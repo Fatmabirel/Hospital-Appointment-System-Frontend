@@ -1,26 +1,55 @@
-<header class="p-3 text-bg-dark">
-    <div class="container">
-      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-          <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
-        </a>
 
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">About</a></li>
-        </ul>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+      <img src="assets/Logo1.jpg" width="150" height="100" class="d-inline-block align-top" alt="Logo">
+    <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" style="font-size: 1.2rem" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="font-size: 1.2rem" href="#">Branşlarımız</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="font-size: 1.2rem" href="#">Doktorlarımız</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" style="font-size: 1.2rem" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Hakkımızda
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" style="font-size: 1rem" href="#">Tanıtım</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" style="font-size: 1rem" href="#">Misyon,Vizyon</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" style="font-size: 1rem" href="#">Kalite Politikası</a></li>
+          </ul>  
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="font-size: 1.2rem" href="#">Bize Ulaşın</a>
+        </li>
 
-        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-          <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
+     
+        <!-- <li class="nav-item">
+          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+        </li> -->
+      </ul>
+      <form class="d-flex " role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success form-control me-5 justify-content-around" type="submit">Search</button>
+      </form>
+
+      <!-- <form class="d-flex ">
+          <button class="btn btn-outline-success form-control me-5 "  type="submit">RANDEVU AL</button>
+        </form> -->
+        <form class="d-flex ">
+          <button class="btn btn-success"  type="submit">RANDEVU AL</button>
         </form>
 
-        <div class="text-end">
-          <button type="button" class="btn btn-outline-light me-2">Login</button>
-          <button type="button" class="btn btn-warning">Sign-up</button>
-        </div>
-      </div>
     </div>
-  </header>
+  </div>
+</nav>
