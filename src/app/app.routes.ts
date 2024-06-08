@@ -1,15 +1,10 @@
 import { Routes } from '@angular/router';
-
-import { HomePageComponent } from './routes/home-page/home-page.component';
+import { HomePageComponent } from './routes/home-page/home-page/home-page.component';
+import { AboutComponent } from './features/about/about.component';
 import { BranchListComponent } from './features/branches/components/branch-list/branch-list.component';
 import { DoctorListComponent } from './features/doctors/components/doctor-list/doctor-list.component';
 import { ContactComponent } from './features/contact/contact.component';
 
-import { AboutComponent } from './features/about/about.component';
-
-
-export const routes: Routes = [
- {
 
 export const routes: Routes =
  [
@@ -32,20 +27,10 @@ export const routes: Routes =
         path: 'contact',
         component: ContactComponent,
       },
+      {
+        path:'about',
+        component: AboutComponent
+      },
 ];
-
-
-    path: '', // Route belirtilen path ile eşleştiğinde
-    component: HomePageComponent, // İlgili
-  },
-  {
-    path:'about',
-    component: AboutComponent
-  },
-
-
-
-];
-
 
 
