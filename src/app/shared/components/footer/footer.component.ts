@@ -1,4 +1,3 @@
-
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
@@ -10,7 +9,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     CommonModule,
   ],
   templateUrl: './footer.component.html',
-  styleUrl: './footer.component.css',
+  styleUrl: './footer.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent { }
