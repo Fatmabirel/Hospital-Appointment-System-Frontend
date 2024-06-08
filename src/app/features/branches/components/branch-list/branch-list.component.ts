@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Branch } from '../../models/branch';
 import { BranchService } from '../../services/branch.service';
 import { CommonModule } from '@angular/common';
+import { BasicLayoutComponent } from '../../../../shared/components/basic-layout/basic-layout.component';
 
 @Component({
   selector: 'app-branch-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,BasicLayoutComponent],
   templateUrl: './branch-list.component.html',
   styleUrl: './branch-list.component.scss'
 })
@@ -14,7 +15,7 @@ export class BranchListComponent implements OnInit {
 
   branches:Branch[]=[];
   pageIndex: number = 0;
-  pageSize: number = 40;
+  pageSize: number = 50;
   groupedBranches: { [key: string]: Branch[] } = {};
 
   constructor(private branchService:BranchService){}

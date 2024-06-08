@@ -1,38 +1,24 @@
-<!-- <div class="row" id="branchMainDiv">
-
-  <div  class="col-8 offset-2 col-md-6 offset-md-0 col-lg-3 mb-4 department-links">
-      <h3 class="sub-title ls-n-20 line-height-1 mb-0">Tıbbi Birimler</h3>
-      <div class="article">
-                          <p  *ngFor="let branch of branches" class="article-question">
-                              <a href="/tibbi-birimler/acil-servis">
-                                  <i class="far fa-caret-right"></i>
-                                  <span>{{branch.name}}</span>
-                              </a>
-                          </p>
-      </div>
-  </div>
-</div> -->
-
-<!-- <div class="container mt-5">
-  <h2 class="mb-4">Tıbbi Birimler</h2>
-  <div class="list-group">
-    <a *ngFor="let branch of branches" href="#" class="list-group-item list-group-item-action">
-      {{ branch.name }}
-    </a>
-  </div>
-</div> -->
-
-
-
-<div class="container mt-5">
+ <app-basic-layout>
+ <div class="container mt-5">
   <h2 class="title">Tıbbi Birimler</h2>
-  <div *ngFor="let key of groupedKeys()">
-    <h3>{{ key }}</h3>
-    <div class="list-group">
-      <a *ngFor="let branch of groupedBranches[key]" href="#" class="list-group-item list-group-item-action">
-        {{ branch.name }}
-      </a>
+  <nav aria-label="breadcrumb" class="breadcrumb-nav">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Anasayfa</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Tıbbi Birimler</li>
+    </ol>
+  </nav>
+  <div class="row">
+    <div class="col-4" *ngFor="let key of groupedKeys()">
+      <div class="group">
+        <h3>{{ key }}.</h3>
+        <ul>
+          <li *ngFor="let branch of groupedBranches[key]">
+            {{ branch.name }}
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
 
+</app-basic-layout>

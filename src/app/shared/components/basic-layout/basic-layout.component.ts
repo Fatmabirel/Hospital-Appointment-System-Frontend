@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from '../footer/footer.component';
@@ -11,3 +12,4 @@ import { AboutComponent } from '../../../features/about/about.component';
   styleUrl: './basic-layout.component.scss',
 })
 export class BasicLayoutComponent {}
+
