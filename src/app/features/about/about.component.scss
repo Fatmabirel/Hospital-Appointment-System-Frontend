@@ -1,9 +1,12 @@
+
 .about-container {
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: 50%;
+
   padding: 20px;
   font-family: Arial, sans-serif;
   line-height: 1.6;
+  justify-content: center;
+
 }
 
 .about-container h1,
@@ -22,4 +25,17 @@
 
 .about-container ul li {
   margin-bottom: 10px;
+}
+
+.image-section {
+  flex: 1;
+  display: flex;
+  justify-content: center; /* İsteğe bağlı: resmi ortalamak için */
+  align-items: center; /* İsteğe bağlı: resmi dikey ortalamak için */
+}
+
+.image-section img {
+  max-width: 50%;
+  height: auto;
+  border-radius: 8px; /* İsteğe bağlı: resmin kenarlarını yuvarlatmak için */
 }
