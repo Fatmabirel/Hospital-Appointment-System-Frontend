@@ -1,8 +1,8 @@
+
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from '../footer/footer.component';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { SliderComponent } from "../slider/slider.component";
 @Component({
     selector: 'app-basic-layout',
     standalone: true,
@@ -11,3 +11,4 @@ import { SliderComponent } from "../slider/slider.component";
     imports: [CommonModule, FooterComponent, NavbarComponent]
 })
 export class BasicLayoutComponent {}
+
