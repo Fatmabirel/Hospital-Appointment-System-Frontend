@@ -1,8 +1,7 @@
-
 <div class="slider-container">
   <div class="slider" [style.transform]="getSliderTransform()">
     <!-- Slide 1 -->
-    <div *ngFor="let slide of slides" class="slide" style="background-color: #3c75b1;">
+    <div *ngFor="let slide of slides" class="slide" style="background-color: #7fb2e8; ">
       <div class="slide-content">
         <h2>{{ slide.title }}</h2>
         <p>{{ slide.description }}</p>
@@ -15,3 +14,4 @@
   <button class="prev" (click)="prevSlide()">&#10094;</button>
   <button class="next" (click)="nextSlide()">&#10095;</button>
 </div>
+

@@ -14,7 +14,7 @@ export class BranchListComponent implements OnInit {
 
   branches:Branch[]=[];
   pageIndex: number = 0;
-  pageSize: number = 40;
+  pageSize: number = 50;
   groupedBranches: { [key: string]: Branch[] } = {};
 
   constructor(private branchService:BranchService){}
