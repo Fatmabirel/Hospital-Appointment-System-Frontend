@@ -3,10 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { DoctorService } from '../../services/doctor.service';
 import { Doctor } from '../../models/doctor';
+import { BasicLayoutComponent } from '../../../../shared/components/basic-layout/basic-layout.component';
 @Component({
   selector: 'app-doctor-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, BasicLayoutComponent],
   templateUrl: './doctor-list.component.html',
   styleUrl: './doctor-list.component.scss'
 })

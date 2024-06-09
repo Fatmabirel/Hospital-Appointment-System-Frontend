@@ -1,37 +1,30 @@
-
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
 
   <div class="container-fluid">
-      <img src="assets/Logo1.jpg" width="150" height="100" class="d-inline-block align-top" alt="Logo">
+    <img src="assets/Logo1.jpg" width="150" height="100" class="d-inline-block align-top" alt="Logo">
     <!-- <a class="navbar-brand" href="#">Navbar</a> -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" style="font-size: 1.2rem" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" style="font-size: 1.2rem" aria-current="page" routerLink="">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" style="font-size: 1.2rem" href="#">Branşlarımız</a>
+          <a class="nav-link" style="font-size: 1.2rem" routerLink="/branches">Tıbbi Birimler</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" style="font-size: 1.2rem" href="#">Doktorlarımız</a>
+          <a class="nav-link" style="font-size: 1.2rem" routerLink="/doctors">Doktorlarımız</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" style="font-size: 1.2rem" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Hakkımızda
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" style="font-size: 1rem" href="#">Tanıtım</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" style="font-size: 1rem" href="#">Misyon,Vizyon</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" style="font-size: 1rem" href="#">Kalite Politikası</a></li>
-          </ul>
-        </li>
+
         <li class="nav-item">
-          <a class="nav-link" style="font-size: 1.2rem" href="#">Bize Ulaşın</a>
+          <a class="nav-link" style="font-size: 1.2rem">Hakkımızda</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" style="font-size: 1.2rem" routerLink="/contact">Bize Ulaşın</a>
         </li>
 
 
@@ -47,11 +40,10 @@
       <!-- <form class="d-flex ">
           <button class="btn btn-outline-success form-control me-5 "  type="submit">RANDEVU AL</button>
         </form> -->
-        <form class="d-flex ">
-          <button class="btn btn-success"  type="submit">RANDEVU AL</button>
-        </form>
+      <form class="d-flex ">
+        <button class="btn btn-success" type="submit">RANDEVU AL</button>
+      </form>
 
     </div>
   </div>
 </nav>
-
