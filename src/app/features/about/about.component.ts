@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
 import { BasicLayoutComponent } from '../../shared/components/basic-layout/basic-layout.component';
 
+
+
 @Component({
-  selector: 'app-contact',
+  selector: 'app-about',
   standalone: true,
   imports: [BasicLayoutComponent],
-  templateUrl: './contact.component.html',
-  styleUrl: './contact.component.scss'
+  templateUrl: './about.component.html',
+  styleUrl: './about.component.scss'
 })
-export class ContactComponent {
+export class AboutComponent {
 
 }

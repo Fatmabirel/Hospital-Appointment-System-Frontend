@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Branch } from '../../models/branch';
 import { BranchService } from '../../services/branch.service';
 import { CommonModule } from '@angular/common';
+import { BasicLayoutComponent } from '../../../../shared/components/basic-layout/basic-layout.component';
 
 @Component({
   selector: 'app-branch-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,BasicLayoutComponent],
   templateUrl: './branch-list.component.html',
   styleUrl: './branch-list.component.scss'
 })

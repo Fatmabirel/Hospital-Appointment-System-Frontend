@@ -35,11 +35,16 @@
               "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "node_modules/primeng/resources/themes/saga-blue/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
-              "node_modules/primeicons/primeicons.css"
+              "node_modules/primeicons/primeicons.css",
+
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
+
+
             ],
             "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.js"
+             "node_modules/bootstrap/dist/js/bootstrap.bundle.js"
             ],
+
             "server": "src/main.server.ts",
             "prerender": true,
             "ssr": {
@@ -109,5 +114,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "20a1694c-5ca8-414e-afe5-bb7c3f5ad8dd"
   }
 }

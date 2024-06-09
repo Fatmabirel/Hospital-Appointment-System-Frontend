@@ -1,0 +1,42 @@
+
+
+.about-container {
+  max-width: 50%;
+
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+
+
+}
+
+.about-container h1,
+.about-container h2 {
+  color: #0c5bb1;
+}
+
+.about-container p {
+  margin-bottom: 20px;
+}
+
+.about-container ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.about-container ul li {
+  margin-bottom: 10px;
+}
+
+.image-section {
+  flex: 1;
+  display: flex;
+  justify-content: center; /* İsteğe bağlı: resmi ortalamak için */
+  align-items: center; /* İsteğe bağlı: resmi dikey ortalamak için */
+}
+
+.image-section img {
+  max-width: 50%;
+  height: auto;
+  border-radius: 8px; /* İsteğe bağlı: resmin kenarlarını yuvarlatmak için */
+}
