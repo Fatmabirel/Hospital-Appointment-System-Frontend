@@ -7,7 +7,7 @@ import { BasicLayoutComponent } from '../../../../shared/components/basic-layout
 @Component({
   selector: 'app-branch-list',
   standalone: true,
-  imports: [CommonModule, BasicLayoutComponent],
+  imports: [CommonModule,BasicLayoutComponent],
   templateUrl: './branch-list.component.html',
   styleUrl: './branch-list.component.scss'
 })

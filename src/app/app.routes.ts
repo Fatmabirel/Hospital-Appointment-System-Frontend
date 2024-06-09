@@ -4,7 +4,6 @@ import { BranchListComponent } from './features/branches/components/branch-list/
 import { DoctorListComponent } from './features/doctors/components/doctor-list/doctor-list.component';
 import { ContactComponent } from './features/contact/contact.component';
 
-
 export const routes: Routes =
  [
     {
@@ -19,11 +18,13 @@ export const routes: Routes =
         // ilk karşılaştığı <router-outlet></router-outlet> etiketine yerleştirir.
       },
       {
-        path: 'doctors',
-        component: DoctorListComponent,
+        path: 'doctors', 
+        component: DoctorListComponent, 
       },
       {
-        path: 'contact',
-        component: ContactComponent,
+        path: 'contact', 
+        component: ContactComponent, 
       },
 ];
+
+

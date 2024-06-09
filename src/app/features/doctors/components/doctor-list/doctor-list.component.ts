@@ -7,7 +7,7 @@ import { BasicLayoutComponent } from '../../../../shared/components/basic-layout
 @Component({
   selector: 'app-doctor-list',
   standalone: true,
-  imports: [CommonModule, BasicLayoutComponent],
+  imports: [CommonModule,BasicLayoutComponent],
   templateUrl: './doctor-list.component.html',
   styleUrl: './doctor-list.component.scss'
 })
