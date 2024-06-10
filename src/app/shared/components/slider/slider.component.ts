@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BasicLayoutComponent } from "../basic-layout/basic-layout.component";
+import { HomePageComponent } from "../../../routes/home-page/home-page.component";
 
 @Component({
     selector: 'app-slider',
     standalone: true,
     templateUrl: './slider.component.html',
     styleUrl: './slider.component.scss',
-    imports: [CommonModule]
+    imports: [CommonModule, HomePageComponent]
 })
 export class SliderComponent {
 
@@ -20,17 +21,17 @@ export class SliderComponent {
     {
       title: 'Sağlık Hizmetlerinde Yenilikçi Yaklaşım',
       description: 'Teknoloji ve sağlık sektörünün birleşiminde, size özel çözümlerimizle sağlığınızı korumak için buradayız.',
-      image: '../../../../../assets/images/sağlık.jpg'
+      image: '../../../../../assets/images/slider/sağlık.jpg'
     },
     {
       title: 'Sağlıkta İhtiyacınız Olan Her Şey Burada',
       description: 'Tam teşekküllü tıbbi ekipmanlarımız ve uzman sağlık personelimizle sağlık sorunlarınızı çözmek için yanınızdayız.',
-      image: '../../../../../assets/images/heart.png'
+      image: '../../../../../assets/images/slider/heart.png'
     },
     {
       title: 'Sağlıkta Öncü Olmak İçin Buradayız',
       description: 'Sektördeki en son teknolojileri kullanarak sizlere en iyi sağlık hizmetini sunmayı taahhüt ediyoruz.',
-      image: '../../../../../assets/images/sağlık2.jpeg'
+      image: '../../../../../assets/images/slider/sağlık2.jpeg'
     },
     // Diğer slaytlar burada eklenebilir
   ];
