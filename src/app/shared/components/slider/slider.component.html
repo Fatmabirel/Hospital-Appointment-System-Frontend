@@ -1,16 +1,15 @@
-
 <div class="slider-container">
   <div class="slider" [style.transform]="getSliderTransform()">
-    <!-- Slide 1 -->
-    <div *ngFor="let slide of slides" class="slide" style="background-color: #7fb2e8; ">
-      <div class="slide-content">
-        <h2>{{ slide.title }}</h2>
-        <p>{{ slide.description }}</p>
+      <!-- Tek bir slide -->
+      <div *ngFor="let slide of slides" class="slide" style="background-color: #7fb2e8;">
+          <div class="slide-content" style="width: 400px; height: min-content; margin-left: 15px;">
+              <h2>{{ slide.title }}</h2>
+              <p>{{ slide.description }}</p>
+          </div>
+          <div class="slide-image">
+              <img [src]="slide.image" style="width: 400px;margin-left: 20px; margin-right: 10px; " alt="Slide Image">
+          </div>
       </div>
-      <div class="slide-image">
-        <img [src]="slide.image" style="width: 100%;" alt="Slide Image">
-      </div>
-    </div>
   </div>
   <button class="prev" (click)="prevSlide()">&#10094;</button>
   <button class="next" (click)="nextSlide()">&#10095;</button>
