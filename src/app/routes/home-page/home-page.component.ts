@@ -6,7 +6,7 @@ import {  faCalendar,faUserDoctor,faHospitalWide,faClipboardCheck } from '@forta
 import { SliderComponent } from "../../shared/components/slider/slider.component";
 
 
-import { SliderComponent } from '../../shared/components/slider/slider.component';
+
 
 @Component({
     selector: 'app-home-page',
