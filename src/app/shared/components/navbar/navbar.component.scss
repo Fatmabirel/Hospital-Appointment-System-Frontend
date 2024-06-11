@@ -2,6 +2,7 @@
 .navbar {
   background-color: #0066ae !important; /* Navbar arkaplan rengini ayarlar */
   padding: 10px 0; /* Navbar yüksekliğini küçültmek için padding'i ayarlar */
+  z-index: 2000;
 }
 
 .navbar .nav-link {
@@ -53,3 +54,19 @@
   border-radius: 5px; /* Kenarlık köşelerini yuvarlar */
   margin-right: 40px; /* Sağ kenara ek boşluk bırakır */
 }
+
+
+.dropdown-menu {
+  overflow: visible; /* Menünün sınırlarını aşmasına izin ver */
+  z-index: 3000; /* Dropdown menünün z-index değeri */
+}
+
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+
+// ul li a:hover{
+//    background-color:rgb(9,67,145);
+// }

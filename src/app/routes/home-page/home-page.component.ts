@@ -3,6 +3,7 @@ import { BasicLayoutComponent } from '../../shared/components/basic-layout/basic
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {  faCalendar,faUserDoctor,faHospitalWide,faClipboardCheck } from '@fortawesome/free-solid-svg-icons';
+import { SliderComponent } from "../../shared/components/slider/slider.component";
 
 
 
@@ -11,7 +12,7 @@ import {  faCalendar,faUserDoctor,faHospitalWide,faClipboardCheck } from '@forta
     standalone: true,
     templateUrl: './home-page.component.html',
     styleUrl: './home-page.component.scss',
-    imports: [BasicLayoutComponent, RouterModule,FontAwesomeModule]
+    imports: [BasicLayoutComponent, RouterModule, FontAwesomeModule, SliderComponent]
 })
 export class HomePageComponent {
 icon=faCalendar;
