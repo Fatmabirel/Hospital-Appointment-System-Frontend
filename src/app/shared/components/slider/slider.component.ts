@@ -16,7 +16,7 @@ export class SliderComponent {
     {
       title: 'Sağlıkta Mükemmeliyet İçin Çalışıyoruz',
       description: 'Deneyimli sağlık ekibimizle en iyi sağlık hizmetini sunmak için buradayız. Sizin ve sevdiklerinizin sağlığı bizim önceliğimizdir.',
-      image: '../../../../../assets/images/doctors.jpg'
+      image: '../../../../../assets/images/slider/doctors.jpg'
     },
     {
       title: 'Sağlık Hizmetlerinde Yenilikçi Yaklaşım',
