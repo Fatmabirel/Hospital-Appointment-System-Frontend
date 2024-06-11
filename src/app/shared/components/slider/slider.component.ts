@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BasicLayoutComponent } from "../basic-layout/basic-layout.component";
-import { HomePageComponent } from "../../../routes/home-page/home-page.component";
 
-@Component({
+
+ @Component({
     selector: 'app-slider',
     standalone: true,
     templateUrl: './slider.component.html',
     styleUrl: './slider.component.scss',
-    imports: [CommonModule, ]
+    imports: [CommonModule]
 })
 export class SliderComponent {
 
@@ -16,7 +16,7 @@ export class SliderComponent {
     {
       title: 'Sağlıkta Mükemmeliyet İçin Çalışıyoruz',
       description: 'Deneyimli sağlık ekibimizle en iyi sağlık hizmetini sunmak için buradayız. Sizin ve sevdiklerinizin sağlığı bizim önceliğimizdir.',
-      image: '../../../../../assets/images/doctors.jpg'
+      image: '../../../../../assets/images/slider/doctors.jpg'
     },
     {
       title: 'Sağlık Hizmetlerinde Yenilikçi Yaklaşım',

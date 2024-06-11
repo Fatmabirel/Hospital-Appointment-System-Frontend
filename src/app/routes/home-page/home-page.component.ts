@@ -3,16 +3,18 @@ import { BasicLayoutComponent } from '../../shared/components/basic-layout/basic
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {  faCalendar,faUserDoctor,faHospitalWide,faClipboardCheck } from '@fortawesome/free-solid-svg-icons';
-
-
 import { SliderComponent } from '../../shared/components/slider/slider.component';
+
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-home-page',
     standalone: true,
     templateUrl: './home-page.component.html',
     styleUrl: './home-page.component.scss',
-   imports: [BasicLayoutComponent, RouterModule,SliderComponent,FontAwesomeModule],
+
+   imports: [CommonModule,BasicLayoutComponent, RouterModule,SliderComponent,FontAwesomeModule,SliderComponent],
+
 })
 export class HomePageComponent {
 icon=faCalendar;
