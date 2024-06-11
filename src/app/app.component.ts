@@ -13,7 +13,7 @@ import { HomePageComponent } from './routes/home-page/home-page.component';
   standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  imports: [RouterOutlet, FooterComponent, NavbarComponent, DoctorListComponent, ContactComponent, BranchListComponent, SliderComponent, HomePageComponent]
+  imports: [RouterOutlet, FooterComponent, NavbarComponent, DoctorListComponent, ContactComponent, BranchListComponent,  HomePageComponent]
 })
 export class AppComponent {
   title = 'hospital';
