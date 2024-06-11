@@ -6,13 +6,16 @@ import {  faCalendar,faUserDoctor,faHospitalWide,faClipboardCheck } from '@forta
 import { SliderComponent } from "../../shared/components/slider/slider.component";
 
 
+import { SliderComponent } from '../../shared/components/slider/slider.component';
 
 @Component({
     selector: 'app-home-page',
     standalone: true,
     templateUrl: './home-page.component.html',
     styleUrl: './home-page.component.scss',
-    imports: [BasicLayoutComponent, RouterModule, FontAwesomeModule, SliderComponent]
+
+   imports: [BasicLayoutComponent, RouterModule,SliderComponent,FontAwesomeModule],
+
 })
 export class HomePageComponent {
 icon=faCalendar;
