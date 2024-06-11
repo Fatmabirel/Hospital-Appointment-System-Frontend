@@ -8,7 +8,7 @@ import { HomePageComponent } from "../../../routes/home-page/home-page.component
     standalone: true,
     templateUrl: './slider.component.html',
     styleUrl: './slider.component.scss',
-    imports: [CommonModule, HomePageComponent]
+    imports: [CommonModule, ]
 })
 export class SliderComponent {
 
