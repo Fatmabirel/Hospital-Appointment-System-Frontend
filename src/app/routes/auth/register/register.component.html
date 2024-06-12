@@ -1,8 +1,8 @@
-<body>
+<app-basic-layout>
   <div class="container-fluid d-flex align-items-center justify-content-center" style="height: 100vh;">
     <div class="col-md-6">
-      <div class="card border-0 ">
-        <div class="card-header ">
+      <div class="card border-0">
+        <div class="card-header">
           <h3 class="mb-0">Üye Ol</h3>
         </div>
         <div class="card-body">
@@ -11,34 +11,34 @@
             <img src="assets/images/logo/logo.png" alt="Hospital Logo" class="img-fluid" style="max-width: 300px;">
           </div> -->
           <!-- End Logo -->
-          <form>
+          <form [formGroup]="registerForm" (ngSubmit)="register()">
             <div class="form-group">
               <label for="firstname">Ad</label>
-              <input type="text" class="form-control" id="firstname" name="firstname" required>
+              <input type="text" class="form-control" id="firstname" formControlName="firstName">
             </div>
             <div class="form-group">
               <label for="lastname">Soyad</label>
-              <input type="text" class="form-control" id="lastname" name="lastname" required>
+              <input type="text" class="form-control" id="lastname" formControlName="lastName">
             </div>
             <div class="form-group">
               <label for="phone">Telefon</label>
-              <input type="tel" class="form-control" id="phone" name="phone" required>
+              <input type="tel" class="form-control" id="phone" formControlName="phone">
             </div>
             <div class="form-group">
               <label for="email">E-posta</label>
-              <input type="email" class="form-control" id="email" name="email" required>
+              <input type="email" class="form-control" id="email" formControlName="email">
             </div>
             <div class="form-group">
               <label for="password" class="form-label">Şifre</label>
-              <input type="password" id="password" class="form-control" aria-describedby="passwordHelpBlock">
+              <input type="password" id="password" class="form-control" formControlName="password" aria-describedby="passwordHelpBlock">
               <div id="passwordHelpBlock" class="form-text">
-                Şifreniz en az 8 karakter olmalıdır.1 büyük harf,1 küçük harf ve rakam içermelidir.
+                Şifreniz en az 8 karakter olmalıdır. 1 büyük harf, 1 küçük harf ve rakam içermelidir.
               </div>
             </div>
             <button type="submit" class="btn btn-primary btn-block">Üye ol</button>
           </form>
           <div class="text mt-3">
-            <a href="/login" class="text-primary" >Giriş Yap</a>
+            <a href="/login" class="text-primary">Giriş Yap</a>
           </div>
         </div>
       </div>
@@ -46,4 +46,4 @@
   </div>
   <!-- Bootstrap JS (Optional) -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
+</app-basic-layout>
