@@ -1,7 +1,8 @@
 import { TokenModel } from "./tokenModel";
 
-export interface ResponseTokenModel{
-  accessToken:TokenModel,
-  requiredAuthenticatorType:string
 
+export interface ResponseTokenModel {
+  accessToken: TokenModel;
+  requiredAuthenticatorType: string | null;
 }
+
