@@ -1,5 +1,6 @@
 <app-basic-layout>
-    <div class="container-fluid d-flex align-items-center justify-content-center" style="height: 100vh;">
+    <div class="container" >
+      <div class="row justify-content-center">
       <div class="col-md-6">
         <div class="card border-0 ">
           <div class="card-header ">
@@ -23,7 +24,9 @@
                   Şifreniz en az 8 karakter olmalıdır. 1 büyük harf, 1 küçük harf ve rakam içermelidir.
                 </div>
               </div>
-              <button type="submit" class="btn btn-primary btn-block">Giriş Yap</button>
+              <div class="d-flex justify-content-end">
+              <button type="submit" class="btn btn-primary btn-block ">Giriş Yap</button>
+            </div>
             </form>
             <div class="text mt-3">
               <a href="#" class="text-primary">Şifremi Unuttum</a>
@@ -35,7 +38,7 @@
         </div>
       </div>
     </div>
+    </div>
     <!-- Bootstrap JS (Optional) -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </app-basic-layout>
-  
