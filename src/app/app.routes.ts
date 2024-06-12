@@ -4,6 +4,11 @@ import { BranchListComponent } from './features/branches/components/branch-list/
 import { DoctorListComponent } from './features/doctors/components/doctor-list/doctor-list.component';
 import { ContactComponent } from './features/contact/contact.component';
 import { AboutComponent } from './features/about/about.component';
+import { LoginComponent } from './routes/auth/login/login.component';
+import { RegisterComponent } from './routes/auth/register/register.component';
+import { loginGuard } from './core/auth/guards/login.guard';
+
+
 
 
 export const routes: Routes =
@@ -12,16 +17,17 @@ export const routes: Routes =
         path: '', // Route belirtilen path ile eşleştiğinde
         component: HomePageComponent, // İlgili componenti AppComponent'ten başlayarak
         // ilk karşılaştığı <router-outlet></router-outlet> etiketine yerleştirir.
-      },
-
+     },
       {
         path: 'branches', // Route belirtilen path ile eşleştiğinde
         component: BranchListComponent, // İlgili componenti AppComponent'ten başlayarak
         // ilk karşılaştığı <router-outlet></router-outlet> etiketine yerleştirir.
+        // canActivate:[loginGuard] örnek guard bu şekilde yazılıcak
       },
       {
         path: 'doctors',
         component: DoctorListComponent,
+
       },
       {
         path: 'contact',
@@ -29,8 +35,17 @@ export const routes: Routes =
       },
       {
         path:'about',
-        component: AboutComponent
+        component:AboutComponent
       },
+      {
+        path:'login',
+        component:LoginComponent
+      },
+      {
+        path:'register',
+        component:RegisterComponent
+      },
+
 ];
 
 

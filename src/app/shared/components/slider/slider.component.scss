@@ -1,93 +1,102 @@
+/* Genel sayfa stili */
+body {
+  margin: 0;
 
-body,h2,p{
-  font-family: "Source Sans Pro", sans-serif;
-}
-h2 {
-  font-size: 2.3em;
-  text-align: left;
 }
 
-p {
-  font-weight: 500;
-  text-align: left;
-  width: 550px;
-}
-
+/* Slider konteyneri */
 .slider-container {
   position: relative;
+  width: 100%;
   max-width: 100%;
-  margin: auto;
+  height: 400px; /* Slider yüksekliği */
   overflow: hidden;
+  margin: 0 auto;
 }
 
+/* Slider */
 .slider {
   display: flex;
   transition: transform 0.5s ease-in-out;
+  height: 100%; /* Slider yüksekliği */
 }
 
+/* Tek bir slide */
 .slide {
   min-width: 100%;
-  box-sizing: border-box;
+  height: 100%; /* Slider yüksekliği */
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-}
-
-.slide-content {
-  flex: 1;
-  padding: 20px;
-  margin-left: 70px;
-  background: rgba(255, 255, 255, 0.8);
-  padding: 20px;
-  border-radius: 8px;
   text-align: center;
-  max-width: 50%;
+  color: #fff;
+  font-size: 14px;
+  position: relative;
 }
 
-.slide-content h2 {
-  font-size: 2em;
-  margin-bottom: 10px;
+/* Slide içeriği */
+.slide-content {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #000;
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 2;
 }
 
-.slide-content p {
-  font-size: 1em;
-}
-
-.slide-image {
-  flex: 1;
-  text-align: right;
-  margin-right: 170px;
-}
-
+/* Slide resmi */
 .slide-image img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
+  max-height: 100%; /* Slider yüksekliği */
+  object-fit: cover;
 }
 
-button.prev,
-button.next {
+h2{
+  font-size: 16pt;
+  color:  #4479b1;
+}
+/* Önceki ve sonraki düğmeler */
+.prev, .next {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  border: none;
+  background-color: rgba(0,0,0,0.5);
   color: white;
-  font-size: 18px;
-  padding: 10px;
+  border: none;
   cursor: pointer;
+  padding: 10px;
+  font-size: 18px;
+  z-index: 3;
 }
 
-button.prev {
-  left: 0;
+.prev {
+  left: 10px;
 }
 
-button.next {
-  right: 0;
+.next {
+  right: 10px;
 }
 
+/* Hover efekti */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+p{
+  font-size: 1.2rem;
+}
 
+h3{
+  color: #4479b1;
+}
 
-
-
+.carousel-caption h3 {
+  font-weight: bolder;
+  font-size: 24px;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+}
+.carousel-caption p {
+  font-weight: bolder;
+  font-size: 16px;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
+}
 
