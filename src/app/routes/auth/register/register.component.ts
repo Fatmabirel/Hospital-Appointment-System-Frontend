@@ -36,20 +36,48 @@ export class RegisterComponent {
       password: ['', [Validators.required, Validators.minLength(8)]],
     });
   }
-  register() {
-    if(this.registerForm.valid){
-      //console.log(this.registerForm.value);
-      let registerModel = Object.assign({},this.registerForm.value);
-      this.authService.register(registerModel).subscribe(response=>{
-        this.toastrService.success("Giriş sayfasına yönlendiriliyorsunuz...", "Kayıt olundu",{
-          progressBar:true
-        })
-        this.router.navigate(['/']);
-        localStorage.setItem("token",response.token);
-      },responseError=>this.toastrService.error(responseError.error,"Hata",{
-        progressBar:true
-      }))
+
+  registersd() {
+    if (this.registerForm.valid) {
+      const registerModel: RegisterModel = Object.assign({}, this.registerForm.value);
+      this.authService.register(registerModel).subscribe(
+        (response) => {
+          const token = response.token; // Burada response direkt olarak token değerini içeriyor
+          localStorage.setItem('token', token);
+          this.toastrService.success('Kayıt başarılı!', 'Başarılı');
+          this.router.navigate(['/']); // Başarılı kayıttan sonra yönlendirme
+        },
+        (responseError) => {
+          this.toastrService.error('Kayıt başarısız. Lütfen bilgilerinizi kontrol edin.', 'Hata');
+        }
+      );
+    } else {
+      this.toastrService.error('Eksik bilgi girdiniz. Lütfen bilgilerinizi kontrol edin.', 'Uyarı');
     }
   }
+
+  register() {
+  if (this.registerForm.valid) {
+    let registerModel = Object.assign({}, this.registerForm.value);
+    this.authService.register(registerModel).subscribe(
+      (response) => {
+        this.toastrService.success("Giriş sayfasına yönlendiriliyorsunuz...", "Kayıt olundu", {
+          progressBar: true
+        });
+        // Başarılı kayıt sonrasında kullanıcıyı giriş sayfasına yönlendir
+        this.router.navigate(['/']);
+        // Kayıt başarılı olduğunda token'ı local storage'a kaydet
+        localStorage.setItem("token", response.token);
+      },
+      (responseError) => {
+        // Hata durumunda toastr ile hata mesajını göster
+        this.toastrService.error('Kayıt başarısız. Lütfen bilgilerinizi kontrol edin.', 'Hata');
+      }
+    );
+  }else {
+    this.toastrService.error('Eksik bilgi girdiniz. Lütfen bilgilerinizi kontrol edin.', 'Uyarı');
+  }
+}
+
   
 }
