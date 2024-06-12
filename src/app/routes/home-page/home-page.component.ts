@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {  faCalendar,faUserDoctor,faHospitalWide,faClipboardCheck } from '@fortawesome/free-solid-svg-icons';
 import { SliderComponent } from '../../shared/components/slider/slider.component';
-
 import { CommonModule } from '@angular/common';
 
 @Component({
