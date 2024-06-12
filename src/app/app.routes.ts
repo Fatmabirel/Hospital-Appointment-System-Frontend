@@ -3,6 +3,7 @@ import { HomePageComponent } from './routes/home-page/home-page.component';
 import { BranchListComponent } from './features/branches/components/branch-list/branch-list.component';
 import { DoctorListComponent } from './features/doctors/components/doctor-list/doctor-list.component';
 import { ContactComponent } from './features/contact/contact.component';
+import { AboutComponent } from './features/about/about.component';
 
 
 export const routes: Routes =
