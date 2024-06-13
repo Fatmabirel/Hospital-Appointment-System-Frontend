@@ -7,8 +7,8 @@ import { AboutComponent } from './features/about/about.component';
 import { LoginComponent } from './routes/auth/login/login.component';
 import { RegisterComponent } from './routes/auth/register/register.component';
 import { loginGuard } from './core/auth/guards/login.guard';
-import { AdminSidebarComponent } from './panels/admin/component/sidebar/adminSidebar.component';
-import { PatientSidebarComponent } from './panels/patient/component/sidebar/psidebar/psidebar.component';
+import { AdminSidebarComponent } from './features/panels/admin/components/sidebar/adminSidebar.component';
+import { PatientSidebarComponent } from './features/panels/patient/components/sidebar/psidebar.component';
 import { DoctorSidebarComponent } from './features/panels/doctor/components/sidebar/doctorSidebar.component';
 
 
