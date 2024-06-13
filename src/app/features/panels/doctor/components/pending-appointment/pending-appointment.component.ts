@@ -1,23 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { Appointment } from '../../../../appointments/models/appointmentModel';
 import { DoctorService } from '../../../../doctors/services/doctor.service';
-import { ResponseModel } from '../../../../models/responseModel';
 import { AppointmentService } from '../../../../appointments/services/appointment.service';
+import { ResponseModel } from '../../../../models/responseModel';
 import { DoctorSidebarComponent } from '../sidebar/doctorSidebar.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-appointment-history',
+  selector: 'app-pending-appointment',
   standalone: true,
   imports: [CommonModule, DoctorSidebarComponent],
-  templateUrl: './appointment-history.component.html',
-  styleUrl: './appointment-history.component.scss'
+  templateUrl: './pending-appointment.component.html',
+  styleUrl: './pending-appointment.component.scss'
 })
-export class AppointmentHistoryComponent implements OnInit {
+export class PendingAppointmentComponent {
   appointments: Appointment[] = [];
   pageIndex: number = 0;
   pageSize: number = 12;
-  todayDate: Date = new Date(); // Şu anki tarihi ve saati al
+  todayDate: Date = new Date(); // Bugünkü tarihi al
 
   constructor(private doctorService: DoctorService, private appointmentService: AppointmentService) {}
 
@@ -34,8 +34,8 @@ export class AppointmentHistoryComponent implements OnInit {
             // Filtreleme işlemi
             this.appointments = response.items.filter(appointment => {
               const appointmentDate = new Date(appointment.date);
-              // Tarih ve saat kontrolü: Bugünkü tarihten önceki randevuları getir
-              return appointmentDate < this.todayDate || (appointmentDate.getTime() === this.todayDate.getTime() && appointment.time < this.todayDate.toTimeString().slice(0, 5));
+              // Tarih ve saat kontrolü
+              return appointmentDate > this.todayDate || (appointmentDate.getTime() === this.todayDate.getTime() && appointment.time > this.todayDate.toTimeString().slice(0, 5));
             });
           },
           (error) => {
@@ -48,4 +48,5 @@ export class AppointmentHistoryComponent implements OnInit {
       }
     );
   }
+ 
 }

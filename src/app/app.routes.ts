@@ -6,11 +6,11 @@ import { ContactComponent } from './features/contact/contact.component';
 import { AboutComponent } from './features/about/about.component';
 import { LoginComponent } from './routes/auth/login/login.component';
 import { RegisterComponent } from './routes/auth/register/register.component';
-import { loginGuard } from './core/auth/guards/login.guard';
 import { DoctorSidebarComponent } from './features/panels/doctor/components/sidebar/doctorSidebar.component';
 import { PatientSidebarComponent } from './features/panels/patient/components/sidebar/psidebar.component';
 import { AdminSidebarComponent } from './features/panels/admin/components/sidebar/adminSidebar.component';
 import { AppointmentHistoryComponent } from './features/panels/doctor/components/appointment-history/appointment-history.component';
+import { PendingAppointmentComponent } from './features/panels/doctor/components/pending-appointment/pending-appointment.component';
 
 export const routes: Routes =
  [
@@ -53,6 +53,10 @@ export const routes: Routes =
       {
         path:'appointment-history',
         component:AppointmentHistoryComponent
+      },
+      {
+        path:'pending-appointments',
+        component:PendingAppointmentComponent
       },
 
       {
