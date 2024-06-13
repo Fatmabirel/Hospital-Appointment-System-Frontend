@@ -1,0 +1,37 @@
+.body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.sidebar {
+    width: 280px;
+    height: 100vh;
+    padding: 15px;
+    border-right: 2px solid #333; /* Sağ kenarlık */
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+
+.fs{
+    font-size: 24px; /* Başlık yazı tipi boyutu */
+    font-weight: bold; /* Kalın yazı tipi */
+    margin-top: 0;
+    margin-bottom: 15px; /* Başlık altındaki boşluk */
+    color: #000000;
+}
+
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
