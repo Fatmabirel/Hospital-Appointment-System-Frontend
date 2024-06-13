@@ -7,8 +7,10 @@ import { AboutComponent } from './features/about/about.component';
 import { LoginComponent } from './routes/auth/login/login.component';
 import { RegisterComponent } from './routes/auth/register/register.component';
 import { loginGuard } from './core/auth/guards/login.guard';
-import { AppointmentHistoryComponent } from './features/panels/doctor/components/appointment-history/appointment-history.component';
 import { DoctorSidebarComponent } from './features/panels/doctor/components/sidebar/doctorSidebar.component';
+import { PatientSidebarComponent } from './features/panels/patient/components/sidebar/psidebar.component';
+import { AdminSidebarComponent } from './features/panels/admin/components/sidebar/adminSidebar.component';
+import { AppointmentHistoryComponent } from './features/panels/doctor/components/appointment-history/appointment-history.component';
 
 export const routes: Routes =
  [
@@ -45,13 +47,23 @@ export const routes: Routes =
         component:RegisterComponent
       },
       {
-        path:'sidebar',
+        path:'dsidebar',
         component:DoctorSidebarComponent
       },
       {
         path:'appointment-history',
         component:AppointmentHistoryComponent
       },
+
+      {
+        path:'doctor-sidebar',
+        component:AdminSidebarComponent
+      },
+      
+      {
+        path:'patient-sidebar',
+        component:PatientSidebarComponent
+      }
 
 ];
 
