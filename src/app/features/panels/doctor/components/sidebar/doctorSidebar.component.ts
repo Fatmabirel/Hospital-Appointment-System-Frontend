@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { DoctorService } from '../../../../doctors/services/doctor.service';
+import { Doctor } from '../../../../doctors/models/doctor';
 
 @Component({
   selector: 'app-doctor-sidebar',
@@ -13,19 +14,20 @@ import { DoctorService } from '../../../../doctors/services/doctor.service';
   styleUrl: './doctorSidebar.component.scss'
 })
 export class DoctorSidebarComponent implements OnInit {
-  doctorName: string = '';
-  doctorId: string = '';
+  doctor: Doctor;
+  errorMessage: string;
 
   constructor(private doctorService: DoctorService) {}
 
   ngOnInit(): void {
     this.doctorService.getDoctorProfile().subscribe(
       (doctor) => {
-        this.doctorName = `${doctor.firstName} ${doctor.lastName}`;
-        console.log(this.doctorName);
+        this.doctor = doctor;
+        //console.log('Doctor:', this.doctor); // Doctor bilgilerini konsola yazdır
       },
       (error) => {
-        console.error('Hata:', error);
+        this.errorMessage = error.message; // Hata mesajını al ve errorMessage değişkenine ata
+        //console.error('Hata:', error); // Hata durumunda konsola yazdır
       }
     );
   }
