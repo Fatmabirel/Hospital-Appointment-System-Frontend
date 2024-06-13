@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Doctor } from '../models/doctor';
 import { ResponseModel } from '../../models/responseModel';
 import { jwtDecode } from 'jwt-decode';
+import { Appointment } from '../../appointments/models/appointmentModel';
 
 @Injectable({
   providedIn: 'root',
@@ -38,7 +39,7 @@ export class DoctorService {
       throw new Error('Token bulunamadı');
     }
 
-    const decodedToken = this.decodeToken(token);
+    const decodedToken: any = this.decodeToken(token);
     if (!decodedToken || !decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']) {
       throw new Error('Token decode edilemedi veya ID bulunamadı');
     }
@@ -46,4 +47,6 @@ export class DoctorService {
     const doctorId = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
     return this.httpClient.get<Doctor>(`${this.apiUrl}/${doctorId}`);
   }
+
+ 
 }

@@ -8,6 +8,7 @@ import { LoginComponent } from './routes/auth/login/login.component';
 import { RegisterComponent } from './routes/auth/register/register.component';
 import { loginGuard } from './core/auth/guards/login.guard';
 import { DoctorSidebarComponent } from './panels/doctor/component/sidebar/doctorSidebar.component';
+import { AppointmentHistoryComponent } from './panels/doctor/component/appointment-history/appointment-history.component';
 
 
 
@@ -46,10 +47,13 @@ export const routes: Routes =
         path:'register',
         component:RegisterComponent
       },
-
       {
         path:'sidebar',
         component:DoctorSidebarComponent
+      },
+      {
+        path:'appointment-history',
+        component:AppointmentHistoryComponent
       },
 
 ];
