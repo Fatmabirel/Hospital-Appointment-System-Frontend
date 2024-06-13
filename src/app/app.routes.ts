@@ -7,6 +7,7 @@ import { AboutComponent } from './features/about/about.component';
 import { LoginComponent } from './routes/auth/login/login.component';
 import { RegisterComponent } from './routes/auth/register/register.component';
 import { loginGuard } from './core/auth/guards/login.guard';
+import { DoctorSidebarComponent } from './panels/doctor/component/sidebar/doctorSidebar.component';
 
 
 
@@ -44,6 +45,11 @@ export const routes: Routes =
       {
         path:'register',
         component:RegisterComponent
+      },
+
+      {
+        path:'sidebar',
+        component:DoctorSidebarComponent
       },
 
 ];

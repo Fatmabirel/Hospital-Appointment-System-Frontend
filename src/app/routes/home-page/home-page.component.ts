@@ -5,6 +5,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {  faCalendar,faUserDoctor,faHospitalWide,faClipboardCheck } from '@fortawesome/free-solid-svg-icons';
 import { SliderComponent } from '../../shared/components/slider/slider.component';
 import { CommonModule } from '@angular/common';
+import { DoctorSidebarComponent } from '../../panels/doctor/component/sidebar/doctorSidebar.component';
 
 @Component({
     selector: 'app-home-page',
@@ -12,7 +13,7 @@ import { CommonModule } from '@angular/common';
     templateUrl: './home-page.component.html',
     styleUrl: './home-page.component.scss',
 
-   imports: [CommonModule,BasicLayoutComponent, RouterModule,SliderComponent,FontAwesomeModule,SliderComponent],
+   imports: [CommonModule,BasicLayoutComponent, RouterModule,SliderComponent,FontAwesomeModule,SliderComponent,DoctorSidebarComponent],
 
 })
 export class HomePageComponent {
