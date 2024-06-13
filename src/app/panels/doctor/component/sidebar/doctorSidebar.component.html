@@ -1,8 +1,11 @@
-  <body class="d-flex flex-column flex-shrink-0 p-3 text-dark bg-white" class="sidebar" style="width: 280px;">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-      <!-- <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg> -->
-      <span class="fs primary-color">DOKTOR PANELİ</span>
-    </a>
+  <div class="d-flex flex-column flex-shrink-0 p-3 text-dark bg-white" class="sidebar" style="width: 280px;">
+    <div>
+      <p *ngIf="doctorName" class="welcome-message">Hoş geldiniz,</p>
+      <p *ngIf="doctorName" class="doctor-name">{{ doctorName }}</p>
+      <p *ngIf="!doctorName" class="loading-message">Yükleniyor...</p>
+    </div>
+    
+    
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
@@ -54,5 +57,5 @@
         </a>
       </li>
     </ul>    
-</body>
+</div>
   
