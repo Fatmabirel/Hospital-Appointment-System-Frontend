@@ -8,6 +8,8 @@ import { LoginComponent } from './routes/auth/login/login.component';
 import { RegisterComponent } from './routes/auth/register/register.component';
 import { loginGuard } from './core/auth/guards/login.guard';
 import { DoctorSidebarComponent } from './panels/doctor/component/sidebar/doctorSidebar.component';
+import { AdminSidebarComponent } from './panels/admin/component/sidebar/adminSidebar.component';
+import { PatientSidebarComponent } from './panels/patient/component/sidebar/psidebar/psidebar.component';
 
 
 
@@ -48,9 +50,19 @@ export const routes: Routes =
       },
 
       {
-        path:'sidebar',
+        path:'dsidebar',
         component:DoctorSidebarComponent
       },
+
+      {
+        path:'asidebar',
+        component:AdminSidebarComponent
+      },
+      
+      {
+        path:'psidebar',
+        component:PatientSidebarComponent
+      }
 
 ];
 
