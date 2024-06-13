@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { DoctorService } from '../../../../features/doctors/services/doctor.service';
+import { DoctorService } from '../../../../doctors/services/doctor.service';
 
 @Component({
   selector: 'app-doctor-sidebar',
