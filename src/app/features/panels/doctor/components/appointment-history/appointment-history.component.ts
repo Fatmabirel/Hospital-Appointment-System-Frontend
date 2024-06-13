@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { DoctorSidebarComponent } from '../sidebar/doctorSidebar.component';
 import { CommonModule } from '@angular/common';
-import { Appointment } from '../../../../features/appointments/models/appointmentModel';
-import { DoctorService } from '../../../../features/doctors/services/doctor.service';
-import { ResponseModel } from '../../../../features/models/responseModel';
-import { AppointmentService } from '../../../../features/appointments/services/appointment.service';
+import { Appointment } from '../../../../appointments/models/appointmentModel';
+import { DoctorService } from '../../../../doctors/services/doctor.service';
+import { ResponseModel } from '../../../../models/responseModel';
+import { AppointmentService } from '../../../../appointments/services/appointment.service';
+import { DoctorSidebarComponent } from '../sidebar/doctorSidebar.component';
 
 @Component({
   selector: 'app-appointment-history',
