@@ -47,7 +47,7 @@ export const routes: Routes =
         component:RegisterComponent
       },
       {
-        path:'dsidebar',
+        path:'doctor-sidebar',
         component:DoctorSidebarComponent
       },
       {
@@ -56,7 +56,7 @@ export const routes: Routes =
       },
 
       {
-        path:'doctor-sidebar',
+        path:'admin-sidebar',
         component:AdminSidebarComponent
       },
       
