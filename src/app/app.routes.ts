@@ -48,7 +48,6 @@ export const routes: Routes =
       },
       {
         path:'doctor-sidebar',
-        path:'doctor-sidebar',
         component:DoctorSidebarComponent
       },
       {
