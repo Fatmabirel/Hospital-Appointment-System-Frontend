@@ -28,11 +28,9 @@ export class AppointmentHistoryComponent implements OnInit {
     this.doctorService.getDoctorProfile().subscribe(
       (doctor) => {
         const doctorId = doctor.id.toString(); 
-        //console.log('id:', doctorId);
         this.appointmentService.getDoctorAppointments(doctorId, this.pageIndex, this.pageSize).subscribe(
           (response: ResponseModel<Appointment>) => {
             this.appointments = response.items;
-            //console.log('Randevular:', this.appointments);
           },
           (error) => {
             console.error('Randevular alınamadı:', error);
