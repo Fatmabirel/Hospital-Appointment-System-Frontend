@@ -15,6 +15,7 @@ import { Doctor } from '../../../../doctors/models/doctor';
 })
 export class DoctorSidebarComponent implements OnInit {
   doctor: Doctor;
+  doctorName:string = '';
   errorMessage: string;
 
   constructor(private doctorService: DoctorService) {}
@@ -23,11 +24,12 @@ export class DoctorSidebarComponent implements OnInit {
     this.doctorService.getDoctorProfile().subscribe(
       (doctor) => {
         this.doctor = doctor;
+        this.doctorName = doctor.firstName + ' ' + doctor.lastName;
         //console.log('Doctor:', this.doctor); // Doctor bilgilerini konsola yazdır
       },
       (error) => {
         this.errorMessage = error.message; // Hata mesajını al ve errorMessage değişkenine ata
-        //console.error('Hata:', error); // Hata durumunda konsola yazdır
+        console.error('Hata:', error); // Hata durumunda konsola yazdır
       }
     );
   }

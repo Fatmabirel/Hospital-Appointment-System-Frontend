@@ -1,60 +1,58 @@
-  <div class="d-flex flex-column flex-shrink-0 p-3 text-dark bg-white" class="sidebar" style="width: 280px;">
-    <div>
-      <p *ngIf="doctorName" class="welcome-message">Hoş geldiniz,</p>
-      <p *ngIf="doctorName" class="doctor-name">{{ doctorName }}</p>
-      <p *ngIf="!doctorName" class="loading-message">Yükleniyor...</p>
-    </div>
-
-
-    <hr>
-    <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item">
-        <a routerLink="/" routerLinkActive="active" class="nav-link">
-          <i class="bi bi-house-heart"></i>
-          Ana Sayfa
-        </a>
-      </li>
-      <li class="nav-item">
-        <a routerLink="/" routerLinkActive="nav-link text-dark" class="nav-link">
-          <i class="bi bi-calendar-heart"></i>
-          Randevu Takvimi
-        </a>
-      </li>
-      <li class="nav-item">
-        <a routerLink="/" routerLinkActive="nav-link text-dark" class="nav-link">
-          <i class="bi bi-calendar-check"></i>
-          Geçmiş Randevular
-        </a>
-      </li>
-      <li class="nav-item">
-        <a routerLink="/" routerLinkActive="nav-link text-dark" class="nav-link">
-          <i class="bi bi-calendar3-week"></i>
-          Bekleyen Randevular
-        </a>
-      </li>
-      <li class="nav-item">
-        <a routerLink="/" routerLinkActive="nav-link text-dark" class="nav-link">
-          <i class="bi bi-journal"></i>
-          Raporlar
-        </a>
-      </li>
-      <li class="nav-item">
-        <a routerLink="/" routerLinkActive="nav-link text-dark" class="nav-link">
-          <i class="bi bi-people-fill"></i>
-          Hastalarım
-        </a>
-      </li>
-      <li class="nav-item">
-        <a routerLink="/" routerLinkActive="nav-link text-dark" class="nav-link">
-          <i class="bi bi-gear-fill"></i>
-          Profil Bilgilerim
-        </a>
-      </li>
-      <li class="nav-item">
-        <a routerLink="/" routerLinkActive="nav-link text-dark" class="nav-link">
-          <i class="bi bi-box-arrow-left"></i>
-          Çıkış Yap
-        </a>
-      </li>
-    </ul>
+<div class="d-flex flex-column flex-shrink-0 p-3 text-dark bg-white" class="sidebar" style="width: 280px;">
+  <div>
+    <p *ngIf="doctorName" class="welcome-message">Hoş geldiniz,</p>
+    <p *ngIf="doctorName" class="doctor-name">{{ doctorName }}</p>
+    <p *ngIf="!doctorName" class="loading-message">Yükleniyor...</p>
+  </div>
+  <hr>
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li class="nav-item">
+      <a routerLink="/" routerLinkActive="active" class="nav-link">
+        <i class="bi bi-house-heart"></i>
+        Ana Sayfa
+      </a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="/appointment-calendar" routerLinkActive="active" class="nav-link">
+        <i class="bi bi-calendar-heart"></i>
+        Randevu Takvimi
+      </a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="/appointment-history" routerLinkActive="active" class="nav-link">
+        <i class="bi bi-calendar-check"></i>
+        Geçmiş Randevular
+      </a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="/pending-appointments" routerLinkActive="active" class="nav-link">
+        <i class="bi bi-calendar3-week"></i>
+        Bekleyen Randevular
+      </a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="/reports" routerLinkActive="active" class="nav-link">
+        <i class="bi bi-journal"></i>
+        Raporlar
+      </a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="/patients" routerLinkActive="active" class="nav-link">
+        <i class="bi bi-people-fill"></i>
+        Hastalarım
+      </a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="/profile" routerLinkActive="active" class="nav-link">
+        <i class="bi bi-gear-fill"></i>
+        Profil Bilgilerim
+      </a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="/logout" routerLinkActive="active" class="nav-link">
+        <i class="bi bi-box-arrow-left"></i>
+        Çıkış Yap
+      </a>
+    </li>
+  </ul>
 </div>
