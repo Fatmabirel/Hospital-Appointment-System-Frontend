@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
           const token = response.accessToken.token; // accessToken içinden token özelliğini al
           localStorage.setItem('token', token);
           this.toastrService.success('Giriş başarılı!', 'Başarılı');
-          this.router.navigate(['/']);  // Başarılı girişten sonra yönlendirme
+          this.router.navigate(['/sidebar']);  // Başarılı girişten sonra yönlendirme
         },
         (responseError) => {
           this.toastrService.error('Giriş başarısız. Lütfen bilgilerinizi kontrol edin.', 'Hata');
