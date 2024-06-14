@@ -48,5 +48,5 @@ export class DoctorService {
     return this.httpClient.get<Doctor>(`${this.apiUrl}/${doctorId}`);
   }
 
- 
+
 }
