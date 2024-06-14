@@ -1,8 +1,6 @@
-
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <img src="assets/images/logo/logo.png"  class="d-inline-block align-top" alt="Logo" id="logo" routerLink=""  >
-    <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+    <img src="assets/images/logo/logo.png" class="d-inline-block align-top" alt="Logo" id="logo" routerLink="">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -10,52 +8,40 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active"  aria-current="page" routerLink="">Ana Sayfa</a>
+          <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Ana Sayfa</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/branches" >Tıbbi Birimler</a>
+          <a class="nav-link" routerLink="/branches" routerLinkActive="active">Tıbbi Birimler</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"  routerLink="/doctors">Doktorlarımız</a>
+          <a class="nav-link" routerLink="/doctors" routerLinkActive="active">Doktorlarımız</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"  routerLink="/about">Hakkımızda</a>
-        <li class="nav-item">
-          <a class="nav-link"  routerLink="/contact">Bize Ulaşın</a>
+          <a class="nav-link" routerLink="/about" routerLinkActive="active">Hakkımızda</a>
         </li>
-
-
-
-        <!-- <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/contact" routerLinkActive="active">Bize Ulaşın</a>
+        </li>
       </ul>
       <form class="d-flex " role="search">
         <input class="form-control me-2" type="search" placeholder="Ara" aria-label="Search">
       </form>
 
-      <!-- <form class="d-flex ">
-          <button class="btn btn-outline-success form-control me-5 "  type="submit">RANDEVU AL</button>
-        </form> -->
-      <form class="d-flex ">
-        <div class="btn-group">
+      <form class="d-flex">
+        <div class="btn-group" *ngIf="!isLoggedIn">
           <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             RANDEVU AL
           </button>
           <ul class="dropdown-menu" id="dropdown-menu">
-            <li><a class="dropdown-item" href="login">Üye Girişi</a></li>
-            <li><a class="dropdown-item" href="register">Üye Ol</a></li>
-            <!-- <li><a class="dropdown-item" href="#">Something else here</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Separated link</a></li> -->
+            <li><a class="dropdown-item" routerLink="/login">Üye Girişi</a></li>
+            <li><a class="dropdown-item" routerLink="/register">Üye Ol</a></li>
           </ul>
         </div>
+        <div class="btn-group" *ngIf="isLoggedIn">
+          <button type="button" class="btn btn-success" routerLink="/appointments">RANDEVU AL</button>
+          <button type="button" class="btn btn-success" routerLink="/doctor-sidebar">HESABIM</button>
+        </div>
       </form>
-
-
-      <!-- Example single danger button -->
-
-
     </div>
   </div>
 </nav>
