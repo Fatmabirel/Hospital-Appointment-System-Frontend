@@ -6,6 +6,8 @@ import { ResponseTokenModel } from '../models/responseTokenModel';
 import { RegisterModel } from '../models/registerModel';
 import { TokenModel } from '../models/tokenModel';
 
+import { jwtDecode } from 'jwt-decode';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -31,4 +33,33 @@ export class AuthService {
       return false;
     }
   }
+
+  decodeToken(token: string): any {
+    try {
+      return jwtDecode(token);
+    } catch (Error) {
+      console.error('Token decode edilemedi', Error);
+      return null;
+    }
+  }
+
+
+  getUserProfile(): string {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('Token bulunamadı');
+    }
+
+    const decodedToken: any = this.decodeToken(token);
+    if (!decodedToken || !decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']) {
+      throw new Error('Token decode edilemedi veya ID bulunamadı');
+    }
+
+    const userId = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+    return userId;
+  }
+
+
+
+
 }
