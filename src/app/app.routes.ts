@@ -11,6 +11,7 @@ import { PatientSidebarComponent } from './features/panels/patient/components/si
 import { AdminSidebarComponent } from './features/panels/admin/components/sidebar/adminSidebar.component';
 import { AppointmentHistoryComponent } from './features/panels/doctor/components/appointment-history/appointment-history.component';
 import { PendingAppointmentComponent } from './features/panels/doctor/components/pending-appointment/pending-appointment.component';
+import { ProfilePageComponent } from './features/profile-page/profile-page/profile-page.component';
 
 export const routes: Routes =
  [
@@ -63,11 +64,16 @@ export const routes: Routes =
         path:'admin-sidebar',
         component:AdminSidebarComponent
       },
-      
+
       {
         path:'patient-sidebar',
         component:PatientSidebarComponent
-      }
+      },
+
+      {
+        path:'profile',
+        component: ProfilePageComponent
+      },
 
 ];
 

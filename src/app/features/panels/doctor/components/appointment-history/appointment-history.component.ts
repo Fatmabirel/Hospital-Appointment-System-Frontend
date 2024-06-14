@@ -28,7 +28,7 @@ export class AppointmentHistoryComponent implements OnInit {
   loadDoctorAppointments(): void {
     this.doctorService.getDoctorProfile().subscribe(
       (doctor) => {
-        const doctorId = doctor.id.toString(); 
+        const doctorId = doctor.id.toString();
         this.appointmentService.getDoctorAppointments(doctorId, this.pageIndex, this.pageSize).subscribe(
           (response: ResponseModel<Appointment>) => {
             // Filtreleme işlemi
