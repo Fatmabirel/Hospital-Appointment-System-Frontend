@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CreateDrScheduleRequest } from '../../models/create-request-drschedule';
-import { AuthService } from '../../../../../core/auth/services/auth.service';
+
 import { DrscheduleService } from '../../services/drschedule.service';
 import { ToastrService } from 'ngx-toastr';
+import { TokenService } from '../../../../../core/auth/services/token.service';
 
 @Component({
   selector: 'app-create-doctor-schedule',
@@ -13,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './create-doctor-schedule.component.html',
   styleUrls: ['./create-doctor-schedule.component.scss']
 })
-export class CreateDoctorScheduleComponent {
+export class CreateDoctorScheduleComponent implements OnInit{
   selectedDate: string;
   startTime: string;
   endTime: string;
@@ -22,10 +23,13 @@ export class CreateDoctorScheduleComponent {
   times: string[] = [];
 
   constructor(
-    private authService: AuthService,
+     private tokenService:TokenService,
     private drScheduleService: DrscheduleService,
     private toastrService: ToastrService
   ) {
+
+  }
+  ngOnInit(): void {
     const today = new Date();
     const twoWeeksLater = new Date();
     twoWeeksLater.setDate(today.getDate() + 14);
@@ -61,7 +65,7 @@ export class CreateDoctorScheduleComponent {
 
   add() {
     if (this.selectedDate && this.startTime && this.endTime) {
-      const userId: string = this.authService.getUserProfile();
+      const userId: string = this.tokenService.getUserId();
 
       const schedule: CreateDrScheduleRequest = {
         doctorID: userId,
@@ -114,4 +118,6 @@ export class CreateDoctorScheduleComponent {
     }
     return true;
   }
+
+
 }
