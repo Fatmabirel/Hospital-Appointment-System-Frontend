@@ -16,6 +16,7 @@ import { Doctor } from '../../../../doctors/models/doctor';
 export class DoctorSidebarComponent implements OnInit {
   doctor: Doctor;
   doctorName:string = '';
+  doctorTitle:string = '';
   errorMessage: string;
 
   constructor(private doctorService: DoctorService) {}
@@ -24,6 +25,7 @@ export class DoctorSidebarComponent implements OnInit {
     this.doctorService.getDoctorProfile().subscribe(
       (doctor) => {
         this.doctor = doctor;
+        this.doctorTitle = doctor.title;
         this.doctorName = doctor.firstName + ' ' + doctor.lastName;
         //console.log('Doctor:', this.doctor); // Doctor bilgilerini konsola yazdır
       },

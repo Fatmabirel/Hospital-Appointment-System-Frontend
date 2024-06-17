@@ -1,6 +1,7 @@
 <div class="d-flex flex-column flex-shrink-0 p-3 text-dark bg-white" style="width: 280px;">
   <div>
     <p *ngIf="doctorName" class="welcome-message">Hoş geldiniz,</p>
+    <p *ngIf="doctorTitle" class="doctor-title">{{doctorTitle}} </p>
     <p *ngIf="doctorName" class="doctor-name">{{ doctorName }}</p>
     <p *ngIf="!doctorName" class="loading-message">Yükleniyor...</p>
   </div>
