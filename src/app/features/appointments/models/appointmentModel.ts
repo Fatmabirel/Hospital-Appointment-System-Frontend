@@ -14,6 +14,7 @@ export interface Appointment {
     patientnationalIdentity?:string;
     patientdateOfBirth?:Date;
     patientPhone?:string;
+    patientAge?:number;
     
 
 

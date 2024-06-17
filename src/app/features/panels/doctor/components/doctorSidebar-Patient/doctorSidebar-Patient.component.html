@@ -9,9 +9,10 @@
         <tr>
           <th scope="col" style="width: 25%;">Hasta Adı Soyadı</th>
           <th scope="col" style="width: 15%;">Doğum Tarihi</th>
+          <th scope="col" style="width: 15%;">Yaşı</th>
           <th scope="col" style="width: 15%;">TC.NO</th> 
           <th scope="col" style="width: 15%;">Telefon No</th> 
-          <th scope="col" style="width: 15%;">Raporu</th>
+          <!-- <th scope="col" style="width: 15%;">Raporu</th> -->
          
         </tr>
       </thead>
@@ -19,12 +20,13 @@
         <tr *ngFor="let appointment of appointments">
           <td>{{ appointment.patientFirstName }} {{ appointment.patientLastName}}</td>
           <td>{{ appointment.patientdateOfBirth}}</td>
+          <td>{{ appointment.patientAge}}</td>
           <td>{{ appointment.patientnationalIdentity}}</td>
           <td>{{ appointment.patientPhone}}</td>
          
-          <td>
+          <!-- <td>
             <button class="btn btn-primary btn-sm">Raporu Görüntüle</button>
-          </td>
+          </td> -->
     
       </tbody>
     </table>

@@ -54,6 +54,7 @@ export class DoctorSidebarPatientComponent implements OnInit {
                   appointments.patientFirstName = patientResponse.firstName;
                   appointments.patientLastName = patientResponse.lastName;
                   appointments.patientPhone = patientResponse.phone;
+                  appointments.patientAge=patientResponse.age;
                   this.appointments.push(appointments);
                 })
             }
