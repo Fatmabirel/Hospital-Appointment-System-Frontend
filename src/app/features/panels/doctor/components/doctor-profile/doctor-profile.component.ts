@@ -37,15 +37,14 @@ export class DoctorProfileComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       branchID: ['', Validators.required],
-      branchName: ['', Validators.required],
+      branchName: [''],
       title: ['', Validators.required],
       schoolName: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
       nationalIdentity: ['', Validators.required],
       phone: ['', Validators.required],
       address: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]]
     });
   }
 
@@ -73,8 +72,6 @@ export class DoctorProfileComponent implements OnInit {
           console.log('Doktor güncellendi:', response);
           this.toastrService.success('Bilgileriniz başarıyla güncellendi');
           this.router.navigate(['doctor-sidebar']);
-
-          // İşlem başarılı ise gerekli işlemler yapılabilir (örneğin yönlendirme)
         },
         (error) => {
           console.error('Doktor güncellenemedi:', error);
@@ -82,7 +79,7 @@ export class DoctorProfileComponent implements OnInit {
       );
     } else {
       // Form geçerli değilse hata mesajı gösterilebilir
-      this.toastrService.error('Lütfen formu doğru şekilde doldurun');
+      this.toastrService.error('Lütfen eksik alanları doldurun');
     }
   }
 }
