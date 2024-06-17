@@ -40,12 +40,12 @@ export class PendingAppointmentComponent {
             (response: ResponseModel<Appointment>) => {
               // Filtreleme işlemi
               this.appointments = response.items.filter((appointment) => {
-                const appointmentDate = new Date(appointment.date!);
+                const appointmentDate = new Date(appointment.date);
                 // Tarih ve saat kontrolü
                 return (
                   appointmentDate > this.todayDate ||
                   (appointmentDate.getTime() === this.todayDate.getTime() &&
-                    appointment.time! >
+                    appointment.time >
                       this.todayDate.toTimeString().slice(0, 5))
                 );
               });

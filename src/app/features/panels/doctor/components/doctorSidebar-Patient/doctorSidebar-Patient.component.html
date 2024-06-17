@@ -17,12 +17,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let appointment of appointments">
-          <td>{{ appointment.patientFirstName }} {{ appointment.patientLastName}}</td>
-          <td>{{ appointment.patientdateOfBirth}}</td>
-          <td>{{ appointment.patientAge}}</td>
-          <td>{{ appointment.patientnationalIdentity}}</td>
-          <td>{{ appointment.patientPhone}}</td>
+        <tr *ngFor="let paitent of paitents">
+          <td>{{ paitent.firstName }} {{ paitent.lastName}}</td>
+          <td>{{ paitent.dateOfBirth}}</td>
+          <td>{{ paitent.age}}</td>
+          <td>{{ paitent.nationalIdentity}}</td>
+          <td>{{ paitent.phone}}</td>
          
           <!-- <td>
             <button class="btn btn-primary btn-sm">Raporu Görüntüle</button>

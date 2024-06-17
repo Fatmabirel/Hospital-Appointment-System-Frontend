@@ -23,6 +23,7 @@ import { Appointment } from '../../../../appointments/models/appointmentModel';
 
 export class DoctorSidebarPatientComponent implements OnInit {
   appointments: Appointment[] = [];
+  paitents: Patient[] = [];
   pageIndex: number = 0;
   pageSize: number = 12;
 
@@ -39,23 +40,35 @@ export class DoctorSidebarPatientComponent implements OnInit {
         //console.log('id:', doctorId);
         this.appointmentService.getDoctorAppointments(doctorId, this.pageIndex, this.pageSize).subscribe(
           (response: ResponseModel<Appointment>) => {
-
+            
             for (let index = 0; index < response.items.length; index++) {
               const appointment = response.items[index];
               this.patientService.getByPatientId(appointment.patientID,0,1).subscribe(
                 (patientResponse: Patient) => {
-                  let appointments: Appointment = {
-                    patientID: appointment.patientID
+                  let patients: Patient = {
+                    address: patientResponse.address,
+                    id: patientResponse.id,
+                    age: patientResponse.age,
+                    dateOfBirth: patientResponse.dateOfBirth,
+                    firstName: patientResponse.firstName,
+                    lastName: patientResponse.lastName,
+                    nationalIdentity: patientResponse.nationalIdentity,
+                    phone: patientResponse.phone,
+                    appointmentDate: patientResponse.appointmentDate,
+                    appointmentId: patientResponse.appointmentId,
+                    appointmentRapor: patientResponse.appointmentRapor,
+                    appointmentTime: patientResponse.appointmentTime,
+                    email: patientResponse.email,
                   };
                   
-                  appointments.patientnationalIdentity = patientResponse.nationalIdentity;
-                  appointments.patientPhone = patientResponse.phone;
-                  appointments.patientdateOfBirth = patientResponse.dateOfBirth;
-                  appointments.patientFirstName = patientResponse.firstName;
-                  appointments.patientLastName = patientResponse.lastName;
-                  appointments.patientPhone = patientResponse.phone;
-                  appointments.patientAge=patientResponse.age;
-                  this.appointments.push(appointments);
+                  // appointments.patientnationalIdentity = patientResponse.nationalIdentity;
+                  // appointments.patientPhone = patientResponse.phone;
+                  // appointments.patientdateOfBirth = patientResponse.dateOfBirth;
+                  // appointments.patientFirstName = patientResponse.firstName;
+                  // appointments.patientLastName = patientResponse.lastName;
+                  // appointments.patientPhone = patientResponse.phone;
+                  // appointments.patientAge=patientResponse.age;
+                  this.paitents.push(patients);
                 })
             }
 
