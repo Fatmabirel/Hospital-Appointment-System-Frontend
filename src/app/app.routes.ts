@@ -12,6 +12,7 @@ import { AdminSidebarComponent } from './features/panels/admin/components/sideba
 import { AppointmentHistoryComponent } from './features/panels/doctor/components/appointment-history/appointment-history.component';
 import { PendingAppointmentComponent } from './features/panels/doctor/components/pending-appointment/pending-appointment.component';
 import { DoctorProfileComponent } from './features/panels/doctor/components/doctor-profile/doctor-profile.component';
+import { CreateDoctorScheduleComponent } from './features/panels/doctor/components/create-doctor-schedule/create-doctor-schedule.component';
 
 export const routes: Routes =
  [
@@ -68,11 +69,16 @@ export const routes: Routes =
         path:'admin-sidebar',
         component:AdminSidebarComponent
       },
-      
+
       {
         path:'patient-sidebar',
         component:PatientSidebarComponent
-      }
+      },
+      {
+        path: 'drschedule', // Route belirtilen path ile eşleştiğinde
+        component: CreateDoctorScheduleComponent, // İlgili componenti AppComponent'ten başlayarak
+        // ilk karşılaştığı <router-outlet></router-outlet> etiketine yerleştirir.
+     },
 
 ];
 

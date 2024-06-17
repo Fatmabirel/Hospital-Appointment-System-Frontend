@@ -6,6 +6,8 @@ import { ResponseTokenModel } from '../models/responseTokenModel';
 import { RegisterModel } from '../models/registerModel';
 import { TokenModel } from '../models/tokenModel';
 
+
+
 @Injectable({
   providedIn: 'root',
 })
@@ -30,4 +32,10 @@ export class AuthService {
       return false;
     }
   }
+
+
+
+
+
+
 }

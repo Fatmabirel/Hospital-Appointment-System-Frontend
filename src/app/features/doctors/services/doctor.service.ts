@@ -51,5 +51,4 @@ export class DoctorService {
     const doctorId = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
     return this.httpClient.get<Doctor>(`${this.apiUrl}/${doctorId}`);
   }
-
 }
