@@ -75,7 +75,7 @@ export const routes: Routes =
         component:PatientSidebarComponent
       },
       {
-        path: 'drschedule', // Route belirtilen path ile eşleştiğinde
+        path: 'doctor-schedule', // Route belirtilen path ile eşleştiğinde
         component: CreateDoctorScheduleComponent, // İlgili componenti AppComponent'ten başlayarak
         // ilk karşılaştığı <router-outlet></router-outlet> etiketine yerleştirir.
      },

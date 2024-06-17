@@ -68,10 +68,10 @@ export class TokenService {
  //bu daha sonradan silinebilir sadece consoleda ne yazdığını görmek adına
   // Eğer userRoles bir dizi ise, her bir rolü yazdırmak için
   if (Array.isArray(userRoles)) {
-    userRoles.forEach(role => console.log(role));
+    //userRoles.forEach(role => console.log(role));
   } else {
     // Eğer userRoles tek bir string ise
-    console.log(userRoles);
+    //console.log(userRoles);
   }
 
   return userRoles;

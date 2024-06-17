@@ -62,11 +62,11 @@ export class LoginComponent implements OnInit {
           const userRoles=this.tokenService.getUserRole();
 
           if(userRoles=="Admin")
-          this.router.navigate(['contact']);  // Başarılı girişten sonra yönlendirme
+          this.router.navigate(['admin-sidebar']);  // Başarılı girişten sonra yönlendirme
            else if(userRoles.includes("Doctors.Update"))
-          this.router.navigate(['branches'])
+          this.router.navigate(['doctor-sidebar'])
           else if(userRoles.includes("Patients.Update"))
-            this.router.navigate(['doctors'])
+            this.router.navigate(['/'])
         },
         (responseError) => {
           this.toastrService.error('Giriş başarısız. Lütfen bilgilerinizi kontrol edin.', 'Hata');

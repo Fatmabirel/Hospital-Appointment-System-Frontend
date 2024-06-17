@@ -39,7 +39,7 @@
         </div>
         <div class="btn-group" *ngIf="isLoggedIn">
           <button type="button" class="btn btn-success" routerLink="/appointments">RANDEVU AL</button>
-          <button type="button" class="btn btn-success" routerLink="/doctor-sidebar">HESABIM</button>
+          <button type="button" class="btn btn-success" (click)="directUsers()">HESABIM</button>
         </div>
       </form>
     </div>

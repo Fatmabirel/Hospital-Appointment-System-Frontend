@@ -6,11 +6,12 @@ import { CreateDrScheduleRequest } from '../../models/create-request-drschedule'
 import { DrscheduleService } from '../../services/drschedule.service';
 import { ToastrService } from 'ngx-toastr';
 import { TokenService } from '../../../../../core/auth/services/token.service';
+import { DoctorSidebarComponent } from '../sidebar/doctorSidebar.component';
 
 @Component({
   selector: 'app-create-doctor-schedule',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule,DoctorSidebarComponent],
   templateUrl: './create-doctor-schedule.component.html',
   styleUrls: ['./create-doctor-schedule.component.scss']
 })
