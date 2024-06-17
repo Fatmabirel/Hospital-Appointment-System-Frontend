@@ -33,6 +33,10 @@ export class DoctorService {
     return this.httpClient.get<ResponseModel<Doctor>>(this.apiUrl, { params });
   }
 
+  updateDoctor(doctor: Doctor): Observable<ResponseModel<Doctor>> {
+    return this.httpClient.put<ResponseModel<Doctor>>(this.apiUrl, doctor);
+  }
+
   getDoctorProfile(): Observable<Doctor> {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -47,6 +51,4 @@ export class DoctorService {
     const doctorId = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
     return this.httpClient.get<Doctor>(`${this.apiUrl}/${doctorId}`);
   }
-
- 
 }

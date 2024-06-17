@@ -17,9 +17,9 @@
       <tbody>
         <tr *ngFor="let appointment of appointments">
           <td>{{ appointment.patientFirstName }} {{ appointment.patientLastName }}</td>
-          <td>{{ appointment.date | date }}</td>
+          <td>{{ appointment.date | date:'dd.MM.yyyy' }}</td>
           <td>{{ appointment.time }}</td>
-          <td>{{ appointment.status ? 'Aktif' : 'Pasif' }}</td>
+          <td>Tamamlandı</td>
           <td>
             <button class="btn btn-primary btn-sm">Raporu Görüntüle</button>
           </td>

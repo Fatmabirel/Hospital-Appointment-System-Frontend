@@ -6,6 +6,8 @@ import { ResponseTokenModel } from '../models/responseTokenModel';
 import { RegisterModel } from '../models/registerModel';
 import { TokenModel } from '../models/tokenModel';
 
+
+
 @Injectable({
   providedIn: 'root',
 })
@@ -24,11 +26,14 @@ export class AuthService {
   }
 
   isAuthenticated() {
-
     if (localStorage.getItem('token')) {
       return true;
     } else {
       return false;
     }
   }
+  logout(): void {
+    localStorage.removeItem('token');
+  }
+
 }

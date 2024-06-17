@@ -17,6 +17,7 @@ export class AppointmentHistoryComponent implements OnInit {
   appointments: Appointment[] = [];
   pageIndex: number = 0;
   pageSize: number = 12;
+  todayDate: Date = new Date(); // Şu anki tarihi ve saati al
 
   constructor(private doctorService: DoctorService, private appointmentService: AppointmentService) {}
 
@@ -28,11 +29,14 @@ export class AppointmentHistoryComponent implements OnInit {
     this.doctorService.getDoctorProfile().subscribe(
       (doctor) => {
         const doctorId = doctor.id.toString(); 
-        //console.log('id:', doctorId);
         this.appointmentService.getDoctorAppointments(doctorId, this.pageIndex, this.pageSize).subscribe(
           (response: ResponseModel<Appointment>) => {
-            this.appointments = response.items;
-            //console.log('Randevular:', this.appointments);
+            // Filtreleme işlemi
+            this.appointments = response.items.filter(appointment => {
+              const appointmentDate = new Date(appointment.date);
+              // Tarih ve saat kontrolü: Bugünkü tarihten önceki randevuları getir
+              return appointmentDate < this.todayDate || (appointmentDate.getTime() === this.todayDate.getTime() && appointment.time < this.todayDate.toTimeString().slice(0, 5));
+            });
           },
           (error) => {
             console.error('Randevular alınamadı:', error);
@@ -44,5 +48,4 @@ export class AppointmentHistoryComponent implements OnInit {
       }
     );
   }
- 
 }

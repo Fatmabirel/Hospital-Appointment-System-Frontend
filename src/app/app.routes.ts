@@ -6,11 +6,13 @@ import { ContactComponent } from './features/contact/contact.component';
 import { AboutComponent } from './features/about/about.component';
 import { LoginComponent } from './routes/auth/login/login.component';
 import { RegisterComponent } from './routes/auth/register/register.component';
-import { loginGuard } from './core/auth/guards/login.guard';
 import { DoctorSidebarComponent } from './features/panels/doctor/components/sidebar/doctorSidebar.component';
 import { PatientSidebarComponent } from './features/panels/patient/components/sidebar/psidebar.component';
 import { AdminSidebarComponent } from './features/panels/admin/components/sidebar/adminSidebar.component';
 import { AppointmentHistoryComponent } from './features/panels/doctor/components/appointment-history/appointment-history.component';
+import { PendingAppointmentComponent } from './features/panels/doctor/components/pending-appointment/pending-appointment.component';
+import { DoctorProfileComponent } from './features/panels/doctor/components/doctor-profile/doctor-profile.component';
+import { CreateDoctorScheduleComponent } from './features/panels/doctor/components/create-doctor-schedule/create-doctor-schedule.component';
 import { DoctorSidebarPatientComponent } from './features/panels/doctor/components/doctorSidebar-Patient/doctorSidebar-Patient.component';
 
 export const routes: Routes =
@@ -52,19 +54,34 @@ export const routes: Routes =
         component:DoctorSidebarComponent
       },
       {
+        path:'doctor-profile',
+        component:DoctorProfileComponent
+      },
+      {
         path:'appointment-history',
         component:AppointmentHistoryComponent
+      },
+      {
+        path:'pending-appointments',
+        component:PendingAppointmentComponent
       },
 
       {
         path:'admin-sidebar',
         component:AdminSidebarComponent
       },
-      
+
       {
         path:'patient-sidebar',
         component:PatientSidebarComponent
       },
+      {
+        path: 'doctor-schedule', // Route belirtilen path ile eşleştiğinde
+        component: CreateDoctorScheduleComponent, // İlgili componenti AppComponent'ten başlayarak
+        // ilk karşılaştığı <router-outlet></router-outlet> etiketine yerleştirir.
+     },
+
+      
       {
         path:'doctor-patient',
         component:DoctorSidebarPatientComponent

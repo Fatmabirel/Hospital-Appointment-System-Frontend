@@ -1,7 +1,7 @@
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-md-6 offset-md-3">
-      <h2 class="text-center text-primary">Doktor Takvimi np</h2>
+<div class="d-flex">
+  <app-doctor-sidebar></app-doctor-sidebar>
+    <div class="flex-grow-1 p-3">
+      <h2 class="text-center" style="color: #1565c0;">ÇALIŞMA TAKVİMİM</h2>
       <div class="form-group mt-4">
         <label for="selectedDate">Tarih Seçin (İki Hafta İçinde)</label>
         <input type="date" id="selectedDate" class="form-control" [(ngModel)]="selectedDate"
@@ -25,7 +25,9 @@
           <i class="bi bi-clock"></i>
         </div>
       </div>
-      <button class="btn btn-primary mt-4" (click)="saveSchedule()">Kaydet</button>
+      <button class="btn btn-primary mt-4" (click)="add()">Kaydet</button>
     </div>
   </div>
-</div>
+
+  
+  
