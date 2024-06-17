@@ -33,9 +33,9 @@ export class AppointmentHistoryComponent implements OnInit {
           (response: ResponseModel<Appointment>) => {
             // Filtreleme işlemi
             this.appointments = response.items.filter(appointment => {
-              const appointmentDate = new Date(appointment.date);
+              const appointmentDate = new Date(appointment.date!);
               // Tarih ve saat kontrolü: Bugünkü tarihten önceki randevuları getir
-              return appointmentDate < this.todayDate || (appointmentDate.getTime() === this.todayDate.getTime() && appointment.time < this.todayDate.toTimeString().slice(0, 5));
+              return appointmentDate < this.todayDate || (appointmentDate.getTime() === this.todayDate.getTime() && appointment.time! < this.todayDate.toTimeString().slice(0, 5));
             });
           },
           (error) => {
