@@ -94,8 +94,8 @@ export const routes: Routes =
 
     { path: 'report-detail/:id',
       component: EditReportComponent } // ReportDetailCompo
-    
-    }
+
+
 
 ];
 
