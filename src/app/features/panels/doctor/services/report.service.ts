@@ -24,12 +24,9 @@ export class ReportService {
    return this.httpClient.get<ResponseModel<ResponseReport>>(newPath,{params});
   }
 
-  getReportDetails(reportId:number):Observable<ResponseReport>
-  {
-    let params = new HttpParams()
-    .set('reportId',reportId);
+  getReportDetails(reportId: number): Observable<ResponseReport> {
+    const url = `${this.apiUrl}${reportId}`; // /Reports/1 gibi URL oluşturur
 
-    return this.httpClient.get<ResponseReport>(this.apiUrl,{params});
-
+    return this.httpClient.get<ResponseReport>(url);
   }
 }

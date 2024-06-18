@@ -8,7 +8,7 @@ export interface ResponseReport{
       doctorTitle: string,
       patientID: number,
       patientFirstName: string,
-      patientLastName: string,
+      patientLastName: string
       patientIdentity:string,
       appointmentDate: string,
       appointmentTime: string,
