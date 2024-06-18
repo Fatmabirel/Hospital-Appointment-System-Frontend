@@ -13,6 +13,8 @@ import { AppointmentHistoryComponent } from './features/panels/doctor/components
 import { PendingAppointmentComponent } from './features/panels/doctor/components/pending-appointment/pending-appointment.component';
 import { DoctorProfileComponent } from './features/panels/doctor/components/doctor-profile/doctor-profile.component';
 import { CreateDoctorScheduleComponent } from './features/panels/doctor/components/create-doctor-schedule/create-doctor-schedule.component';
+import { ListReportComponent } from './features/panels/doctor/components/list-report/list-report.component';
+import { UpdateReportComponent } from './features/panels/doctor/components/update-report/update-report.component';
 
 export const routes: Routes =
  [
@@ -79,6 +81,14 @@ export const routes: Routes =
         component: CreateDoctorScheduleComponent, // İlgili componenti AppComponent'ten başlayarak
         // ilk karşılaştığı <router-outlet></router-outlet> etiketine yerleştirir.
      },
+
+     {
+      path:'reports',
+      component:ListReportComponent
+    },
+
+    { path: 'report-detail/:id',
+      component: UpdateReportComponent } // ReportDetailCompo
 
 ];
 
