@@ -8,8 +8,15 @@ export interface Appointment {
     doctorLastName: string;
     doctorTitle: string;
     branchName: string;
-    patientId: string;
+    patientID: string;
     patientFirstName: string;
     patientLastName: string;
+    patientnationalIdentity:string;
+    patientdateOfBirth:Date;
+    patientPhone:string;
+    patientAge:number;
+    
+
+
   }
   
