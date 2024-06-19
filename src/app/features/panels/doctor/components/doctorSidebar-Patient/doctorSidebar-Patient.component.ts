@@ -76,12 +76,12 @@ export class DoctorSidebarPatientComponent implements OnInit {
             //console.log('Randevular:', this.appointments);
           },
           (error) => {
-            console.error('Randevular alınamadı:', error);
+            console.error('doktor bilgisi alınamadı:', error);
           }
         );
       },
       (error) => {
-        console.error('Doktor bilgileri alınamadı:', error);
+        console.error('hasta  bilgileri alınamadı:', error);
       }
     );
   }
