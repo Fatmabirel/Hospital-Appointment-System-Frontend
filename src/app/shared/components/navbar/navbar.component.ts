@@ -26,7 +26,7 @@ export class NavbarComponent {
     if(userRoles=="Admin")
     this.router.navigate(['admin-sidebar']);  // Başarılı girişten sonra yönlendirme
      else if(userRoles.includes("Doctors.Update"))
-    this.router.navigate(['doctor-sidebar'])
+    this.router.navigate(['doctor-dashboard'])
     else if(userRoles.includes("Patients.Update"))
       this.router.navigate(['patient-sidebar'])
   }
