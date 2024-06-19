@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { ResponseReport } from '../models/responseReport';
 import { ResponseModel } from '../../../models/responseModel';
 import { Observable } from 'rxjs';
+import { UpdateRequestReport } from '../models/update-request-report';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +29,10 @@ export class ReportService {
     const url = `${this.apiUrl}${reportId}`; // /Reports/1 gibi URL oluşturur
 
     return this.httpClient.get<ResponseReport>(url);
+  }
+
+
+  updateReport(report: UpdateRequestReport): Observable<Report> {
+    return this.httpClient.put<Report>(this.apiUrl, report);
   }
 }
