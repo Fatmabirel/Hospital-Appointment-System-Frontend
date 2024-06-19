@@ -13,6 +13,7 @@ import { AppointmentHistoryComponent } from './features/panels/doctor/components
 import { PendingAppointmentComponent } from './features/panels/doctor/components/pending-appointment/pending-appointment.component';
 import { DoctorProfileComponent } from './features/panels/doctor/components/doctor-profile/doctor-profile.component';
 import { CreateDoctorScheduleComponent } from './features/panels/doctor/components/create-doctor-schedule/create-doctor-schedule.component';
+import { DoctorDashboardComponent } from './features/panels/doctor/components/doctor-dashboard/doctor-dashboard.component';
 
 export const routes: Routes =
  [
@@ -51,6 +52,10 @@ export const routes: Routes =
       {
         path:'doctor-sidebar',
         component:DoctorSidebarComponent
+      },
+      {
+        path:'doctor-dashboard',
+        component:DoctorDashboardComponent
       },
       {
         path:'doctor-profile',
