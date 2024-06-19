@@ -15,6 +15,12 @@ import { DoctorProfileComponent } from './features/panels/doctor/components/doct
 import { CreateDoctorScheduleComponent } from './features/panels/doctor/components/create-doctor-schedule/create-doctor-schedule.component';
 import { DoctorDashboardComponent } from './features/panels/doctor/components/doctor-dashboard/doctor-dashboard.component';
 
+import { ListReportComponent } from './features/panels/doctor/components/list-report/list-report.component';
+import { EditReportComponent } from './features/panels/doctor/components/edit-report/edit-report.component';
+
+
+
+
 export const routes: Routes =
  [
     {
@@ -84,6 +90,17 @@ export const routes: Routes =
         component: CreateDoctorScheduleComponent, // İlgili componenti AppComponent'ten başlayarak
         // ilk karşılaştığı <router-outlet></router-outlet> etiketine yerleştirir.
      },
+
+
+     {
+      path:'reports',
+      component:ListReportComponent
+    },
+
+    { path: 'report-detail/:id',
+      component: EditReportComponent } // ReportDetailCompo
+
+
 
 ];
 

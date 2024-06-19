@@ -28,9 +28,4 @@ export class AppointmentService {
       { params }
     );
   }
-  getTotalAppointments(doctorId: string): Observable<number> {
-    let params = new HttpParams().set('doctorId', doctorId);
-
-    return this.httpClient.get<number>(`${this.apiUrl}/getTotalAppointments`, { params });
-  }
 }
