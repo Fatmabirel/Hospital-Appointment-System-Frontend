@@ -16,6 +16,7 @@ import { CreateDoctorScheduleComponent } from './features/panels/doctor/componen
 
 import { ListReportComponent } from './features/panels/doctor/components/list-report/list-report.component';
 import { EditReportComponent } from './features/panels/doctor/components/edit-report/edit-report.component';
+import { AddReportComponent } from './features/panels/doctor/components/add-report/add-report.component';
 
 
 
@@ -93,7 +94,11 @@ export const routes: Routes =
     },
 
     { path: 'report-detail/:id',
-      component: EditReportComponent } // ReportDetailCompo
+      component: EditReportComponent } ,// ReportDetailCompo
+
+      { path: 'add-report/:appointmentId',
+        component: AddReportComponent } // ReportDetailCompo
+
 
 
 
