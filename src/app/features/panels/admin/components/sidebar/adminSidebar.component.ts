@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { TokenService } from '../../../../../core/auth/services/token.service';
 import { AdminService } from '../../../../admins/services/admin.service';
 import { Admin } from '../../../../admins/models/admin';
+import { AuthService } from '../../../../../core/auth/services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-admin-sidebar',
@@ -16,17 +18,31 @@ export class AdminSidebarComponent implements OnInit {
   admin: Admin;
   adminName: string = '';
 
-  constructor(private tokenService: TokenService,private adminService:AdminService) {}
+  constructor(
+    private tokenService: TokenService,
+    private adminService: AdminService,
+    private authService:AuthService,
+    private toastrService:ToastrService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-   this.getAdminProfile();
+    this.getAdminProfile();
   }
 
-  getAdminProfile(){
+  getAdminProfile() {
     this.adminService.getAdminProfile().subscribe((admin) => {
       this.adminName = admin.firstName + ' ' + admin.lastName;
       return this.adminName;
-    })
+    });
   }
 
+  logout(): void {
+    this.authService.logout();
+    this.toastrService.success(
+      'Başarıyla çıkış yaptınız. Giriş sayfasına yönlendiriliyorsunuz',
+      'Başarılı'
+    );
+    this.router.navigate(['/']); // Giriş sayfasına yönlendir
+  }
 }
