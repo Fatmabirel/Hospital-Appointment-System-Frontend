@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { CreateDrScheduleRequest } from '../../models/create-request-drschedule';
+import { AuthService } from '../../../../../core/auth/services/auth.service';
+import { DrscheduleService } from '../../services/drschedule.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-create-doctor-schedule',
@@ -17,7 +21,11 @@ export class CreateDoctorScheduleComponent {
   maxDate: string;
   times: string[] = [];
 
-  constructor() {
+  constructor(
+    private authService: AuthService,
+    private drScheduleService: DrscheduleService,
+    private toastrService: ToastrService
+  ) {
     const today = new Date();
     const twoWeeksLater = new Date();
     twoWeeksLater.setDate(today.getDate() + 14);
@@ -51,18 +59,42 @@ export class CreateDoctorScheduleComponent {
     return `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
   }
 
-  saveSchedule() {
+  add() {
     if (this.selectedDate && this.startTime && this.endTime) {
-      const schedule = {
-        date: this.selectedDate,
-        startTime: this.startTime,
-        endTime: this.endTime
+      const userId: string = this.authService.getUserProfile();
+
+      const schedule: CreateDrScheduleRequest = {
+        doctorID: userId,
+        date: this.formatDateForDatabase(this.selectedDate),
+        startTime: this.formatTimeForDatabase(this.startTime),
+        endTime: this.formatTimeForDatabase(this.endTime)
       };
+
+      this.drScheduleService.add(schedule).subscribe(
+        response => {
+          this.toastrService.info("Takvim oluşturuldu");
+        },
+        error => {
+          this.toastrService.error("Bugüne ait bir takviminiz zaten var");
+          console.error('Error creating schedule:', error);
+        }
+      );
+
       console.log('Saved Schedule:', schedule);
-      // Backend'e kaydetme veya gerekli işlemleri yapma
     } else {
-      alert('Lütfen tüm alanları doldurun.');
+     this.toastrService.error("","Tüm alanları doldurunuz.");
     }
+  }
+
+  private formatDateForDatabase(date: string): string {
+    // Tarihi Yıl-Ay-Gün biçiminde formatlayarak döndürün
+    return new Date(date).toISOString().split('T')[0];
+  }
+
+  private formatTimeForDatabase(time: string): string {
+    // Zamanı Saat:Dakika:Saniye biçiminde formatlayarak döndürün
+    const [hour, minute] = time.split(':');
+    return `${hour}:${minute}:00`;
   }
 
   getFilteredTimes() {
