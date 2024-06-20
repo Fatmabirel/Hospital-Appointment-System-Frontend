@@ -17,7 +17,7 @@ import { DoctorDashboardComponent } from './features/panels/doctor/components/do
 
 import { ListReportComponent } from './features/panels/doctor/components/list-report/list-report.component';
 import { EditReportComponent } from './features/panels/doctor/components/edit-report/edit-report.component';
-
+import { DoctorSidebarPatientComponent } from './features/panels/doctor/components/doctorSidebar-Patient/doctorSidebar-Patient.component';
 
 
 
@@ -67,6 +67,9 @@ export const routes: Routes =
         path:'doctor-profile',
         component:DoctorProfileComponent
       },
+
+      
+
       {
         path:'appointment-history',
         component:AppointmentHistoryComponent
@@ -98,9 +101,13 @@ export const routes: Routes =
     },
 
     { path: 'report-detail/:id',
-      component: EditReportComponent } // ReportDetailCompo
-
-
+      component: EditReportComponent 
+    } ,// ReportDetailCompo
+    
+    {
+      path:'doctor-patient',
+      component:DoctorSidebarPatientComponent
+    },
 
 ];
 
