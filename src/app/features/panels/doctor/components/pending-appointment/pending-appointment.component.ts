@@ -6,6 +6,7 @@ import { ResponseModel } from '../../../../models/responseModel';
 import { DoctorSidebarComponent } from '../sidebar/doctorSidebar.component';
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pending-appointment',
@@ -23,7 +24,8 @@ export class PendingAppointmentComponent {
   constructor(
     private doctorService: DoctorService,
     private appointmentService: AppointmentService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -60,7 +62,7 @@ export class PendingAppointmentComponent {
       }
     );
   }
-  
+
   public viewReport(){
     return this.toastrService.error("Randevu henüz gerçekleşmedi. Rapor bulunmamaktadır.", "Hata");
   }

@@ -1,9 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ResponseReport } from '../models/responseReport';
-import { ResponseModel } from '../../../models/responseModel';
+import { ResponseModel } from '../../models/responseModel';
 import { Observable } from 'rxjs';
 import { UpdateRequestReport } from '../models/update-request-report';
+import { AddReport } from '../models/addReport';
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +35,10 @@ export class ReportService {
 
   updateReport(report: UpdateRequestReport): Observable<Report> {
     return this.httpClient.put<Report>(this.apiUrl, report);
+  }
+
+  addReport(addReport:AddReport):Observable<Report>
+  {
+       return this.httpClient.post<Report>(this.apiUrl,addReport);
   }
 }
