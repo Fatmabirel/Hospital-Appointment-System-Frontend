@@ -13,6 +13,11 @@ import { AppointmentHistoryComponent } from './features/panels/doctor/components
 import { PendingAppointmentComponent } from './features/panels/doctor/components/pending-appointment/pending-appointment.component';
 import { DoctorProfileComponent } from './features/panels/doctor/components/doctor-profile/doctor-profile.component';
 import { CreateDoctorScheduleComponent } from './features/panels/doctor/components/create-doctor-schedule/create-doctor-schedule.component';
+import { DoctorDashboardComponent } from './features/panels/doctor/components/doctor-dashboard/doctor-dashboard.component';
+import { ListDoctorComponent } from './features/panels/admin/components/list-doctor/list-doctor.component';
+import { UpdateDoctorComponent } from './features/panels/admin/components/update-doctor/update-doctor.component';
+import { AddDoctorComponent } from './features/panels/admin/components/add-doctor/add-doctor.component';
+import { StatisticsComponent } from './features/statistics/statistics.component';
 
 export const routes: Routes =
  [
@@ -99,6 +104,10 @@ export const routes: Routes =
         // ilk karşılaştığı <router-outlet></router-outlet> etiketine yerleştirir.
      },
 
+     {
+      path: 'statistics',
+      component: StatisticsComponent,
+     },
 ];
 
 
