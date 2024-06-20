@@ -18,7 +18,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideToastr({
       positionClass: 'toast-bottom-right'
-    }),
+    }), provideAnimationsAsync(),
 
   ]
 };
