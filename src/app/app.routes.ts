@@ -20,9 +20,8 @@ import { EditReportComponent } from './features/panels/doctor/components/edit-re
 import { ListDoctorComponent } from './features/panels/admin/components/list-doctor/list-doctor.component';
 import { UpdateDoctorComponent } from './features/panels/admin/components/update-doctor/update-doctor.component';
 import { AddDoctorComponent } from './features/panels/admin/components/add-doctor/add-doctor.component';
-
-
-
+import { AdminPastAppointmentsComponent } from './features/panels/admin/components/list-appointment/admin-past-appointment/admin-past-appointment.component';
+import { AdminUpcomingAppointmentsComponent } from './features/panels/admin/components/list-appointment/admin-upcoming-appointment/admin-upcoming-appointment.component';
 
 export const routes: Routes =
  [
@@ -115,7 +114,10 @@ export const routes: Routes =
     },
 
     { path: 'report-detail/:id',
-      component: EditReportComponent } // ReportDetailCompo
+      component: EditReportComponent }, // ReportDetailCompo
+
+    { path: 'admin-past-appointments', component: AdminPastAppointmentsComponent},
+    { path: 'admin-upcoming-appointments', component: AdminUpcomingAppointmentsComponent },
 
 
 

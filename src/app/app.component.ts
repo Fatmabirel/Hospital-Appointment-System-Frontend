@@ -20,23 +20,23 @@ import { DoctorSidebarPatientComponent } from './features/panels/doctor/componen
   standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  imports: [RouterOutlet, 
+  imports: [RouterOutlet,
     FooterComponent,
-     NavbarComponent, 
-     DoctorListComponent,
-     ContactComponent,
-      BranchListComponent, 
-      SliderComponent, 
-      HomePageComponent,
-     DoctorSidebarComponent,
-     AdminSidebarComponent, 
-     PatientSidebarComponent,
-     DoctorSidebarPatientComponent
-     
-   
-     
-    
-    ]
+    NavbarComponent,
+    DoctorListComponent,
+    ContactComponent,
+    BranchListComponent,
+    SliderComponent,
+    HomePageComponent,
+    DoctorSidebarComponent,
+    AdminSidebarComponent,
+    PatientSidebarComponent,
+    DoctorSidebarPatientComponent
+
+
+
+
+  ]
 })
 export class AppComponent {
   title = 'hospital';
