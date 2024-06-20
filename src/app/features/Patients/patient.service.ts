@@ -38,6 +38,23 @@ export class PatientService {
     return this.httpClient.get<Patient>(`${this.apiUrl}/${id}`);
   }
 
+
+  getPatients(
+    pageIndex: number,
+    pageSize: number
+  ): Observable<ResponseModel<Patient>> {
+    let params = new HttpParams()
+      .set('PageIndex', pageIndex.toString())
+      .set('PageSize', pageSize.toString());
+
+    return this.httpClient.get<ResponseModel<Patient>>(this.apiUrl, { params });
+  }
+
+
+
+
+
+
   getPatientProfile(): Observable<Patient> {
     const token = localStorage.getItem('token');
     if (!token) {

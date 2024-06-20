@@ -1,8 +1,11 @@
-<body class="d-flex flex-column flex-shrink-0 p-3 text-dark bg-white" class="sidebar" style="width: 280px;">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-      <!-- <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg> -->
+
+       <div
+       class="d-flex flex-column flex-shrink-0 p-3 text-dark bg-white"
+       style="width: 280px"
+     >
+       <div>
       <span class="fs primary-color">ADMIN PANELİ</span>
-    </a>
+    <!-- </a> -->
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
@@ -23,18 +26,33 @@
           Branş Yönetimi
         </a>
       </li>
-      <li class="nav-item">
+
+
+      <!-- <li class="nav-item">
         <a routerLink="/" routerLinkActive="nav-link text-dark" class="nav-link">
           <i class="bi bi-people-fill"></i>
           Hasta Yönetimi
         </a>
+      </li> -->
+      <li class="nav-item">
+        <a
+          routerLink="/admin-patient"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="nav-link"
+        >
+          <i class="bi bi-people-fill"></i>
+          Hastalarım Yönetimi
+        </a>
       </li>
-<!--       <li class="nav-item">
+
+
+      <li class="nav-item">
         <a routerLink="/" routerLinkActive="nav-link text-dark" class="nav-link">
           <i class="bi bi-calendar-heart"></i>
           Randevu Yönetimi
         </a>
-      </li> -->
+      </li>
       <li class="nav-item">
         <a routerLink="/" routerLinkActive="nav-link text-dark" class="nav-link">
           <i class="bi bi-calendar3-week"></i>
@@ -61,5 +79,5 @@
         </a>
       </li>
     </ul>    
-</body>
+
   

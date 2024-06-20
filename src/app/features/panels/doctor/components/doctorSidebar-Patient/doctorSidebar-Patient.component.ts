@@ -54,11 +54,15 @@ export class DoctorSidebarPatientComponent implements OnInit {
                     lastName: patientResponse.lastName,
                     nationalIdentity: patientResponse.nationalIdentity,
                     phone: patientResponse.phone,
+                    height:patientResponse.height,
+                    weight:patientResponse.weight,
+                    bloodGroup:patientResponse.bloodGroup,
                     appointmentDate: patientResponse.appointmentDate,
                     appointmentId: patientResponse.appointmentId,
                     appointmentRapor: patientResponse.appointmentRapor,
                     appointmentTime: patientResponse.appointmentTime,
                     email: patientResponse.email,
+
                   };
                   
                   // appointments.patientnationalIdentity = patientResponse.nationalIdentity;

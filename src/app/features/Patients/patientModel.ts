@@ -2,7 +2,10 @@
 
 export interface Patient { 
     id: number;
-    age: number;
+    age: number; 
+    height:number;
+    weight:number;
+    bloodGroup:string;
     firstName:string;
     lastName:string;
     dateOfBirth :Date;
@@ -14,6 +17,6 @@ export interface Patient {
     appointmentDate:Date;
     appointmentTime:string;
     appointmentRapor:string;  
-
+   
 }
 
