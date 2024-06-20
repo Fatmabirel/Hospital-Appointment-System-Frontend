@@ -1,5 +1,6 @@
 export interface Doctor {
-    id:number;
+    id:string;
+    branchID:number;
     branchName:number;
     title:string;
     schoolName:string;
@@ -9,4 +10,6 @@ export interface Doctor {
     nationalIdentity:string;
     phone:string;
     address:string;
+    email:string;
+    password:string;
 }

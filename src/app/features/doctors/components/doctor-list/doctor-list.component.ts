@@ -29,4 +29,5 @@ export class DoctorListComponent implements OnInit {
       this.doctors = response.items;
     });
   }
+ 
 }

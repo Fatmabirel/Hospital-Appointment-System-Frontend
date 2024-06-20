@@ -43,6 +43,31 @@
   -moz-user-select: none;
   user-select: none;
 }
+h2 {
+  font-size: 24px;
+  color: #343a40;
+  margin-bottom: 16px;
+}
+
+/* Hoş geldiniz mesajı stili */
+.welcome-message {
+  font-size: 18px;
+  color: #353c42; /* Hoş geldiniz mesajı için farklı bir renk */
+  font-weight: bold;
+  margin: 3px 0;
+  text-align: center;
+}
+
+/* Doktor adı stili */
+.admin-name {
+  font-size: 25px;
+  color: #0056b3; /* Primary renk */
+  font-weight: bold;
+  text-transform: uppercase; /* Tüm harfler büyük */
+  margin: 0; 
+  text-align: center;
+}
+
 
 @media (min-width: 768px) {
   .bd-placeholder-img-lg {

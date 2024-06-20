@@ -11,8 +11,8 @@ import { PatientSidebarComponent } from './features/panels/patient/components/si
 import { AdminSidebarComponent } from './features/panels/admin/components/sidebar/adminSidebar.component';
 import { AppointmentHistoryComponent } from './features/panels/doctor/components/appointment-history/appointment-history.component';
 import { PendingAppointmentComponent } from './features/panels/doctor/components/pending-appointment/pending-appointment.component';
+import { DoctorProfileComponent } from './features/panels/doctor/components/doctor-profile/doctor-profile.component';
 import { CreateDoctorScheduleComponent } from './features/panels/doctor/components/create-doctor-schedule/create-doctor-schedule.component';
-
 
 export const routes: Routes =
  [
@@ -53,6 +53,14 @@ export const routes: Routes =
         component:DoctorSidebarComponent
       },
       {
+        path:'doctor-dashboard',
+        component:DoctorDashboardComponent
+      },
+      {
+        path:'doctor-profile',
+        component:DoctorProfileComponent
+      },
+      {
         path:'appointment-history',
         component:AppointmentHistoryComponent
       },
@@ -67,16 +75,29 @@ export const routes: Routes =
       },
 
       {
+        path:'admin-list-doctor',
+        component:ListDoctorComponent
+      },
+
+      {
+        path:'admin-update-doctor/:doctorId',
+        component:UpdateDoctorComponent
+      },
+      {
+        path:'admin-add-doctor',
+        component:AddDoctorComponent
+      },
+
+      {
         path:'patient-sidebar',
         component:PatientSidebarComponent
       },
 
       {
-        path: 'drschedule', // Route belirtilen path ile eşleştiğinde
+        path: 'doctor-schedule', // Route belirtilen path ile eşleştiğinde
         component: CreateDoctorScheduleComponent, // İlgili componenti AppComponent'ten başlayarak
         // ilk karşılaştığı <router-outlet></router-outlet> etiketine yerleştirir.
      },
-
 
 ];
 

@@ -5,6 +5,8 @@ import { DoctorService } from '../../../../doctors/services/doctor.service';
 import { ResponseModel } from '../../../../models/responseModel';
 import { AppointmentService } from '../../../../appointments/services/appointment.service';
 import { DoctorSidebarComponent } from '../sidebar/doctorSidebar.component';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-appointment-history',
@@ -19,7 +21,10 @@ export class AppointmentHistoryComponent implements OnInit {
   pageSize: number = 12;
   todayDate: Date = new Date(); // Şu anki tarihi ve saati al
 
-  constructor(private doctorService: DoctorService, private appointmentService: AppointmentService) {}
+  constructor(private doctorService: DoctorService, private appointmentService: AppointmentService,
+    private toastrService: ToastrService,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.loadDoctorAppointments();
@@ -30,11 +35,12 @@ export class AppointmentHistoryComponent implements OnInit {
       (doctor) => {
         const doctorId = doctor.id.toString();
         this.appointmentService.getDoctorAppointments(doctorId, this.pageIndex, this.pageSize).subscribe(
-          (response: ResponseModel<Appointment>) => {
+          (response: ResponseModel<Appointment>) => {   console.log(response);
             // Filtreleme işlemi
             this.appointments = response.items.filter(appointment => {
               const appointmentDate = new Date(appointment.date);
               // Tarih ve saat kontrolü: Bugünkü tarihten önceki randevuları getir
+
               return appointmentDate < this.todayDate || (appointmentDate.getTime() === this.todayDate.getTime() && appointment.time < this.todayDate.toTimeString().slice(0, 5));
             });
           },
@@ -47,5 +53,14 @@ export class AppointmentHistoryComponent implements OnInit {
         console.error('Doktor bilgileri alınamadı:', error);
       }
     );
+  }
+
+
+
+
+    public addReport(appointmentId:number){
+    this.router.navigate(['/add-report', appointmentId]);
+    return this.toastrService.info("Rapor ekleyebilirsiniz.");
+
   }
 }

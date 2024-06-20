@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginModel } from '../../../core/auth/models/loginModel';
 import { BasicLayoutComponent } from '../../../shared/components/basic-layout/basic-layout.component';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { TokenService } from '../../../core/auth/services/token.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
@@ -33,7 +34,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private toastrService: ToastrService,
-    private router: Router
+    private router: Router,
+    private tokenService:TokenService
   ) {}
 
   ngOnInit(): void {
@@ -56,7 +58,15 @@ export class LoginComponent implements OnInit {
           const token = response.accessToken.token; // accessToken içinden token özelliğini al
           localStorage.setItem('token', token);
           this.toastrService.success('Giriş başarılı!', 'Başarılı');
-          this.router.navigate(['/sidebar']);  // Başarılı girişten sonra yönlendirme
+
+          const userRoles=this.tokenService.getUserRole();
+
+          if(userRoles=="Admin")
+          this.router.navigate(['admin-sidebar']);  // Başarılı girişten sonra yönlendirme
+           else if(userRoles.includes("Doctors.Update"))
+          this.router.navigate(['doctor-sidebar'])
+          else if(userRoles.includes("Patients.Update"))
+            this.router.navigate(['/'])
         },
         (responseError) => {
           this.toastrService.error('Giriş başarısız. Lütfen bilgilerinizi kontrol edin.', 'Hata');
