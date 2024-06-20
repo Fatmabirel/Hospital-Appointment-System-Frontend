@@ -17,9 +17,13 @@ import { DoctorDashboardComponent } from './features/panels/doctor/components/do
 
 import { ListReportComponent } from './features/panels/doctor/components/list-report/list-report.component';
 import { EditReportComponent } from './features/panels/doctor/components/edit-report/edit-report.component';
+
+import { AddReportComponent } from './features/panels/doctor/components/add-report/add-report.component';
+
 import { ListDoctorComponent } from './features/panels/admin/components/list-doctor/list-doctor.component';
 import { UpdateDoctorComponent } from './features/panels/admin/components/update-doctor/update-doctor.component';
 import { AddDoctorComponent } from './features/panels/admin/components/add-doctor/add-doctor.component';
+
 
 
 
@@ -115,7 +119,11 @@ export const routes: Routes =
     },
 
     { path: 'report-detail/:id',
-      component: EditReportComponent } // ReportDetailCompo
+      component: EditReportComponent } ,// ReportDetailCompo
+
+      { path: 'add-report/:appointmentId',
+        component: AddReportComponent } // ReportDetailCompo
+
 
 
 

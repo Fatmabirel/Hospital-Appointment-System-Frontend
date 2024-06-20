@@ -2,13 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import {FormsModule,ReactiveFormsModule } from '@angular/forms';
 import {FormBuilder, FormGroup, FormControl,Validators } from '@angular/forms';
 import { DoctorSidebarComponent } from "../sidebar/doctorSidebar.component";
-import { ReportService } from '../../services/report.service';
 
-import { ResponseReport } from '../../models/responseReport';
+
+
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-import { UpdateRequestReport } from '../../models/update-request-report';
+
 import { ToastrService } from 'ngx-toastr';
+import { ReportService } from '../../../../reports/services/report.service';
+import { ResponseReport } from '../../../../reports/models/responseReport';
+import { UpdateRequestReport } from '../../../../reports/models/update-request-report';
 @Component({
     selector: 'app-edit-report',
     standalone: true,
@@ -24,11 +27,11 @@ export class EditReportComponent implements OnInit{
   reportId: number;
 
 
-   constructor(private formsBuilder:FormBuilder,
+    constructor(private formsBuilder:FormBuilder,
     private reportService:ReportService,
     private activatedRoute:ActivatedRoute,
     private router: Router,
-  private toastrService:ToastrService){
+    private toastrService:ToastrService){
 
   }
   ngOnInit(): void {
@@ -73,21 +76,6 @@ export class EditReportComponent implements OnInit{
 
   }
 
-  // update()
-  // {
-
-  //   this.activatedRoute.params.subscribe(params=>{
-  //     const reportId=params["id"];
-  //     })
-
-  //   if (this.reportForm.valid) { // Formun geçerli olup olmadığını kontrol ediyoruz
-  //     const updatedReport: UpdateRequestReport = this.reportForm.value; // Form verilerini Doctor nesnesine atıyoruz
-  //     updateReport.id = this.reportId;
-  //     updateReport.text = this.doctor.branchID;
-  //     console.log(updateReport);
-
-
-  // }
 
   update() {
     if (this.reportForm.valid) {
