@@ -1,0 +1,59 @@
+<div class="d-flex">
+  <app-admin-sidebar></app-admin-sidebar>
+
+  <div class="flex-grow-1 p-3">
+    <h2
+      style="
+        color: #1565c0;
+        font-size: 28px;
+        text-align: center;
+        margin-bottom: 19px;
+      "
+    >
+      DOKTORLAR
+    </h2>
+    <div class="d-flex justify-content-end mb-3">
+      <button class="btn btn-success" [routerLink]="['/admin-add-doctor']">Doktor Ekle</button>
+    </div>
+
+    <table class="table table-striped">
+      <thead class="thead-primary">
+        <tr>
+          <th scope="col" style="width: 20%">Doktor Adı Soyadı</th>
+          <th scope="col" style="width: 15%">Branş</th>
+          <th scope="col" style="width: 15%">Unvan</th>
+          <th scope="col" style="width: 15%">Okul Adı</th>
+          <th scope="col" style="width: 20%">Doğum Tarihi</th>
+          <th scope="col" style="width: 15%">Kimlik Numarası</th>
+          <th scope="col" style="width: 15%">Adres</th>
+          <th scope="col" style="width: 15%">Telefon Numarası</th>
+          <th scope="col" style="width: 15%">Mail adresi</th>
+          <th scope="col" style="width: 20%">İşlemler</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let doctor of doctors">
+          <td>{{ doctor.firstName }} {{ doctor.lastName }}</td>
+          <td>{{ doctor.branchName }}</td>
+          <td>{{ doctor.title }}</td>
+          <td>{{ doctor.schoolName }}</td>
+          <td>{{ doctor.dateOfBirth }}</td>
+          <td>{{ doctor.nationalIdentity }}</td>
+          <td>{{ doctor.address }}</td>
+          <td>{{ doctor.phone }}</td>
+          <td>{{ doctor.email }}</td>
+          <td class="text-center">
+            <div class="btn-group" role="group">
+              <button class="btn btn-sm btn-primary mr-2"  [routerLink]="['/admin-update-doctor', doctor.id]">
+                <i class="fa fa-pencil"></i>
+              </button>
+              <button class="btn btn-sm btn-danger" (click)="deleteDoctor(doctor.id)">
+                <i class="fa fa-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
