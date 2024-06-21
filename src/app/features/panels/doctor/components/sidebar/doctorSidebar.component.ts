@@ -17,6 +17,8 @@ export class DoctorSidebarComponent implements OnInit {
   doctor: Doctor;
   doctorName: string = '';
   doctorTitle: string = '';
+  doctorBranch:string='';
+
   errorMessage: string;
 
   constructor(
@@ -29,12 +31,15 @@ export class DoctorSidebarComponent implements OnInit {
   ngOnInit(): void {
     this.doctorService.getDoctorProfile().subscribe(
       (doctor) => {
+        console.log(doctor);
         this.doctor = doctor;
         this.doctorTitle = doctor.title;
         this.doctorName = doctor.firstName + ' ' + doctor.lastName;
+        this.doctorBranch=doctor.branchName;
+
         //console.log('Doctor:', this.doctor); // Doctor bilgilerini konsola yazdır
       },
-      
+
       (error) => {
         this.errorMessage = error.message; // Hata mesajını al ve errorMessage değişkenine ata
         console.error('Hata:', error); // Hata durumunda konsola yazdır
