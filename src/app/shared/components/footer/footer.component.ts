@@ -8,6 +8,7 @@ import { RouterLink, RouterModule } from '@angular/router';
 
   imports: [
     CommonModule,RouterModule,RouterLink
+
   ],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss',
