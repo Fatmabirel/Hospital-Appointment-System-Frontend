@@ -6,6 +6,7 @@ import { AdminSidebarComponent } from '../panels/admin/components/sidebar/adminS
 import { DoctorService } from '../doctors/services/doctor.service';
 import { PatientService } from '../Patients/patient.service';
 import { AppointmentService } from '../appointments/services/appointment.service';
+import { FeedbackService } from '../feedbacks/services/feedback.service';
 
 
 
@@ -23,8 +24,9 @@ export class StatisticsComponent implements OnInit {
   pageViews: number;
   doctorCount: number; // Doktor sayısı için değişken;
   appointmentCount: number;
+  feedbackCount: number;
 
-  constructor(private doctorService: DoctorService, private patientService: PatientService, private appointmentService: AppointmentService) { // DoctorService inject ediliyor
+  constructor(private doctorService: DoctorService, private patientService: PatientService, private appointmentService: AppointmentService, private feedbackService: FeedbackService,) { // DoctorService inject ediliyor
     // Örnek veriler
     this.patientCount = 0;
     this.activeUsers = 150;
@@ -38,6 +40,7 @@ export class StatisticsComponent implements OnInit {
     this.getDoctorCount(); // Doktor sayısını almak için metot çağrılıyor
     this.getPatientCount();
     this.getAppointmentCount();
+    this.getFeedbackCount();
   }
 
   getDoctorCount(): void {
@@ -53,8 +56,14 @@ export class StatisticsComponent implements OnInit {
   }
 
   getAppointmentCount(): void {
-    this.appointmentService.getAppointmentId(0, 1).subscribe((response) => { // Tüm doktorları getirmek yerine sadece toplam sayıyı almak için sayfalama parametreleri kullanılıyor
-      this.appointmentCount = response.count; // Toplam doktor sayısını alıyoruz
+    this.appointmentService.getAppointmentId(0, 1).subscribe((response) => {
+      this.appointmentCount = response.count;
+    });
+  }
+
+  getFeedbackCount(): void {
+    this.feedbackService.getFeedbacks(0,1).subscribe((response) => {
+      this.feedbackCount = response.count;
     });
   }
 }
