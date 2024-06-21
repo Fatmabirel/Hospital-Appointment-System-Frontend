@@ -13,10 +13,17 @@ import { AppointmentHistoryComponent } from './features/panels/doctor/components
 import { PendingAppointmentComponent } from './features/panels/doctor/components/pending-appointment/pending-appointment.component';
 import { DoctorProfileComponent } from './features/panels/doctor/components/doctor-profile/doctor-profile.component';
 import { CreateDoctorScheduleComponent } from './features/panels/doctor/components/create-doctor-schedule/create-doctor-schedule.component';
+import { DoctorDashboardComponent } from './features/panels/doctor/components/doctor-dashboard/doctor-dashboard.component';
 
 import { ListReportComponent } from './features/panels/doctor/components/list-report/list-report.component';
 import { EditReportComponent } from './features/panels/doctor/components/edit-report/edit-report.component';
+
 import { AddReportComponent } from './features/panels/doctor/components/add-report/add-report.component';
+
+import { ListDoctorComponent } from './features/panels/admin/components/list-doctor/list-doctor.component';
+import { UpdateDoctorComponent } from './features/panels/admin/components/update-doctor/update-doctor.component';
+import { AddDoctorComponent } from './features/panels/admin/components/add-doctor/add-doctor.component';
+
 
 
 
@@ -60,6 +67,10 @@ export const routes: Routes =
         component:DoctorSidebarComponent
       },
       {
+        path:'doctor-dashboard',
+        component:DoctorDashboardComponent
+      },
+      {
         path:'doctor-profile',
         component:DoctorProfileComponent
       },
@@ -75,6 +86,20 @@ export const routes: Routes =
       {
         path:'admin-sidebar',
         component:AdminSidebarComponent
+      },
+
+      {
+        path:'admin-list-doctor',
+        component:ListDoctorComponent
+      },
+
+      {
+        path:'admin-update-doctor/:doctorId',
+        component:UpdateDoctorComponent
+      },
+      {
+        path:'admin-add-doctor',
+        component:AddDoctorComponent
       },
 
       {
