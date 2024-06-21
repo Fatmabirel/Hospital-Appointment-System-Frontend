@@ -14,17 +14,15 @@ import { PendingAppointmentComponent } from './features/panels/doctor/components
 import { DoctorProfileComponent } from './features/panels/doctor/components/doctor-profile/doctor-profile.component';
 import { CreateDoctorScheduleComponent } from './features/panels/doctor/components/create-doctor-schedule/create-doctor-schedule.component';
 import { DoctorDashboardComponent } from './features/panels/doctor/components/doctor-dashboard/doctor-dashboard.component';
-
 import { ListReportComponent } from './features/panels/doctor/components/list-report/list-report.component';
 import { EditReportComponent } from './features/panels/doctor/components/edit-report/edit-report.component';
-
 import { AddReportComponent } from './features/panels/doctor/components/add-report/add-report.component';
-
 import { ListDoctorComponent } from './features/panels/admin/components/list-doctor/list-doctor.component';
 import { UpdateDoctorComponent } from './features/panels/admin/components/update-doctor/update-doctor.component';
 import { AddDoctorComponent } from './features/panels/admin/components/add-doctor/add-doctor.component';
-import { AdminPastAppointmentsComponent } from './features/panels/admin/components/list-appointment/admin-past-appointment/admin-past-appointment.component';
-import { AdminUpcomingAppointmentsComponent } from './features/panels/admin/components/list-appointment/admin-upcoming-appointment/admin-upcoming-appointment.component';
+import { PastAppointmentsComponent } from './features/panels/admin/components/list-appointment/past-appointments/past-appointments.component';
+import { UpcomingAppointmentsComponent } from './features/panels/admin/components/list-appointment/upcoming-appointments/upcoming-appointments.component';
+
 
 export const routes: Routes =
  [
@@ -119,10 +117,8 @@ export const routes: Routes =
     { path: 'report-detail/:id',
       component: EditReportComponent }, // ReportDetailCompo
 
-    { path: 'admin-past-appointments', component: AdminPastAppointmentsComponent},
-    { path: 'admin-upcoming-appointments', component: AdminUpcomingAppointmentsComponent },
-
-
+    { path: 'past-appointments', component: PastAppointmentsComponent},
+    { path: 'upcoming-appointments', component: UpcomingAppointmentsComponent}
 
 ];
 

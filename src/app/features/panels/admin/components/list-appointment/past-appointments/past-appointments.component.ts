@@ -6,17 +6,18 @@ import { Appointment } from '../../../../../appointments/models/appointmentModel
 import { Doctor } from '../../../../../doctors/models/doctor';
 import { ResponseModel } from '../../../../../models/responseModel';
 import { AdminSidebarComponent } from '../../sidebar/adminSidebar.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-admin-past-appointments',
+  selector: 'app-past-appointments',
   standalone: true,
-  imports: [CommonModule, AdminSidebarComponent],
-  templateUrl: './admin-past-appointment.component.html',
-  styleUrls: ['./admin-past-appointment.component.scss']
+  imports: [CommonModule, AdminSidebarComponent, RouterModule],
+  templateUrl: './past-appointments.component.html',
+  styleUrls: ['./past-appointments.component.scss']
 })
-export class AdminPastAppointmentsComponent implements OnInit {
+export class PastAppointmentsComponent implements OnInit {
   pastAppointments: Appointment[] = [];
-  doctors: { [key: string]: Doctor } = {};
+  /* doctors: { [key: string]: Doctor } = {}; */
   todayDate: Date = new Date();
   errorMessage: string;
 
@@ -34,7 +35,7 @@ export class AdminPastAppointmentsComponent implements OnInit {
           return appointmentDate < this.todayDate ||
             (appointmentDate.getTime() === this.todayDate.getTime() && appointment.time < this.todayDate.toTimeString().slice(0, 5));
         });
-        this.loadDoctorNames(this.pastAppointments);
+        /* this.loadDoctorNames(this.pastAppointments); */
       },
       (error) => {
         console.error('Randevular alınamadı:', error);
@@ -43,7 +44,7 @@ export class AdminPastAppointmentsComponent implements OnInit {
     );
   }
 
-  loadDoctorNames(appointments: Appointment[]): void {
+  /* loadDoctorNames(appointments: Appointment[]): void {
     appointments.forEach((appointment) => {
       if (!this.doctors[appointment.doctorId]) {
         this.doctorService.getDoctorById(appointment.doctorId).subscribe(
@@ -56,6 +57,6 @@ export class AdminPastAppointmentsComponent implements OnInit {
           }
         );
       }
-    });
+    }); */
   }
-}
+

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AppointmentService } from '../../../../../appointments/services/appointment.service';
 import { DoctorService } from '../../../../../doctors/services/doctor.service';
@@ -10,13 +11,13 @@ import { AdminSidebarComponent } from '../../sidebar/adminSidebar.component';
 @Component({
   selector: 'app-admin-upcoming-appointments',
   standalone: true,
-  imports: [CommonModule, AdminSidebarComponent],
-  templateUrl: './admin-upcoming-appointment.component.html',
-  styleUrls: ['./admin-upcoming-appointment.component.scss']
+  imports: [CommonModule, AdminSidebarComponent,RouterModule],
+  templateUrl: './upcoming-appointments.component.html',
+  styleUrls: ['./upcoming-appointments.component.scss']
 })
-export class AdminUpcomingAppointmentsComponent implements OnInit {
+export class UpcomingAppointmentsComponent implements OnInit {
   upcomingAppointments: Appointment[] = [];
-  doctors: { [key: string]: Doctor } = {};
+  /* doctors: { [key: string]: Doctor } = {}; */
   todayDate: Date = new Date();
   errorMessage: string;
 
@@ -34,7 +35,7 @@ export class AdminUpcomingAppointmentsComponent implements OnInit {
           return appointmentDate > this.todayDate ||
             (appointmentDate.getTime() === this.todayDate.getTime() && appointment.time >= this.todayDate.toTimeString().slice(0, 5));
         });
-        this.loadDoctorNames(this.upcomingAppointments);
+        /* this.loadDoctorNames(this.upcomingAppointments); */
       },
       (error) => {
         console.error('Randevular alınamadı:', error);
@@ -43,7 +44,7 @@ export class AdminUpcomingAppointmentsComponent implements OnInit {
     );
   }
 
-  loadDoctorNames(appointments: Appointment[]): void {
+  /* loadDoctorNames(appointments: Appointment[]): void {
     appointments.forEach((appointment) => {
       if (!this.doctors[appointment.doctorId]) {
         this.doctorService.getDoctorById(appointment.doctorId).subscribe(
@@ -57,5 +58,5 @@ export class AdminUpcomingAppointmentsComponent implements OnInit {
         );
       }
     });
-  }
+  } */
 }

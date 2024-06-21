@@ -11,7 +11,8 @@ import { AdminSidebarComponent } from './features/panels/admin/components/sideba
 import { PatientSidebarComponent } from './features/panels/patient/components/sidebar/psidebar.component';
 import { DoctorSidebarComponent } from './features/panels/doctor/components/sidebar/doctorSidebar.component';
 import { DoctorSidebarPatientComponent } from './features/panels/doctor/components/doctorSidebar-Patient/doctorSidebar-Patient.component';
-
+import { PastAppointmentsComponent } from './features/panels/admin/components/list-appointment/past-appointments/past-appointments.component';
+import { UpcomingAppointmentsComponent } from './features/panels/admin/components/list-appointment/upcoming-appointments/upcoming-appointments.component';
 
 
 
@@ -31,7 +32,9 @@ import { DoctorSidebarPatientComponent } from './features/panels/doctor/componen
     DoctorSidebarComponent,
     AdminSidebarComponent,
     PatientSidebarComponent,
-    DoctorSidebarPatientComponent
+    DoctorSidebarPatientComponent,
+    PastAppointmentsComponent,
+    UpcomingAppointmentsComponent
 
 
 
