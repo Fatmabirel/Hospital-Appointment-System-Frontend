@@ -1,25 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import {FormsModule,ReactiveFormsModule } from '@angular/forms';
-import {FormBuilder, FormGroup, FormControl,Validators } from '@angular/forms';
-import { DoctorSidebarComponent } from "../sidebar/doctorSidebar.component";
-
-
-
-import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
-
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ReportService } from '../../../../reports/services/report.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ResponseReport } from '../../../../reports/models/responseReport';
 import { UpdateRequestReport } from '../../../../reports/models/update-request-report';
+import { AdminSidebarComponent } from "../sidebar/adminSidebar.component";
+import {FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { error } from 'console';
+
 @Component({
-    selector: 'app-edit-report',
+    selector: 'app-admin-edit-report',
     standalone: true,
-    templateUrl: './edit-report.component.html',
-    styleUrl: './edit-report.component.scss',
-    imports: [FormsModule, ReactiveFormsModule, DoctorSidebarComponent]
+    templateUrl: './admin-edit-report.component.html',
+    styleUrl: './admin-edit-report.component.scss',
+    imports: [AdminSidebarComponent,FormsModule,ReactiveFormsModule]
 })
-export class EditReportComponent implements OnInit{
+export class AdminEditReportComponent implements OnInit{
 
   reportForm:FormGroup;
   responseReport:ResponseReport;
@@ -34,6 +31,7 @@ export class EditReportComponent implements OnInit{
     private toastrService:ToastrService){
 
   }
+
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params=>{
       if(params["id"])
@@ -87,10 +85,10 @@ export class EditReportComponent implements OnInit{
 
       this.reportService.updateReport(updatedReport).subscribe((response) => {
 
-          this.toastrService.success('Bilgileriniz başarıyla güncellendi');
-          this.router.navigate(['doctor-sidebar']);
+          this.toastrService.success('Rapor başarıyla güncellendi');
+          this.router.navigate(['admin-sidebar']);
           console.log('Rapor başarıyla güncellendi',response);
-        // this.router.navigate(['/doctor-reports']); // Güncelleme sonrası yönlendirme
+        this.router.navigate(['/admin-reports']); // Güncelleme sonrası yönlendirme
       },  (error) => {
         console.error('Güncelleme sırasında hata oluştu:', error);
       }
@@ -99,9 +97,12 @@ export class EditReportComponent implements OnInit{
     }
     else {
       // Form geçerli değilse hata mesajı gösterilebilir
-      this.toastrService.error('Lütfen eksik alanları doldurun');
+      this.toastrService.error('Lütfen eksik alanları doldurun.');
     }
   }
 
+
+
 }
+
 

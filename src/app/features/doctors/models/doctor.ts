@@ -1,7 +1,7 @@
 export interface Doctor {
     id:string;
     branchID:number;
-    branchName:number;
+    branchName:string;
     title:string;
     schoolName:string;
     firstName:string;
