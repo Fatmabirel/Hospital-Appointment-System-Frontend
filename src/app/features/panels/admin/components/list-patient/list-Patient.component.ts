@@ -6,16 +6,16 @@ import { Patient } from '../../../../Patients/patientModel';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-admin-patient',
+  selector: 'app-list-patient',
   standalone: true,
   imports: [
     CommonModule,RouterModule,AdminSidebarComponent
   ],
-  templateUrl: './Admin-Patient.component.html',
-  styleUrl: './Admin-Patient.component.scss',
+  templateUrl: './List-Patient.component.html',
+  styleUrl: './List-Patient.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AdminPatientComponent  {
+export class ListPatientComponent  {
 
 
   patients: Patient[] = [];
@@ -32,11 +32,19 @@ export class AdminPatientComponent  {
   getPatients() {
     this.patientService.getPatients(this.pageIndex, this.pageSize).subscribe((response) => {
       this.patients = response.items;
-    });
+    });   
   }
 
-
-
-
+  deletePatient(patientId:string) {
+    this.patientService.deletePatient(patientId).subscribe(
+      (response) => {
+        console.log('Hasta başarıyla silindi:', response);
+        this.getPatients(); // Hastaları yeniden yükleyerek güncellemeyi sağlıyoruz
+      },
+      (error) => {
+        console.error('Hasta silinemedi:', error);
+      }
+    );
+  }
   
  }

@@ -23,7 +23,9 @@ import { AddDoctorComponent } from './features/panels/admin/components/add-docto
 
 
 import { DoctorSidebarPatientComponent } from './features/panels/doctor/components/doctorSidebar-Patient/doctorSidebar-Patient.component';
-import { AdminPatientComponent } from './features/panels/admin/components/Admin-Patient/Admin-Patient.component';
+import { ListPatientComponent } from './features/panels/admin/components/list-patient/list-Patient.component';
+import { AddPatientComponent } from './features/panels/admin/components/add-Patient/add-Patient.component';
+import { UpdatePatientComponent } from './features/panels/admin/components/update-patient/update-patient.component';
 
 
 export const routes: Routes =
@@ -130,9 +132,16 @@ export const routes: Routes =
 
  {
       path:'admin-patient',
-      component:AdminPatientComponent
-    }
-    
+      component:ListPatientComponent
+    },
+    {
+      path:'admin-add-patient',
+      component:AddPatientComponent
+    },
+    {
+      path:'admin-update-patient/:patientId',
+      component:UpdatePatientComponent
+    },
 ];
 
 

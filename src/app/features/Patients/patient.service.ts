@@ -50,9 +50,17 @@ export class PatientService {
     return this.httpClient.get<ResponseModel<Patient>>(this.apiUrl, { params });
   }
 
+  addPatient(patient: any): Observable<Patient> {
+    return this.httpClient.post<any>(this.apiUrl, patient);
+  }
 
-
-
+  updatePatient(patient: Patient): Observable<ResponseModel<Patient>> {
+    return this.httpClient.put<ResponseModel<Patient>>(this.apiUrl, patient);
+  }
+  
+  deletePatient(id:string): Observable<ResponseModel<any>> {
+    return this.httpClient.delete<ResponseModel<any>>(`${this.apiUrl}/${id}`);
+  }
 
 
   getPatientProfile(): Observable<Patient> {

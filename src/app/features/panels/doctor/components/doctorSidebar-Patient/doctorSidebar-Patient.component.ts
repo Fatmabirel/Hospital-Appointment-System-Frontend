@@ -57,11 +57,13 @@ export class DoctorSidebarPatientComponent implements OnInit {
                     height:patientResponse.height,
                     weight:patientResponse.weight,
                     bloodGroup:patientResponse.bloodGroup,
+                    email: patientResponse.email,
+                    password:patientResponse.password,
                     appointmentDate: patientResponse.appointmentDate,
                     appointmentId: patientResponse.appointmentId,
                     appointmentRapor: patientResponse.appointmentRapor,
                     appointmentTime: patientResponse.appointmentTime,
-                    email: patientResponse.email,
+                    
 
                   };
                   

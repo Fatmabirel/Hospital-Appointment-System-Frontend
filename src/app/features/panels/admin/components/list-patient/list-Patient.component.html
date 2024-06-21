@@ -4,6 +4,10 @@
     <div class="flex-grow-1 p-3">
       <h2 style="color: #1565c0; font-size: 28px; text-align: center;margin-bottom: 19px;">RANDEVULU HASTALAR</h2>
   
+      <div class="d-flex justify-content-end mb-3">
+        <button class="btn btn-success" [routerLink]="['/admin-add-patient']">Hasta Ekle</button>
+      </div>
+
       <table class="table table-striped">
         <thead class="thead-primary">
           <tr>
@@ -33,9 +37,24 @@
             <td>{{ patient.phone}}</td>
             <td>{{ patient.email}}</td>
             <td>{{ patient.address}}</td>
-            <!-- <td>
-              <button class="btn btn-primary btn-sm">Raporu Görüntüle</button>
-            </td> -->
+
+            <!-- <div class="btn-group" role="group">
+              <button class="btn btn-sm btn-primary mr-2"[routerLink]="['/admin-update-patient', patient.id]"></button>
+               
+               
+                <i class="fa fa-pencil"></i>
+              </button> -->
+
+              <div class="btn-group" role="group">
+                <button class="btn btn-sm btn-primary mr-2"  [routerLink]="['/admin-update-patient', patient.id]">
+                  <i class="fa fa-pencil"></i>
+                </button>
+
+
+                <button class="btn btn-sm btn-danger" (click)="deletePatient(patient.id.toString())">
+                  <i class="fa fa-trash"></i>
+                </button>
+            </div>
       
         </tbody>
       </table>
