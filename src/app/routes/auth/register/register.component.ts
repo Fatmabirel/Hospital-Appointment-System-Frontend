@@ -5,7 +5,6 @@ import { AuthService } from '../../../core/auth/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { RegisterModel } from '../../../core/auth/models/registerModel';
-
 @Component({
   selector: 'app-register',
   standalone: true,
