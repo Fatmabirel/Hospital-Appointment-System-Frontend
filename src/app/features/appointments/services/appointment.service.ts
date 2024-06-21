@@ -22,13 +22,14 @@ export class AppointmentService {
       .set('PageIndex', pageIndex.toString())
       .set('PageSize', pageSize.toString())
       .set('doctorId', doctorId); // doctorId parametresini doğrudan params'a ekliyoruz
-    
+
     return this.httpClient.get<ResponseModel<Appointment>>(
       `${this.apiUrl}/getByDoctorId`,
       { params }
     );
   }
 
+<<<<<<< HEAD
   getAllAppointments(
     pageIndex: number,
     pageSize: number
@@ -43,3 +44,6 @@ export class AppointmentService {
     );
   }
 }
+=======
+}
+>>>>>>> origin/master

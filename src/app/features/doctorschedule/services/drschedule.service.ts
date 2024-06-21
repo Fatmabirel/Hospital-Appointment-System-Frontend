@@ -2,9 +2,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DoctorSchedule } from '../models/doctorschedule';
 import { CreateDrScheduleRequest } from '../models/create-request-drschedule';
+
 import { jwtDecode } from 'jwt-decode';
+import { DoctorSchedule } from '../models/doctorschedule';
 @Injectable({
   providedIn: 'root'
 })

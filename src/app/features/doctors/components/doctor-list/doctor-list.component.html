@@ -1,8 +1,9 @@
 <app-basic-layout>
 <div class="row">
+  <h2 class="title">Doktorlarımız</h2>
     <div *ngFor="let doctor of doctors" class="col-md-4">
-      <div class="card border-info " style="margin-bottom: 40px;">
-        <img src="https://via.placeholder.com/180" class="card-img-top" alt="Doctor Image" style="max-height: 290px; max-width: 100%;" />
+      <div class="card border-primary" style="margin-bottom: 40px;">
+        <img src="https://via.placeholder.com/180" class="card-img-top" alt="Doctor Image" style="max-height: 250px; max-width: 100%;" />
         <div class="card-body">
           <ul class="list-group list-group-flush">
             <li class="list-group-item" style="font-size: 18px; text-align: center">{{ doctor.firstName}} {{ doctor.lastName}}</li>

@@ -1,9 +1,11 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ResponseReport } from '../models/responseReport';
-import { ResponseModel } from '../../../models/responseModel';
+import { ResponseModel } from '../../models/responseModel';
 import { Observable } from 'rxjs';
 import { UpdateRequestReport } from '../models/update-request-report';
+import { AddReport } from '../models/addReport';
+import { Report } from '../models/report';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,7 @@ export class ReportService {
   getDoctorReports(pageIndex:number,pageSize:number,doctorId:string):Observable<ResponseModel<ResponseReport>>
   {
     let newPath=this.apiUrl+'getByDoctorId'
-   let params = new HttpParams()
+    let params = new HttpParams()
    .set('PageIndex', pageIndex.toString())
    .set('PageSize', pageSize.toString())
    .set('doctorId',doctorId);
@@ -35,4 +37,29 @@ export class ReportService {
   updateReport(report: UpdateRequestReport): Observable<Report> {
     return this.httpClient.put<Report>(this.apiUrl, report);
   }
+
+  addReport(addReport:AddReport):Observable<Report>
+  {
+       return this.httpClient.post<Report>(this.apiUrl,addReport);
+  }
+
+
+   getByAppointmentId(appointmentid:number):Observable<Report>{
+    let newPath=this.apiUrl+'appointmentid'
+    let params = new HttpParams()
+    .set('appointmentid',appointmentid);
+
+    return this.httpClient.get<Report>(newPath,{params});
+   }
+
+
+   getList(pageIndex:number,pageSize:number):Observable<ResponseModel<ResponseReport>>
+   {
+
+    let params = new HttpParams()
+    .set('PageIndex', pageIndex.toString())
+    .set('PageSize', pageSize.toString())
+
+    return this.httpClient.get<ResponseModel<ResponseReport>>(this.apiUrl,{params});
+   }
 }
