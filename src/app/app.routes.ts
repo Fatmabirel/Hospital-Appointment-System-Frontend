@@ -23,6 +23,7 @@ import { AddReportComponent } from './features/panels/doctor/components/add-repo
 import { ListDoctorComponent } from './features/panels/admin/components/list-doctor/list-doctor.component';
 import { UpdateDoctorComponent } from './features/panels/admin/components/update-doctor/update-doctor.component';
 import { AddDoctorComponent } from './features/panels/admin/components/add-doctor/add-doctor.component';
+import { ListFeedbackComponent } from './features/panels/admin/components/list-feedback/list-feedback.component';
 
 
 
@@ -101,7 +102,10 @@ export const routes: Routes =
         path:'admin-add-doctor',
         component:AddDoctorComponent
       },
-
+      {
+        path:'admin-list-feedback',
+        component:ListFeedbackComponent
+      },
       {
         path:'patient-sidebar',
         component:PatientSidebarComponent
