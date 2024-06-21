@@ -1,9 +1,5 @@
-export interface Doctor {
-    id:string;
-    branchID:number;
-    branchName:number;
-    title:string;
-    schoolName:string;
+export interface Admin {
+    id:number;
     firstName:string;
     lastName:string;
     dateOfBirth:Date;
