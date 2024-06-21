@@ -32,7 +32,7 @@ export class ListPatientComponent  {
   getPatients() {
     this.patientService.getPatients(this.pageIndex, this.pageSize).subscribe((response) => {
       this.patients = response.items;
-    });   
+    });
   }
 
   deletePatient(patientId:string) {
@@ -46,5 +46,7 @@ export class ListPatientComponent  {
       }
     );
   }
-  
+
+
+
  }
