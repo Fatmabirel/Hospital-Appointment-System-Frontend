@@ -8,11 +8,12 @@ import { DoctorSidebarComponent } from '../sidebar/doctorSidebar.component';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { ReportService } from '../../../../reports/services/report.service';
+import { CapitalizeFirstPipe } from '../../../../pipe/capitalize-first.pipe';
 
 @Component({
   selector: 'app-appointment-history',
   standalone: true,
-  imports: [CommonModule, DoctorSidebarComponent],
+  imports: [CommonModule, DoctorSidebarComponent,CapitalizeFirstPipe],
   templateUrl: './appointment-history.component.html',
   styleUrls: ['./appointment-history.component.scss']
 })
