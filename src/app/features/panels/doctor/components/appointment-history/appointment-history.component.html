@@ -13,7 +13,6 @@
           <th scope="col" style="width: 15%;">Durum</th>
           <th scope="col" style="width: 25%;"></th>
           <th scope="col" style="width: 25%;"></th>
-
         </tr>
       </thead>
       <tbody>
@@ -23,7 +22,7 @@
           <td>{{ appointment.time }}</td>
           <td>Tamamlandı</td>
           <td>
-            <button class="btn btn-primary btn-sm" >Raporu Görüntüle</button>
+            <button class="btn btn-primary btn-sm" (click)="viewReport(appointment.id)">Raporu Görüntüle</button>
           </td>
           <td>
             <button class="btn btn-success btn-sm" (click)="addReport(appointment.id)">Rapor Ekle</button>
