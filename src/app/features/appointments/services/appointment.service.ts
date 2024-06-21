@@ -13,21 +13,6 @@ export class AppointmentService {
 
   constructor(private httpClient: HttpClient) {}
 
-
-  getAllAppointments(
-    pageIndex: number,
-    pageSize: number
-  ): Observable<ResponseModel<Appointment>> {
-    let params = new HttpParams()
-      .set('PageIndex', pageIndex.toString())
-      .set('PageSize', pageSize.toString());
-
-    return this.httpClient.get<ResponseModel<Appointment>>(
-      `${this.apiUrl}/getAll`,
-      { params }
-    );
-  }
-
   getDoctorAppointments(
     doctorId: string,
     pageIndex: number,
@@ -40,6 +25,20 @@ export class AppointmentService {
     
     return this.httpClient.get<ResponseModel<Appointment>>(
       `${this.apiUrl}/getByDoctorId`,
+      { params }
+    );
+  }
+
+  getAllAppointments(
+    pageIndex: number,
+    pageSize: number
+  ): Observable<ResponseModel<Appointment>> {
+    let params = new HttpParams()
+      .set('PageIndex', pageIndex.toString())
+      .set('PageSize', pageSize.toString());
+
+    return this.httpClient.get<ResponseModel<Appointment>>(
+      `${this.apiUrl}/getAll`,
       { params }
     );
   }
