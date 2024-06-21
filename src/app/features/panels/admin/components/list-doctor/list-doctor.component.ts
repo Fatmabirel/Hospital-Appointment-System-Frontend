@@ -20,7 +20,7 @@ import { ConfirmDialogComponent } from '../../../../../shared/components/confirm
     MatDialogModule,
     MatButtonModule
   ],
-  
+
   templateUrl: './list-doctor.component.html',
   styleUrl: './list-doctor.component.scss',
 })
@@ -48,14 +48,14 @@ export class ListDoctorComponent implements OnInit {
       width: '400px',
       data: { title: 'ONAY', message: 'Bu doktoru silmek istediğinizden emin misiniz?' },
     });
-  
+
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.deleteDoctor(doctorId);
       }
     });
   }
-  
+
 
   deleteDoctor(doctorId: string) {
     this.doctorService.deleteDoctor(doctorId).subscribe(
