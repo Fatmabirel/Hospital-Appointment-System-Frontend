@@ -14,6 +14,8 @@ import { DoctorSidebarPatientComponent } from './features/panels/doctor/componen
 import { PastAppointmentsComponent } from './features/panels/admin/components/list-appointment/past-appointments/past-appointments.component';
 import { UpcomingAppointmentsComponent } from './features/panels/admin/components/list-appointment/upcoming-appointments/upcoming-appointments.component';
 
+import { StatisticsComponent } from './features/statistics/statistics.component';
+
 
 
 @Component({
@@ -23,23 +25,24 @@ import { UpcomingAppointmentsComponent } from './features/panels/admin/component
   styleUrl: './app.component.scss',
   imports: [RouterOutlet,
     FooterComponent,
-    NavbarComponent,
-    DoctorListComponent,
-    ContactComponent,
-    BranchListComponent,
-    SliderComponent,
-    HomePageComponent,
-    DoctorSidebarComponent,
-    AdminSidebarComponent,
-    PatientSidebarComponent,
-    DoctorSidebarPatientComponent,
-    PastAppointmentsComponent,
-    UpcomingAppointmentsComponent
-
-
-
-
-  ]
+     NavbarComponent, 
+     DoctorListComponent,
+     ContactComponent,
+      BranchListComponent, 
+      SliderComponent, 
+      HomePageComponent,
+     DoctorSidebarComponent,
+     AdminSidebarComponent, 
+     PatientSidebarComponent,
+     DoctorSidebarPatientComponent,
+     PastAppointmentsComponent,
+    UpcomingAppointmentsComponent,
+    StatisticsComponent
+     
+   
+     
+    
+    ]
 })
 export class AppComponent {
   title = 'hospital';

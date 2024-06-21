@@ -14,14 +14,25 @@ import { PendingAppointmentComponent } from './features/panels/doctor/components
 import { DoctorProfileComponent } from './features/panels/doctor/components/doctor-profile/doctor-profile.component';
 import { CreateDoctorScheduleComponent } from './features/panels/doctor/components/create-doctor-schedule/create-doctor-schedule.component';
 import { DoctorDashboardComponent } from './features/panels/doctor/components/doctor-dashboard/doctor-dashboard.component';
+
 import { ListReportComponent } from './features/panels/doctor/components/list-report/list-report.component';
 import { EditReportComponent } from './features/panels/doctor/components/edit-report/edit-report.component';
+
 import { AddReportComponent } from './features/panels/doctor/components/add-report/add-report.component';
+
 import { ListDoctorComponent } from './features/panels/admin/components/list-doctor/list-doctor.component';
 import { UpdateDoctorComponent } from './features/panels/admin/components/update-doctor/update-doctor.component';
 import { AddDoctorComponent } from './features/panels/admin/components/add-doctor/add-doctor.component';
 import { PastAppointmentsComponent } from './features/panels/admin/components/list-appointment/past-appointments/past-appointments.component';
 import { UpcomingAppointmentsComponent } from './features/panels/admin/components/list-appointment/upcoming-appointments/upcoming-appointments.component';
+
+import { StatisticsComponent } from './features/statistics/statistics.component';
+import { ListFeedbackComponent } from './features/panels/admin/components/list-feedback/list-feedback.component';
+import { DoctorSidebarPatientComponent } from './features/panels/doctor/components/doctorSidebar-Patient/doctorSidebar-Patient.component';
+import { ListPatientComponent } from './features/panels/admin/components/list-patient/list-Patient.component';
+import { AddPatientComponent } from './features/panels/admin/components/add-Patient/add-Patient.component';
+import { UpdatePatientComponent } from './features/panels/admin/components/update-patient/update-patient.component';
+import { UpdateFeedbackComponent } from './features/panels/admin/components/update-feedback/update-feedback.component';
 
 
 export const routes: Routes =
@@ -120,6 +131,4 @@ export const routes: Routes =
     { path: 'past-appointments', component: PastAppointmentsComponent},
     { path: 'upcoming-appointments', component: UpcomingAppointmentsComponent}
 
-];
-
-
+    ];

@@ -54,34 +54,30 @@ export class DoctorSidebarPatientComponent implements OnInit {
                     lastName: patientResponse.lastName,
                     nationalIdentity: patientResponse.nationalIdentity,
                     phone: patientResponse.phone,
+                    height:patientResponse.height,
+                    weight:patientResponse.weight,
+                    bloodGroup:patientResponse.bloodGroup,
+                    email: patientResponse.email,
+                    passwordSalt:patientResponse.passwordSalt,
                     appointmentDate: patientResponse.appointmentDate,
                     appointmentId: patientResponse.appointmentId,
                     appointmentRapor: patientResponse.appointmentRapor,
                     appointmentTime: patientResponse.appointmentTime,
-                    email: patientResponse.email,
+                    
+
                   };
                   
-                  // appointments.patientnationalIdentity = patientResponse.nationalIdentity;
-                  // appointments.patientPhone = patientResponse.phone;
-                  // appointments.patientdateOfBirth = patientResponse.dateOfBirth;
-                  // appointments.patientFirstName = patientResponse.firstName;
-                  // appointments.patientLastName = patientResponse.lastName;
-                  // appointments.patientPhone = patientResponse.phone;
-                  // appointments.patientAge=patientResponse.age;
                   this.paitents.push(patients);
                 })
             }
-
-            //this.appointments = response.items;
-            //console.log('Randevular:', this.appointments);
           },
           (error) => {
-            console.error('Randevular alınamadı:', error);
+            console.error('doktor bilgisi alınamadı:', error);
           }
         );
       },
       (error) => {
-        console.error('Doktor bilgileri alınamadı:', error);
+        console.error('hasta  bilgileri alınamadı:', error);
       }
     );
   }
