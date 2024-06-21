@@ -7,21 +7,26 @@ import { AppointmentService } from '../../../../appointments/services/appointmen
 import { DoctorSidebarComponent } from '../sidebar/doctorSidebar.component';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { ReportService } from '../../../../reports/services/report.service';
 
 @Component({
   selector: 'app-appointment-history',
   standalone: true,
   imports: [CommonModule, DoctorSidebarComponent],
   templateUrl: './appointment-history.component.html',
-  styleUrl: './appointment-history.component.scss'
+  styleUrls: ['./appointment-history.component.scss']
 })
 export class AppointmentHistoryComponent implements OnInit {
   appointments: Appointment[] = [];
+  hasReportMap: { [key: number]: boolean } = {}; // hasReport bilgisini tutmak için nesne
   pageIndex: number = 0;
   pageSize: number = 12;
-  todayDate: Date = new Date(); // Şu anki tarihi ve saati al
+  todayDate: Date = new Date();
 
-  constructor(private doctorService: DoctorService, private appointmentService: AppointmentService,
+  constructor(
+    private doctorService: DoctorService,
+    private appointmentService: AppointmentService,
+    private reportService: ReportService,
     private toastrService: ToastrService,
     private router: Router,
   ) {}
@@ -34,14 +39,29 @@ export class AppointmentHistoryComponent implements OnInit {
     this.doctorService.getDoctorProfile().subscribe(
       (doctor) => {
         const doctorId = doctor.id.toString();
-        this.appointmentService.getDoctorAppointments(doctorId, this.pageIndex, this.pageSize).subscribe(
-          (response: ResponseModel<Appointment>) => {   console.log(response);
-            // Filtreleme işlemi
-            this.appointments = response.items.filter(appointment => {
-              const appointmentDate = new Date(appointment.date);
-              // Tarih ve saat kontrolü: Bugünkü tarihten önceki randevuları getir
 
+        this.appointmentService.getDoctorAppointments(doctorId, this.pageIndex, this.pageSize).subscribe(
+          (response: ResponseModel<Appointment>) => {
+            const filteredAppointments = response.items.filter(appointment => {
+              const appointmentDate = new Date(appointment.date);
               return appointmentDate < this.todayDate || (appointmentDate.getTime() === this.todayDate.getTime() && appointment.time < this.todayDate.toTimeString().slice(0, 5));
+            });
+
+            // hasReport bilgisini her randevu için kontrol et ve ata
+            const appointmentObservables = filteredAppointments.map(appointment => {
+              return this.reportService.getByAppointmentId(appointment.id).toPromise().then(
+                response => {
+                  this.hasReportMap[appointment.id] = true;
+                },
+                error => {
+                  this.hasReportMap[appointment.id] = false;
+                }
+              );
+            });
+
+            // Tüm observables tamamlandığında appointments listesini güncelle
+            Promise.all(appointmentObservables).then(() => {
+              this.appointments = filteredAppointments;
             });
           },
           (error) => {
@@ -55,12 +75,19 @@ export class AppointmentHistoryComponent implements OnInit {
     );
   }
 
+  public viewReport(appointmentId: number) {
+    if (this.hasReportMap[appointmentId]) {
+      this.router.navigate(['report-detail', appointmentId]);
+    } else {
+      this.toastrService.error("Randevu henüz gerçekleşmedi. Rapor bulunmamaktadır.", "Hata");
+    }
+  }
 
-
-
-    public addReport(appointmentId:number){
-    this.router.navigate(['/add-report', appointmentId]);
-    return this.toastrService.info("Rapor ekleyebilirsiniz.");
-
+  public addReport(appointmentId: number) {
+    if (this.hasReportMap[appointmentId]) {
+      this.toastrService.warning("Zaten bir raporunuz var");
+    } else {
+      this.router.navigate(['/add-report', appointmentId]);
+    }
   }
 }
