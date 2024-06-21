@@ -13,7 +13,7 @@ export interface Patient {
     phone :string;
     address:string;
     email:string;
-    password:string;
+    passwordSalt:string;
     appointmentId:number;
     appointmentDate:Date;
     appointmentTime:string;

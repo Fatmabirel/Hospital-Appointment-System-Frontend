@@ -80,7 +80,7 @@ export class UpdatePatientComponent {
               phone: data.phone,
               address: data.address,
               email: data.email,
-              password:data.password
+              password:data.passwordSalt
 
               
             });

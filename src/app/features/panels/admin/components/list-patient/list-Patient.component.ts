@@ -11,8 +11,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,RouterModule,AdminSidebarComponent
   ],
-  templateUrl: './List-Patient.component.html',
-  styleUrl: './List-Patient.component.scss',
+  templateUrl: './list-Patient.component.html',
+  styleUrl: './list-Patient.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListPatientComponent  {

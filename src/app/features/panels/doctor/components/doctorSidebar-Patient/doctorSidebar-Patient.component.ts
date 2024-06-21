@@ -58,7 +58,7 @@ export class DoctorSidebarPatientComponent implements OnInit {
                     weight:patientResponse.weight,
                     bloodGroup:patientResponse.bloodGroup,
                     email: patientResponse.email,
-                    password:patientResponse.password,
+                    passwordSalt:patientResponse.passwordSalt,
                     appointmentDate: patientResponse.appointmentDate,
                     appointmentId: patientResponse.appointmentId,
                     appointmentRapor: patientResponse.appointmentRapor,
@@ -67,19 +67,9 @@ export class DoctorSidebarPatientComponent implements OnInit {
 
                   };
                   
-                  // appointments.patientnationalIdentity = patientResponse.nationalIdentity;
-                  // appointments.patientPhone = patientResponse.phone;
-                  // appointments.patientdateOfBirth = patientResponse.dateOfBirth;
-                  // appointments.patientFirstName = patientResponse.firstName;
-                  // appointments.patientLastName = patientResponse.lastName;
-                  // appointments.patientPhone = patientResponse.phone;
-                  // appointments.patientAge=patientResponse.age;
                   this.paitents.push(patients);
                 })
             }
-
-            //this.appointments = response.items;
-            //console.log('Randevular:', this.appointments);
           },
           (error) => {
             console.error('doktor bilgisi alınamadı:', error);
