@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { CreateDrScheduleRequest } from '../../models/create-request-drschedule';
+import { CreateDrScheduleRequest } from '../../../../doctorschedule/models/create-request-drschedule';
 
-import { DrscheduleService } from '../../services/drschedule.service';
+
 import { ToastrService } from 'ngx-toastr';
 import { TokenService } from '../../../../../core/auth/services/token.service';
 import { DoctorSidebarComponent } from '../sidebar/doctorSidebar.component';
+import { DrscheduleService } from '../../../../doctorschedule/services/drschedule.service';
 
 @Component({
   selector: 'app-create-doctor-schedule',
