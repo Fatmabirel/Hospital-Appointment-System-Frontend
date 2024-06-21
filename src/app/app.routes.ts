@@ -27,6 +27,10 @@ import { ListFeedbackComponent } from './features/panels/admin/components/list-f
 
 
 
+import { DoctorSidebarPatientComponent } from './features/panels/doctor/components/doctorSidebar-Patient/doctorSidebar-Patient.component';
+import { ListPatientComponent } from './features/panels/admin/components/list-patient/list-Patient.component';
+import { AddPatientComponent } from './features/panels/admin/components/add-Patient/add-Patient.component';
+import { UpdatePatientComponent } from './features/panels/admin/components/update-patient/update-patient.component';
 
 
 export const routes: Routes =
@@ -75,6 +79,9 @@ export const routes: Routes =
         path:'doctor-profile',
         component:DoctorProfileComponent
       },
+
+      
+
       {
         path:'appointment-history',
         component:AppointmentHistoryComponent
@@ -123,14 +130,28 @@ export const routes: Routes =
     },
 
     { path: 'report-detail/:id',
-      component: EditReportComponent } ,// ReportDetailCompo
+      component: EditReportComponent 
+    } ,// ReportDetailCompo
+    
+    {
+      path:'doctor-patient',
+      component:DoctorSidebarPatientComponent
+    },
 
-      { path: 'add-report/:appointmentId',
-        component: AddReportComponent } // ReportDetailCompo
-
-
-
-
+ {
+      path:'admin-patient',
+      component:ListPatientComponent
+    },
+    {
+      path:'admin-add-patient',
+      component:AddPatientComponent
+    },
+    {
+      path:'admin-update-patient/:patientId',
+      component:UpdatePatientComponent
+    },
+    { path: 'add-report/:appointmentId',
+      component: AddReportComponent } // ReportDetailCompo
 ];
 
 
