@@ -15,21 +15,23 @@ import { DoctorProfileComponent } from './features/panels/doctor/components/doct
 import { CreateDoctorScheduleComponent } from './features/panels/doctor/components/create-doctor-schedule/create-doctor-schedule.component';
 import { DoctorDashboardComponent } from './features/panels/doctor/components/doctor-dashboard/doctor-dashboard.component';
 
+
 import { ListReportComponent  } from './features/panels/doctor/components/list-report/list-report.component';
-
 import { EditReportComponent } from './features/panels/doctor/components/edit-report/edit-report.component';
-
 import { AddReportComponent } from './features/panels/doctor/components/add-report/add-report.component';
-
 import { ListDoctorComponent } from './features/panels/admin/components/list-doctor/list-doctor.component';
 import { UpdateDoctorComponent } from './features/panels/admin/components/update-doctor/update-doctor.component';
 import { AddDoctorComponent } from './features/panels/admin/components/add-doctor/add-doctor.component';
 import { AdminListReportComponent } from './features/panels/admin/components/admin-list-report/admin-list-report.component';
 import { AdminEditReportComponent } from './features/panels/admin/components/admin-edit-report/admin-edit-report.component';
+import { StatisticsComponent } from './features/statistics/statistics.component';
+import { ListFeedbackComponent } from './features/panels/admin/components/list-feedback/list-feedback.component';
 
-
-
-
+import { DoctorSidebarPatientComponent } from './features/panels/doctor/components/doctorSidebar-Patient/doctorSidebar-Patient.component';
+import { ListPatientComponent } from './features/panels/admin/components/list-patient/list-Patient.component';
+import { AddPatientComponent } from './features/panels/admin/components/add-Patient/add-Patient.component';
+import { UpdatePatientComponent } from './features/panels/admin/components/update-patient/update-patient.component';
+import { UpdateFeedbackComponent } from './features/panels/admin/components/update-feedback/update-feedback.component';
 
 export const routes: Routes =
   [
@@ -136,11 +138,48 @@ export const routes: Routes =
     {
       path: 'add-report/:appointmentId',
       component: AddReportComponent
-    } // ReportDetailCompo   //o anki randevunun id si ile yönlendirme yapıp randevu ekleme
+    },
+    // ReportDetailCompo   //o anki randevunun id si ile yönlendirme yapıp randevu ekleme
 
+      {
+        path: 'admin-list-feedback',
+        component: ListFeedbackComponent,
+     },
+      {
+        path: 'admin-update-feedback/:feedbackId',
+        component: UpdateFeedbackComponent,
+       },
+      
+       {
+           path: 'statistics',
+          component: StatisticsComponent,
+        },
+        {
+          path: 'doctor-patient',
+         component: DoctorSidebarPatientComponent,
+        },
 
-
+  {
+    path: 'admin-patient',
+    component: ListPatientComponent,
+  },
+  {
+    path: 'admin-add-patient',
+    component: AddPatientComponent,
+  },
+  {
+    path: 'admin-update-patient/:patientId',
+    component: UpdatePatientComponent,
+  },
 
   ];
+
+
+
+
+
+
+
+
 
 

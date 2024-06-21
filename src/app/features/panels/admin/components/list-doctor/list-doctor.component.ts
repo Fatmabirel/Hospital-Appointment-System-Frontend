@@ -6,7 +6,6 @@ import { Doctor } from '../../../../doctors/models/doctor';
 import { RouterModule } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConfirmDialogComponent } from '../../../../../shared/components/confirm-dialog/confirm-dialog.component';
 
 
@@ -20,7 +19,7 @@ import { ConfirmDialogComponent } from '../../../../../shared/components/confirm
     MatDialogModule,
     MatButtonModule
   ],
-  
+
   templateUrl: './list-doctor.component.html',
   styleUrl: './list-doctor.component.scss',
 })
@@ -48,14 +47,14 @@ export class ListDoctorComponent implements OnInit {
       width: '400px',
       data: { title: 'ONAY', message: 'Bu doktoru silmek istediğinizden emin misiniz?' },
     });
-  
+
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.deleteDoctor(doctorId);
       }
     });
   }
-  
+
 
   deleteDoctor(doctorId: string) {
     this.doctorService.deleteDoctor(doctorId).subscribe(
