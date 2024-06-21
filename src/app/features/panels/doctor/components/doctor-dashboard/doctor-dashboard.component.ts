@@ -2,11 +2,13 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { DoctorSidebarComponent } from '../sidebar/doctorSidebar.component';
 import { DoctorService } from '../../../../doctors/services/doctor.service';
 import { Chart } from 'chart.js';
+import { CommonModule } from '@angular/common';
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-doctor-dashboard',
   standalone: true,
-  imports: [DoctorSidebarComponent],
+  imports: [CommonModule, RouterModule, DoctorSidebarComponent],
   templateUrl: './doctor-dashboard.component.html',
   styleUrl: './doctor-dashboard.component.scss'
 })
