@@ -58,11 +58,19 @@
     </li>
 
     <li class="nav-item">
+      <a routerLink="/admin-list-feedback" routerLinkActive="active"  [routerLinkActiveOptions]="{ exact: true }" class="nav-link">
+        <i class="bi bi-chat-dots-fill"></i>
+        Geri Bildirimler
+      </a>
+    </li>
+
+    <li class="nav-item">
       <a routerLink="/" routerLinkActive="active"  [routerLinkActiveOptions]="{ exact: true }" class="nav-link">
         <i class="bi bi-gear-fill"></i>
         Profil Bilgilerim
       </a>
     </li>
+
     <li class="nav-item">
       <a (click)="logout()" class="nav-link">
         <i class="bi bi-box-arrow-left"></i>
