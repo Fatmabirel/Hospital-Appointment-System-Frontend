@@ -29,21 +29,14 @@
           <tr *ngFor="let patient of patients">
             <td>{{ patient.firstName }} {{ patient.lastName}}</td>
             <td>{{ patient.dateOfBirth}}</td>
-            <td>{{ patient.age}}</td>
-            <td>{{ patient.height}}</td>
-            <td>{{ patient.weight}}</td>
-            <td>{{ patient.bloodGroup}}</td>
+            <td>{{ patient.age||"-"}}</td>
+            <td>{{ patient.height||"-"}}</td>
+            <td>{{ patient.weight||"-"}}</td>
+            <td>{{ patient.bloodGroup||"-"}}</td>
             <td>{{ patient.nationalIdentity}}</td>
             <td>{{ patient.phone}}</td>
             <td>{{ patient.email}}</td>
-            <td>{{ patient.address}}</td>
-
-            <!-- <div class="btn-group" role="group">
-              <button class="btn btn-sm btn-primary mr-2"[routerLink]="['/admin-update-patient', patient.id]"></button>
-               
-               
-                <i class="fa fa-pencil"></i>
-              </button> -->
+            <td>{{ patient.address||"-"}}</td>
 
               <div class="btn-group" role="group">
                 <button class="btn btn-sm btn-primary mr-2"  [routerLink]="['/admin-update-patient', patient.id]">
