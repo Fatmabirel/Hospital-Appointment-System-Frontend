@@ -8,13 +8,14 @@ import { DoctorService } from '../../../../doctors/services/doctor.service';
 import { AppointmentService } from '../../../../appointments/services/appointment.service'; 
 import { ResponseModel } from '../../../../models/responseModel';
 import { Appointment } from '../../../../appointments/models/appointmentModel';
+import { CapitalizeFirstPipe } from '../../../../pipe/capitalize-first.pipe';
 
 
 @Component({
   selector: 'app-doctor-sidebar-patient',
   standalone: true,
   imports: [
-    CommonModule,RouterModule,DoctorSidebarComponent
+    CommonModule,RouterModule,DoctorSidebarComponent,CapitalizeFirstPipe
   ],
   templateUrl: './doctorSidebar-Patient.component.html',
   styleUrl: './doctorSidebar-Patient.component.scss',
