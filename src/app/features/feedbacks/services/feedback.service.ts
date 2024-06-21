@@ -22,4 +22,19 @@ export class FeedbackService {
 
     return this.httpClient.get<ResponseModel<Feedback>>(this.apiUrl, { params });
   }
+
+  getFeedbackById(id: number): Observable<Feedback> {
+    return this.httpClient.get<Feedback>(`${this.apiUrl}/${id}`);
+  }
+  addFeedback(feedback: any): Observable<Feedback> {
+    return this.httpClient.post<any>(this.apiUrl, feedback);
+  }
+
+  updateFeedback(feedback: Feedback): Observable<ResponseModel<Feedback>> {
+    return this.httpClient.put<ResponseModel<Feedback>>(this.apiUrl, feedback);
+  }
+  
+  deleteFeedback(id: number): Observable<ResponseModel<any>> {
+    return this.httpClient.delete<ResponseModel<any>>(`${this.apiUrl}/${id}`);
+  }
 }

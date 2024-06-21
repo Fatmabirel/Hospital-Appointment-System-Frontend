@@ -19,4 +19,8 @@ export class AdminService {
     }
     return this.httpClient.get<Admin>(`${this.apiUrl}/${userId}`);
   }
+
+  getAdminById(id: string): Observable<Admin> {
+    return this.httpClient.get<Admin>(`${this.apiUrl}/${id}`);
+  }
 }

@@ -19,61 +19,66 @@ import { UpdateDoctorComponent } from './features/panels/admin/components/update
 import { AddDoctorComponent } from './features/panels/admin/components/add-doctor/add-doctor.component';
 import { StatisticsComponent } from './features/statistics/statistics.component';
 import { ListFeedbackComponent } from './features/panels/admin/components/list-feedback/list-feedback.component';
+<<<<<<< HEAD
 import { ListReportComponent } from './features/panels/doctor/components/list-report/list-report.component';
 import { EditReportComponent } from './features/panels/doctor/components/edit-report/edit-report.component';
+=======
+
+>>>>>>> 549004fdbd1de85b8761b031ec436c38694246e8
 import { DoctorSidebarPatientComponent } from './features/panels/doctor/components/doctorSidebar-Patient/doctorSidebar-Patient.component';
 import { ListPatientComponent } from './features/panels/admin/components/list-patient/list-Patient.component';
 import { AddPatientComponent } from './features/panels/admin/components/add-Patient/add-Patient.component';
 import { UpdatePatientComponent } from './features/panels/admin/components/update-patient/update-patient.component';
+<<<<<<< HEAD
 import { AddReportComponent } from './features/panels/doctor/components/add-report/add-report.component';
+=======
+import { UpdateFeedbackComponent } from './features/panels/admin/components/update-feedback/update-feedback.component';
+>>>>>>> 549004fdbd1de85b8761b031ec436c38694246e8
 
-
-export const routes: Routes =
- [
-    {
-        path: '', // Route belirtilen path ile eşleştiğinde
-        component: HomePageComponent, // İlgili componenti AppComponent'ten başlayarak
-        // ilk karşılaştığı <router-outlet></router-outlet> etiketine yerleştirir.
-     },
-      {
-        path: 'branches', // Route belirtilen path ile eşleştiğinde
-        component: BranchListComponent, // İlgili componenti AppComponent'ten başlayarak
-        // ilk karşılaştığı <router-outlet></router-outlet> etiketine yerleştirir.
-        // canActivate:[loginGuard] örnek guard bu şekilde yazılıcak
-      },
-      {
-        path: 'doctors',
-        component: DoctorListComponent,
-
-      },
-      {
-        path: 'contact',
-        component: ContactComponent,
-      },
-      {
-        path:'about',
-        component:AboutComponent
-      },
-      {
-        path:'login',
-        component:LoginComponent
-      },
-      {
-        path:'register',
-        component:RegisterComponent
-      },
-      {
-        path:'doctor-sidebar',
-        component:DoctorSidebarComponent
-      },
-      {
-        path:'doctor-dashboard',
-        component:DoctorDashboardComponent
-      },
-      {
-        path:'doctor-profile',
-        component:DoctorProfileComponent
-      },
+export const routes: Routes = [
+  {
+    path: '', // Route belirtilen path ile eşleştiğinde
+    component: HomePageComponent, // İlgili componenti AppComponent'ten başlayarak
+    // ilk karşılaştığı <router-outlet></router-outlet> etiketine yerleştirir.
+  },
+  {
+    path: 'branches', // Route belirtilen path ile eşleştiğinde
+    component: BranchListComponent, // İlgili componenti AppComponent'ten başlayarak
+    // ilk karşılaştığı <router-outlet></router-outlet> etiketine yerleştirir.
+    // canActivate:[loginGuard] örnek guard bu şekilde yazılıcak
+  },
+  {
+    path: 'doctors',
+    component: DoctorListComponent,
+  },
+  {
+    path: 'contact',
+    component: ContactComponent,
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+  },
+  {
+    path: 'doctor-sidebar',
+    component: DoctorSidebarComponent,
+  },
+  {
+    path: 'doctor-dashboard',
+    component: DoctorDashboardComponent,
+  },
+  {
+    path: 'doctor-profile',
+    component: DoctorProfileComponent,
+  },
 
 
 
@@ -86,10 +91,10 @@ export const routes: Routes =
         component:PendingAppointmentComponent
       },
 
-      {
-        path:'admin-sidebar',
-        component:AdminSidebarComponent
-      },
+  {
+    path: 'admin-sidebar',
+    component: AdminSidebarComponent,
+  },
 
       {
         path:'admin-list-doctor',
@@ -128,6 +133,36 @@ export const routes: Routes =
       path:'reports',
       component:ListReportComponent
     },
+  {
+    path: 'admin-update-doctor/:doctorId',
+    component: UpdateDoctorComponent,
+  },
+  {
+    path: 'admin-add-doctor',
+    component: AddDoctorComponent,
+  },
+  {
+    path: 'admin-list-feedback',
+    component: ListFeedbackComponent,
+  },
+  {
+    path: 'admin-update-feedback/:feedbackId',
+    component: UpdateFeedbackComponent,
+  },
+  {
+    path: 'patient-sidebar',
+    component: PatientSidebarComponent,
+  },
+  {
+    path: 'doctor-schedule', // Route belirtilen path ile eşleştiğinde
+    component: CreateDoctorScheduleComponent, // İlgili componenti AppComponent'ten başlayarak
+    // ilk karşılaştığı <router-outlet></router-outlet> etiketine yerleştirir.
+  },
+
+  {
+    path: 'reports',
+    component: ListReportComponent,
+  },
 
     { path: 'report-detail/:id',
       component: EditReportComponent
@@ -152,6 +187,24 @@ export const routes: Routes =
     },
     { path: 'add-report/:appointmentId',
       component: AddReportComponent } // ReportDetailCompo
+=======
+  {
+    path: 'doctor-patient',
+    component: DoctorSidebarPatientComponent,
+  },
+
+  {
+    path: 'admin-patient',
+    component: ListPatientComponent,
+  },
+  {
+    path: 'admin-add-patient',
+    component: AddPatientComponent,
+  },
+  {
+    path: 'admin-update-patient/:patientId',
+    component: UpdatePatientComponent,
+  },
+  { path: 'add-report/:appointmentId', component: AddReportComponent }, // ReportDetailCompo
+>>>>>>> 549004fdbd1de85b8761b031ec436c38694246e8
 ];
-
-
