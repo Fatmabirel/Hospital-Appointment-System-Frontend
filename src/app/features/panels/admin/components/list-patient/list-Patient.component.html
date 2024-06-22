@@ -42,9 +42,7 @@
                 <button class="btn btn-sm btn-primary mr-2"  [routerLink]="['/admin-update-patient', patient.id]">
                   <i class="fa fa-pencil"></i>
                 </button>
-
-
-                <button class="btn btn-sm btn-danger" (click)="deletePatient(patient.id.toString())">
+                <button class="btn btn-sm btn-danger" (click)="confirmDelete(patient.id)">
                   <i class="fa fa-trash"></i>
                 </button>
             </div>

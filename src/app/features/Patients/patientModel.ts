@@ -1,23 +1,19 @@
-
-
-export interface Patient { 
-    id: number;
-    age: number; 
-    height:number;
-    weight:number;
-    bloodGroup:string;
-    firstName:string;
-    lastName:string;
-    dateOfBirth :Date;
-    nationalIdentity :string;
-    phone :string;
-    address:string;
-    email:string;
-    passwordSalt:string;
-    appointmentId:number;
-    appointmentDate:Date;
-    appointmentTime:string;
-    appointmentRapor:string;  
-   
+export interface Patient {
+  id: string;
+  age: number;
+  height: number;
+  weight: number;
+  bloodGroup: string;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: Date;
+  nationalIdentity: string;
+  phone: string;
+  address: string;
+  email: string;
+  passwordSalt: string;
+  appointmentId: number;
+  appointmentDate: Date;
+  appointmentTime: string;
+  appointmentRapor: string;
 }
-
