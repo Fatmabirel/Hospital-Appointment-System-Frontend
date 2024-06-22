@@ -26,7 +26,7 @@ import { ConfirmDialogComponent } from '../../../../../shared/components/confirm
 export class ListDoctorComponent implements OnInit {
   doctors: Doctor[] = [];
   pageIndex: number = 0;
-  pageSize: number = 10;
+  pageSize: number = 12;
 
   constructor(private doctorService: DoctorService, private dialog: MatDialog) {}
 

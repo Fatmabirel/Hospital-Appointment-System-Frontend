@@ -11,6 +11,8 @@ import { Appointment } from '../../appointments/models/appointmentModel';
 })
 export class DoctorService {
   apiUrl = 'http://localhost:60805/api/Doctors';
+  registerDoctorUrl = 'http://localhost:60805/api/Auth/Register/Doctor';
+
   constructor(private httpClient: HttpClient) {}
 
   private decodeToken(token: string): any {
@@ -38,7 +40,7 @@ export class DoctorService {
   }
 
   addDoctor(doctor: any): Observable<Doctor> {
-    return this.httpClient.post<any>(this.apiUrl, doctor);
+    return this.httpClient.post<any>(this.registerDoctorUrl, doctor);
   }
 
   updateDoctor(doctor: Doctor): Observable<ResponseModel<Doctor>> {
