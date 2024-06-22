@@ -55,7 +55,7 @@ export class UpdatePatientComponent {
       phone: ['', Validators.required],
       address: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+     
     });
   }
 
@@ -80,7 +80,7 @@ export class UpdatePatientComponent {
               phone: data.phone,
               address: data.address,
               email: data.email,
-              password:data.passwordSalt
+             
 
               
             });
@@ -101,7 +101,7 @@ export class UpdatePatientComponent {
       const updatedPatient:Patient = this.patientForm.value; // Form verilerini Doctor nesnesine atıyoruz
       updatedPatient.id = this.patient.id;
       
-      //console.log(updatedDoctor);
+      //console.log(updatedHasta);
       this.PatientService.updatePatient(updatedPatient).subscribe(
         (response) => {
           this.toastrService.success('Hasta başarıyla güncellendi');

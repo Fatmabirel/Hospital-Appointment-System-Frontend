@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
 import { PatientService } from '../../../../Patients/patient.service';
 import { Patient } from '../../../../Patients/patientModel';
@@ -14,9 +14,9 @@ import { CapitalizeFirstPipe } from '../../../../pipe/capitalize-first.pipe';
   ],
   templateUrl: './list-Patient.component.html',
   styleUrl: './list-Patient.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+
 })
-export class ListPatientComponent  {
+export class ListPatientComponent implements OnInit {
 
 
   patients: Patient[] = [];
