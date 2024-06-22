@@ -1,29 +1,32 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
 import { PatientService } from '../../../../Patients/patient.service';
 import { Patient } from '../../../../Patients/patientModel';
 import { RouterModule } from '@angular/router';
+import { CapitalizeFirstPipe } from '../../../../pipe/capitalize-first.pipe';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../../../../../shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-list-patient',
   standalone: true,
   imports: [
-    CommonModule,RouterModule,AdminSidebarComponent
+    CommonModule,RouterModule,AdminSidebarComponent,CapitalizeFirstPipe
   ],
   templateUrl: './list-Patient.component.html',
-  styleUrl: './list-Patient.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrl: './list-Patient.component.scss'
+ 
 })
-export class ListPatientComponent  {
+export class ListPatientComponent implements OnInit {
 
 
   patients: Patient[] = [];
   pageIndex: number = 0;
-  pageSize: number = 10;
+  pageSize: number = 12;
   isLoading: boolean = true;
 
-  constructor(private patientService:PatientService) {}
+  constructor(private patientService:PatientService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.getPatients();
@@ -32,6 +35,19 @@ export class ListPatientComponent  {
   getPatients() {
     this.patientService.getPatients(this.pageIndex, this.pageSize).subscribe((response) => {
       this.patients = response.items;
+    });
+  }
+
+  confirmDelete(patientId: string) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '400px',
+      data: { title: 'ONAY', message: 'Bu hastayı silmek istediğinizden emin misiniz?' },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.deletePatient(patientId);
+      }
     });
   }
 

@@ -1,4 +1,4 @@
-.body {
+body {
   font-family: Arial, sans-serif;
   display: flex;
 }
@@ -8,8 +8,17 @@
   height: 100vh;
   padding: 15px;
   border-right: 2px solid #333; /* Sağ kenarlık */
-  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to bottom, #ffffff, #f8f9fa); /* Arka plan gradyan */
 }
+
+.doctor-info {
+  background-color: #e9ecef;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
 .fs {
   font-size: 24px; /* Yazı tipi boyutu */
   font-weight: bold; /* Kalın yazı tipi */
@@ -22,6 +31,7 @@
 .primary-color {
   color: #007bff; /* Primary renk */
 }
+
 .nav-item {
   margin-bottom: 10px; /* Menü öğeleri arasında boşluk */
 }
@@ -31,11 +41,21 @@
   align-items: center;
   font-size: 18px; /* Menü öğe yazı tipi boyutu */
   color: #000000; /* Menü öğe yazı rengi */
+  transition: background-color 0.3s, color 0.3s;
+  border-radius: 5px;
+  padding: 10px;
 }
 
-.nav-link i, .nav-link svg {
+.nav-link:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.nav-link i,
+.nav-link svg {
   margin-right: 10px; /* İkon ile metin arasındaki boşluk */
 }
+
 .bd-placeholder-img {
   font-size: 1.125rem;
   text-anchor: middle;
@@ -65,14 +85,14 @@ h2 {
   color: #0056b3; /* Primary renk */
   font-weight: bold;
   text-transform: uppercase; /* Tüm harfler büyük */
-  margin: 0; 
+  margin: 0;
   text-align: center;
 }
 
-.doctor-title {
+.doctor-branch {
   font-size: 20px;
   font-weight: bold;
-  margin: 0; 
+  margin: 0;
   text-align: center;
 }
 

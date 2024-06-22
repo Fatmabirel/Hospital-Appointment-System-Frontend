@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Patient } from '../../../../Patients/patientModel';
 import { PatientService } from '../../../../Patients/patient.service';
@@ -14,13 +14,10 @@ import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    AdminSidebarComponent,
-   
-   
+    AdminSidebarComponent,   
   ],
   templateUrl: './update-patient.component.html',
   styleUrl: './update-patient.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UpdatePatientComponent { 
 
@@ -55,7 +52,7 @@ export class UpdatePatientComponent {
       phone: ['', Validators.required],
       address: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+     
     });
   }
 
@@ -80,7 +77,7 @@ export class UpdatePatientComponent {
               phone: data.phone,
               address: data.address,
               email: data.email,
-              password:data.passwordSalt
+             
 
               
             });
@@ -101,7 +98,7 @@ export class UpdatePatientComponent {
       const updatedPatient:Patient = this.patientForm.value; // Form verilerini Doctor nesnesine atıyoruz
       updatedPatient.id = this.patient.id;
       
-      //console.log(updatedDoctor);
+      //console.log(updatedHasta);
       this.PatientService.updatePatient(updatedPatient).subscribe(
         (response) => {
           this.toastrService.success('Hasta başarıyla güncellendi');

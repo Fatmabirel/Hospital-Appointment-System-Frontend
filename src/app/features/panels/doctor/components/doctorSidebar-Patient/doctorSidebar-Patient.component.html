@@ -18,7 +18,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let paitent of paitents">
-          <td>{{ paitent.firstName }} {{ paitent.lastName}}</td>
+          <td>{{ paitent.firstName|CapitalizeFirst }} {{ paitent.lastName|CapitalizeFirst}}</td>
           <td>{{ paitent.dateOfBirth}}</td>
           <td>{{ paitent.age}}</td>
           <td>{{ paitent.nationalIdentity}}</td>
