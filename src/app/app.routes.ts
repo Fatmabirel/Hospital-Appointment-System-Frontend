@@ -30,6 +30,9 @@ import { DoctorSidebarPatientComponent } from './features/panels/doctor/componen
 import { ListPatientComponent } from './features/panels/admin/components/list-patient/list-Patient.component';
 import { AddPatientComponent } from './features/panels/admin/components/add-Patient/add-Patient.component';
 import { UpdatePatientComponent } from './features/panels/admin/components/update-patient/update-patient.component';
+import { ListBranchComponent } from './features/panels/admin/components/list-branch/list-branch.component';
+import { AddBranchComponent } from './features/panels/admin/components/add-branch/add-branch.component';
+import { UpdateBranchComponent } from './features/panels/admin/components/update-branch/update-branch.component';
 
 
 export const routes: Routes =
@@ -147,7 +150,20 @@ export const routes: Routes =
       component:UpdatePatientComponent
     },
     { path: 'add-report/:appointmentId',
-      component: AddReportComponent } // ReportDetailCompo
+      component: AddReportComponent
+     }, // ReportDetailCompo
+     {
+      path:'list-branch',
+      component:ListBranchComponent
+    },
+    {
+      path:'admin-add-branch',
+      component:AddBranchComponent
+    },
+    {
+      path:'admin-update-branch/:branchId',
+      component:UpdateBranchComponent
+    },
 ];
 
 

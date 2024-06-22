@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Patient } from '../../../../Patients/patientModel';
 import { PatientService } from '../../../../Patients/patient.service';
@@ -20,7 +20,7 @@ import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
   ],
   templateUrl: './update-patient.component.html',
   styleUrl: './update-patient.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  
 })
 export class UpdatePatientComponent { 
 
