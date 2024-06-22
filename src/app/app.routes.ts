@@ -148,4 +148,12 @@ export const routes: Routes = [
     path: 'report-detail/:id',
     component: EditReportComponent,
   },
+  {
+    path: 'past-appointments',
+    component: PastAppointmentsComponent,
+  },
+  {
+    path: 'upcoming-appointments',
+    component: UpcomingAppointmentsComponent,
+  },
 ];
