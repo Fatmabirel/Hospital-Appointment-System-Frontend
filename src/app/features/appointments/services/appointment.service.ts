@@ -39,7 +39,4 @@ export class AppointmentService {
 
     return this.httpClient.get<ResponseModel<Appointment>>(this.apiUrl, { params });
   }
-
-
-
 }

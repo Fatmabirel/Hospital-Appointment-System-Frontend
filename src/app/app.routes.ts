@@ -32,6 +32,9 @@ import { ListPatientComponent } from './features/panels/admin/components/list-pa
 import { AddPatientComponent } from './features/panels/admin/components/add-Patient/add-Patient.component';
 import { UpdatePatientComponent } from './features/panels/admin/components/update-patient/update-patient.component';
 import { UpdateFeedbackComponent } from './features/panels/admin/components/update-feedback/update-feedback.component';
+import { DoctorListFeedbackComponent } from './features/panels/doctor/components/doctor-list-feedback/doctor-list-feedback.component';
+import { DoctorAddFeedbackComponent } from './features/panels/doctor/components/doctor-add-feedback/doctor-add-feedback.component';
+import { DoctorUpdateFeedbackComponent } from './features/panels/doctor/components/doctor-update-feedback/doctor-update-feedback.component';
 
 export const routes: Routes =
   [
@@ -128,6 +131,19 @@ export const routes: Routes =
     {
       path: 'doctor-reports',
       component: ListReportComponent //doktorun  kendine ait raporlar
+    },
+
+    {
+      path: 'doctor-feedbacks',
+      component: DoctorListFeedbackComponent 
+    },
+    {
+      path: 'doctor-add-feedback',
+      component: DoctorAddFeedbackComponent 
+    },
+    {
+      path: 'doctor-update-feedback/:id',
+      component: DoctorUpdateFeedbackComponent 
     },
 
     {
