@@ -35,7 +35,6 @@ export class PastAppointmentsComponent implements OnInit {
           return appointmentDate < this.todayDate ||
             (appointmentDate.getTime() === this.todayDate.getTime() && appointment.time < this.todayDate.toTimeString().slice(0, 5));
         });
-        /* this.loadDoctorNames(this.pastAppointments); */
       },
       (error) => {
         console.error('Randevular alınamadı:', error);
@@ -44,19 +43,22 @@ export class PastAppointmentsComponent implements OnInit {
     );
   }
 
-  /* loadDoctorNames(appointments: Appointment[]): void {
-    appointments.forEach((appointment) => {
-      if (!this.doctors[appointment.doctorId]) {
-        this.doctorService.getDoctorById(appointment.doctorId).subscribe(
-          (doctor) => {
-            this.doctors[appointment.doctorId] = doctor;
-          },
-          (error) => {
-            console.error('Doktor bilgisi alınamadı:', error);
-            this.errorMessage = error.message;
-          }
-        );
-      }
-    }); */
+  confirmDelete(appointmentId: number): void {
+    if (confirm('Randevuyu silmek istediğinize emin misiniz?')) {
+      this.deleteAppointment(appointmentId);
+    }
   }
+
+  deleteAppointment(appointmentId: number): void {
+    this.appointmentService.deleteAppointment(appointmentId).subscribe(
+      () => {
+        this.pastAppointments = this.pastAppointments.filter(appointment => appointment.id !== appointmentId);
+      },
+      (error) => {
+        console.error('Randevu silinemedi:', error);
+        this.errorMessage = error.message;
+      }
+    );
+  }
+}
 

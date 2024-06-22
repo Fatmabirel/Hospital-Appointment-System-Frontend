@@ -25,24 +25,24 @@ import { StatisticsComponent } from './features/statistics/statistics.component'
   styleUrl: './app.component.scss',
   imports: [RouterOutlet,
     FooterComponent,
-     NavbarComponent, 
-     DoctorListComponent,
-     ContactComponent,
-      BranchListComponent, 
-      SliderComponent, 
-      HomePageComponent,
-     DoctorSidebarComponent,
-     AdminSidebarComponent, 
-     PatientSidebarComponent,
-     DoctorSidebarPatientComponent,
-     PastAppointmentsComponent,
+    NavbarComponent,
+    DoctorListComponent,
+    ContactComponent,
+    BranchListComponent,
+    SliderComponent,
+    HomePageComponent,
+    DoctorSidebarComponent,
+    AdminSidebarComponent,
+    PatientSidebarComponent,
+    DoctorSidebarPatientComponent,
+    PastAppointmentsComponent,
     UpcomingAppointmentsComponent,
     StatisticsComponent
-     
-   
-     
-    
-    ]
+
+
+
+
+  ]
 })
 export class AppComponent {
   title = 'hospital';

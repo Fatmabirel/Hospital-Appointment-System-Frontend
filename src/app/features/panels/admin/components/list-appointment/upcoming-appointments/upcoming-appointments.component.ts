@@ -7,17 +7,20 @@ import { Appointment } from '../../../../../appointments/models/appointmentModel
 import { Doctor } from '../../../../../doctors/models/doctor';
 import { ResponseModel } from '../../../../../models/responseModel';
 import { AdminSidebarComponent } from '../../sidebar/adminSidebar.component';
+import { response } from 'express';
 
 @Component({
-  selector: 'app-admin-upcoming-appointments',
+  selector: 'app-upcoming-appointments',
   standalone: true,
   imports: [CommonModule, AdminSidebarComponent,RouterModule],
   templateUrl: './upcoming-appointments.component.html',
   styleUrls: ['./upcoming-appointments.component.scss']
 })
-export class UpcomingAppointmentsComponent implements OnInit {
+export class UpcomingAppointmentsComponent /* implements OnInit */ {
   upcomingAppointments: Appointment[] = [];
-  /* doctors: { [key: string]: Doctor } = {}; */
+  pageIndex: number = 0;
+  pageSize: number = 10;
+  isLoading: boolean = true;
   todayDate: Date = new Date();
   errorMessage: string;
 
@@ -28,6 +31,8 @@ export class UpcomingAppointmentsComponent implements OnInit {
   }
 
   loadUpcomingAppointments(): void {
+
+    
     this.appointmentService.getAllAppointments(0, 100).subscribe(
       (response: ResponseModel<Appointment>) => {
         this.upcomingAppointments = response.items.filter(appointment => {
@@ -35,7 +40,7 @@ export class UpcomingAppointmentsComponent implements OnInit {
           return appointmentDate > this.todayDate ||
             (appointmentDate.getTime() === this.todayDate.getTime() && appointment.time >= this.todayDate.toTimeString().slice(0, 5));
         });
-        /* this.loadDoctorNames(this.upcomingAppointments); */
+       
       },
       (error) => {
         console.error('Randevular alınamadı:', error);
@@ -44,19 +49,21 @@ export class UpcomingAppointmentsComponent implements OnInit {
     );
   }
 
-  /* loadDoctorNames(appointments: Appointment[]): void {
-    appointments.forEach((appointment) => {
-      if (!this.doctors[appointment.doctorId]) {
-        this.doctorService.getDoctorById(appointment.doctorId).subscribe(
-          (doctor) => {
-            this.doctors[appointment.doctorId] = doctor;
-          },
-          (error) => {
-            console.error('Doktor bilgisi alınamadı:', error);
-            this.errorMessage = error.message;
-          }
-        );
+  confirmDelete(appointmentId: number): void {
+    if (confirm('Randevuyu silmek istediğinize emin misiniz?')) {
+      this.deleteAppointment(appointmentId);
+    }
+  }
+
+  deleteAppointment(appointmentId: number): void {
+    this.appointmentService.deleteAppointment(appointmentId).subscribe(
+      () => {
+        this.upcomingAppointments = this.upcomingAppointments.filter(appointment => appointment.id !== appointmentId);
+      },
+      (error) => {
+        console.error('Randevu silinemedi:', error);
+        this.errorMessage = error.message;
       }
-    });
-  } */
+    );
+  }
 }

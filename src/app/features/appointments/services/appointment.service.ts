@@ -56,6 +56,9 @@ export class AppointmentService {
     return this.httpClient.get<ResponseModel<Appointment>>(this.apiUrl, { params });
   }
 
-
+  deleteAppointment(appointmentId: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.apiUrl}/${appointmentId}`);
+  }
+  
 
 }
