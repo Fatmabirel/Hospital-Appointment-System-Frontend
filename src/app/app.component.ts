@@ -11,6 +11,7 @@ import { AdminSidebarComponent } from './features/panels/admin/components/sideba
 import { PatientSidebarComponent } from './features/panels/patient/components/sidebar/psidebar.component';
 import { DoctorSidebarComponent } from './features/panels/doctor/components/sidebar/doctorSidebar.component';
 import { DoctorSidebarPatientComponent } from './features/panels/doctor/components/doctorSidebar-Patient/doctorSidebar-Patient.component';
+import { StatisticsComponent } from './features/statistics/statistics.component';
 
 
 
@@ -20,22 +21,23 @@ import { DoctorSidebarPatientComponent } from './features/panels/doctor/componen
   standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  imports: [RouterOutlet, 
+  imports: [RouterOutlet,
     FooterComponent,
-     NavbarComponent, 
+     NavbarComponent,
      DoctorListComponent,
      ContactComponent,
-      BranchListComponent, 
-      SliderComponent, 
+      BranchListComponent,
+      SliderComponent,
       HomePageComponent,
      DoctorSidebarComponent,
-     AdminSidebarComponent, 
+     AdminSidebarComponent,
      PatientSidebarComponent,
-     DoctorSidebarPatientComponent
-     
-   
-     
-    
+     DoctorSidebarPatientComponent,
+     StatisticsComponent,
+
+
+
+
     ]
 })
 export class AppComponent {

@@ -17,6 +17,8 @@ export class DoctorSidebarComponent implements OnInit {
   doctor: Doctor;
   doctorName: string = '';
   doctorTitle: string = '';
+  doctorBranch:string='';
+
   errorMessage: string;
 
   constructor(
@@ -32,9 +34,9 @@ export class DoctorSidebarComponent implements OnInit {
         this.doctor = doctor;
         this.doctorTitle = doctor.title;
         this.doctorName = doctor.firstName + ' ' + doctor.lastName;
-        //console.log('Doctor:', this.doctor); // Doctor bilgilerini konsola yazdır
+        this.doctorBranch=doctor.branchName;
       },
-      
+
       (error) => {
         this.errorMessage = error.message; // Hata mesajını al ve errorMessage değişkenine ata
         console.error('Hata:', error); // Hata durumunda konsola yazdır

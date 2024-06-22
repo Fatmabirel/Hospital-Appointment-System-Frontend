@@ -62,4 +62,11 @@ export class ReportService {
 
     return this.httpClient.get<ResponseModel<ResponseReport>>(this.apiUrl,{params});
    }
+
+   deleteReport(reportId: number):Observable<Report>
+   {
+    const url = `${this.apiUrl}${reportId}`; // /Reports/1 gibi URL oluşturur
+
+    return this.httpClient.delete<Report>(url);
+   }
 }

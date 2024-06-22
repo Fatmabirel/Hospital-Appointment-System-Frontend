@@ -43,6 +43,7 @@ export class AppointmentHistoryComponent implements OnInit {
 
         this.appointmentService.getDoctorAppointments(doctorId, this.pageIndex, this.pageSize).subscribe(
           (response: ResponseModel<Appointment>) => {
+            console.log(response);
             const filteredAppointments = response.items.filter(appointment => {
               const appointmentDate = new Date(appointment.date);
               return appointmentDate < this.todayDate || (appointmentDate.getTime() === this.todayDate.getTime() && appointment.time < this.todayDate.toTimeString().slice(0, 5));
@@ -80,7 +81,7 @@ export class AppointmentHistoryComponent implements OnInit {
     if (this.hasReportMap[appointmentId]) {
       this.router.navigate(['report-detail', appointmentId]);
     } else {
-      this.toastrService.error("Randevu henüz gerçekleşmedi. Rapor bulunmamaktadır.", "Hata");
+      this.toastrService.warning("Rapor bulunmamaktadır.");
     }
   }
 

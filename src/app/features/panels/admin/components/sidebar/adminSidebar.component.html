@@ -1,29 +1,29 @@
+
 <div
-  class="d-flex flex-column flex-shrink-0 p-3 text-dark bg-white"
-  class="sidebar"
+  class="d-flex flex-column flex-shrink-0 p-3 text-dark bg-white sidebar"
   style="width: 280px"
 >
-<div>
-  <p *ngIf="adminName" class="welcome-message">Hoş geldiniz,</p>
-  <p *ngIf="adminName" class="admin-name">{{ adminName }}</p>
-</div>
+  <div class="text-center admin-info">
+    <p *ngIf="adminName" class="welcome-message">Hoş geldiniz,</p>
+    <p *ngIf="adminName" class="admin-name">{{ adminName }}</p>
+  </div>
   <hr />
   <ul class="nav nav-pills flex-column mb-auto">
     <li class="nav-item">
-      <a routerLink="/" routerLinkActive="active"  [routerLinkActiveOptions]="{ exact: true }" class="nav-link">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link">
         <i class="bi bi-house-heart"></i>
         Ana Sayfa
       </a>
     </li>
     <li class="nav-item">
-      <a routerLink="/admin-list-doctor" routerLinkActive="active"  [routerLinkActiveOptions]="{ exact: true }" class="nav-link">
+      <a routerLink="/admin-list-doctor" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link">
         <i class="bi bi-person-lines-fill"></i>
         Doktor Yönetimi
       </a>
     </li>
     <li class="nav-item">
       <a routerLink="/list-branch" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link">
-        <i class="bi-diagram-3-fill"></i>
+        <i class="bi bi-diagram-3-fill"></i>
         Branş Yönetimi
       </a>
     </li>
@@ -33,29 +33,55 @@
       </a>
     </li>
     <li class="nav-item">
-      <a routerLink="/" routerLinkActive="active"  [routerLinkActiveOptions]="{ exact: true }" class="nav-link">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link">
         <i class="bi bi-calendar3-week"></i>
         Randevu Yönetimi
       </a>
     </li>
+    
     <li class="nav-item">
-      <a routerLink="/" routerLinkActive="active"  [routerLinkActiveOptions]="{ exact: true }" class="nav-link">
+      <a routerLink="/admin-reports" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link">
         <i class="bi bi-journal"></i>
-        Raporlar ve Analiz
+        Rapor Yönetimi
       </a>
     </li>
 
     <li class="nav-item">
       <a routerLink="/" routerLinkActive="active"  [routerLinkActiveOptions]="{ exact: true }" class="nav-link">
+        <i class="bi bi-journals"></i>
+        Raporlar ve Analiz
+      </a>
+    </li>
+      
+    <li class="nav-item">
+      <a routerLink="/statistics" routerLinkActive="active"  [routerLinkActiveOptions]="{ exact: true }" class="nav-link">
+        <i class="bi bi-bar-chart"></i>
+        İstatistikler
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a routerLink="/admin-list-feedback" routerLinkActive="active"  [routerLinkActiveOptions]="{ exact: true }" class="nav-link">
+        <i class="bi bi-chat-dots-fill"></i>
+        Geri Bildirimler
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a routerLink="/" routerLinkActive="active"  [routerLinkActiveOptions]="{ exact: true }" class="nav-link">
+
         <i class="bi bi-gear-fill"></i>
         Profil Bilgilerim
       </a>
     </li>
+
     <li class="nav-item">
-      <a (click)="logout()" class="nav-link">
+      <a (click)="logout()" class="nav-link" style="cursor: pointer;">
         <i class="bi bi-box-arrow-left"></i>
         Çıkış Yap
       </a>
     </li>
   </ul>
 </div>
+
+

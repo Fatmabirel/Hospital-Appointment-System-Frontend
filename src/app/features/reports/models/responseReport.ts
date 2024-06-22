@@ -6,6 +6,7 @@ export interface ResponseReport{
       doctorFirstName:string,
       doctorLastName: string,
       doctorTitle: string,
+      doctorBranch:string
       patientID: number,
       patientFirstName: string,
       patientLastName: string

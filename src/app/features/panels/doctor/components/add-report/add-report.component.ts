@@ -46,7 +46,7 @@ constructor(private formsBuilder:FormBuilder,
 createReportForm(){
   this.reportForm=this.formsBuilder.group({
 
-   reportText:[""]
+   reportText:["",Validators.required]
 
   })
 }
@@ -66,7 +66,7 @@ add() {
         // this.router.navigate(['doctor-sidebar']);
         console.log('Rapor başarıyla eklendi',response);
         this.toastrService.success("Rapor eklendi");
-      this.router.navigate(['/reports']); // Güncelleme sonrası yönlendirme
+      this.router.navigate(['/doctor-reports']); // Güncelleme sonrası yönlendirme
 
         },  (error) => {
       console.error('Ekleme sırasında hata oluştu:', error);

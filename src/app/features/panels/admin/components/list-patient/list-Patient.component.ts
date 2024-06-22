@@ -5,6 +5,8 @@ import { PatientService } from '../../../../Patients/patient.service';
 import { Patient } from '../../../../Patients/patientModel';
 import { RouterModule } from '@angular/router';
 import { CapitalizeFirstPipe } from '../../../../pipe/capitalize-first.pipe';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../../../../../shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-list-patient',
@@ -13,18 +15,18 @@ import { CapitalizeFirstPipe } from '../../../../pipe/capitalize-first.pipe';
     CommonModule,RouterModule,AdminSidebarComponent,CapitalizeFirstPipe
   ],
   templateUrl: './list-Patient.component.html',
-  styleUrl: './list-Patient.component.scss',
-
+  styleUrl: './list-Patient.component.scss'
+ 
 })
 export class ListPatientComponent implements OnInit {
 
 
   patients: Patient[] = [];
   pageIndex: number = 0;
-  pageSize: number = 10;
+  pageSize: number = 12;
   isLoading: boolean = true;
 
-  constructor(private patientService:PatientService) {}
+  constructor(private patientService:PatientService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.getPatients();
@@ -33,7 +35,20 @@ export class ListPatientComponent implements OnInit {
   getPatients() {
     this.patientService.getPatients(this.pageIndex, this.pageSize).subscribe((response) => {
       this.patients = response.items;
-    });   
+    });
+  }
+
+  confirmDelete(patientId: string) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '400px',
+      data: { title: 'ONAY', message: 'Bu hastayı silmek istediğinizden emin misiniz?' },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.deletePatient(patientId);
+      }
+    });
   }
 
   deletePatient(patientId:string) {
@@ -47,5 +62,7 @@ export class ListPatientComponent implements OnInit {
       }
     );
   }
-  
+
+
+
  }

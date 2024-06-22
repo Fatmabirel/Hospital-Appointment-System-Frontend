@@ -52,7 +52,6 @@ export class TokenService {
 
   getUserRole()
   {
-
     const token = localStorage.getItem('token');
     if (!token) {
       throw new Error('Token bulunamadı');

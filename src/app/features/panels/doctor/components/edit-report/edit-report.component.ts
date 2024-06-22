@@ -55,7 +55,7 @@ export class EditReportComponent implements OnInit{
     this.reportForm=this.formsBuilder.group({
      name:["",Validators.required],
      tcNo:["",Validators.required],
-     reportText:[""]
+     reportText:["",Validators.required]
 
     })
   }
@@ -90,7 +90,7 @@ export class EditReportComponent implements OnInit{
           this.toastrService.success('Bilgileriniz başarıyla güncellendi');
           this.router.navigate(['doctor-sidebar']);
           console.log('Rapor başarıyla güncellendi',response);
-        this.router.navigate(['/reports']); // Güncelleme sonrası yönlendirme
+        // this.router.navigate(['/doctor-reports']); // Güncelleme sonrası yönlendirme
       },  (error) => {
         console.error('Güncelleme sırasında hata oluştu:', error);
       }

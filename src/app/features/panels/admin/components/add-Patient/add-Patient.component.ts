@@ -24,7 +24,7 @@ import { Router } from '@angular/router';
 })
 export class AddPatientComponent { 
   patient: Patient[] = [];
-  patientId: number;
+  patientId: string;
   pageIndex: number = 0;
   pageSize: number = 50;
   PatientForm: FormGroup;
