@@ -4,6 +4,7 @@ import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
 import { PatientService } from '../../../../Patients/patient.service';
 import { Patient } from '../../../../Patients/patientModel';
 import { RouterModule } from '@angular/router';
+import { CapitalizeFirstPipe } from '../../../../pipe/capitalize-first.pipe';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../../../shared/components/confirm-dialog/confirm-dialog.component';
 
@@ -11,12 +12,13 @@ import { ConfirmDialogComponent } from '../../../../../shared/components/confirm
   selector: 'app-list-patient',
   standalone: true,
   imports: [
-    CommonModule,RouterModule,AdminSidebarComponent
+    CommonModule,RouterModule,AdminSidebarComponent,CapitalizeFirstPipe
   ],
   templateUrl: './list-Patient.component.html',
-  styleUrl: './list-Patient.component.scss',
+  styleUrl: './list-Patient.component.scss'
+ 
 })
-export class ListPatientComponent  {
+export class ListPatientComponent implements OnInit {
 
 
   patients: Patient[] = [];

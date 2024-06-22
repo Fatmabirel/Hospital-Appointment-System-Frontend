@@ -20,4 +20,31 @@ export class BranchService {
 
     return this.httpClient.get<ResponseModel<Branch>>(this.apiUrl,{params});
   }
+
+  addbranch(branch: any): Observable<Branch> {
+    return this.httpClient.post<any>(this.apiUrl, branch);
+  }
+
+  updateBranch(branch: Branch): Observable<ResponseModel<Branch>> {
+    return this.httpClient.put<ResponseModel<Branch>>(this.apiUrl, branch);
+  }
+  
+  deleteBranch(id:string): Observable<ResponseModel<any>> {
+    return this.httpClient.delete<ResponseModel<any>>(`${this.apiUrl}/${id}`);
+  }
+
+  getByBranchId(
+    id: string,
+    pageIndex: number,
+    pageSize: number
+  ): Observable<Branch> {
+    let params = new HttpParams()
+    //.set('PageIndex', pageIndex.toString())
+    //.set('PageSize', pageSize.toString())
+     .set('id', id);
+     
+
+    return this.httpClient.get<Branch>(`${this.apiUrl}/${id}`);
+  }
+
 }

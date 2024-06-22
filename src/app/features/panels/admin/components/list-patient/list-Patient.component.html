@@ -27,7 +27,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let patient of patients">
-            <td>{{ patient.firstName }} {{ patient.lastName}}</td>
+            <td>{{ patient.firstName|CapitalizeFirst }} {{ patient.lastName|CapitalizeFirst}}</td>
             <td>{{ patient.dateOfBirth}}</td>
             <td>{{ patient.age||"-"}}</td>
             <td>{{ patient.height||"-"}}</td>

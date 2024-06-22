@@ -31,7 +31,6 @@
                 />
               </div>
             </div>
-
             <div class="col-md-6">
               <label for="inputDateOfBirth" class="form-label"
                 >Doğum Tarihi</label
@@ -44,9 +43,6 @@
                   id="inputDateOfBirth"
                   formControlName="dateOfBirth"
                 />
-              </div>
-            </div>
-
             <div class="col-md-6">
               <label for="inputage" class="form-label">Yaş</label>
               <div class="input-group">
@@ -156,30 +152,11 @@
                   formControlName="email"
                 />
               </div>
-            </div>
-            <div class="col-md-6">
-              <label for="inputPassword" class="form-label">Şifre</label>
-              <div class="input-group">
-                <div class="input-group-text">🔒</div>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="inputPassword"
-                  formControlName="password"
-                />
+          <div class="col-12">
+                <button type="submit" class="btn btn-primary w-100" (click)="updatePatient()">Bilgilerimi Güncelle</button>
               </div>
-            </div>
-
-            <div class="col-12">
-              <button
-                type="submit"
-                class="btn btn-primary w-100"
-                (click)="updatePatient()"
-              >
-                Bilgilerimi Güncelle
-              </button>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>

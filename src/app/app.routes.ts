@@ -35,6 +35,10 @@ import { UpdateFeedbackComponent } from './features/panels/admin/components/upda
 import { DoctorListFeedbackComponent } from './features/panels/doctor/components/doctor-list-feedback/doctor-list-feedback.component';
 import { DoctorAddFeedbackComponent } from './features/panels/doctor/components/doctor-add-feedback/doctor-add-feedback.component';
 import { DoctorUpdateFeedbackComponent } from './features/panels/doctor/components/doctor-update-feedback/doctor-update-feedback.component';
+import { ListBranchComponent } from './features/panels/admin/components/list-branch/list-branch.component';
+import { AddBranchComponent } from './features/panels/admin/components/add-branch/add-branch.component';
+import { UpdateBranchComponent } from './features/panels/admin/components/update-branch/update-branch.component';
+
 
 export const routes: Routes =
   [
@@ -186,6 +190,18 @@ export const routes: Routes =
   {
     path: 'admin-update-patient/:patientId',
     component: UpdatePatientComponent,
+  },
+  {
+    path:'list-branch',
+    component:ListBranchComponent
+  },
+  {
+    path:'admin-add-branch',
+    component:AddBranchComponent
+  },
+  {
+    path:'admin-update-branch/:branchId',
+    component:UpdateBranchComponent
   },
 
   ];
