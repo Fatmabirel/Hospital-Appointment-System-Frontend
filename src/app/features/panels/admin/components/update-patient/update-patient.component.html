@@ -32,9 +32,7 @@
               </div>
             </div>
             <div class="col-md-6">
-              <label for="inputDateOfBirth" class="form-label"
-                >Doğum Tarihi</label
-              >
+              <label for="inputDateOfBirth" class="form-label">Doğum Tarihi</label>
               <div class="input-group">
                 <div class="input-group-text">🎂</div>
                 <input
@@ -43,19 +41,20 @@
                   id="inputDateOfBirth"
                   formControlName="dateOfBirth"
                 />
+              </div>
+            </div>
             <div class="col-md-6">
-              <label for="inputage" class="form-label">Yaş</label>
+              <label for="inputAge" class="form-label">Yaş</label>
               <div class="input-group">
                 <div class="input-group-text">🎂</div>
                 <input
                   type="text"
                   class="form-control"
-                  id="inputage"
+                  id="inputAge"
                   formControlName="age"
                 />
               </div>
             </div>
-
             <div class="col-md-6">
               <label for="inputHeight" class="form-label">Boy</label>
               <div class="input-group">
@@ -100,11 +99,8 @@
                 </select>
               </div>
             </div>
-
             <div class="col-md-6">
-              <label for="inputNationalIdentity" class="form-label"
-                >Kimlik Numarası</label
-              >
+              <label for="inputNationalIdentity" class="form-label">Kimlik Numarası</label>
               <div class="input-group">
                 <div class="input-group-text">🆔</div>
                 <input
@@ -136,7 +132,6 @@
                   class="form-control"
                   id="inputAddress"
                   formControlName="address"
-                  name="address"
                   placeholder="1234 Ana Cadde"
                 />
               </div>
@@ -152,11 +147,11 @@
                   formControlName="email"
                 />
               </div>
-          <div class="col-12">
-                <button type="submit" class="btn btn-primary w-100" (click)="updatePatient()">Bilgilerimi Güncelle</button>
-              </div>
-            </form>
-          </div>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary w-100" (click)="updatePatient()">Bilgilerimi Güncelle</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
