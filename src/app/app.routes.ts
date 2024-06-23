@@ -39,6 +39,7 @@ import { ListBranchComponent } from './features/panels/admin/components/list-bra
 import { AddBranchComponent } from './features/panels/admin/components/add-branch/add-branch.component';
 import { UpdateBranchComponent } from './features/panels/admin/components/update-branch/update-branch.component';
 import { AdminProfileComponent } from './features/panels/admin/components/admin-profile/admin-profile.component';
+import { FaqComponent } from './features/faq/faq.component';
 
 export const routes: Routes = [
   {
@@ -55,6 +56,10 @@ export const routes: Routes = [
   {
     path: 'doctors',
     component: DoctorListComponent,
+  },
+  {
+    path: 'faq',
+    component: FaqComponent,
   },
   {
     path: 'contact',
