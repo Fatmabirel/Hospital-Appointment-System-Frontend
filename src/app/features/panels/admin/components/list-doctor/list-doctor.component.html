@@ -31,7 +31,6 @@
         </button>
       </div>
     </div>
-
     <div class="table-responsive">
       <table class="table table-striped">
         <thead class="thead-primary">
@@ -75,6 +74,9 @@
                   (click)="confirmDelete(doctor.id)"
                 >
                   <i class="fa fa-trash"></i>
+                </button>
+                <button class="btn btn-sm btn-success" (click)="goToRoute(doctor.id)">
+                  Takvimi Görüntüle
                 </button>
               </div>
             </td>
