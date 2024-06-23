@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ConfirmDialogComponent } from '../../../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { CapitalizeFirstPipe } from '../../../../pipe/capitalize-first.pipe';
 
 
 @Component({
@@ -17,7 +18,8 @@ import { ConfirmDialogComponent } from '../../../../../shared/components/confirm
     CommonModule,
     RouterModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    CapitalizeFirstPipe
   ],
 
   templateUrl: './list-doctor.component.html',
@@ -26,7 +28,7 @@ import { ConfirmDialogComponent } from '../../../../../shared/components/confirm
 export class ListDoctorComponent implements OnInit {
   doctors: Doctor[] = [];
   pageIndex: number = 0;
-  pageSize: number = 10;
+  pageSize: number = 12;
 
   constructor(private doctorService: DoctorService, private dialog: MatDialog) {}
 

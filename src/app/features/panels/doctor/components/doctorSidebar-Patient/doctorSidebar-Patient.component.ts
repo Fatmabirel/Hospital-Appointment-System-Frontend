@@ -1,5 +1,5 @@
 import { CommonModule} from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Patient } from '../../../../Patients/patientModel';
 import { PatientService } from '../../../../Patients/patient.service';
 import { RouterModule } from '@angular/router';
@@ -8,17 +8,18 @@ import { DoctorService } from '../../../../doctors/services/doctor.service';
 import { AppointmentService } from '../../../../appointments/services/appointment.service'; 
 import { ResponseModel } from '../../../../models/responseModel';
 import { Appointment } from '../../../../appointments/models/appointmentModel';
+import { CapitalizeFirstPipe } from '../../../../pipe/capitalize-first.pipe';
 
 
 @Component({
   selector: 'app-doctor-sidebar-patient',
   standalone: true,
   imports: [
-    CommonModule,RouterModule,DoctorSidebarComponent
+    CommonModule,RouterModule,DoctorSidebarComponent,CapitalizeFirstPipe
   ],
   templateUrl: './doctorSidebar-Patient.component.html',
   styleUrl: './doctorSidebar-Patient.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+ 
 })
 
 export class DoctorSidebarPatientComponent implements OnInit {
@@ -58,7 +59,6 @@ export class DoctorSidebarPatientComponent implements OnInit {
                     weight:patientResponse.weight,
                     bloodGroup:patientResponse.bloodGroup,
                     email: patientResponse.email,
-                    passwordSalt:patientResponse.passwordSalt,
                     appointmentDate: patientResponse.appointmentDate,
                     appointmentId: patientResponse.appointmentId,
                     appointmentRapor: patientResponse.appointmentRapor,

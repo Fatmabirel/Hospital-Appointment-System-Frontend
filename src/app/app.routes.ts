@@ -14,33 +14,52 @@ import { PendingAppointmentComponent } from './features/panels/doctor/components
 import { DoctorProfileComponent } from './features/panels/doctor/components/doctor-profile/doctor-profile.component';
 import { CreateDoctorScheduleComponent } from './features/panels/doctor/components/create-doctor-schedule/create-doctor-schedule.component';
 import { DoctorDashboardComponent } from './features/panels/doctor/components/doctor-dashboard/doctor-dashboard.component';
+import { ListReportComponent } from './features/panels/doctor/components/list-report/list-report.component';
+import { EditReportComponent } from './features/panels/doctor/components/edit-report/edit-report.component';
+import { AddReportComponent } from './features/panels/doctor/components/add-report/add-report.component';
 import { ListDoctorComponent } from './features/panels/admin/components/list-doctor/list-doctor.component';
 import { UpdateDoctorComponent } from './features/panels/admin/components/update-doctor/update-doctor.component';
 import { AddDoctorComponent } from './features/panels/admin/components/add-doctor/add-doctor.component';
+import { AdminListReportComponent } from './features/panels/admin/components/admin-list-report/admin-list-report.component';
+import { AdminEditReportComponent } from './features/panels/admin/components/admin-edit-report/admin-edit-report.component';
+import { PastAppointmentsComponent } from './features/panels/admin/components/list-appointment/past-appointments/past-appointments.component';
+import { UpcomingAppointmentsComponent } from './features/panels/admin/components/list-appointment/upcoming-appointments/upcoming-appointments.component';
+
 import { StatisticsComponent } from './features/statistics/statistics.component';
 import { ListFeedbackComponent } from './features/panels/admin/components/list-feedback/list-feedback.component';
+
 import { DoctorSidebarPatientComponent } from './features/panels/doctor/components/doctorSidebar-Patient/doctorSidebar-Patient.component';
 import { ListPatientComponent } from './features/panels/admin/components/list-patient/list-Patient.component';
 import { AddPatientComponent } from './features/panels/admin/components/add-Patient/add-Patient.component';
 import { UpdatePatientComponent } from './features/panels/admin/components/update-patient/update-patient.component';
 import { UpdateFeedbackComponent } from './features/panels/admin/components/update-feedback/update-feedback.component';
-import { ListReportComponent } from './features/panels/doctor/components/list-report/list-report.component';
-import { EditReportComponent } from './features/panels/doctor/components/edit-report/edit-report.component';
-import { AddReportComponent } from './features/panels/doctor/components/add-report/add-report.component';
+import { ListDoctorScheduleComponent } from './features/panels/doctor/components/list-doctor-schedule/list-doctor-schedule.component';
+import { UpdateDoctorScheduleComponent } from './features/panels/doctor/components/update-doctor-schedule/update-doctor-schedule.component';
+import { ListBranchComponent } from './features/panels/admin/components/list-branch/list-branch.component';
+import { AddBranchComponent } from './features/panels/admin/components/add-branch/add-branch.component';
+import { UpdateBranchComponent } from './features/panels/admin/components/update-branch/update-branch.component';
+import { AdminProfileComponent } from './features/panels/admin/components/admin-profile/admin-profile.component';
+import { FaqComponent } from './features/faq/faq.component';
 
 export const routes: Routes = [
   {
-    path: '',
-    component: HomePageComponent,
+    path: '', // Route belirtilen path ile eşleştiğinde
+    component: HomePageComponent, // İlgili componenti AppComponent'ten başlayarak
+    // ilk karşılaştığı <router-outlet></router-outlet> etiketine yerleştirir.
   },
   {
-    path: 'branches',
-    component: BranchListComponent,
-    // canActivate:[loginGuard]
+    path: 'branches', // Route belirtilen path ile eşleştiğinde
+    component: BranchListComponent, // İlgili componenti AppComponent'ten başlayarak
+    // ilk karşılaştığı <router-outlet></router-outlet> etiketine yerleştirir.
+    // canActivate:[loginGuard] örnek guard bu şekilde yazılıcak
   },
   {
     path: 'doctors',
     component: DoctorListComponent,
+  },
+  {
+    path: 'faq',
+    component: FaqComponent,
   },
   {
     path: 'contact',
@@ -78,13 +97,31 @@ export const routes: Routes = [
     path: 'pending-appointments',
     component: PendingAppointmentComponent,
   },
+
   {
     path: 'admin-sidebar',
     component: AdminSidebarComponent,
   },
+
   {
     path: 'admin-list-doctor',
     component: ListDoctorComponent,
+  },
+  {
+    path: 'admin-branches',
+    component: ListBranchComponent,
+  },
+  {
+    path: 'admin-add-branch',
+    component: AddBranchComponent,
+  },
+  {
+    path: 'admin-update-branch/:branchId',
+    component: UpdateBranchComponent,
+  },
+  {
+    path: 'admin-profile',
+    component: AdminProfileComponent,
   },
   {
     path: 'admin-update-doctor/:doctorId',
@@ -94,52 +131,91 @@ export const routes: Routes = [
     path: 'admin-add-doctor',
     component: AddDoctorComponent,
   },
-  {
-    path: 'admin-list-feedback',
-    component: ListFeedbackComponent,
-  },
+
   {
     path: 'patient-sidebar',
     component: PatientSidebarComponent,
   },
   {
-    path: 'doctor-schedule',
-    component: CreateDoctorScheduleComponent,
+    path: 'doctor-schedule', // Route belirtilen path ile eşleştiğinde
+    component: CreateDoctorScheduleComponent, // İlgili componenti AppComponent'ten başlayarak
+    // ilk karşılaştığı <router-outlet></router-outlet> etiketine yerleştirir.
   },
   {
-    path: 'statistics',
-    component: StatisticsComponent,
+    path: 'list-doctor-schedule', // Route belirtilen path ile eşleştiğinde
+    component: ListDoctorScheduleComponent, // İlgili componenti AppComponent'ten başlayarak
+    // ilk karşılaştığı <router-outlet></router-outlet> etiketine yerleştirir.
   },
   {
-    path: 'reports',
-    component: ListReportComponent,
+    path: 'admin-reports',
+    component: AdminListReportComponent,
+  },
+  {
+    path: 'admin-report-detail/:id',
+    component: AdminEditReportComponent,
+  }, //
+
+  {
+    path: 'doctor-reports',
+    component: ListReportComponent, //doktorun  kendine ait raporlar
+  },
+
+  {
+    path: 'report-detail/:id',
+    component: EditReportComponent,
+  }, // ReportDetailCompo //o an ki reportid ile yönlendirme yapıp detayını görme
+
+  {
+    path: 'add-report/:appointmentId',
+    component: AddReportComponent,
+  },
+  // ReportDetailCompo   //o anki randevunun id si ile yönlendirme yapıp randevu ekleme
+
+  {
+    path: 'admin-list-feedback',
+    component: ListFeedbackComponent,
   },
   {
     path: 'admin-update-feedback/:feedbackId',
     component: UpdateFeedbackComponent,
   },
+
+  {
+    path: 'statistics',
+    component: StatisticsComponent,
+  },
   {
     path: 'doctor-patient',
     component: DoctorSidebarPatientComponent,
   },
+
   {
     path: 'admin-patient',
     component: ListPatientComponent,
   },
+
   {
     path: 'admin-add-patient',
     component: AddPatientComponent,
   },
+
   {
     path: 'admin-update-patient/:patientId',
     component: UpdatePatientComponent,
   },
+
   {
-    path: 'add-report/:appointmentId',
-    component: AddReportComponent,
+    path: 'doctorschedule/:scheduleId',
+    component: UpdateDoctorScheduleComponent,
   },
+
   {
-    path: 'report-detail/:id',
-    component: EditReportComponent,
+    path: 'past-appointments',
+    component: PastAppointmentsComponent,
+  },
+
+  {
+    path: 'upcoming-appointments',
+    component: UpcomingAppointmentsComponent,
   },
 ];

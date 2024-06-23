@@ -78,10 +78,10 @@ export class CreateDoctorScheduleComponent implements OnInit{
 
       this.drScheduleService.add(schedule).subscribe(
         response => {
-          this.toastrService.info("Takvim oluşturuldu");
+          this.toastrService.info("Takvim çizelgenize başarılı bir şekilde eklendi",'Başarılı');
         },
         error => {
-          this.toastrService.error("Bugüne ait bir takviminiz zaten var");
+          this.toastrService.error("Bugüne ait bir takviminiz zaten var",'Hatalı İşlem');
           console.error('Error creating schedule:', error);
         }
       );
@@ -120,6 +120,7 @@ export class CreateDoctorScheduleComponent implements OnInit{
     }
     return true;
   }
+
 
 
 }

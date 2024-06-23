@@ -26,9 +26,7 @@ export class ListReportComponent implements OnInit{
   constructor(private reportService:ReportService,
     private tokenService:TokenService,
     private router: Router
-  ){
-
-  }
+  ){}
 
   ngOnInit(): void {
     this.getDoctorReports();

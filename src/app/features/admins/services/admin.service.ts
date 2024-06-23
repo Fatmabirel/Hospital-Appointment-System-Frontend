@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
 import { Admin } from '../models/admin';
 import { Observable } from 'rxjs';
 import { TokenService } from '../../../core/auth/services/token.service';
+import { ResponseModel } from '../../models/responseModel';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +23,29 @@ export class AdminService {
 
   getAdminById(id: string): Observable<Admin> {
     return this.httpClient.get<Admin>(`${this.apiUrl}/${id}`);
+  }
+
+  getAdminByAuth(): Observable<Admin> {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('Token bulunamadı');
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.httpClient.get<Admin>(`${this.apiUrl}/GetFromAuth`, { headers: headers });
+  }
+
+  updateAdmin(admin: Admin): Observable<ResponseModel<Admin>> {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('Token bulunamadı');
+    }
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.httpClient.put<ResponseModel<Admin>>(`${this.apiUrl}/FromAuth`, admin,{ headers: headers });
   }
 }

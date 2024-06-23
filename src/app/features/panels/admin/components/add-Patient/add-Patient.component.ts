@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
 import { FormBuilder, FormGroup, FormsModule,ReactiveFormsModule, Validators } from '@angular/forms';
 import { Patient } from '../../../../Patients/patientModel';
@@ -20,11 +20,11 @@ import { Router } from '@angular/router';
   ],
   templateUrl: './add-Patient.component.html',
   styleUrl: './add-Patient.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  
 })
 export class AddPatientComponent { 
   patient: Patient[] = [];
-  patientId: number;
+  patientId: string;
   pageIndex: number = 0;
   pageSize: number = 50;
   PatientForm: FormGroup;

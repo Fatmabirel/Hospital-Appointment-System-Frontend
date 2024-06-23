@@ -1,0 +1,30 @@
+<div class="d-flex">
+    <app-admin-sidebar></app-admin-sidebar>
+   
+     <div class="flex-grow-1 p-3">
+       <h2 class="h2">
+         BRANŞ EKLE
+       </h2>
+       <div class="container">
+         <div class="row justify-content-center">
+           <div class="col-md-11 mx-auto">
+             <form class="row g-3" *ngIf="BranchForm" [formGroup]="BranchForm">
+                
+               <div class="col-md-6">
+                 <label for="inputName" class="form-label">Branş Adı</label>
+                 <div class="input-group">
+                   <div class="input-group-text">👤</div>
+                   <input type="text" class="form-control" id="inputName" formControlName="Name" />
+                 </div>
+               </div>
+          
+               <div class="col-12">
+                 <button type="submit" class="btn btn-primary w-100" (click)="addBranches()">Branş Ekle</button>
+               </div>
+             </form>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+   

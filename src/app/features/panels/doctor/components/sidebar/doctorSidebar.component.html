@@ -1,11 +1,13 @@
 <div
-  class="d-flex flex-column flex-shrink-0 p-3 text-dark bg-white"
+  class="d-flex flex-column flex-shrink-0 p-3 text-dark bg-white sidebar"
   style="width: 280px"
 >
-  <div>
+  <div class="text-center doctor-info">
     <p *ngIf="doctorName" class="welcome-message">Hoş geldiniz,</p>
-    <p *ngIf="doctorTitle" class="doctor-title">{{ doctorTitle }}</p>
-    <p *ngIf="doctorName" class="doctor-name">{{ doctorName }}</p>
+    <p *ngIf="doctorName" class="doctor-name">
+      {{ doctorTitle }} {{ doctorName }}
+    </p>
+    <p *ngIf="doctorBranch" class="doctor-branch">{{ doctorBranch }}</p>
     <p *ngIf="!doctorName" class="loading-message">Yükleniyor...</p>
   </div>
   <hr />
@@ -23,7 +25,7 @@
     </li>
     <li class="nav-item">
       <a
-        routerLink="/doctor-schedule"
+        routerLink="/list-doctor-schedule"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
         class="nav-link"
@@ -56,7 +58,7 @@
     </li>
     <li class="nav-item">
       <a
-        routerLink="/reports"
+        routerLink="/doctor-reports"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
         class="nav-link"
@@ -78,6 +80,17 @@
     </li>
     <li class="nav-item">
       <a
+        routerLink="/doctor-feedbacks"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="nav-link"
+      >
+        <i class="bi bi-chat-dots-fill"></i>
+        Geri Bildirimlerim
+      </a>
+    </li>
+    <li class="nav-item">
+      <a
         routerLink="/doctor-profile"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
@@ -88,7 +101,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a (click)="logout()" class="nav-link">
+      <a (click)="logout()" class="nav-link" style="cursor: pointer">
         <i class="bi bi-box-arrow-left"></i>
         Çıkış Yap
       </a>

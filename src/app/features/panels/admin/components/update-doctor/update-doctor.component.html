@@ -22,19 +22,31 @@
                   <div class="input-group-text">👤</div>
                   <input type="text" class="form-control" id="inputLastName" formControlName="lastName"/>
                 </div>
+
               </div>
               <div class="col-md-6">
                 <label for="inputBranchName" class="form-label">Branş Adı</label>
                 <div class="input-group">
                   <div class="input-group-text">🏥</div>
-                  <input type="text" class="form-control" id="inputBranchName" formControlName="branchName" readonly />
+                  <input type="text" class="form-control" id="inputBranchName" formControlName="branchName" />
                 </div>
               </div>
               <div class="col-md-6">
                 <label for="inputTitle" class="form-label">Ünvan</label>
                 <div class="input-group">
                   <div class="input-group-text">📜</div>
-                  <input type="text" class="form-control" id="inputTitle" formControlName="title"/>
+                  <select
+                    class="form-select"
+                    id="inputTitle"
+                    formControlName="title"
+                  >
+                    <option value="Prt. Dr.">Prt. Dr.</option>
+                    <option value="Uzm. Dr.">Uzm. Dr.</option>
+                    <option value="Op. Dr.">Op. Dr.</option>
+                    <option value="Yrd. Doç.">Yrd. Doç.</option>
+                    <option value="Doç. Dr.">Doç. Dr.</option>
+                    <option value="Prof. Dr.">Prof. Dr.</option>
+                  </select>
                 </div>
               </div>
               <div class="col-md-6">
