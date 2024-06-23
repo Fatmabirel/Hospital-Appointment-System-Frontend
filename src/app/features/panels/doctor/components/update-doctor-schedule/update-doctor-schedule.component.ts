@@ -103,7 +103,7 @@ export class UpdateDoctorScheduleComponent implements OnInit {
           this.toastrService.success("Takvim çizelgeniz başarılı bir şekilde güncellendi", 'Başarılı');
         },
         error => {
-          this.toastrService.error(error, 'Hatalı İşlem');
+          this.toastrService.error("Bu tarih için doktor takvim çizelgeniz zaten mevcut", 'Hatalı İşlem');
           console.error('Error updating schedule:', error);
         }
       );

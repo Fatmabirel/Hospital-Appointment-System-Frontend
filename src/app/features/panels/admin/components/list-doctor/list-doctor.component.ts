@@ -3,7 +3,7 @@ import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
 import { CommonModule } from '@angular/common';
 import { DoctorService } from '../../../../doctors/services/doctor.service';
 import { Doctor } from '../../../../doctors/models/doctor';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ConfirmDialogComponent } from '../../../../../shared/components/confirm-dialog/confirm-dialog.component';
@@ -30,7 +30,7 @@ export class ListDoctorComponent implements OnInit {
   pageIndex: number = 0;
   pageSize: number = 12;
 
-  constructor(private doctorService: DoctorService, private dialog: MatDialog) {}
+  constructor(private doctorService: DoctorService, private dialog: MatDialog,    private router:Router) {}
 
   ngOnInit(): void {
     this.getDoctors();
@@ -40,6 +40,7 @@ export class ListDoctorComponent implements OnInit {
     this.doctorService
       .getDoctors(this.pageIndex, this.pageSize)
       .subscribe((response) => {
+        console.log(response);
         this.doctors = response.items;
       });
   }
@@ -68,5 +69,10 @@ export class ListDoctorComponent implements OnInit {
         console.error('Doktor silinemedi:', error);
       }
     );
+  }
+
+  goToRoute(doctorId:string)
+  {
+    this.router.navigate(['admindoctorschedule', doctorId]);
   }
 }
