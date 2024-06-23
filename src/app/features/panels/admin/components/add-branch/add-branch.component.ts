@@ -69,7 +69,7 @@ export class AddBranchComponent {
           this.router.navigate(['/admin-branches']);
         },
         (error) => {
-          this.toastrService.error('Branş eklenemedi');
+          this.toastrService.error('Aynı isimde branş bulunmaktadır.');
           //console.error('Error adding doctor:', error);
         }
       );
