@@ -85,7 +85,6 @@ export class AddDoctorComponent {
         },
         (error) => {
           this.toastrService.error('Doktor eklenemedi');
-          //console.error('Error adding doctor:', error);
         }
       );
     } else {

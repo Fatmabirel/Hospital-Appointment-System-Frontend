@@ -14,13 +14,10 @@ import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    AdminSidebarComponent,
-   
-   
+    AdminSidebarComponent,   
   ],
   templateUrl: './update-patient.component.html',
   styleUrl: './update-patient.component.scss',
-  
 })
 export class UpdatePatientComponent { 
 

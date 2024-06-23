@@ -4,6 +4,8 @@ import { Branch } from '../../../../branches/models/branch';
 import { BranchService } from '../../../../branches/services/branch.service';
 import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
 import { RouterModule } from '@angular/router';
+import { ConfirmDialogComponent } from '../../../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-list-branch',
@@ -23,7 +25,7 @@ export class ListBranchComponent implements OnInit {
   pageSize: number = 10;
   isLoading: boolean = true;
 
-  constructor(private branchService:BranchService) {}
+  constructor(private branchService:BranchService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.getBranches();
@@ -39,11 +41,24 @@ export class ListBranchComponent implements OnInit {
     this.branchService.deleteBranch(branchId).subscribe(
       (response) => {
         console.log('Branş başarıyla silindi:', response);
-        this.getBranches(); //Branş yeniden yükleyerek güncellemeyi sağlıyoruz
+        this.getBranches();
       },
       (error) => {
         console.error('Branş silinemedi:', error);
       }
     );
+  }
+
+  confirmDelete(branchId: string) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '400px',
+      data: { title: 'ONAY', message: 'Bu branşı silmek istediğinizden emin misiniz?' },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.deleteBranch(branchId);
+      }
+    });
   }
  }
