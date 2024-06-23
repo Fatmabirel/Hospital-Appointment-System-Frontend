@@ -36,7 +36,14 @@ import { UpdateFeedbackComponent } from './features/panels/admin/components/upda
 import { ListDoctorScheduleComponent } from './features/panels/doctor/components/list-doctor-schedule/list-doctor-schedule.component';
 import { UpdateDoctorScheduleComponent } from './features/panels/doctor/components/update-doctor-schedule/update-doctor-schedule.component';
 import { ListBranchComponent } from './features/panels/admin/components/list-branch/list-branch.component';
+
 import { AdminListDrscheduleComponent } from './features/panels/admin/components/admin-list-drschedule/admin-list-drschedule.component';
+
+import { AddBranchComponent } from './features/panels/admin/components/add-branch/add-branch.component';
+import { UpdateBranchComponent } from './features/panels/admin/components/update-branch/update-branch.component';
+import { AdminProfileComponent } from './features/panels/admin/components/admin-profile/admin-profile.component';
+import { FaqComponent } from './features/faq/faq.component';
+
 
 export const routes: Routes = [
   {
@@ -53,6 +60,10 @@ export const routes: Routes = [
   {
     path: 'doctors',
     component: DoctorListComponent,
+  },
+  {
+    path: 'faq',
+    component: FaqComponent,
   },
   {
     path: 'contact',
@@ -104,7 +115,18 @@ export const routes: Routes = [
     path: 'admin-branches',
     component: ListBranchComponent,
   },
-
+  {
+    path: 'admin-add-branch',
+    component: AddBranchComponent,
+  },
+  {
+    path: 'admin-update-branch/:branchId',
+    component: UpdateBranchComponent,
+  },
+  {
+    path: 'admin-profile',
+    component: AdminProfileComponent,
+  },
   {
     path: 'admin-update-doctor/:doctorId',
     component: UpdateDoctorComponent,

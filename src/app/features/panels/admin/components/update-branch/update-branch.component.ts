@@ -81,7 +81,7 @@ export class UpdateBranchComponent {
       this.branchService.updateBranch(updatedBranch).subscribe(
         (response) => {
           this.toastrService.success('Branş başarıyla güncellendi');
-          this.router.navigate(['/list-branch']);
+          this.router.navigate(['/admin-branches']);
         },
         (error) => {
           console.error('Hasta güncellenemedi:', error);
