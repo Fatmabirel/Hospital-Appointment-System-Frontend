@@ -38,6 +38,7 @@ import { UpdateDoctorScheduleComponent } from './features/panels/doctor/componen
 import { ListBranchComponent } from './features/panels/admin/components/list-branch/list-branch.component';
 import { AddBranchComponent } from './features/panels/admin/components/add-branch/add-branch.component';
 import { UpdateBranchComponent } from './features/panels/admin/components/update-branch/update-branch.component';
+import { DoctorListFeedbackComponent } from './features/panels/doctor/components/doctor-list-feedback/doctor-list-feedback.component';
 
 export const routes: Routes = [
   {
@@ -207,5 +208,9 @@ export const routes: Routes = [
   {
     path: 'upcoming-appointments',
     component: UpcomingAppointmentsComponent,
+  },
+  {
+    path: 'doctor-feedbacks',
+    component:DoctorListFeedbackComponent,
   },
 ];
