@@ -32,6 +32,8 @@ import { ListPatientComponent } from './features/panels/admin/components/list-pa
 import { AddPatientComponent } from './features/panels/admin/components/add-Patient/add-Patient.component';
 import { UpdatePatientComponent } from './features/panels/admin/components/update-patient/update-patient.component';
 import { UpdateFeedbackComponent } from './features/panels/admin/components/update-feedback/update-feedback.component';
+import { ListDoctorScheduleComponent } from './features/panels/doctor/components/list-doctor-schedule/list-doctor-schedule.component';
+import { UpdateDoctorScheduleComponent } from './features/panels/doctor/components/update-doctor-schedule/update-doctor-schedule.component';
 
 export const routes: Routes =
   [
@@ -117,6 +119,11 @@ export const routes: Routes =
       // ilk karşılaştığı <router-outlet></router-outlet> etiketine yerleştirir.
     },
     {
+      path: 'list-doctor-schedule', // Route belirtilen path ile eşleştiğinde
+      component: ListDoctorScheduleComponent, // İlgili componenti AppComponent'ten başlayarak
+      // ilk karşılaştığı <router-outlet></router-outlet> etiketine yerleştirir.
+    },
+    {
       path: 'admin-reports',
       component: AdminListReportComponent
     },
@@ -149,7 +156,7 @@ export const routes: Routes =
         path: 'admin-update-feedback/:feedbackId',
         component: UpdateFeedbackComponent,
        },
-      
+
        {
            path: 'statistics',
           component: StatisticsComponent,
@@ -171,6 +178,13 @@ export const routes: Routes =
     path: 'admin-update-patient/:patientId',
     component: UpdatePatientComponent,
   },
+  {
+    path: 'doctorschedule/:scheduleId',
+    component: UpdateDoctorScheduleComponent,
+  },
+
+
+
 
   ];
 
