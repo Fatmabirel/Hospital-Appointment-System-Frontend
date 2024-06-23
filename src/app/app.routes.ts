@@ -223,4 +223,8 @@ export const routes: Routes = [
     path: 'upcoming-appointments',
     component: UpcomingAppointmentsComponent,
   },
+  {
+    path: 'doctor-feedbacks',
+    component:DoctorListFeedbackComponent,
+  },
 ];
