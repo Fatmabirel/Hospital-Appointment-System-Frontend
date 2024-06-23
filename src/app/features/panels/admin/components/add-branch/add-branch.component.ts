@@ -66,7 +66,7 @@ export class AddBranchComponent {
       this.branchService.addbranch(this.BranchForm.value).subscribe(
         (response) => {
           this.toastrService.success('Branş başarıyla eklendi');
-          this.router.navigate(['/list-branch']);
+          this.router.navigate(['/admin-branches']);
         },
         (error) => {
           this.toastrService.error('Branş eklenemedi');
