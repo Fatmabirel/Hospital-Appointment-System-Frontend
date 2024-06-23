@@ -33,127 +33,172 @@ import { ListPatientComponent } from './features/panels/admin/components/list-pa
 import { AddPatientComponent } from './features/panels/admin/components/add-Patient/add-Patient.component';
 import { UpdatePatientComponent } from './features/panels/admin/components/update-patient/update-patient.component';
 import { UpdateFeedbackComponent } from './features/panels/admin/components/update-feedback/update-feedback.component';
+import { ListDoctorScheduleComponent } from './features/panels/doctor/components/list-doctor-schedule/list-doctor-schedule.component';
+import { UpdateDoctorScheduleComponent } from './features/panels/doctor/components/update-doctor-schedule/update-doctor-schedule.component';
 
-export const routes: Routes = [
-  {
-    path: '',
-    component: HomePageComponent,
-  },
-  {
-    path: 'branches',
-    component: BranchListComponent,
-    // canActivate:[loginGuard]
-  },
-  {
-    path: 'doctors',
-    component: DoctorListComponent,
-  },
-  {
-    path: 'contact',
-    component: ContactComponent,
-  },
-  {
-    path: 'about',
-    component: AboutComponent,
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
-    path: 'register',
-    component: RegisterComponent,
-  },
-  {
-    path: 'doctor-sidebar',
-    component: DoctorSidebarComponent,
-  },
-  {
-    path: 'doctor-dashboard',
-    component: DoctorDashboardComponent,
-  },
-  {
-    path: 'doctor-profile',
-    component: DoctorProfileComponent,
-  },
-  {
-    path: 'appointment-history',
-    component: AppointmentHistoryComponent,
-  },
-  {
-    path: 'pending-appointments',
-    component: PendingAppointmentComponent,
-  },
-  {
-    path: 'admin-sidebar',
-    component: AdminSidebarComponent,
-  },
-  {
-    path: 'admin-list-doctor',
-    component: ListDoctorComponent,
-  },
-  {
-    path: 'admin-update-doctor/:doctorId',
-    component: UpdateDoctorComponent,
-  },
-  {
-    path: 'admin-add-doctor',
-    component: AddDoctorComponent,
-  },
-  {
-    path: 'admin-list-feedback',
-    component: ListFeedbackComponent,
-  },
-  {
-    path: 'patient-sidebar',
-    component: PatientSidebarComponent,
-  },
-  {
-    path: 'doctor-schedule',
-    component: CreateDoctorScheduleComponent,
-  },
-  {
-    path: 'statistics',
-    component: StatisticsComponent,
-  },
-  {
-    path: 'reports',
-    component: ListReportComponent,
-  },
-  {
-    path: 'admin-update-feedback/:feedbackId',
-    component: UpdateFeedbackComponent,
-  },
-  {
-    path: 'doctor-patient',
-    component: DoctorSidebarPatientComponent,
-  },
-  {
-    path: 'admin-patient',
-    component: ListPatientComponent,
-  },
-  {
-    path: 'admin-add-patient',
-    component: AddPatientComponent,
-  },
-  {
-    path: 'admin-update-patient/:patientId',
-    component: UpdatePatientComponent,
-  },
-  {
-    path: 'add-report/:appointmentId',
-    component: AddReportComponent,
-  },
-  {
-    path: 'report-detail/:id',
-    component: EditReportComponent,
-  },
-  {
-    path: 'past-appointments',
-    component: PastAppointmentsComponent,
-  },
-  {
-    path: 'upcoming-appointments',
-    component: UpcomingAppointmentsComponent,
-  },
+
+export const routes: Routes =
+  [
+    {
+      path: '', // Route belirtilen path ile eşleştiğinde
+      component: HomePageComponent, // İlgili componenti AppComponent'ten başlayarak
+      // ilk karşılaştığı <router-outlet></router-outlet> etiketine yerleştirir.
+    },
+    {
+      path: 'branches', // Route belirtilen path ile eşleştiğinde
+      component: BranchListComponent, // İlgili componenti AppComponent'ten başlayarak
+      // ilk karşılaştığı <router-outlet></router-outlet> etiketine yerleştirir.
+      // canActivate:[loginGuard] örnek guard bu şekilde yazılıcak
+    },
+    {
+      path: 'doctors',
+      component: DoctorListComponent,
+
+    },
+    {
+      path: 'contact',
+      component: ContactComponent,
+    },
+    {
+      path: 'about',
+      component: AboutComponent
+    },
+    {
+      path: 'login',
+      component: LoginComponent
+    },
+    {
+      path: 'register',
+      component: RegisterComponent
+    },
+    {
+      path: 'doctor-sidebar',
+      component: DoctorSidebarComponent
+    },
+    {
+      path: 'doctor-dashboard',
+      component: DoctorDashboardComponent
+    },
+    {
+      path: 'doctor-profile',
+      component: DoctorProfileComponent
+    },
+    {
+      path: 'appointment-history',
+      component: AppointmentHistoryComponent
+    },
+    {
+      path: 'pending-appointments',
+      component: PendingAppointmentComponent
+    },
+
+    {
+      path: 'admin-sidebar',
+      component: AdminSidebarComponent
+    },
+
+    {
+      path: 'admin-list-doctor',
+      component: ListDoctorComponent
+    },
+
+    {
+      path: 'admin-update-doctor/:doctorId',
+      component: UpdateDoctorComponent
+    },
+    {
+      path: 'admin-add-doctor',
+      component: AddDoctorComponent
+    },
+
+    {
+      path: 'patient-sidebar',
+      component: PatientSidebarComponent
+    },
+    {
+      path: 'doctor-schedule', // Route belirtilen path ile eşleştiğinde
+      component: CreateDoctorScheduleComponent, // İlgili componenti AppComponent'ten başlayarak
+      // ilk karşılaştığı <router-outlet></router-outlet> etiketine yerleştirir.
+    },
+    {
+      path: 'list-doctor-schedule', // Route belirtilen path ile eşleştiğinde
+      component: ListDoctorScheduleComponent, // İlgili componenti AppComponent'ten başlayarak
+      // ilk karşılaştığı <router-outlet></router-outlet> etiketine yerleştirir.
+    },
+    {
+      path: 'admin-reports',
+      component: AdminListReportComponent
+    },
+    {
+      path: 'admin-report-detail/:id',
+      component: AdminEditReportComponent
+    },//
+
+    {
+      path: 'doctor-reports',
+      component: ListReportComponent //doktorun  kendine ait raporlar
+    },
+
+    {
+      path: 'report-detail/:id',
+      component: EditReportComponent
+    },// ReportDetailCompo //o an ki reportid ile yönlendirme yapıp detayını görme
+
+    {
+      path: 'add-report/:appointmentId',
+      component: AddReportComponent
+    },
+    // ReportDetailCompo   //o anki randevunun id si ile yönlendirme yapıp randevu ekleme
+
+      {
+        path: 'admin-list-feedback',
+        component: ListFeedbackComponent,
+     },
+      {
+        path: 'admin-update-feedback/:feedbackId',
+        component: UpdateFeedbackComponent,
+       },
+
+       {
+           path: 'statistics',
+          component: StatisticsComponent,
+        },
+        {
+          path: 'doctor-patient',
+         component: DoctorSidebarPatientComponent,
+        },
+    
+         {
+            path: 'admin-patient',
+            component: ListPatientComponent,
+         },
+     
+         {
+            path: 'admin-add-patient',
+            component: AddPatientComponent,
+         },
+    
+         {
+            path: 'admin-update-patient/:patientId',
+            component: UpdatePatientComponent,
+         },
+    
+         {    
+            path: 'doctorschedule/:scheduleId',
+            component: UpdateDoctorScheduleComponent,
+          },
+    
+           {
+             path: 'past-appointments',
+             component: PastAppointmentsComponent,
+           },
+    
+           {
+              path: 'upcoming-appointments',
+              component: UpcomingAppointmentsComponent,
+           },
+
+
+
 ];
+

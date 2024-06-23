@@ -1,36 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 import { CreateDrScheduleRequest } from '../../../../doctorschedule/models/create-request-drschedule';
-
-
 import { ToastrService } from 'ngx-toastr';
 import { TokenService } from '../../../../../core/auth/services/token.service';
 import { DoctorSidebarComponent } from '../sidebar/doctorSidebar.component';
 import { DrscheduleService } from '../../../../doctorschedule/services/drschedule.service';
+import { UpdateDoctorSchedule } from '../../../../doctorschedule/models/update-doctor-schedule';
 
 @Component({
-  selector: 'app-create-doctor-schedule',
+  selector: 'app-update-doctor-schedule',
   standalone: true,
-  imports: [FormsModule, CommonModule,DoctorSidebarComponent],
-  templateUrl: './create-doctor-schedule.component.html',
-  styleUrls: ['./create-doctor-schedule.component.scss']
+  imports: [FormsModule, CommonModule, DoctorSidebarComponent],
+  templateUrl: './update-doctor-schedule.component.html',
+  styleUrls: ['./update-doctor-schedule.component.scss']
 })
-export class CreateDoctorScheduleComponent implements OnInit{
+export class UpdateDoctorScheduleComponent implements OnInit {
   selectedDate: string;
   startTime: string;
   endTime: string;
   minDate: string;
   maxDate: string;
   times: string[] = [];
+  scheduleId: number;
 
   constructor(
-     private tokenService:TokenService,
+    private route: ActivatedRoute,
+    private tokenService: TokenService,
     private drScheduleService: DrscheduleService,
     private toastrService: ToastrService
-  ) {
+  ) {}
 
-  }
   ngOnInit(): void {
     const today = new Date();
     const twoWeeksLater = new Date();
@@ -40,6 +41,26 @@ export class CreateDoctorScheduleComponent implements OnInit{
     this.maxDate = this.formatDate(twoWeeksLater);
 
     this.generateTimes();
+
+    this.route.params.subscribe(params => {
+      if (params['scheduleId']) {
+        this.scheduleId = +params['scheduleId'];
+        console.log('Schedule ID:', this.scheduleId); // Schedule ID'nin doğru alındığını kontrol etme
+      } else {
+        this.scheduleId = 0;
+      }
+    });
+
+    // Get schedule ID from route parameters
+    //this.scheduleId = this.route.snapshot.paramMap.get('scheduleId');
+
+    // Fetch existing schedule details
+    this.drScheduleService.getById(this.scheduleId).subscribe(schedule => {
+      console.log(schedule);
+      this.selectedDate = schedule.date;
+      this.startTime = this.formatTimeForDisplay(schedule.startTime);
+      this.endTime = this.formatTimeForDisplay(schedule.endTime);
+    });
   }
 
   private formatDate(date: Date): string {
@@ -65,44 +86,46 @@ export class CreateDoctorScheduleComponent implements OnInit{
     return `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
   }
 
-  add() {
+  update() {
     if (this.selectedDate && this.startTime && this.endTime) {
       const userId: string = this.tokenService.getUserId();
 
-      const schedule: CreateDrScheduleRequest = {
+      const schedule: UpdateDoctorSchedule = {
+        id:this.scheduleId,
         doctorID: userId,
         date: this.formatDateForDatabase(this.selectedDate),
         startTime: this.formatTimeForDatabase(this.startTime),
         endTime: this.formatTimeForDatabase(this.endTime)
       };
 
-      this.drScheduleService.add(schedule).subscribe(
+      this.drScheduleService.updateDoctorSchedule( schedule).subscribe(
         response => {
-          this.toastrService.info("Takvim çizelgenize başarılı bir şekilde eklendi",'Başarılı');
+          this.toastrService.success("Takvim çizelgeniz başarılı bir şekilde güncellendi", 'Başarılı');
         },
         error => {
-          this.toastrService.error("Bugüne ait bir takviminiz zaten var",'Hatalı İşlem');
-          console.error('Error creating schedule:', error);
+          this.toastrService.error(error, 'Hatalı İşlem');
+          console.error('Error updating schedule:', error);
         }
       );
 
-      console.log('Saved Schedule:', schedule);
+      console.log('Updated Schedule:', schedule);
     } else {
-     this.toastrService.error("","Tüm alanları doldurunuz.");
+      this.toastrService.error("", "Tüm alanları doldurunuz.");
     }
   }
 
   private formatDateForDatabase(date: string): string {
-    // Tarihi Yıl-Ay-Gün biçiminde formatlayarak döndürün
     return new Date(date).toISOString().split('T')[0];
   }
 
   private formatTimeForDatabase(time: string): string {
-    // Zamanı Saat:Dakika:Saniye biçiminde formatlayarak döndürün
     const [hour, minute] = time.split(':');
     return `${hour}:${minute}:00`;
   }
-
+  private formatTimeForDisplay(time: string): string {
+    const [hour, minute] = time.split(':');
+    return `${hour}:${minute}`;
+  }
   getFilteredTimes() {
     if (!this.startTime) {
       return this.times;
@@ -120,7 +143,4 @@ export class CreateDoctorScheduleComponent implements OnInit{
     }
     return true;
   }
-
-
-
 }
