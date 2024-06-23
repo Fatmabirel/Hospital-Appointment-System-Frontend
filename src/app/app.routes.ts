@@ -38,6 +38,7 @@ import { UpdateDoctorScheduleComponent } from './features/panels/doctor/componen
 import { ListBranchComponent } from './features/panels/admin/components/list-branch/list-branch.component';
 import { AddBranchComponent } from './features/panels/admin/components/add-branch/add-branch.component';
 import { UpdateBranchComponent } from './features/panels/admin/components/update-branch/update-branch.component';
+import { AdminProfileComponent } from './features/panels/admin/components/admin-profile/admin-profile.component';
 
 export const routes: Routes = [
   {
@@ -112,6 +113,10 @@ export const routes: Routes = [
   {
     path: 'admin-update-branch/:branchId',
     component: UpdateBranchComponent,
+  },
+  {
+    path: 'admin-profile',
+    component: AdminProfileComponent,
   },
   {
     path: 'admin-update-doctor/:doctorId',
