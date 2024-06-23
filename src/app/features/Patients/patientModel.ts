@@ -11,7 +11,6 @@ export interface Patient {
   phone: string;
   address: string;
   email: string;
-  passwordSalt: string;
   appointmentId: number;
   appointmentDate: Date;
   appointmentTime: string;

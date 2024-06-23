@@ -11,7 +11,7 @@
       <table class="table table-striped">
         <thead class="thead-primary">
           <tr>
-            <th scope="col" style="width: 20%;">Hasta Adı Soyadı</th>
+            <th scope="col" style="width: 15%;">Hasta Adı Soyadı</th>
             <th scope="col" style="width: 15%;">Doğum Tarihi</th>
             <th scope="col" style="width: 3%;">Yaşı</th>
             <th scope="col" style="width: 3%;">Boyu</th>
@@ -21,23 +21,23 @@
             <th scope="col" style="width: 10%;">Telefon Numarası</th> 
             <th scope="col" style="width: 20%;">Mail Adresi</th>
             <th scope="col" style="width: 30%;">Adres</th>
-            <th scope="col" style="width: 3%;">İşlemler</th>
+            <th scope="col" style="width: 10%;">İşlemler</th>
            
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let patient of patients">
-            <td>{{ patient.firstName }} {{ patient.lastName}}</td>
+            <td>{{ patient.firstName|CapitalizeFirst }} {{ patient.lastName|CapitalizeFirst}}</td>
             <td>{{ patient.dateOfBirth}}</td>
             <td>{{ patient.age||"-"}}</td>
             <td>{{ patient.height||"-"}}</td>
             <td>{{ patient.weight||"-"}}</td>
             <td>{{ patient.bloodGroup||"-"}}</td>
-            <td>{{ patient.nationalIdentity}}</td>
+            <td>{{ patient.nationalIdentity }}</td>
             <td>{{ patient.phone}}</td>
             <td>{{ patient.email}}</td>
             <td>{{ patient.address||"-"}}</td>
-
+            <td class="text-center">
               <div class="btn-group" role="group">
                 <button class="btn btn-sm btn-primary mr-2"  [routerLink]="['/admin-update-patient', patient.id]">
                   <i class="fa fa-pencil"></i>
@@ -45,8 +45,8 @@
                 <button class="btn btn-sm btn-danger" (click)="confirmDelete(patient.id)">
                   <i class="fa fa-trash"></i>
                 </button>
-            </div>
-      
+              </div>
+            </td>      
         </tbody>
       </table>
     </div>

@@ -33,7 +33,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let doctor of doctors">
-          <td>{{ doctor.firstName }} {{ doctor.lastName }}</td>
+          <td>{{ doctor.firstName|CapitalizeFirst}} {{ doctor.lastName|CapitalizeFirst }}</td>
           <td>{{ doctor.branchName }}</td>
           <td>{{ doctor.title }}</td>
           <td>{{ doctor.schoolName }}</td>

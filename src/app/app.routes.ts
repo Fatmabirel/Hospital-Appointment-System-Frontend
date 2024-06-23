@@ -14,8 +14,6 @@ import { PendingAppointmentComponent } from './features/panels/doctor/components
 import { DoctorProfileComponent } from './features/panels/doctor/components/doctor-profile/doctor-profile.component';
 import { CreateDoctorScheduleComponent } from './features/panels/doctor/components/create-doctor-schedule/create-doctor-schedule.component';
 import { DoctorDashboardComponent } from './features/panels/doctor/components/doctor-dashboard/doctor-dashboard.component';
-
-
 import { ListReportComponent  } from './features/panels/doctor/components/list-report/list-report.component';
 import { EditReportComponent } from './features/panels/doctor/components/edit-report/edit-report.component';
 import { AddReportComponent } from './features/panels/doctor/components/add-report/add-report.component';
@@ -24,6 +22,9 @@ import { UpdateDoctorComponent } from './features/panels/admin/components/update
 import { AddDoctorComponent } from './features/panels/admin/components/add-doctor/add-doctor.component';
 import { AdminListReportComponent } from './features/panels/admin/components/admin-list-report/admin-list-report.component';
 import { AdminEditReportComponent } from './features/panels/admin/components/admin-edit-report/admin-edit-report.component';
+import { PastAppointmentsComponent } from './features/panels/admin/components/list-appointment/past-appointments/past-appointments.component';
+import { UpcomingAppointmentsComponent } from './features/panels/admin/components/list-appointment/upcoming-appointments/upcoming-appointments.component';
+
 import { StatisticsComponent } from './features/statistics/statistics.component';
 import { ListFeedbackComponent } from './features/panels/admin/components/list-feedback/list-feedback.component';
 
@@ -34,6 +35,7 @@ import { UpdatePatientComponent } from './features/panels/admin/components/updat
 import { UpdateFeedbackComponent } from './features/panels/admin/components/update-feedback/update-feedback.component';
 import { ListDoctorScheduleComponent } from './features/panels/doctor/components/list-doctor-schedule/list-doctor-schedule.component';
 import { UpdateDoctorScheduleComponent } from './features/panels/doctor/components/update-doctor-schedule/update-doctor-schedule.component';
+
 
 export const routes: Routes =
   [
@@ -165,35 +167,38 @@ export const routes: Routes =
           path: 'doctor-patient',
          component: DoctorSidebarPatientComponent,
         },
+    
+         {
+            path: 'admin-patient',
+            component: ListPatientComponent,
+         },
+     
+         {
+            path: 'admin-add-patient',
+            component: AddPatientComponent,
+         },
+    
+         {
+            path: 'admin-update-patient/:patientId',
+            component: UpdatePatientComponent,
+         },
+    
+         {    
+            path: 'doctorschedule/:scheduleId',
+            component: UpdateDoctorScheduleComponent,
+          },
+    
+           {
+             path: 'past-appointments',
+             component: PastAppointmentsComponent,
+           },
+    
+           {
+              path: 'upcoming-appointments',
+              component: UpcomingAppointmentsComponent,
+           },
 
-  {
-    path: 'admin-patient',
-    component: ListPatientComponent,
-  },
-  {
-    path: 'admin-add-patient',
-    component: AddPatientComponent,
-  },
-  {
-    path: 'admin-update-patient/:patientId',
-    component: UpdatePatientComponent,
-  },
-  {
-    path: 'doctorschedule/:scheduleId',
-    component: UpdateDoctorScheduleComponent,
-  },
 
 
-
-
-  ];
-
-
-
-
-
-
-
-
-
+];
 
