@@ -84,7 +84,8 @@ export class UpdateBranchComponent {
           this.router.navigate(['/admin-branches']);
         },
         (error) => {
-          console.error('Hasta güncellenemedi:', error);
+          this.toastrService.error('Aynı branchten var');
+          
         }
       );
     } else {
@@ -92,6 +93,4 @@ export class UpdateBranchComponent {
       this.toastrService.error('Lütfen eksik alanları doldurun');
     }
   }
-
-
- }
+}
