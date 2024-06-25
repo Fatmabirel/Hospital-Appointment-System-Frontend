@@ -20,8 +20,6 @@ import { FeedbackService } from '../feedbacks/services/feedback.service';
 })
 export class StatisticsComponent implements OnInit {
   patientCount: number;
-  activeUsers: number;
-  pageViews: number;
   doctorCount: number; // Doktor sayısı için değişken;
   appointmentCount: number;
   feedbackCount: number;
@@ -29,10 +27,9 @@ export class StatisticsComponent implements OnInit {
   constructor(private doctorService: DoctorService, private patientService: PatientService, private appointmentService: AppointmentService, private feedbackService: FeedbackService,) { // DoctorService inject ediliyor
     // Örnek veriler
     this.patientCount = 0;
-    this.activeUsers = 150;
-    this.pageViews = 5000;
     this.doctorCount = 0; // Başlangıç değeri
     this.appointmentCount = 0;
+    this.feedbackCount = 0;
   }
 
   ngOnInit(): void {
