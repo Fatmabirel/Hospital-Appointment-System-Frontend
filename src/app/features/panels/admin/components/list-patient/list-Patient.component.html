@@ -49,6 +49,12 @@
             </td>      
         </tbody>
       </table>
+      <app-pagination
+      [totalPages]="totalPages"
+      [pageIndex]="pageIndex"
+      [pageSize]="pageSize"
+      (pageChange)="onPageChanged($any($event))"
+    ></app-pagination>
     </div>
   </div>
   

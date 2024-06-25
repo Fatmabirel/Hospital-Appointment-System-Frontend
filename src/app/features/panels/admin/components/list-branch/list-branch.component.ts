@@ -6,6 +6,7 @@ import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
 import { RouterModule } from '@angular/router';
 import { ConfirmDialogComponent } from '../../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { PaginationComponent } from '../../../../../core/paging/components/pagination/pagination.component';
 
 @Component({
   selector: 'app-list-branch',
@@ -13,31 +14,47 @@ import { MatDialog } from '@angular/material/dialog';
   imports: [
     CommonModule,
     AdminSidebarComponent,
-    RouterModule
+    RouterModule,
+    PaginationComponent
   ],
   templateUrl: './list-branch.component.html',
   styleUrl: './list-branch.component.scss',
   
 })
 export class ListBranchComponent implements OnInit {
-  branchs: Branch[] = [];
+  branches: Branch[] = [];
   pageIndex: number = 0;
-  pageSize: number = 10;
-  isLoading: boolean = true;
+  pageSize:number = 5;
+  totalPages: number = 0;
+  hasNext: boolean = false;
 
-  constructor(private branchService:BranchService, private dialog: MatDialog) {}
+  constructor(private branchService: BranchService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.getBranches();
   }
 
-  getBranches() {
-    this.branchService.getBranches(this.pageIndex, this.pageSize).subscribe((response) => {
-      this.branchs = response.items;
-    });   
+  onPageChanged(newPageIndex: number) {
+    this.pageIndex = newPageIndex;
+    console.log(this.pageIndex);
+    this.getBranches();
   }
 
-  deleteBranch(branchId:string) {
+
+  getBranches() {
+    this.branchService.getBranches(this.pageIndex, this.pageSize).subscribe(
+      (response) => {
+        this.branches = response.items;
+        this.totalPages = response.pages;
+        this.hasNext = response.hasNext;
+      },
+      (error) => {
+        console.error('Branşlar getirilirken hata oluştu:', error);
+      }
+    );
+  }
+
+  deleteBranch(branchId: string) {
     this.branchService.deleteBranch(branchId).subscribe(
       (response) => {
         console.log('Branş başarıyla silindi:', response);
