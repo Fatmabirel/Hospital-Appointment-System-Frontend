@@ -58,7 +58,6 @@ export class ListDoctorComponent implements OnInit {
 
   onPageChanged(newPageIndex: number) {
     this.pageIndex = newPageIndex;
-    console.log(this.pageIndex);
     this.getDoctors();
   }
 
