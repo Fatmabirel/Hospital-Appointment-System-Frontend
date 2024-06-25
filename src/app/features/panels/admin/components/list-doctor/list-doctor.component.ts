@@ -13,6 +13,7 @@ import { FilterDoctorNamePipe } from '../../../../pipe/filter-doctor-name.pipe';
 import { FilterDoctorBranchPipe } from '../../../../pipe/filter-doctor-branch.pipe';
 import { BranchService } from '../../../../branches/services/branch.service';
 import { Branch } from '../../../../branches/models/branch';
+import { PaginationComponent } from '../../../../../core/paging/components/pagination/pagination.component';
 
 @Component({
   selector: 'app-list-doctor',
@@ -27,6 +28,7 @@ import { Branch } from '../../../../branches/models/branch';
     CapitalizeFirstPipe,
     FilterDoctorNamePipe,
     FilterDoctorBranchPipe,
+    PaginationComponent
   ],
 
   templateUrl: './list-doctor.component.html',
@@ -36,7 +38,9 @@ export class ListDoctorComponent implements OnInit {
   doctors: Doctor[] = [];
   branches: Branch[] = [];
   pageIndex: number = 0;
-  pageSize: number = 12;
+  pageSize:number = 5;
+  totalPages: number = 0;
+  hasNext: boolean = false;
   filterText: string = '';
   selectedBranch: any | null = null;
 
@@ -52,12 +56,20 @@ export class ListDoctorComponent implements OnInit {
     this.getBranches();
   }
 
+  onPageChanged(newPageIndex: number) {
+    this.pageIndex = newPageIndex;
+    console.log(this.pageIndex);
+    this.getDoctors();
+  }
+
   getDoctors() {
     this.doctorService
       .getDoctors(this.pageIndex, this.pageSize)
       .subscribe((response) => {
         console.log(response);
         this.doctors = response.items;
+        this.totalPages = response.pages;
+        this.hasNext = response.hasNext;
       });
   }
   getBranches() {

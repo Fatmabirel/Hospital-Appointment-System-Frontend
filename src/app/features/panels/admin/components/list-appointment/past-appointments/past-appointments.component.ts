@@ -7,11 +7,12 @@ import { Doctor } from '../../../../../doctors/models/doctor';
 import { ResponseModel } from '../../../../../models/responseModel';
 import { AdminSidebarComponent } from '../../sidebar/adminSidebar.component';
 import { RouterModule } from '@angular/router';
+import { PaginationComponent } from '../../../../../../core/paging/components/pagination/pagination.component';
 
 @Component({
   selector: 'app-past-appointments',
   standalone: true,
-  imports: [CommonModule, AdminSidebarComponent, RouterModule],
+  imports: [CommonModule, AdminSidebarComponent, RouterModule,PaginationComponent],
   templateUrl: './past-appointments.component.html',
   styleUrls: ['./past-appointments.component.scss']
 })
@@ -20,16 +21,27 @@ export class PastAppointmentsComponent implements OnInit {
   /* doctors: { [key: string]: Doctor } = {}; */
   todayDate: Date = new Date();
   errorMessage: string;
+  pageIndex: number = 0;
+  pageSize:number = 5;
+  totalPages: number = 0;
+  hasNext: boolean = false;
 
   constructor(private appointmentService: AppointmentService, private doctorService: DoctorService) {}
 
   ngOnInit(): void {
     this.loadPastAppointments();
   }
+  onPageChanged(newPageIndex: number) {
+    this.pageIndex = newPageIndex;
+    console.log(this.pageIndex);
+    this.loadPastAppointments();
+  }
 
   loadPastAppointments(): void {
-    this.appointmentService.getAllAppointments(0, 100).subscribe(
+    this.appointmentService.getAllAppointments(this.pageIndex,this.pageSize).subscribe(
       (response: ResponseModel<Appointment>) => {
+        this.totalPages = response.pages;
+        this.hasNext = response.hasNext;
         this.pastAppointments = response.items.filter(appointment => {
           const appointmentDate = new Date(appointment.date);
           return appointmentDate < this.todayDate ||
