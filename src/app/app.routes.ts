@@ -48,6 +48,7 @@ import { DoctorListFeedbackComponent } from './features/panels/doctor/components
 import { PatientListPastAppointmentComponent } from './features/panels/patient/components/patient-list-past-appointment/patient-list-past-appointment.component';
 
 import { PatientProfileComponent } from './features/panels/patient/components/Patient-profile/Patient-profile.component';
+import { PatientListUpcomingAppointmentComponent } from './features/panels/patient/components/patient-list-upcoming-appointment/patient-list-upcoming-appointment.component';
 
 export const routes: Routes = [
   {
@@ -233,6 +234,10 @@ export const routes: Routes = [
   {
     path: 'patient-past-appointments',
     component: PatientListPastAppointmentComponent,
+  },
+  {
+    path: 'patient-upcoming-appointments',
+    component: PatientListUpcomingAppointmentComponent,
   },
   {
     path: 'patient-profile',
