@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { PatientService } from '../../../../Patients/patient.service';
 import { ResponseModel } from '../../../../models/responseModel';
+import { ReportService } from '../../../../reports/services/report.service';
 
 @Component({
   selector: 'app-patient-list-past-appointment',
@@ -17,6 +18,7 @@ import { ResponseModel } from '../../../../models/responseModel';
 })
 export class PatientListPastAppointmentComponent {
   appointments: Appointment[] = [];
+  hasReportMap: { [key: number]: boolean } = {}; // hasReport bilgisini tutmak için nesne
   pageIndex: number = 0;
   pageSize: number = 12;
   todayDate: Date = new Date(); // Bugünkü tarihi al
@@ -24,6 +26,7 @@ export class PatientListPastAppointmentComponent {
   constructor(
     private patientService: PatientService,
     private appointmentService: AppointmentService,
+    private reportService:ReportService,
     private toastrService: ToastrService,
     private router: Router
   ) {}
@@ -60,5 +63,14 @@ export class PatientListPastAppointmentComponent {
         console.error('Doktor bilgileri alınamadı:', error);
       }
     );
+  }
+
+  public viewReport(appointmentId: number) {
+    console.log(appointmentId);
+      this.reportService.getByAppointmentId(appointmentId).subscribe(response=>{
+        let reportId=response.id;
+        console.log(reportId);
+        this.router.navigate(['patient-report-detail', reportId]);
+      })
   }
 }

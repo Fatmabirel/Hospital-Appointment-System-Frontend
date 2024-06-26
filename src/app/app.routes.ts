@@ -51,6 +51,8 @@ import { PatientListPastAppointmentComponent } from './features/panels/patient/c
 
 import { PatientProfileComponent } from './features/panels/patient/components/Patient-profile/Patient-profile.component';
 import { PatientListUpcomingAppointmentComponent } from './features/panels/patient/components/patient-list-upcoming-appointment/patient-list-upcoming-appointment.component';
+import { PatientListReportComponent } from './features/panels/patient/components/patient-list-report/patient-list-report.component';
+import { PatientReportDetailComponent } from './features/panels/patient/components/patient-report-detail/patient-report-detail.component';
 
 export const routes: Routes = [
   {
@@ -251,8 +253,16 @@ export const routes: Routes = [
   {
     path: 'patient-profile',
     component:PatientProfileComponent,
-
   },
+  {
+    path: 'patient-reports',
+    component:PatientListReportComponent,
+  },
+  {
+    path: 'patient-report-detail/:id',
+    component: PatientReportDetailComponent,
+  }, 
+  
   {
     path: 'admin-edit-doctor-schedule/:doctorId/:scheduleId',
     component: AdminUpdateDrscheduleComponent,

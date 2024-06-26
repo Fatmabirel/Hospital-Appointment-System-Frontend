@@ -61,6 +61,6 @@ export class PatientListUpcomingAppointmentComponent {
     );
   }
   viewReport() : void{
-    this.toastrService.error("Bu randevu henüz gerçekleşmedi.Rapor bulunmamaktadır", "Rapor bulunamadı")
+    this.toastrService.error("Bu randevu henüz gerçekleşmedi!", "Rapor bulunamadı")
   }
 }
