@@ -227,4 +227,5 @@ export const routes: Routes = [
     path: 'doctor-feedbacks',
     component:DoctorListFeedbackComponent,
   },
+
 ];
