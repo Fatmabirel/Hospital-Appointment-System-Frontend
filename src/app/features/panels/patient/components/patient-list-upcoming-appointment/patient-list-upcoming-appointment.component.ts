@@ -7,6 +7,8 @@ import { AppointmentService } from '../../../../appointments/services/appointmen
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { ResponseModel } from '../../../../models/responseModel';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../../../../../shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-patient-list-upcoming-appointment',
@@ -25,7 +27,8 @@ export class PatientListUpcomingAppointmentComponent {
     private patientService: PatientService,
     private appointmentService: AppointmentService,
     private toastrService: ToastrService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -60,7 +63,36 @@ export class PatientListUpcomingAppointmentComponent {
       }
     );
   }
+  
   viewReport() : void{
     this.toastrService.error("Bu randevu henüz gerçekleşmedi!", "Rapor bulunamadı")
+  }
+
+  confirmDelete(appointmentId: number) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '400px',
+      data: {
+        title: 'ONAY',
+        message: 'Bu randevuyu iptal etmek istediğinizden emin misiniz?',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.deleteAppointment(appointmentId);
+      }
+    });
+  }
+
+  deleteAppointment(appointmentId: number) {
+    this.appointmentService.deleteAppointment(appointmentId).subscribe(
+      (response) => {
+        this.toastrService.success("Randevu başarıyla iptal edildi!")
+        this.getPatientAppointments();
+      },
+      (error) => {
+        this.toastrService.error("Randevu iptal edilemedi!")
+      }
+    );
   }
 }
