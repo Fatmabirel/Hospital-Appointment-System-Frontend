@@ -1,22 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CreateDrScheduleRequest } from '../../../../doctorschedule/models/create-request-drschedule';
 import { ToastrService } from 'ngx-toastr';
 import { TokenService } from '../../../../../core/auth/services/token.service';
-import { DoctorSidebarComponent } from '../sidebar/doctorSidebar.component';
+
 import { DrscheduleService } from '../../../../doctorschedule/services/drschedule.service';
 import { UpdateDoctorSchedule } from '../../../../doctorschedule/models/update-doctor-schedule';
+import { AdminSidebarComponent } from "../sidebar/adminSidebar.component";
 
 @Component({
-  selector: 'app-update-doctor-schedule',
-  standalone: true,
-  imports: [FormsModule, CommonModule, DoctorSidebarComponent],
-  templateUrl: './update-doctor-schedule.component.html',
-  styleUrls: ['./update-doctor-schedule.component.scss']
+    selector: 'app-admin-update-drschedule',
+    standalone: true,
+    templateUrl: './admin-update-drschedule.component.html',
+    styleUrl: './admin-update-drschedule.component.scss',
+    imports: [FormsModule, CommonModule,AdminSidebarComponent]
 })
-export class UpdateDoctorScheduleComponent implements OnInit {
+export class AdminUpdateDrscheduleComponent implements OnInit {
   selectedDate: string;
   startTime: string;
   endTime: string;
@@ -24,12 +25,14 @@ export class UpdateDoctorScheduleComponent implements OnInit {
   maxDate: string;
   times: string[] = [];
   scheduleId: number;
+  doctorId:string;
 
   constructor(
     private route: ActivatedRoute,
     private tokenService: TokenService,
     private drScheduleService: DrscheduleService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private router:Router
   ) {}
 
   ngOnInit(): void {
@@ -43,11 +46,15 @@ export class UpdateDoctorScheduleComponent implements OnInit {
     this.generateTimes();
 
     this.route.params.subscribe(params => {
-      if (params['scheduleId']) {
-        this.scheduleId = +params['scheduleId'];
+      if (params['doctorId'] && params['scheduleId']  ) {
+        this.scheduleId = params['scheduleId'];
+        this.doctorId=params['doctorId'];
+        console.log('Doctor ID:', this.doctorId); // Doctor ID'nin doğru alındığını kontrol etme
         console.log('Schedule ID:', this.scheduleId); // Schedule ID'nin doğru alındığını kontrol etme
+
       } else {
         this.scheduleId = 0;
+        this.doctorId='0';
       }
     });
 
@@ -88,7 +95,7 @@ export class UpdateDoctorScheduleComponent implements OnInit {
 
   update() {
     if (this.selectedDate && this.startTime && this.endTime) {
-      const userId: string = this.tokenService.getUserId();
+      const userId: string = this.doctorId;
 
       const schedule: UpdateDoctorSchedule = {
         id:this.scheduleId,
@@ -100,8 +107,14 @@ export class UpdateDoctorScheduleComponent implements OnInit {
 
       this.drScheduleService.updateDoctorSchedule( schedule).subscribe(
         response => {
-          this.toastrService.success("Takvim çizelgeniz başarılı bir şekilde güncellendi", 'Başarılı');
+          this.toastrService.success("Doktorun takvim çizelgesi başarılı bir şekilde güncellendi", 'Başarılı');
+          this.router.navigate(['admin-doctor-schedule', this.doctorId]);
+
         },
+        // error => {
+        //   this.toastrService.error("Bu tarih için doktorun takvim çizelgesi zaten mevcut", 'Hatalı İşlem');
+        //   console.error('Error updating schedule:', error);
+        // }
         responseError => {
 
           console.log(responseError);

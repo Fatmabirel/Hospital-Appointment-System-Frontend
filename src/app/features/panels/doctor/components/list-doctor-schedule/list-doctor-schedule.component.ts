@@ -34,6 +34,7 @@ export class ListDoctorScheduleComponent implements OnInit {
     let  doctorId = this.tokenService.getUserId().toString();
     this.drScheduleService.getDoctorSchedule(this.pageIndex,this.pageSize,doctorId).subscribe(response=>{
     this.schedules=response.items;
+    console.log(response);
 
   })
 
@@ -46,9 +47,11 @@ export class ListDoctorScheduleComponent implements OnInit {
              this.toastrService.success('Seçtiğiniz tarihe ait takvim çizelgeniz silindi','Başarılı');
              this.getDoctorSchedule();
 
-        },error=>
-        {
-          this.toastrService.error(error,'Hata');
+        } ,responseError => {
+
+          console.log(responseError);
+          this.toastrService.error(responseError.error.detail,'Hatalı İşlem');
+
         })
   }
 

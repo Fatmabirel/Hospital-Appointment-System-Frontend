@@ -43,6 +43,8 @@ import { AddBranchComponent } from './features/panels/admin/components/add-branc
 import { UpdateBranchComponent } from './features/panels/admin/components/update-branch/update-branch.component';
 import { AdminProfileComponent } from './features/panels/admin/components/admin-profile/admin-profile.component';
 import { FaqComponent } from './features/faq/faq.component';
+import { AdminUpdateDrscheduleComponent } from './features/panels/admin/components/admin-update-drschedule/admin-update-drschedule.component';
+import { AdminAddReportComponent } from './features/panels/admin/components/admin-add-report/admin-add-report.component';
 
 
 export const routes: Routes = [
@@ -158,7 +160,10 @@ export const routes: Routes = [
     path: 'admin-report-detail/:id',
     component: AdminEditReportComponent,
   }, //
-
+  {
+    path: 'admin-add-report/:appointmentId',
+    component: AdminAddReportComponent,
+  },
   {
     path: 'doctor-reports',
     component: ListReportComponent, //doktorun  kendine ait raporlar
@@ -224,7 +229,12 @@ export const routes: Routes = [
   },
 
   {
-    path: 'admindoctorschedule/:doctorId',
+    path: 'admin-doctor-schedule/:doctorId',
     component: AdminListDrscheduleComponent,
+  },
+
+  {
+    path: 'admin-edit-doctor-schedule/:doctorId/:scheduleId',
+    component: AdminUpdateDrscheduleComponent,
   },
 ];

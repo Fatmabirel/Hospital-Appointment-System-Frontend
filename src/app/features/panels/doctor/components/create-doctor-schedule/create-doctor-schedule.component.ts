@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { TokenService } from '../../../../../core/auth/services/token.service';
 import { DoctorSidebarComponent } from '../sidebar/doctorSidebar.component';
 import { DrscheduleService } from '../../../../doctorschedule/services/drschedule.service';
+import { error } from 'node:console';
 
 @Component({
   selector: 'app-create-doctor-schedule',
@@ -80,9 +81,11 @@ export class CreateDoctorScheduleComponent implements OnInit{
         response => {
           this.toastrService.info("Takvim çizelgenize başarılı bir şekilde eklendi",'Başarılı');
         },
-        error => {
-          this.toastrService.error("Bugüne ait bir takviminiz zaten var",'Hatalı İşlem');
-          console.error('Error creating schedule:', error);
+        responseError => {
+
+          console.log(responseError);
+          this.toastrService.error(responseError.error.detail,'Hatalı İşlem');
+
         }
       );
 
