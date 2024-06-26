@@ -43,6 +43,8 @@ import { AddBranchComponent } from './features/panels/admin/components/add-branc
 import { UpdateBranchComponent } from './features/panels/admin/components/update-branch/update-branch.component';
 import { AdminProfileComponent } from './features/panels/admin/components/admin-profile/admin-profile.component';
 import { FaqComponent } from './features/faq/faq.component';
+import { AdminUpdateDrscheduleComponent } from './features/panels/admin/components/admin-update-drschedule/admin-update-drschedule.component';
+import { AdminAddReportComponent } from './features/panels/admin/components/admin-add-report/admin-add-report.component';
 
 import { DoctorListFeedbackComponent } from './features/panels/doctor/components/doctor-list-feedback/doctor-list-feedback.component';
 import { PatientListPastAppointmentComponent } from './features/panels/patient/components/patient-list-past-appointment/patient-list-past-appointment.component';
@@ -163,7 +165,10 @@ export const routes: Routes = [
     path: 'admin-report-detail/:id',
     component: AdminEditReportComponent,
   }, //
-
+  {
+    path: 'admin-add-report/:appointmentId',
+    component: AdminAddReportComponent,
+  },
   {
     path: 'doctor-reports',
     component: ListReportComponent, //doktorun  kendine ait raporlar
@@ -227,7 +232,10 @@ export const routes: Routes = [
     path: 'upcoming-appointments',
     component: UpcomingAppointmentsComponent,
   },
-  {
+
+    path: 'admin-doctor-schedule/:doctorId',
+    component: AdminListDrscheduleComponent,
+
     path: 'doctor-feedbacks',
     component:DoctorListFeedbackComponent,
   },
@@ -242,5 +250,10 @@ export const routes: Routes = [
   {
     path: 'patient-profile',
     component:PatientProfileComponent,
+
+  },
+  {
+    path: 'admin-edit-doctor-schedule/:doctorId/:scheduleId',
+    component: AdminUpdateDrscheduleComponent,
   },
 ];

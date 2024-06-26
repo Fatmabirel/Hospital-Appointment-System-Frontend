@@ -54,4 +54,32 @@ export class AdminListDrscheduleComponent implements OnInit {
   })
 
   }
+
+
+  deleteDoctorSchedule(id:number)
+  {
+        this.drScheduleService.deleteDoctorSchedule(id).subscribe(reponse=>{
+             this.toastrService.success('Doktorun seçtiğiniz tarihe ait takvim çizelgesi silindi','Başarılı');
+             this.getDoctorSchedule(this.doctorId);
+
+        },
+
+        responseError => {
+
+          console.log(responseError);
+          this.toastrService.error(responseError.error.detail,'Hatalı İşlem');
+
+        }
+      )
+
+  }
+
+
+  goToRoute(doctorId:string,scheduleId:number)
+  {
+    this.router.navigate(['admin-edit-doctor-schedule', doctorId, scheduleId]);
+  }
+
+
+
 }

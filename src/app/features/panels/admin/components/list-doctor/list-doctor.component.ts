@@ -112,7 +112,7 @@ export class ListDoctorComponent implements OnInit {
 
   goToRoute(doctorId:string)
   {
-    this.router.navigate(['admindoctorschedule', doctorId]);
+    this.router.navigate(['admin-doctor-schedule', doctorId]);
   }
 
 }
