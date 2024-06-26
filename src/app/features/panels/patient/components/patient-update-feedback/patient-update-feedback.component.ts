@@ -1,33 +1,32 @@
 import { Component } from '@angular/core';
-import { DoctorSidebarComponent } from '../sidebar/doctorSidebar.component';
-import { CommonModule } from '@angular/common';
+import { Patient } from '../../../../Patients/patientModel';
+import { Feedback } from '../../../../feedbacks/models/feedback';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FeedbackService } from '../../../../feedbacks/services/feedback.service';
-import { DoctorService } from '../../../../doctors/services/doctor.service';
+import { PatientService } from '../../../../Patients/patient.service';
 import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Feedback } from '../../../../feedbacks/models/feedback';
-import { Doctor } from '../../../../doctors/models/doctor';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { PatientSidebarComponent } from '../sidebar/psidebar.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-doctor-update-feedback',
+  selector: 'app-patient-update-feedback',
   standalone: true,
-  imports: [DoctorSidebarComponent,CommonModule,ReactiveFormsModule],
-  templateUrl: './doctor-update-feedback.component.html',
-  styleUrl: './doctor-update-feedback.component.scss'
+  imports: [PatientSidebarComponent,ReactiveFormsModule,CommonModule],
+  templateUrl: './patient-update-feedback.component.html',
+  styleUrl: './patient-update-feedback.component.scss'
 })
-export class DoctorUpdateFeedbackComponent {
-  doctor: Doctor;
+export class PatientUpdateFeedbackComponent {
+  patient: Patient;
   userID: string;
   feedbacks: Feedback[] = [];
   pageIndex: number = 0;
-  pageSize: number = 50;
+  pageSize: number = 10;
   feedbackForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
     private feedbackService: FeedbackService,
-    private doctorService: DoctorService,
     private toastrService: ToastrService,
     private router: Router,
     private route: ActivatedRoute
@@ -41,7 +40,7 @@ export class DoctorUpdateFeedbackComponent {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      const feedbackId = params['id']; 
+      const feedbackId = params['feedbackId']; 
       this.feedbackService.getFeedbackById(feedbackId).subscribe((feedback: Feedback) => {
         this.feedbackForm.patchValue({
           id: feedback.id,
@@ -57,7 +56,7 @@ export class DoctorUpdateFeedbackComponent {
       this.feedbackService.updateFeedback(this.feedbackForm.value).subscribe(
         (response) => {
           this.toastrService.success('Geri bildirim başarıyla güncellendi');
-          this.router.navigate(['/doctor-feedbacks']);
+          this.router.navigate(['/patient-feedbacks']);
         },
         (error) => {
           this.toastrService.error('Geri bildirim eklenemedi');

@@ -53,6 +53,9 @@ import { PatientProfileComponent } from './features/panels/patient/components/Pa
 import { PatientListUpcomingAppointmentComponent } from './features/panels/patient/components/patient-list-upcoming-appointment/patient-list-upcoming-appointment.component';
 import { PatientListReportComponent } from './features/panels/patient/components/patient-list-report/patient-list-report.component';
 import { PatientReportDetailComponent } from './features/panels/patient/components/patient-report-detail/patient-report-detail.component';
+import { PatientListFeedbackComponent } from './features/panels/patient/components/patient-list-feedback/patient-list-feedback.component';
+import { PatientAddFeedbackComponent } from './features/panels/patient/components/patient-add-feedback/patient-add-feedback.component';
+import { PatientUpdateFeedbackComponent } from './features/panels/patient/components/patient-update-feedback/patient-update-feedback.component';
 
 export const routes: Routes = [
   {
@@ -262,6 +265,18 @@ export const routes: Routes = [
     path: 'patient-report-detail/:id',
     component: PatientReportDetailComponent,
   }, 
+  {
+    path: 'patient-feedbacks',
+    component:PatientListFeedbackComponent,
+  },
+  {
+    path: 'patient-add-feedback',
+    component:PatientAddFeedbackComponent,
+  },
+  {
+    path: 'patient-update-feedback/:feedbackId',
+    component:PatientUpdateFeedbackComponent,
+  },
   
   {
     path: 'admin-edit-doctor-schedule/:doctorId/:scheduleId',

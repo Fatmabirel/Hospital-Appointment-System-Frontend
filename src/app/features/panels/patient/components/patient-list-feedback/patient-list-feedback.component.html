@@ -1,0 +1,47 @@
+<div class="d-flex">
+    <app-patient-sidebar></app-patient-sidebar>
+  
+    <div class="flex-grow-1 p-3">
+      <h2
+        style="
+          color: #1565c0;
+          font-size: 28px;
+          text-align: center;
+          margin-bottom: 19px;
+        "
+      >
+        GERİ BİLDİRİMLERİM
+      </h2>
+      <div class="d-flex justify-content-end mb-3">
+        <button class="btn btn-success" [routerLink]="['/patient-add-feedback']">Geri Bildirim Ekle</button>
+      </div>
+  
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col" style="width: 50%">Mesaj</th>
+            <th scope="col" style="width: 25%">Tarih</th>
+            <th scope="col" style="width: 25%">İşlemler</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let feedback of feedbacks">
+            <td>{{ feedback.text }}</td>
+            <td>{{ feedback.createdDate | date : "yyyy-MM-dd HH:mm:ss"}}</td>
+            <td>
+              <button class="btn btn-sm btn-primary btn-space" [routerLink]="['/patient-update-feedback',feedback.id]">
+                <i class="fa fa-pencil"></i>
+              </button>
+              <button
+              class="btn btn-sm btn-danger"
+              (click)="confirmDelete(feedback.id)"
+            >
+              <i class="fa fa-trash"></i>
+            </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
