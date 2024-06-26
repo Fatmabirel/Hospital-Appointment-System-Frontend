@@ -68,10 +68,12 @@ add() {
         this.toastrService.success("Rapor eklendi");
       this.router.navigate(['/doctor-reports']); // Güncelleme sonrası yönlendirme
 
-        },  (error) => {
-      console.error('Ekleme sırasında hata oluştu:', error);
-      this.toastrService.warning("Bu randevuya ait bir rapor zaten var.");
-    }
+        },  responseError => {
+
+          console.log(responseError);
+          this.toastrService.error(responseError.error.detail,'Hatalı İşlem');
+
+        }
   );
 
   }

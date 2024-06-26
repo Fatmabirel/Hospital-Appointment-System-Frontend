@@ -88,7 +88,7 @@ export class AdminEditReportComponent implements OnInit{
           this.toastrService.success('Rapor başarıyla güncellendi');
           this.router.navigate(['admin-sidebar']);
           console.log('Rapor başarıyla güncellendi',response);
-        this.router.navigate(['/admin-reports']); // Güncelleme sonrası yönlendirme
+        this.router.navigate(['admin-reports']); // Güncelleme sonrası yönlendirme
       },  (error) => {
         console.error('Güncelleme sırasında hata oluştu:', error);
       }

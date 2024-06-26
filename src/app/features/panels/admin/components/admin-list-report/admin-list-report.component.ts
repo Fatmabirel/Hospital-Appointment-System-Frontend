@@ -5,19 +5,22 @@ import { Router } from '@angular/router';
 import { AdminSidebarComponent } from "../sidebar/adminSidebar.component";
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { PaginationComponent } from '../../../../../core/paging/components/pagination/pagination.component';
 
 @Component({
     selector: 'app-admin-list-report',
     standalone: true,
     templateUrl: './admin-list-report.component.html',
     styleUrl: './admin-list-report.component.scss',
-    imports: [AdminSidebarComponent,CommonModule]
+    imports: [AdminSidebarComponent,CommonModule,PaginationComponent]
 })
 export class AdminListReportComponent {
 
   reports: ResponseReport[]=[]
   pageIndex: number = 0;
-  pageSize: number = 100;
+  pageSize:number = 5;
+  totalPages: number = 0;
+  hasNext: boolean = false;
 
   constructor(private reportService:ReportService,
     private router: Router,private toastrService:ToastrService
@@ -28,11 +31,18 @@ export class AdminListReportComponent {
    this.getListReports();
   }
 
+  onPageChanged(newPageIndex: number) {
+    this.pageIndex = newPageIndex;
+    console.log(this.pageIndex);
+    this.getListReports();
+  }
+
   getListReports()
   {
      this.reportService.getList(this.pageIndex,this.pageSize).subscribe(response=>{
       this.reports=response.items;
-      console.log(response);
+      this.totalPages = response.pages;
+      this.hasNext = response.hasNext;
 
     })
   }

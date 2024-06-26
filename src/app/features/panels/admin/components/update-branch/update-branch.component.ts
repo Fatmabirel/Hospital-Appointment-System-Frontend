@@ -81,10 +81,11 @@ export class UpdateBranchComponent {
       this.branchService.updateBranch(updatedBranch).subscribe(
         (response) => {
           this.toastrService.success('Branş başarıyla güncellendi');
-          this.router.navigate(['/list-branch']);
+          this.router.navigate(['/admin-branches']);
         },
         (error) => {
-          console.error('Hasta güncellenemedi:', error);
+          this.toastrService.error('Aynı branchten var');
+          
         }
       );
     } else {
@@ -92,6 +93,4 @@ export class UpdateBranchComponent {
       this.toastrService.error('Lütfen eksik alanları doldurun');
     }
   }
-
-
- }
+}

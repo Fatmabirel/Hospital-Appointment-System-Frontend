@@ -79,7 +79,11 @@ export class AppointmentHistoryComponent implements OnInit {
 
   public viewReport(appointmentId: number) {
     if (this.hasReportMap[appointmentId]) {
-      this.router.navigate(['report-detail', appointmentId]);
+      this.reportService.getByAppointmentId(appointmentId).subscribe(response=>{
+        let reportId=response.id;
+        this.router.navigate(['report-detail', reportId]);
+      })
+
     } else {
       this.toastrService.warning("Rapor bulunmamaktadır.");
     }

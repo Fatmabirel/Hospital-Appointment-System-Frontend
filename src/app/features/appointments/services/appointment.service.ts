@@ -45,6 +45,22 @@ export class AppointmentService {
     );
   }
 
+  getPatientAppointments(
+    patientId: string,
+    pageIndex: number,
+    pageSize: number
+  ): Observable<ResponseModel<Appointment>> {
+    let params = new HttpParams()
+      .set('PageIndex', pageIndex.toString())
+      .set('PageSize', pageSize.toString())
+      .set('patientId', patientId);
+
+    return this.httpClient.get<ResponseModel<Appointment>>(
+      `${this.apiUrl}/getByPatientId`,
+      { params }
+    );
+  }
+
   getAppointmentById(appointmentId: number): Observable<Appointment> {
     return this.httpClient.get<Appointment>(`${this.apiUrl}/${appointmentId}`);
   }  

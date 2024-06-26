@@ -6,12 +6,18 @@ import { Appointment } from '../../../../../appointments/models/appointmentModel
 import { Doctor } from '../../../../../doctors/models/doctor';
 import { ResponseModel } from '../../../../../models/responseModel';
 import { AdminSidebarComponent } from '../../sidebar/adminSidebar.component';
-import { RouterModule } from '@angular/router';
+
+import { Router, RouterModule } from '@angular/router';
+import { ReportService } from '../../../../../reports/services/report.service';
+import { ToastrService } from 'ngx-toastr';
+import { error } from 'console';
+import { PaginationComponent } from '../../../../../../core/paging/components/pagination/pagination.component';
+
 
 @Component({
   selector: 'app-past-appointments',
   standalone: true,
-  imports: [CommonModule, AdminSidebarComponent, RouterModule],
+  imports: [CommonModule, AdminSidebarComponent, RouterModule,PaginationComponent],
   templateUrl: './past-appointments.component.html',
   styleUrls: ['./past-appointments.component.scss']
 })
@@ -20,21 +26,55 @@ export class PastAppointmentsComponent implements OnInit {
   /* doctors: { [key: string]: Doctor } = {}; */
   todayDate: Date = new Date();
   errorMessage: string;
+  pageIndex: number = 0;
 
-  constructor(private appointmentService: AppointmentService, private doctorService: DoctorService) {}
+  hasReportMap: { [key: number]: boolean } = {}; // hasReport bilgisini tutmak için nesne
+  pageSize:number = 5;
+  totalPages: number = 0;
+  hasNext: boolean = false;
+
+
+  constructor(private appointmentService: AppointmentService, private doctorService: DoctorService,
+    private reportService:ReportService,
+    private router: Router,
+     private toastrService :ToastrService) {}
 
   ngOnInit(): void {
     this.loadPastAppointments();
   }
+  onPageChanged(newPageIndex: number) {
+    this.pageIndex = newPageIndex;
+    console.log(this.pageIndex);
+    this.loadPastAppointments();
+  }
 
   loadPastAppointments(): void {
-    this.appointmentService.getAllAppointments(0, 100).subscribe(
+
+    this.appointmentService.getAllAppointments(this.pageIndex,this.pageSize).subscribe(
       (response: ResponseModel<Appointment>) => {
+        this.totalPages = response.pages;
+        this.hasNext = response.hasNext;
         this.pastAppointments = response.items.filter(appointment => {
           const appointmentDate = new Date(appointment.date);
           return appointmentDate < this.todayDate ||
             (appointmentDate.getTime() === this.todayDate.getTime() && appointment.time < this.todayDate.toTimeString().slice(0, 5));
         });
+           // hasReport bilgisini her randevu için kontrol et ve ata
+           const appointmentObservables = this.pastAppointments.map(appointment => {
+            return this.reportService.getByAppointmentId(appointment.id).toPromise().then(
+              response => {
+                this.hasReportMap[appointment.id] = true;
+              },
+              error => {
+                this.hasReportMap[appointment.id] = false;
+              }
+            );
+          });
+
+          // Tüm observables tamamlandığında appointments listesini güncelle
+          Promise.all(appointmentObservables).then(() => {
+            this.pastAppointments = this.pastAppointments;
+          });
       },
       (error) => {
         console.error('Randevular alınamadı:', error);
@@ -60,5 +100,42 @@ export class PastAppointmentsComponent implements OnInit {
       }
     );
   }
+
+
+//randevuya ait raporu görüntüle
+  // public viewReport(appointmentId: number) {
+
+  //     this.reportService.getByAppointmentId(appointmentId).subscribe(response=>{
+  //       let reportId=response.id;
+
+  //     },responseError=>{
+  //       this.toastrService.error("Randevuya ait bir rapor bulunmamaktadır");
+  //       console.log(responseError.error)
+  //     });
+
+  //   }
+
+
+
+    public viewReport(appointmentId: number) {
+      if (this.hasReportMap[appointmentId]) {
+        this.reportService.getByAppointmentId(appointmentId).subscribe(response=>{
+          let reportId=response.id;
+          this.router.navigate(['admin-report-detail', reportId]);
+        })
+
+      } else {
+        this.toastrService.warning("Rapor bulunmamaktadır.");
+      }
+    }
+
+    public addReport(appointmentId: number) {
+      if (this.hasReportMap[appointmentId]) {
+        this.toastrService.warning("Zaten bir raporunuz var");
+      } else {
+        this.router.navigate(['/admin-add-report', appointmentId]);
+      }
+    }
 }
+
 

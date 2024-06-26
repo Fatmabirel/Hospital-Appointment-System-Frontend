@@ -6,22 +6,30 @@ import { FeedbackService } from '../../../../feedbacks/services/feedback.service
 import { ConfirmDialogComponent } from '../../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
+import { PaginationComponent } from '../../../../../core/paging/components/pagination/pagination.component';
 
 @Component({
   selector: 'app-list-feedback',
   standalone: true,
-  imports: [AdminSidebarComponent, CommonModule,RouterModule],
+  imports: [AdminSidebarComponent, CommonModule,RouterModule,PaginationComponent],
   templateUrl: './list-feedback.component.html',
   styleUrl: './list-feedback.component.scss',
 })
 export class ListFeedbackComponent {
   feedbacks: Feedback[] = [];
   pageIndex: number = 0;
-  pageSize: number = 12;
+  pageSize:number = 5;
+  totalPages: number = 0;
+  hasNext: boolean = false;
 
   constructor(private feedbackService: FeedbackService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
+    this.getFeedbacks();
+  }
+  onPageChanged(newPageIndex: number) {
+    this.pageIndex = newPageIndex;
+    console.log(this.pageIndex);
     this.getFeedbacks();
   }
 
@@ -30,6 +38,8 @@ export class ListFeedbackComponent {
       .getFeedbacks(this.pageIndex, this.pageSize)
       .subscribe((response) => {
         this.feedbacks = response.items;
+        this.totalPages = response.pages;
+        this.hasNext = response.hasNext;
       });
   }
 

@@ -7,24 +7,24 @@ import { RouterModule } from '@angular/router';
 import { CapitalizeFirstPipe } from '../../../../pipe/capitalize-first.pipe';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { PaginationComponent } from '../../../../../core/paging/components/pagination/pagination.component';
 
 @Component({
   selector: 'app-list-patient',
   standalone: true,
   imports: [
-    CommonModule,RouterModule,AdminSidebarComponent,CapitalizeFirstPipe
+    CommonModule,RouterModule,AdminSidebarComponent,CapitalizeFirstPipe,PaginationComponent
   ],
   templateUrl: './list-Patient.component.html',
   styleUrl: './list-Patient.component.scss'
  
 })
 export class ListPatientComponent implements OnInit {
-
-
   patients: Patient[] = [];
   pageIndex: number = 0;
-  pageSize: number = 12;
-  isLoading: boolean = true;
+  pageSize:number = 5;
+  totalPages: number = 0;
+  hasNext: boolean = false;
 
   constructor(private patientService:PatientService, private dialog: MatDialog) {}
 
@@ -32,9 +32,17 @@ export class ListPatientComponent implements OnInit {
     this.getPatients();
   }
 
+  onPageChanged(newPageIndex: number) {
+    this.pageIndex = newPageIndex;
+    console.log(this.pageIndex);
+    this.getPatients();
+  }
+
   getPatients() {
     this.patientService.getPatients(this.pageIndex, this.pageSize).subscribe((response) => {
       this.patients = response.items;
+      this.totalPages = response.pages;
+      this.hasNext = response.hasNext;
     });
   }
 
