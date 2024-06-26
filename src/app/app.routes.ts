@@ -233,12 +233,13 @@ export const routes: Routes = [
     component: UpcomingAppointmentsComponent,
   },
 
-    path: 'admin-doctor-schedule/:doctorId',
-    component: AdminListDrscheduleComponent,
-
+    {path: 'admin-doctor-schedule/:doctorId',
+    component: AdminListDrscheduleComponent},
+   {
     path: 'doctor-feedbacks',
     component:DoctorListFeedbackComponent,
   },
+
   {
     path: 'patient-past-appointments',
     component: PatientListPastAppointmentComponent,
