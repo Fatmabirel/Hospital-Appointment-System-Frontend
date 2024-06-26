@@ -49,3 +49,27 @@
     font-size: 3.5rem;
   }
 }
+.patient-info {
+  background-color: #e9ecef;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.welcome-message {
+  font-size: 18px;
+  color: #353c42; /* Hoş geldiniz mesajı için farklı bir renk */
+  font-weight: bold;
+  margin: 3px 0;
+  text-align: center;
+}
+
+.patient-name {
+  font-size: 25px;
+  color: #0056b3; /* Primary renk */
+  font-weight: bold;
+  text-transform: uppercase; /* Tüm harfler büyük */
+  margin: 0;
+  text-align: center;
+}
+
