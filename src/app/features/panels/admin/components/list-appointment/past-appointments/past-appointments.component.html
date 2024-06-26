@@ -3,7 +3,7 @@
     <div class="flex-grow-1 p-3">
       <h2 style="color: #1565c0; font-size: 28px; text-align: center; margin-bottom: 19px;">GEÇMİŞ RANDEVULAR</h2>
       <div class="d-flex justify-content-end mb-3">
-        <button class="btn btn-success" [routerLink]="['/admin-add-appointment']">Randevu Oluştur</button>
+        <button class="btn btn-success" [routerLink]="['/add-appointment']">Randevu Oluştur</button>
       </div>
       <table class="table table-striped">
         <thead class="thead-primary">
@@ -33,9 +33,9 @@
             </td>
             <td class="text-center">
                 <div class="btn-group" role="group">
-                  <button class="btn btn-sm btn-primary mr-2" [routerLink]="['/add-appointment', appointment.id]">
+                  <!-- <button class="btn btn-sm btn-primary mr-2" [routerLink]="['/update-appointment', appointment.id]">
                     <i class="fa fa-pencil"></i>
-                  </button>
+                  </button> -->
                   <button class="btn btn-sm btn-danger" (click)="confirmDelete(appointment.id)">
                     <i class="fa fa-trash"></i>
                   </button>

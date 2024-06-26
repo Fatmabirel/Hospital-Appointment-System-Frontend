@@ -42,14 +42,15 @@ export class UpdateAppointmentComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private toastrService: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
     this.loadAppointment();
     this.loadBranches();
     this.loadDoctors();
-    this.loadPatients(); // Hastaları yüklemek için eklenmiştir
+    this.loadPatients();
+    this.setMinDateAndTime();
   }
 
   initForm(): void {
@@ -181,11 +182,30 @@ export class UpdateAppointmentComponent implements OnInit {
     return `${hours}:${minutes}:${seconds}`;
   }
 
+  setMinDateAndTime(): void {
+    const today = new Date();
+    const minDate = today.toISOString().split('T')[0];
+    const hours = today.getHours().toString().padStart(2, '0');
+    const minutes = today.getMinutes().toString().padStart(2, '0');
+    const minTime = `${hours}:${minutes}`;
+
+    (document.getElementById('date') as HTMLInputElement).setAttribute('min', minDate);
+    (document.getElementById('time') as HTMLInputElement).setAttribute('min', minTime);
+  }
+
   updateAppointment(): void {
     if (this.appointmentForm.valid) {
+      const appointmentData = this.appointmentForm.value;
+      const isValid = this.validateDateTime(appointmentData.date, appointmentData.time);
+
+      if (!isValid) {
+        this.toastrService.error('Geçmiş tarih veya saate randevu oluşturulamaz.');
+        return;
+      }
+
       const updatedAppointment: Appointment = {
-        ...this.appointmentForm.value,
-        time: this.formatTime(this.appointmentForm.value.time)
+        ...appointmentData,
+        time: this.formatTime(appointmentData.time)
       };
 
       this.appointmentService.updateAppointment(updatedAppointment.id, updatedAppointment).subscribe(
@@ -202,4 +222,11 @@ export class UpdateAppointmentComponent implements OnInit {
       this.toastrService.error('Lütfen eksik alanları doldurun');
     }
   }
+
+  validateDateTime(date: string, time: string): boolean {
+    const selectedDate = new Date(`${date}T${time}`);
+    const currentDate = new Date();
+    return selectedDate >= currentDate;
+  }
+
 }
