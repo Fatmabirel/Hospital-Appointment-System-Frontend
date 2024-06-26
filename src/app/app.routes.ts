@@ -45,6 +45,8 @@ import { AdminProfileComponent } from './features/panels/admin/components/admin-
 import { FaqComponent } from './features/faq/faq.component';
 
 import { DoctorListFeedbackComponent } from './features/panels/doctor/components/doctor-list-feedback/doctor-list-feedback.component';
+import { PatientListPastAppointmentComponent } from './features/panels/patient/components/patient-list-past-appointment/patient-list-past-appointment.component';
+
 import { PatientProfileComponent } from './features/panels/patient/components/Patient-profile/Patient-profile.component';
 
 export const routes: Routes = [
@@ -227,6 +229,10 @@ export const routes: Routes = [
   {
     path: 'doctor-feedbacks',
     component:DoctorListFeedbackComponent,
+  },
+  {
+    path: 'patient-past-appointments',
+    component: PatientListPastAppointmentComponent,
   },
   {
     path: 'patient-profile',
