@@ -33,6 +33,8 @@ import { ListPatientComponent } from './features/panels/admin/components/list-pa
 import { AddPatientComponent } from './features/panels/admin/components/add-Patient/add-Patient.component';
 import { UpdatePatientComponent } from './features/panels/admin/components/update-patient/update-patient.component';
 import { UpdateFeedbackComponent } from './features/panels/admin/components/update-feedback/update-feedback.component';
+import { UpdateAppointmentComponent } from './features/panels/admin/components/update-appointment/update-appointment.component';
+import { AddAppointmentComponent } from './features/panels/admin/components/add-appointment/add-appointment.component';
 
 export const routes: Routes = [
   {
@@ -156,4 +158,14 @@ export const routes: Routes = [
     path: 'upcoming-appointments',
     component: UpcomingAppointmentsComponent,
   },
+
+  { path: 'update-appointment/:id',
+    component: UpdateAppointmentComponent, 
+  },
+
+  {
+    path: 'add-appointment',
+    component: AddAppointmentComponent,
+  }
+    
 ];

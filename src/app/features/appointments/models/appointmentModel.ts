@@ -3,10 +3,11 @@ export interface Appointment {
     date: Date;
     time: string;
     status: boolean;
-    doctorId: string;
+    doctorID: string;
     doctorFirstName: string;
     doctorLastName: string;
     doctorTitle: string;
+    branchID: string;
     branchName: string;
     patientID: string;
     patientFirstName: string;
