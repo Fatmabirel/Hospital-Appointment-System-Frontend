@@ -6,15 +6,18 @@ import { Appointment } from '../../../../../appointments/models/appointmentModel
 import { Doctor } from '../../../../../doctors/models/doctor';
 import { ResponseModel } from '../../../../../models/responseModel';
 import { AdminSidebarComponent } from '../../sidebar/adminSidebar.component';
+
 import { Router, RouterModule } from '@angular/router';
 import { ReportService } from '../../../../../reports/services/report.service';
 import { ToastrService } from 'ngx-toastr';
 import { error } from 'console';
+import { PaginationComponent } from '../../../../../../core/paging/components/pagination/pagination.component';
+
 
 @Component({
   selector: 'app-past-appointments',
   standalone: true,
-  imports: [CommonModule, AdminSidebarComponent, RouterModule],
+  imports: [CommonModule, AdminSidebarComponent, RouterModule,PaginationComponent],
   templateUrl: './past-appointments.component.html',
   styleUrls: ['./past-appointments.component.scss']
 })
@@ -24,8 +27,12 @@ export class PastAppointmentsComponent implements OnInit {
   todayDate: Date = new Date();
   errorMessage: string;
   pageIndex: number = 0;
-  pageSize: number = 100;
+
   hasReportMap: { [key: number]: boolean } = {}; // hasReport bilgisini tutmak için nesne
+  pageSize:number = 5;
+  totalPages: number = 0;
+  hasNext: boolean = false;
+
 
   constructor(private appointmentService: AppointmentService, private doctorService: DoctorService,
     private reportService:ReportService,
@@ -35,10 +42,18 @@ export class PastAppointmentsComponent implements OnInit {
   ngOnInit(): void {
     this.loadPastAppointments();
   }
+  onPageChanged(newPageIndex: number) {
+    this.pageIndex = newPageIndex;
+    console.log(this.pageIndex);
+    this.loadPastAppointments();
+  }
 
   loadPastAppointments(): void {
-    this.appointmentService.getAllAppointments(this.pageIndex, this.pageSize).subscribe(
+
+    this.appointmentService.getAllAppointments(this.pageIndex,this.pageSize).subscribe(
       (response: ResponseModel<Appointment>) => {
+        this.totalPages = response.pages;
+        this.hasNext = response.hasNext;
         this.pastAppointments = response.items.filter(appointment => {
           const appointmentDate = new Date(appointment.date);
           return appointmentDate < this.todayDate ||

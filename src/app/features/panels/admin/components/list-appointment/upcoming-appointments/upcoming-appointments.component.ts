@@ -8,18 +8,21 @@ import { Doctor } from '../../../../../doctors/models/doctor';
 import { ResponseModel } from '../../../../../models/responseModel';
 import { AdminSidebarComponent } from '../../sidebar/adminSidebar.component';
 import { response } from 'express';
+import { PaginationComponent } from '../../../../../../core/paging/components/pagination/pagination.component';
 
 @Component({
   selector: 'app-upcoming-appointments',
   standalone: true,
-  imports: [CommonModule, AdminSidebarComponent,RouterModule],
+  imports: [CommonModule, AdminSidebarComponent,RouterModule,PaginationComponent],
   templateUrl: './upcoming-appointments.component.html',
   styleUrls: ['./upcoming-appointments.component.scss']
 })
 export class UpcomingAppointmentsComponent /* implements OnInit */ {
   upcomingAppointments: Appointment[] = [];
   pageIndex: number = 0;
-  pageSize: number = 10;
+  pageSize:number = 5;
+  totalPages: number = 0;
+  hasNext: boolean = false;
   isLoading: boolean = true;
   todayDate: Date = new Date();
   errorMessage: string;
@@ -29,12 +32,17 @@ export class UpcomingAppointmentsComponent /* implements OnInit */ {
   ngOnInit(): void {
     this.loadUpcomingAppointments();
   }
+  onPageChanged(newPageIndex: number) {
+    this.pageIndex = newPageIndex;
+    console.log(this.pageIndex);
+    this.loadUpcomingAppointments();
+  }
 
-  loadUpcomingAppointments(): void {
-
-    
-    this.appointmentService.getAllAppointments(0, 100).subscribe(
+  loadUpcomingAppointments(): void {    
+    this.appointmentService.getAllAppointments(this.pageIndex,this.pageSize).subscribe(
       (response: ResponseModel<Appointment>) => {
+        this.totalPages = response.pages;
+        this.hasNext = response.hasNext;
         this.upcomingAppointments = response.items.filter(appointment => {
           const appointmentDate = new Date(appointment.date);
           return appointmentDate > this.todayDate ||
