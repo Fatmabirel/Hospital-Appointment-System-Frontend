@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { ConfirmDialogComponent } from '../../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { PaginationComponent } from '../../../../../core/paging/components/pagination/pagination.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-list-branch',
@@ -28,7 +29,9 @@ export class ListBranchComponent implements OnInit {
   totalPages: number = 0;
   hasNext: boolean = false;
 
-  constructor(private branchService: BranchService, private dialog: MatDialog) {}
+  constructor(private branchService: BranchService,
+     private dialog: MatDialog,
+     private toastrService:ToastrService,) {}
 
   ngOnInit(): void {
     this.getBranches();
@@ -54,19 +57,22 @@ export class ListBranchComponent implements OnInit {
     );
   }
 
-  deleteBranch(branchId: string) {
-    this.branchService.deleteBranch(branchId).subscribe(
+  deleteBranch(branchId: number) {
+    this.branchService.deleteBranch(branchId,this.pageIndex,100).subscribe(
       (response) => {
         console.log('Branş başarıyla silindi:', response);
+        this.toastrService.success('Branş başarıyla silindi:');
+
         this.getBranches();
       },
       (error) => {
         console.error('Branş silinemedi:', error);
+        this.toastrService.error('Branş silinemedi:');
       }
     );
   }
 
-  confirmDelete(branchId: string) {
+  confirmDelete(branchId: number) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '400px',
       data: { title: 'ONAY', message: 'Bu branşı silmek istediğinizden emin misiniz?' },

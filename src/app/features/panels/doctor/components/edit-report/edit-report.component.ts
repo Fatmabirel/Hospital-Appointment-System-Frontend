@@ -91,8 +91,11 @@ export class EditReportComponent implements OnInit{
           this.router.navigate(['doctor-sidebar']);
           console.log('Rapor başarıyla güncellendi',response);
         // this.router.navigate(['/doctor-reports']); // Güncelleme sonrası yönlendirme
-      },  (error) => {
-        console.error('Güncelleme sırasında hata oluştu:', error);
+      },   responseError => {
+
+        console.log(responseError);
+        this.toastrService.error(responseError.error.detail,'Hatalı İşlem');
+
       }
     );
 

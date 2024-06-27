@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
            else if(userRoles.includes("Doctors.Update"))
           this.router.navigate(['doctor-sidebar'])
           else if(userRoles.includes("Patients.Update"))
-            this.router.navigate(['/'])
+            this.router.navigate(['patient-sidebar'])
         },
         (responseError) => {
           this.toastrService.error('Giriş başarısız. Lütfen bilgilerinizi kontrol edin.', 'Hata');

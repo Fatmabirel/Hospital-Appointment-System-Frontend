@@ -41,7 +41,7 @@ export class DoctorUpdateFeedbackComponent {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      const feedbackId = params['id']; // get id params from route url
+      const feedbackId = params['id']; 
       this.feedbackService.getFeedbackById(feedbackId).subscribe((feedback: Feedback) => {
         this.feedbackForm.patchValue({
           id: feedback.id,
@@ -60,11 +60,10 @@ export class DoctorUpdateFeedbackComponent {
           this.router.navigate(['/doctor-feedbacks']);
         },
         (error) => {
-          this.toastrService.error('Doktor eklenemedi');
+          this.toastrService.error('Geri bildirim eklenemedi');
         }
       );
     } else {
-      console.error('Error adding doctor:', this.feedbackForm.value);
       this.toastrService.error('Eksik alanlarını doldurunuz.');
     }
   }
