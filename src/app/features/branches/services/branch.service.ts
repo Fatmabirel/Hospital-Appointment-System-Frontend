@@ -21,6 +21,10 @@ export class BranchService {
     return this.httpClient.get<ResponseModel<Branch>>(this.apiUrl,{params});
   }
 
+  getAllBranches(): Observable<Branch[]> {
+    return this.httpClient.get<Branch[]>(`${this.apiUrl}/getall`);
+  }
+
   addbranch(branch: any): Observable<Branch> {
     return this.httpClient.post<any>(this.apiUrl, branch);
   }
