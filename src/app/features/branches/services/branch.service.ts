@@ -29,8 +29,11 @@ export class BranchService {
     return this.httpClient.put<ResponseModel<Branch>>(this.apiUrl, branch);
   }
   
-  deleteBranch(id:string): Observable<ResponseModel<any>> {
-    return this.httpClient.delete<ResponseModel<any>>(`${this.apiUrl}/${id}`);
+  deleteBranch(id:number,pageIndex:number,pageSize:number): Observable<ResponseModel<any>> {
+    let params = new HttpParams()
+    .set('PageIndex', pageIndex.toString())
+    .set('PageSize', pageSize.toString());
+    return this.httpClient.delete<ResponseModel<any>>(`${this.apiUrl}/${id}`,{params});
   }
 
   getByBranchId(
