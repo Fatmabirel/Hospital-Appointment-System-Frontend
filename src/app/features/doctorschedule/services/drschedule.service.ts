@@ -8,6 +8,7 @@ import { jwtDecode } from 'jwt-decode';
 import { DoctorSchedule } from '../models/doctorschedule';
 import { ResponseModel } from '../../models/responseModel';
 import { UpdateDoctorSchedule } from '../models/update-doctor-schedule';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -20,6 +21,7 @@ export class DrscheduleService {
   {
      return this.httpClient.post<DoctorSchedule>(this.apiUrl,CreateDrScheduleRequest);
   }
+
 
   //o doktora ait takvimi getir
 
@@ -34,6 +36,8 @@ export class DrscheduleService {
    return this.httpClient.get<ResponseModel<DoctorSchedule>>(newPath,{params});
   }
 
+
+
   //scheduleid ye göre sil
   deleteDoctorSchedule(id:number)
   {
@@ -46,10 +50,18 @@ export class DrscheduleService {
     return this.httpClient.put<UpdateDoctorSchedule>(this.apiUrl,schedule);
   }
 
-
+    //bu takvimin kendi id sine göre getir
   getById(id:number):Observable<UpdateDoctorSchedule>
   {
       let newPath=this.apiUrl+'/'+id;
       return this.httpClient.get<UpdateDoctorSchedule>(newPath);
   }
-}
+
+
+
+
+
+
+
+  }
+
