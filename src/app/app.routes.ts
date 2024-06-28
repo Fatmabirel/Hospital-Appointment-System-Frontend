@@ -61,6 +61,10 @@ import { PatientAddFeedbackComponent } from './features/panels/patient/component
 import { PatientUpdateFeedbackComponent } from './features/panels/patient/components/patient-update-feedback/patient-update-feedback.component';
 import { UpdateAppointmentComponent } from './features/panels/admin/components/update-appointment/update-appointment.component';
 import { AddAppointmentComponent } from './features/panels/admin/components/add-appointment/add-appointment.component';
+import { VisitorCompanionPolicyComponent } from './shared/components/footer-content/visitor-companion-policy/visitor-companion-policy/visitor-companion-policy.component';
+import { QualityPolicyComponent } from './shared/components/footer-content/quality-policy/quality-policy/quality-policy.component';
+import { KvkkComponent } from './shared/components/footer-content/kvkk/kvkk/kvkk.component';
+import { CookiePolicyComponent } from './shared/components/footer-content/cookie-policy/cookie-policy/cookie-policy.component';
 
 
 export const routes: Routes = [
@@ -310,7 +314,26 @@ export const routes: Routes = [
   {
     path: 'add-appointment',
     component: AddAppointmentComponent,
-  }
+  },
+
+  {
+    path: 'visitor-companion-policy',
+    component: VisitorCompanionPolicyComponent,
+  },
 
 
+  {
+    path: 'quality-policy',
+    component: QualityPolicyComponent,
+  },
+
+  {
+    path: 'kvkk',
+    component: KvkkComponent,
+  },
+
+  {
+    path: 'cookie-policy',
+    component: CookiePolicyComponent,
+  },
 ];
