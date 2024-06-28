@@ -23,7 +23,7 @@ export class DoctorListComponent implements OnInit {
   pageIndex: number = 0;
   pageSize: number = 10;
   isLoading: boolean = true;
-  selectedBranch: any | null = null;
+  selectedBranch: string = '';
 
   constructor(private doctorService: DoctorService,private branchService:BranchService) {}
 
