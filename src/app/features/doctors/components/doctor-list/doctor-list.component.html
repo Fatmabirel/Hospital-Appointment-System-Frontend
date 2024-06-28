@@ -2,12 +2,14 @@
   <div class="row">
     <h2 class="title">Doktorlarımız</h2>
     <div class="col-md-12 d-flex justify-content-between align-items-center mb-3">
-      <button class="btn btn-primary">Branş:</button>
-      <div class="form-group mb-0">
-        <select class="form-control" id="branchFilter" [(ngModel)]="selectedBranch" (change)="onBranchFilterChange($event)">
-          <option value="">Tüm Branşlar</option>
-          <option *ngFor="let branch of branches" [value]="branch.name">{{ branch.name }}</option>
-        </select>
+      <div class="d-flex align-items-center">
+        <button class="btn btn-primary mr-2">Branş:</button>
+        <div class="form-group mb-0 d-flex align-items-center"> <!-- d-flex ve align-items-center ekledik -->
+          <select class="form-control mb-0" id="branchFilter" [(ngModel)]="selectedBranch" (change)="onBranchFilterChange($event)">
+            <option value="" selected>Tüm Branşlar</option>
+            <option *ngFor="let branch of branches" [value]="branch.name">{{ branch.name }}</option>
+          </select>
+        </div>
       </div>
     </div>
     <div *ngFor="let doctor of doctors | filterDoctorBranch:selectedBranch" class="col-md-4">
