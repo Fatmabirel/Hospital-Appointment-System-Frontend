@@ -67,6 +67,7 @@ import { KvkkComponent } from './shared/components/footer-content/kvkk/kvkk/kvkk
 import { CookiePolicyComponent } from './shared/components/footer-content/cookie-policy/cookie-policy/cookie-policy.component';
 
 
+
 export const routes: Routes = [
   {
     path: '', // Route belirtilen path ile eşleştiğinde
