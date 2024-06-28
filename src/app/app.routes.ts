@@ -299,11 +299,12 @@ export const routes: Routes = [
 
   {
     path:'create-appointment',
-    component:CreateAppointmentComponent
+    component:CreateAppointmentComponent,
 
-  }
+  },
 
-  { path: 'update-appointment/:id',
+  { 
+    path: 'update-appointment/:id',
     component: UpdateAppointmentComponent, 
   },
 
