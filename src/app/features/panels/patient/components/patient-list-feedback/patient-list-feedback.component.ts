@@ -8,6 +8,7 @@ import { ConfirmDialogComponent } from '../../../../../shared/components/confirm
 import { CommonModule } from '@angular/common';
 import { PatientSidebarComponent } from '../sidebar/psidebar.component';
 import { RouterModule } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-patient-list-feedback',
@@ -25,6 +26,7 @@ export class PatientListFeedbackComponent {
 
   constructor(
     private feedbackService: FeedbackService,
+    private toastrService: ToastrService,
     private patientService: PatientService,
     private dialog: MatDialog
   ) {}
@@ -61,11 +63,11 @@ export class PatientListFeedbackComponent {
   deleteFeedback(feedbackId: number) {
     this.feedbackService.deleteFeedback(feedbackId).subscribe(
       (response) => {
-        console.log('Geri bildirim başarıyla silindi:', response);
+       this.toastrService.success("Geri bildirim başarıyla silindi");
         this.getFeedbackByUserId(this.userID);
       },
       (error) => {
-        console.error('Geri bildirim silinemedi:', error);
+        this.toastrService.error("Geri bildirim silinemedi");
       }
     );
   }
