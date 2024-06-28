@@ -27,6 +27,17 @@ export class ReportService {
    return this.httpClient.get<ResponseModel<ResponseReport>>(newPath,{params});
   }
 
+  getPatientReports(pageIndex:number,pageSize:number,patientId:string):Observable<ResponseModel<ResponseReport>>
+  {
+    let newPath=this.apiUrl+'getByPatientId'
+    let params = new HttpParams()
+   .set('PageIndex', pageIndex.toString())
+   .set('PageSize', pageSize.toString())
+   .set('patientId',patientId);
+
+   return this.httpClient.get<ResponseModel<ResponseReport>>(newPath,{params});
+  }
+  
   getReportDetails(reportId: number): Observable<ResponseReport> {
     const url = `${this.apiUrl}${reportId}`; // /Reports/1 gibi URL oluşturur
 

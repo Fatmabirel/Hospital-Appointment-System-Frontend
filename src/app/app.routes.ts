@@ -51,7 +51,17 @@ import { PatientListPastAppointmentComponent } from './features/panels/patient/c
 
 import { PatientProfileComponent } from './features/panels/patient/components/Patient-profile/Patient-profile.component';
 import { PatientListUpcomingAppointmentComponent } from './features/panels/patient/components/patient-list-upcoming-appointment/patient-list-upcoming-appointment.component';
+
 import { CreateAppointmentComponent } from './features/panels/patient/components/create-appointment/create-appointment.component';
+
+import { PatientListReportComponent } from './features/panels/patient/components/patient-list-report/patient-list-report.component';
+import { PatientReportDetailComponent } from './features/panels/patient/components/patient-report-detail/patient-report-detail.component';
+import { PatientListFeedbackComponent } from './features/panels/patient/components/patient-list-feedback/patient-list-feedback.component';
+import { PatientAddFeedbackComponent } from './features/panels/patient/components/patient-add-feedback/patient-add-feedback.component';
+import { PatientUpdateFeedbackComponent } from './features/panels/patient/components/patient-update-feedback/patient-update-feedback.component';
+import { UpdateAppointmentComponent } from './features/panels/admin/components/update-appointment/update-appointment.component';
+import { AddAppointmentComponent } from './features/panels/admin/components/add-appointment/add-appointment.component';
+
 
 export const routes: Routes = [
   {
@@ -233,14 +243,21 @@ export const routes: Routes = [
     path: 'upcoming-appointments',
     component: UpcomingAppointmentsComponent,
   },
+
    {
     path: 'admin-doctor-schedule/:doctorId',
     component: AdminListDrscheduleComponent,
    },
+
+
+    {path: 'admin-doctor-schedule/:doctorId',
+    component: AdminListDrscheduleComponent},
+
    {
     path: 'doctor-feedbacks',
     component:DoctorListFeedbackComponent,
   },
+
   {
     path: 'patient-past-appointments',
     component: PatientListPastAppointmentComponent,
@@ -252,16 +269,48 @@ export const routes: Routes = [
   {
     path: 'patient-profile',
     component:PatientProfileComponent,
-
   },
+  {
+    path: 'patient-reports',
+    component:PatientListReportComponent,
+  },
+  {
+    path: 'patient-report-detail/:id',
+    component: PatientReportDetailComponent,
+  }, 
+  {
+    path: 'patient-feedbacks',
+    component:PatientListFeedbackComponent,
+  },
+  {
+    path: 'patient-add-feedback',
+    component:PatientAddFeedbackComponent,
+  },
+  {
+    path: 'patient-update-feedback/:feedbackId',
+    component:PatientUpdateFeedbackComponent,
+  },
+  
   {
     path: 'admin-edit-doctor-schedule/:doctorId/:scheduleId',
     component: AdminUpdateDrscheduleComponent,
   },
+
 
   {
     path:'create-appointment',
     component:CreateAppointmentComponent
 
   }
+
+  { path: 'update-appointment/:id',
+    component: UpdateAppointmentComponent, 
+  },
+
+  {
+    path: 'add-appointment',
+    component: AddAppointmentComponent,
+  }
+    
+
 ];

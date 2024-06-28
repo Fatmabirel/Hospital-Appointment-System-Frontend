@@ -40,6 +40,10 @@ export class DoctorService {
     return this.httpClient.get<Doctor>(`${this.apiUrl}/${id}`);
   }
 
+  getDoctorsByBranch(branchId: string): Observable<Doctor[]> {
+    return this.httpClient.get<Doctor[]>(`${this.apiUrl}/branch/${branchId}`);
+  }
+
   addDoctor(doctor: any): Observable<Doctor> {
     return this.httpClient.post<any>(this.registerDoctorUrl, doctor);
   }

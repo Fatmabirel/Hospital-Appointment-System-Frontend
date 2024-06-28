@@ -13,6 +13,7 @@ export class PatientService {
 
   baseApiUrl = 'http://localhost:60805/api';
   apiUrl = 'http://localhost:60805/api/Patients';
+  registerPatientUrl = 'http://localhost:60805/api/Auth/Register/Patient';
   constructor(private httpClient: HttpClient,private tokenService:TokenService) {}
 
   getByPatientId(
@@ -38,7 +39,7 @@ export class PatientService {
   }
 
   addPatient(patient: any): Observable<Patient> {
-    return this.httpClient.post<any>(this.apiUrl, patient);
+    return this.httpClient.post<any>(this.registerPatientUrl, patient);
   }
 
   updatePatient(patient: Patient): Observable<ResponseModel<Patient>> {

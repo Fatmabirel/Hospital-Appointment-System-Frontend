@@ -15,7 +15,7 @@ export class AppointmentService {
 
   apiUrl = 'http://localhost:60805/api/Appointments';
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
 
   getAllAppointments(
@@ -64,6 +64,11 @@ export class AppointmentService {
     );
   }
 
+  getAppointmentById(appointmentId: number): Observable<Appointment> {
+    return this.httpClient.get<Appointment>(`${this.apiUrl}/${appointmentId}`);
+  }  
+
+
   getAppointmentId(
     pageIndex: number,
     pageSize: number
@@ -78,6 +83,7 @@ export class AppointmentService {
   deleteAppointment(appointmentId: number): Observable<void> {
     return this.httpClient.delete<void>(`${this.apiUrl}/${appointmentId}`);
   }
+
 
 
 
@@ -103,4 +109,27 @@ export class AppointmentService {
     }
 
 
+
+  /* addAppointment(appointment: any): Observable<Appointment> {
+    return this.httpClient.post<any>(this.apiUrl, appointment);
+  }
+
+  updateAppointment(appointment: Appointment): Observable<ResponseModel<Appointment>> {
+    return this.httpClient.put<ResponseModel<Appointment>>(this.apiUrl, appointment);
+  } */
+
+
+  addAppointment(appointment: Appointment): Observable<Appointment> {
+    return this.httpClient.post<Appointment>(this.apiUrl, appointment);
+  }
+
+/*   updateAppointment(appointmentId: number, appointment: Appointment): Observable<Appointment> {
+    return this.httpClient.put<Appointment>(`${this.apiUrl}/${appointmentId}`, appointment);
+  } */
+
+  updateAppointment(appointmentId: number, appointment: Appointment): Observable<ResponseModel<Appointment>> {
+    return this.httpClient.put<ResponseModel<Appointment>>(`${this.apiUrl}/${appointmentId}`, appointment);
+  }
+    
+  
 }
