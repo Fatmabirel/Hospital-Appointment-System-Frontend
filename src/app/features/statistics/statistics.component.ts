@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { Chart, ChartConfiguration, ChartType, registerables } from 'chart.js';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Chart, ChartType, registerables } from 'chart.js';
+import { forkJoin } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { DoctorService } from '../doctors/services/doctor.service';
 import { PatientService } from '../Patients/patient.service';
 import { AppointmentService } from '../appointments/services/appointment.service';
 import { FeedbackService } from '../feedbacks/services/feedback.service';
-import { NavbarComponent } from '../../shared/components/navbar/navbar.component';
 import { AdminSidebarComponent } from '../panels/admin/components/sidebar/adminSidebar.component';
 
 Chart.register(...registerables);
@@ -13,15 +14,15 @@ Chart.register(...registerables);
 @Component({
   selector: 'app-statistics',
   standalone: true,
-  imports: [CommonModule,AdminSidebarComponent  ],
+  imports: [CommonModule, AdminSidebarComponent],
   templateUrl: './statistics.component.html',
   styleUrls: ['./statistics.component.scss']
 })
-export class StatisticsComponent implements OnInit {
+export class StatisticsComponent implements OnInit, AfterViewInit {
   @ViewChild('barChart') barChart!: ElementRef;
 
-  patientCount: number;
   doctorCount: number;
+  patientCount: number;
   appointmentCount: number;
   feedbackCount: number;
   isDataReady: boolean = false;
@@ -30,59 +31,64 @@ export class StatisticsComponent implements OnInit {
     private doctorService: DoctorService,
     private patientService: PatientService,
     private appointmentService: AppointmentService,
-    private feedbackService: FeedbackService,
+    private feedbackService: FeedbackService
   ) {
-    this.patientCount = 0;
     this.doctorCount = 0;
+    this.patientCount = 0;
     this.appointmentCount = 0;
     this.feedbackCount = 0;
   }
 
   ngOnInit(): void {
-    this.getDoctorCount();
-    this.getPatientCount();
-    this.getAppointmentCount();
-    this.getFeedbackCount();
+    this.getDataCounts();
   }
 
-  getDoctorCount(): void {
-    this.doctorService.getDoctors(0, 1).subscribe((response) => {
-      this.doctorCount = response.count;
-      this.checkDataAndUpdateChart();
-    });
+  ngAfterViewInit(): void {
+    if (this.isDataReady) {
+      this.updateChart();
+    }
   }
 
-  getPatientCount(): void {
-    this.patientService.getPatients(0, 1).subscribe((response) => {
-      this.patientCount = response.count;
-      this.checkDataAndUpdateChart();
-    });
-  }
+  getDataCounts(): void {
+    forkJoin({
+      doctors: this.doctorService.getDoctors(0, 1),
+      patients: this.patientService.getPatients(0, 1),
+      appointments: this.appointmentService.getAllAppointments(0,1),
+      feedbacks: this.feedbackService.getFeedbacks(0, 1)
+    }).subscribe({
+      next: (response) => {
+        this.doctorCount = response.doctors.count;
+        this.patientCount = response.patients.count;
+        this.appointmentCount = response.appointments.count;
+        this.feedbackCount = response.feedbacks.count;
+        this.checkDataAndUpdateChart();
+      },
+      error: (err) => {
+        console.error('Error fetching data:', err);
 
-  getAppointmentCount(): void {
-    this.appointmentService.getAppointmentId(0, 1).subscribe((response) => {
-      this.appointmentCount = response.count;
-      this.checkDataAndUpdateChart();
-    });
-  }
-
-  getFeedbackCount(): void {
-    this.feedbackService.getFeedbacks(0, 1).subscribe((response) => {
-      this.feedbackCount = response.count;
-      this.checkDataAndUpdateChart();
+      }
     });
   }
 
   checkDataAndUpdateChart(): void {
-
-    if (this.doctorCount !== 0 && this.patientCount !== 0 && this.appointmentCount !== 0 && this.feedbackCount !== 0) {
+    if (
+      this.doctorCount !== null &&
+      this.patientCount !== null &&
+      this.appointmentCount !== null &&
+      this.feedbackCount !== null
+    ) {
       this.updateChart();
       this.isDataReady = true;
     }
   }
 
   updateChart(): void {
-    const data = [this.doctorCount, this.patientCount, this.appointmentCount, this.feedbackCount];
+    const data = [
+      this.doctorCount,
+      this.patientCount,
+      this.appointmentCount,
+      this.feedbackCount
+    ];
     const labels = ['Doktorlar', 'Hastalar', 'Randevular', 'Geri Bildirimler'];
 
     if (this.barChart && this.barChart.nativeElement) {
@@ -91,7 +97,7 @@ export class StatisticsComponent implements OnInit {
         data: {
           labels: labels,
           datasets: [{
-            label: 'Sayısı',
+            label: 'Sayı',
             data: data,
             backgroundColor: ['rgba(75, 192, 192, 0.2)'],
             borderColor: ['rgba(75, 192, 192, 1)'],
