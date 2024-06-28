@@ -5,6 +5,7 @@ import { Doctor } from '../models/doctor';
 import { ResponseModel } from '../../models/responseModel';
 import { jwtDecode } from 'jwt-decode';
 import { Appointment } from '../../appointments/models/appointmentModel';
+import { DoctorForAppointment } from '../models/doctorforappointment';
 
 @Injectable({
   providedIn: 'root',
@@ -46,7 +47,7 @@ export class DoctorService {
   updateDoctor(doctor: Doctor): Observable<ResponseModel<Doctor>> {
     return this.httpClient.put<ResponseModel<Doctor>>(this.apiUrl, doctor);
   }
-  
+
   deleteDoctor(id: string): Observable<ResponseModel<any>> {
     return this.httpClient.delete<ResponseModel<any>>(`${this.apiUrl}/${id}`);
   }
@@ -64,5 +65,16 @@ export class DoctorService {
 
     const doctorId = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
     return this.httpClient.get<Doctor>(`${this.apiUrl}/${doctorId}`);
+  }
+
+//BranchId ye göre doktorları getir
+  getListByBranchId(PageIndex:number,PageSize:number,branchId:number):Observable<ResponseModel<DoctorForAppointment>>
+  {    let newPath=this.apiUrl+"/getByBranchId"
+        let params = new HttpParams()
+      .set('PageIndex', PageIndex.toString())
+      .set('PageSize', PageSize.toString())
+      .set('BranchId',branchId);
+
+      return this.httpClient.get<ResponseModel<DoctorForAppointment>>(newPath, { params });
   }
 }

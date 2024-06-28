@@ -51,6 +51,7 @@ import { PatientListPastAppointmentComponent } from './features/panels/patient/c
 
 import { PatientProfileComponent } from './features/panels/patient/components/Patient-profile/Patient-profile.component';
 import { PatientListUpcomingAppointmentComponent } from './features/panels/patient/components/patient-list-upcoming-appointment/patient-list-upcoming-appointment.component';
+import { CreateAppointmentComponent } from './features/panels/patient/components/create-appointment/create-appointment.component';
 
 export const routes: Routes = [
   {
@@ -232,10 +233,11 @@ export const routes: Routes = [
     path: 'upcoming-appointments',
     component: UpcomingAppointmentsComponent,
   },
-
+   {
     path: 'admin-doctor-schedule/:doctorId',
     component: AdminListDrscheduleComponent,
-
+   },
+   {
     path: 'doctor-feedbacks',
     component:DoctorListFeedbackComponent,
   },
@@ -256,4 +258,10 @@ export const routes: Routes = [
     path: 'admin-edit-doctor-schedule/:doctorId/:scheduleId',
     component: AdminUpdateDrscheduleComponent,
   },
+
+  {
+    path:'create-appointment',
+    component:CreateAppointmentComponent
+
+  }
 ];
