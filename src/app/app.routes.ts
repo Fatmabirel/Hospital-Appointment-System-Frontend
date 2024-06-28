@@ -63,6 +63,7 @@ import { UpdateAppointmentComponent } from './features/panels/admin/components/u
 import { AddAppointmentComponent } from './features/panels/admin/components/add-appointment/add-appointment.component';
 
 
+
 export const routes: Routes = [
   {
     path: '', // Route belirtilen path ile eşleştiğinde
@@ -277,7 +278,7 @@ export const routes: Routes = [
   {
     path: 'patient-report-detail/:id',
     component: PatientReportDetailComponent,
-  }, 
+  },
   {
     path: 'patient-feedbacks',
     component:PatientListFeedbackComponent,
@@ -290,7 +291,7 @@ export const routes: Routes = [
     path: 'patient-update-feedback/:feedbackId',
     component:PatientUpdateFeedbackComponent,
   },
-  
+
   {
     path: 'admin-edit-doctor-schedule/:doctorId/:scheduleId',
     component: AdminUpdateDrscheduleComponent,
@@ -301,16 +302,17 @@ export const routes: Routes = [
     path:'create-appointment',
     component:CreateAppointmentComponent
 
-  }
+  },
 
   { path: 'update-appointment/:id',
-    component: UpdateAppointmentComponent, 
+    component: UpdateAppointmentComponent,
   },
 
   {
     path: 'add-appointment',
     component: AddAppointmentComponent,
-  }
-    
+  },
+
+
 
 ];
