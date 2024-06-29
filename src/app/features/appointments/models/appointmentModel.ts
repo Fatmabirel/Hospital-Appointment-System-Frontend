@@ -12,7 +12,7 @@ export interface Appointment {
     patientID: string;
     patientFirstName: string;
     patientLastName: string;
-    patientnationalIdentity:string;
+    patientNationalIdentity:string;
     patientdateOfBirth:Date;
     patientPhone:string;
     patientAge:number;

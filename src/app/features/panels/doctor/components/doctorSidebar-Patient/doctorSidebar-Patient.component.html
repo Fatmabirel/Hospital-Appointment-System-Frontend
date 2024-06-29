@@ -2,32 +2,53 @@
   <app-doctor-sidebar></app-doctor-sidebar>
 
   <div class="flex-grow-1 p-3">
-    <h2 style="color: #1565c0; font-size: 28px; text-align: center;margin-bottom: 19px;">RANDEVULU HASTALARIM</h2>
-
+    <h2
+      style="
+        color: #1565c0;
+        font-size: 28px;
+        text-align: center;
+        margin-bottom: 19px;
+      "
+    >
+      RANDEVULU HASTALARIM
+    </h2>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <div class="d-flex align-items-center">
+        <div class="input-group mr-3">
+          <span class="input-group-text">
+            <i class="bi bi-search"></i>
+          </span>
+          <input
+            type="text"
+            [(ngModel)]="filterText"
+            class="form-control"
+            id="filterText"
+            placeholder="Hasta kimlik numarası"
+          />
+        </div>
+      </div>
+    </div>
     <table class="table table-striped">
       <thead class="thead-primary">
         <tr>
-          <th scope="col" style="width: 25%;">Hasta Adı Soyadı</th>
-          <th scope="col" style="width: 15%;">Doğum Tarihi</th>
-          <th scope="col" style="width: 15%;">Yaşı</th>
-          <th scope="col" style="width: 15%;">Kimlik Numarası</th> 
-          <th scope="col" style="width: 15%;">Telefon Numarası</th> 
-          <!-- <th scope="col" style="width: 15%;">Raporu</th> -->
-         
+          <th scope="col" style="width: 15%">Hasta Adı Soyadı</th>
+          <th scope="col" style="width: 15%">Kimlik Numarası</th>
+          <th scope="col" style="width: 15%">Doğum Tarihi</th>
+          <th scope="col" style="width: 5%">Yaşı</th>
+          <th scope="col" style="width: 15%">Telefon Numarası</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let paitent of paitents">
-          <td>{{ paitent.firstName|CapitalizeFirst }} {{ paitent.lastName|CapitalizeFirst}}</td>
-          <td>{{ paitent.dateOfBirth}}</td>
-          <td>{{ paitent.age}}</td>
-          <td>{{ paitent.nationalIdentity}}</td>
-          <td>{{ paitent.phone}}</td>
-         
-          <!-- <td>
-            <button class="btn btn-primary btn-sm">Raporu Görüntüle</button>
-          </td> -->
-    
+        <tr *ngFor="let paitent of paitents |filterPatientIdentity:filterText">
+          <td>
+            {{ paitent.firstName | CapitalizeFirst }}
+            {{ paitent.lastName | CapitalizeFirst }}
+          </td>
+          <td>{{ paitent.nationalIdentity }}</td>
+          <td>{{ paitent.dateOfBirth }}</td>
+          <td>{{ paitent.age }}</td>
+          <td>{{ paitent.phone }}</td>
+        </tr>
       </tbody>
     </table>
   </div>

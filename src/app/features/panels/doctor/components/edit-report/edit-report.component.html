@@ -4,8 +4,9 @@
   <div class="content">
     <div class="col-md-12">
       <div class="card">
-        <div class="card-header">
+        <div class="card-header d-flex justify-content-between align-items-center">
           <h5>Rapor Detayı</h5>
+         <button class="btn btn-danger btn-sm" [routerLink]="['/appointment-history']">X</button>
         </div>
         <div class="card-body">
           <form [formGroup]="reportForm" >

@@ -37,7 +37,7 @@ export class ReportService {
 
    return this.httpClient.get<ResponseModel<ResponseReport>>(newPath,{params});
   }
-  
+
   getReportDetails(reportId: number): Observable<ResponseReport> {
     const url = `${this.apiUrl}${reportId}`; // /Reports/1 gibi URL oluşturur
 
@@ -80,4 +80,7 @@ export class ReportService {
 
     return this.httpClient.delete<Report>(url);
    }
+
+
+
 }

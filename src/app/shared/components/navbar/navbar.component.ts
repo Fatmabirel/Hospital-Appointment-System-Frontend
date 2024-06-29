@@ -2,32 +2,53 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { TokenService } from '../../../core/auth/services/token.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule,CommonModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss'
+  styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
-
   isLoggedIn: boolean = false;
 
-  constructor(private tokenService:TokenService,private router: Router){}
+  constructor(
+    private tokenService: TokenService,
+    private router: Router,
+    private toastrService: ToastrService
+  ) {}
 
   ngOnInit(): void {
     const token = localStorage.getItem('token');
     this.isLoggedIn = !!token; // Token varsa true, yoksa false
   }
 
-  directUsers(){
-    const userRoles=this.tokenService.getUserRole();
+  directUsers() {
+    const userRoles = this.tokenService.getUserRole();
 
-    if(userRoles=="Admin")
-    this.router.navigate(['admin-sidebar']);  // Başarılı girişten sonra yönlendirme
-     else if(userRoles.includes("Doctors.Update"))
-    this.router.navigate(['doctor-sidebar'])
-    else if(userRoles.includes("Patients.Update"))
-      this.router.navigate(['patient-sidebar'])
+    if (userRoles == 'Admin') this.router.navigate(['admin-sidebar']);
+    // Başarılı girişten sonra yönlendirme
+    else if (userRoles.includes('Doctors.Update'))
+      this.router.navigate(['doctor-sidebar']);
+    else if (userRoles.includes('Patients.Update'))
+      this.router.navigate(['patient-sidebar']);
+  }
+  checkUserForAppointment() {
+    if (this.isLoggedIn) {
+      const userRoles = this.tokenService.getUserRole();
+      if (userRoles.includes('Patients.Update')) {
+        this.router.navigate(['create-appointment']);
+      } else {
+        this.toastrService.warning(
+          'Randevu alma sayfası hastalara özeldir. Lütfen hasta olarak giriş yapın'
+        );
+      }
+    } else {
+      this.toastrService.warning(
+        'Randevu alma sayfası hastalara özeldir. Lütfen hasta olarak giriş yapın'
+      );
+      this.router.navigate(['/login']);
+    }
   }
 }

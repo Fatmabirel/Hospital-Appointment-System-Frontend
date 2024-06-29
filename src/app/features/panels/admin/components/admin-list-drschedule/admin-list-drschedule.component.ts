@@ -31,7 +31,6 @@ export class AdminListDrscheduleComponent implements OnInit {
     this.route.params.subscribe(params => {
       if (params['doctorId']) {
         this.doctorId = params['doctorId'];
-        console.log('Doctor ID:', this.doctorId); // Doctor ID'nin doğru alındığını kontrol etme
 
       } else {
         // this.doctorId = "0";
@@ -67,7 +66,7 @@ export class AdminListDrscheduleComponent implements OnInit {
         responseError => {
 
           console.log(responseError);
-          this.toastrService.error(responseError.error.detail,'Hatalı İşlem');
+          this.toastrService.error(responseError.error.Detail,'Hatalı İşlem');
 
         }
       )

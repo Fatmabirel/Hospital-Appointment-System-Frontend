@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CreateDrScheduleRequest } from '../../../../doctorschedule/models/create-request-drschedule';
 import { ToastrService } from 'ngx-toastr';
 import { TokenService } from '../../../../../core/auth/services/token.service';
@@ -29,7 +29,8 @@ export class UpdateDoctorScheduleComponent implements OnInit {
     private route: ActivatedRoute,
     private tokenService: TokenService,
     private drScheduleService: DrscheduleService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -100,17 +101,14 @@ export class UpdateDoctorScheduleComponent implements OnInit {
 
       this.drScheduleService.updateDoctorSchedule( schedule).subscribe(
         response => {
-          this.toastrService.success("Takvim çizelgeniz başarılı bir şekilde güncellendi", 'Başarılı');
+          this.toastrService.success("Çalışma takviminiz başarılı bir şekilde güncellendi", 'Başarılı');
+          this.router.navigate(['list-doctor-schedule'])
         },
         responseError => {
-
-          console.log(responseError);
-          this.toastrService.error(responseError.error.detail,'Hatalı İşlem');
+          this.toastrService.error(responseError.error.Detail,'Hatalı İşlem');
 
         }
       );
-
-      console.log('Updated Schedule:', schedule);
     } else {
       this.toastrService.error("", "Tüm alanları doldurunuz.");
     }

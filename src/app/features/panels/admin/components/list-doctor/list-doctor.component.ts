@@ -42,7 +42,7 @@ export class ListDoctorComponent implements OnInit {
   totalPages: number = 0;
   hasNext: boolean = false;
   filterText: string = '';
-  selectedBranch: any | null = null;
+  selectedBranch: string = '';
 
   constructor(
     private doctorService: DoctorService,
@@ -65,7 +65,6 @@ export class ListDoctorComponent implements OnInit {
     this.doctorService
       .getDoctors(this.pageIndex, this.pageSize)
       .subscribe((response) => {
-        console.log(response);
         this.doctors = response.items;
         this.totalPages = response.pages;
         this.hasNext = response.hasNext;

@@ -41,7 +41,6 @@ export class DoctorAddFeedbackComponent {
     this.doctorService.getDoctorProfile().subscribe((doctor) => {
       this.doctor = doctor;
       this.userID = doctor.id;
-      // Assign the userID value to the form control
       this.feedbackForm.patchValue({
         userID: this.userID
       });
@@ -57,11 +56,10 @@ export class DoctorAddFeedbackComponent {
           this.router.navigate(['/doctor-feedbacks']);
         },
         (error) => {
-          this.toastrService.error('Doktor eklenemedi');
+          this.toastrService.error('Geri bildirim eklenemedi');
         }
       );
     } else {
-      console.error('Error adding doctor:', this.feedbackForm.value);
       this.toastrService.error('Eksik alanlarını doldurunuz.');
     }
   }
