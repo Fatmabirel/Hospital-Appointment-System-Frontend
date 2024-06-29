@@ -71,7 +71,7 @@ add() {
         },  responseError => {
 
           console.log(responseError);
-          this.toastrService.error(responseError.error.detail,'Hatalı İşlem');
+          this.toastrService.error(responseError.error.Detail,'Hatalı İşlem');
 
         }
   );

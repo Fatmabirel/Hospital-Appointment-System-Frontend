@@ -200,7 +200,7 @@ isFutureDate(date: string): boolean {
               // İlgili işlem sonrasında kullanıcıya bildirim veya yönlendirme yapılabilir
           }, responseError => {
             console.log(responseError);
-            this.toastrService.error(responseError.error.detail,'Hatalı İşlem');
+            this.toastrService.error(responseError.error.Detail,'Hatalı İşlem');
           });
          }
       }
