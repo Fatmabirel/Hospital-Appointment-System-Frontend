@@ -65,6 +65,7 @@ import { VisitorCompanionPolicyComponent } from './shared/components/footer-cont
 import { QualityPolicyComponent } from './shared/components/footer-content/quality-policy/quality-policy/quality-policy.component';
 import { KvkkComponent } from './shared/components/footer-content/kvkk/kvkk/kvkk.component';
 import { CookiePolicyComponent } from './shared/components/footer-content/cookie-policy/cookie-policy/cookie-policy.component';
+import { ForgotPasswordComponent } from './features/forgot-password/forgot-password.component';
 
 
 
@@ -336,5 +337,9 @@ export const routes: Routes = [
   {
     path: 'cookie-policy',
     component: CookiePolicyComponent,
+  },
+  {
+    path: 'password',
+    component:ForgotPasswordComponent,
   },
 ];
