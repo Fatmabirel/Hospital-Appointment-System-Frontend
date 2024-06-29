@@ -30,4 +30,7 @@ export class NavbarComponent {
     else if(userRoles.includes("Patients.Update"))
       this.router.navigate(['patient-sidebar'])
   }
+  chechUserForAppointment(){
+      this.router.navigate(['create-appointment']);
+  }
 }
