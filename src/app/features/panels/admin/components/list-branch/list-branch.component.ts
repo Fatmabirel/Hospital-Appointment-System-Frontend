@@ -8,6 +8,8 @@ import { ConfirmDialogComponent } from '../../../../../shared/components/confirm
 import { MatDialog } from '@angular/material/dialog';
 import { PaginationComponent } from '../../../../../core/paging/components/pagination/pagination.component';
 import { ToastrService } from 'ngx-toastr';
+import { FormsModule } from '@angular/forms';
+import { FilterBranchNamePipe } from '../../../../pipe/filter-branch-name.pipe';
 
 @Component({
   selector: 'app-list-branch',
@@ -16,7 +18,9 @@ import { ToastrService } from 'ngx-toastr';
     CommonModule,
     AdminSidebarComponent,
     RouterModule,
-    PaginationComponent
+    PaginationComponent,
+    FormsModule,
+    FilterBranchNamePipe
   ],
   templateUrl: './list-branch.component.html',
   styleUrl: './list-branch.component.scss',
@@ -28,6 +32,7 @@ export class ListBranchComponent implements OnInit {
   pageSize:number = 5;
   totalPages: number = 0;
   hasNext: boolean = false;
+  filterText: string = '';
 
   constructor(private branchService: BranchService,
      private dialog: MatDialog,

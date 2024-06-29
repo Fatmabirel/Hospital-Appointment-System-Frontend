@@ -1,7 +1,13 @@
 tr {
   text-align: center;
 }
-/* Arama kutusu */
+
 .form-control {
-  max-width: 150px;
+  max-width: 200px;
+  margin-right: 50px;
 }
+
+.custom-select-width {
+  width: 300px;
+}
+

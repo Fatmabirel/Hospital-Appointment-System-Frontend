@@ -65,6 +65,7 @@ import { VisitorCompanionPolicyComponent } from './shared/components/footer-cont
 import { QualityPolicyComponent } from './shared/components/footer-content/quality-policy/quality-policy/quality-policy.component';
 import { KvkkComponent } from './shared/components/footer-content/kvkk/kvkk/kvkk.component';
 import { CookiePolicyComponent } from './shared/components/footer-content/cookie-policy/cookie-policy/cookie-policy.component';
+import { PatientDashboardComponent } from './features/panels/patient/components/patient-dashboard/patient-dashboard.component';
 
 
 
@@ -294,6 +295,10 @@ export const routes: Routes = [
   {
     path: 'patient-update-feedback/:feedbackId',
     component:PatientUpdateFeedbackComponent,
+  },
+  {
+    path: 'patient-dashboard',
+    component:PatientDashboardComponent,
   },
 
   {

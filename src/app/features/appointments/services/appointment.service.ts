@@ -27,7 +27,7 @@ export class AppointmentService {
       .set('PageSize', pageSize.toString());
 
     return this.httpClient.get<ResponseModel<Appointment>>(
-      `${this.apiUrl}/getAll`,
+      `${this.apiUrl}`,
       { params }
     );
   }

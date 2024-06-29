@@ -31,7 +31,6 @@ export class AdminListDrscheduleComponent implements OnInit {
     this.route.params.subscribe(params => {
       if (params['doctorId']) {
         this.doctorId = params['doctorId'];
-        console.log('Doctor ID:', this.doctorId); // Doctor ID'nin doğru alındığını kontrol etme
 
       } else {
         // this.doctorId = "0";
