@@ -5,7 +5,10 @@ import { Doctor } from '../models/doctor';
 import { ResponseModel } from '../../models/responseModel';
 import { jwtDecode } from 'jwt-decode';
 import { Appointment } from '../../appointments/models/appointmentModel';
-import { DoctorForAppointment } from '../models/doctorforappointment';
+import { DoctorForAppointment } from '../models/doctorForAppointment';
+
+
+
 
 @Injectable({
   providedIn: 'root',

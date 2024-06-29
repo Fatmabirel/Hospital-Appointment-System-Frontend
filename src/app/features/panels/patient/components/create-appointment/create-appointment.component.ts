@@ -4,7 +4,7 @@ import { Branch } from '../../../../branches/models/branch';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DoctorService } from '../../../../doctors/services/doctor.service';
-import { DoctorForAppointment } from '../../../../doctors/models/doctorforappointment';
+import { DoctorForAppointment } from '../../../../doctors/models/doctorForAppointment';
 import { DoctorSchedule } from '../../../../doctorschedule/models/doctorschedule';
 import { DrscheduleService } from '../../../../doctorschedule/services/drschedule.service';
 import { PatientSidebarComponent } from "../sidebar/psidebar.component";

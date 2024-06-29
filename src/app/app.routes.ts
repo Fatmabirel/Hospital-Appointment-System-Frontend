@@ -61,6 +61,18 @@ import { PatientAddFeedbackComponent } from './features/panels/patient/component
 import { PatientUpdateFeedbackComponent } from './features/panels/patient/components/patient-update-feedback/patient-update-feedback.component';
 import { UpdateAppointmentComponent } from './features/panels/admin/components/update-appointment/update-appointment.component';
 import { AddAppointmentComponent } from './features/panels/admin/components/add-appointment/add-appointment.component';
+
+import { AppointmentChartComponent } from './features/panels/admin/components/charts/appointment-chart/appointment-chart.component';
+import { TotalNumberCardsComponent } from './features/panels/admin/components/charts/total-number-cards/total-number-cards.component';
+import { PieChartBranchComponent } from './features/panels/admin/components/charts/pie-chart-brach/pie-chart-branch.component';
+import { PaiChartTitleComponent } from './features/panels/admin/components/charts/pai-chart-title/pai-chart-title.component';
+import { DashboardComponent } from './features/panels/admin/components/charts/dashboard/dashboard.component';
+
+
+
+
+
+
 import { VisitorCompanionPolicyComponent } from './shared/components/footer-content/visitor-companion-policy/visitor-companion-policy/visitor-companion-policy.component';
 import { QualityPolicyComponent } from './shared/components/footer-content/quality-policy/quality-policy/quality-policy.component';
 import { KvkkComponent } from './shared/components/footer-content/kvkk/kvkk/kvkk.component';
@@ -68,6 +80,7 @@ import { CookiePolicyComponent } from './shared/components/footer-content/cookie
 import { PatientDashboardComponent } from './features/panels/patient/components/patient-dashboard/patient-dashboard.component';
 import { DoctorAddFeedbackComponent } from './features/panels/doctor/components/doctor-add-feedback/doctor-add-feedback.component';
 import { DoctorUpdateFeedbackComponent } from './features/panels/doctor/components/doctor-update-feedback/doctor-update-feedback.component';
+
 
 export const routes: Routes = [
   {
@@ -325,6 +338,10 @@ export const routes: Routes = [
   {
     path: 'add-appointment',
     component: AddAppointmentComponent,
+  },
+  {
+    path: 'appointment-chart',
+    component: DashboardComponent,
   },
 
   {

@@ -1,0 +1,23 @@
+<!-- <div class="d-flex">
+  <app-admin-sidebar></app-admin-sidebar> -->
+
+  <div>
+    <h6 style="color: #0066ae;">BRANŞLARDAKİ DOKTOR SAYISI</h6> <!-- Grafiğin başlığı -->
+
+    <ngx-charts-pie-chart
+      [view]="view"
+      [scheme]="colorScheme"
+      [results]="single"
+      [gradient]="gradient"
+      [legend]="showLegend"
+      [legendPosition]="legendPosition"
+      [legendTitle]="legendTitle"
+      [labels]="showLabels"
+      [doughnut]="isDoughnut"
+      (select)="onSelect($event)"
+      (activate)="onActivate($event)"
+      (deactivate)="onDeactivate($event)"
+    >
+    </ngx-charts-pie-chart>
+  </div>
+<!-- </div> -->
