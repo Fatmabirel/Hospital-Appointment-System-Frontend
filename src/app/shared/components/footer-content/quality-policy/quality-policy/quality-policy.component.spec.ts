@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListFeedbackComponent } from './list-feedback.component';
+import { QualityPolicyComponent } from './quality-policy.component';
 
-describe('ListFeedbackComponent', () => {
-  let component: ListFeedbackComponent;
-  let fixture: ComponentFixture<ListFeedbackComponent>;
+describe('QualityPolicyComponent', () => {
+  let component: QualityPolicyComponent;
+  let fixture: ComponentFixture<QualityPolicyComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ListFeedbackComponent]
+      imports: [QualityPolicyComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(ListFeedbackComponent);
+    fixture = TestBed.createComponent(QualityPolicyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

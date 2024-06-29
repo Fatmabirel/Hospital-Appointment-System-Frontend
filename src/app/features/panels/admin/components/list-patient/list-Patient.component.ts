@@ -8,25 +8,36 @@ import { CapitalizeFirstPipe } from '../../../../pipe/capitalize-first.pipe';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { PaginationComponent } from '../../../../../core/paging/components/pagination/pagination.component';
+import { FormsModule } from '@angular/forms';
+import { FilterPatientIdentityPipe } from '../../../../pipe/filter-patient-identity.pipe';
 
 @Component({
   selector: 'app-list-patient',
   standalone: true,
   imports: [
-    CommonModule,RouterModule,AdminSidebarComponent,CapitalizeFirstPipe,PaginationComponent
+    CommonModule,
+    RouterModule,
+    AdminSidebarComponent,
+    CapitalizeFirstPipe,
+    PaginationComponent,
+    FormsModule,
+    FilterPatientIdentityPipe
   ],
   templateUrl: './list-Patient.component.html',
-  styleUrl: './list-Patient.component.scss'
- 
+  styleUrl: './list-Patient.component.scss',
 })
 export class ListPatientComponent implements OnInit {
   patients: Patient[] = [];
   pageIndex: number = 0;
-  pageSize:number = 5;
+  pageSize: number = 5;
   totalPages: number = 0;
   hasNext: boolean = false;
+  filterText: string = '';
 
-  constructor(private patientService:PatientService, private dialog: MatDialog) {}
+  constructor(
+    private patientService: PatientService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.getPatients();
@@ -39,17 +50,22 @@ export class ListPatientComponent implements OnInit {
   }
 
   getPatients() {
-    this.patientService.getPatients(this.pageIndex, this.pageSize).subscribe((response) => {
-      this.patients = response.items;
-      this.totalPages = response.pages;
-      this.hasNext = response.hasNext;
-    });
+    this.patientService
+      .getPatients(this.pageIndex, this.pageSize)
+      .subscribe((response) => {
+        this.patients = response.items;
+        this.totalPages = response.pages;
+        this.hasNext = response.hasNext;
+      });
   }
 
   confirmDelete(patientId: string) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '400px',
-      data: { title: 'ONAY', message: 'Bu hastayı silmek istediğinizden emin misiniz?' },
+      data: {
+        title: 'ONAY',
+        message: 'Bu hastayı silmek istediğinizden emin misiniz?',
+      },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -59,7 +75,7 @@ export class ListPatientComponent implements OnInit {
     });
   }
 
-  deletePatient(patientId:string) {
+  deletePatient(patientId: string) {
     this.patientService.deletePatient(patientId).subscribe(
       (response) => {
         console.log('Hasta başarıyla silindi:', response);
@@ -70,7 +86,4 @@ export class ListPatientComponent implements OnInit {
       }
     );
   }
-
-
-
- }
+}

@@ -27,7 +27,7 @@ export class AppointmentService {
       .set('PageSize', pageSize.toString());
 
     return this.httpClient.get<ResponseModel<Appointment>>(
-      `${this.apiUrl}/getAll`,
+      this.apiUrl,
       { params }
     );
   }
@@ -66,7 +66,7 @@ export class AppointmentService {
 
   getAppointmentById(appointmentId: number): Observable<Appointment> {
     return this.httpClient.get<Appointment>(`${this.apiUrl}/${appointmentId}`);
-  }  
+  }
 
 
   getAppointmentId(
@@ -130,6 +130,6 @@ export class AppointmentService {
   updateAppointment(appointmentId: number, appointment: Appointment): Observable<ResponseModel<Appointment>> {
     return this.httpClient.put<ResponseModel<Appointment>>(`${this.apiUrl}/${appointmentId}`, appointment);
   }
-    
-  
+
+
 }

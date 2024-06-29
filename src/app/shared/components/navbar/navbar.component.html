@@ -26,9 +26,9 @@
           <a class="nav-link" routerLink="/contact" routerLinkActive="active">Bize Ulaşın</a>
         </li>
       </ul>
-      <form class="d-flex " role="search">
+      <!-- <form class="d-flex " role="search">
         <input class="form-control me-2" type="search" placeholder="Ara" aria-label="Search">
-      </form>
+      </form> -->
       <form class="d-flex">
         <div class="btn-group" *ngIf="!isLoggedIn">
           <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -40,7 +40,7 @@
           </ul>
         </div>
         <div class="btn-group" *ngIf="isLoggedIn">
-          <button type="button" class="btn btn-success" routerLink="/appointments">RANDEVU AL</button>
+          <button type="button" class="btn btn-success" (click)="checkUserForAppointment()">RANDEVU AL</button>
           <button type="button" class="btn btn-success" (click)="directUsers()">HESABIM</button>
         </div>
       </form>

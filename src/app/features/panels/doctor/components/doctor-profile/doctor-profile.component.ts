@@ -73,12 +73,11 @@ export class DoctorProfileComponent implements OnInit {
           this.toastrService.success('Bilgileriniz başarıyla güncellendi');
           this.router.navigate(['doctor-sidebar']);
         },
-        (error) => {
-          console.error('Doktor güncellenemedi:', error);
+        (responseError) => {
+          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
     } else {
-      // Form geçerli değilse hata mesajı gösterilebilir
       this.toastrService.error('Lütfen eksik alanları doldurun');
     }
   }

@@ -41,7 +41,7 @@ export class DoctorUpdateFeedbackComponent {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      const feedbackId = params['id']; 
+      const feedbackId = params['feedbackId']; 
       this.feedbackService.getFeedbackById(feedbackId).subscribe((feedback: Feedback) => {
         this.feedbackForm.patchValue({
           id: feedback.id,

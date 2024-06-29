@@ -7,7 +7,7 @@
         </div>
         <div class="col-lg-4 col-md-12 d-flex flex-column justify-content-center">
           <div class="icon-boxes">
-            <a href="/" class="icon-box text-center">
+            <a class="icon-box text-center" (click)="checkUserForAppointment()">
               <div>
                 <fa-icon [icon]="icon" size="2x" style="color: #3b5ec2"></fa-icon>
                 <h4>Online Randevu</h4>
@@ -19,16 +19,16 @@
                 <h4>Doktorlarımız</h4>
               </div>
             </a>
-            <a href="/" class="icon-box text-center">
+            <a routerLink="/faq" class="icon-box text-center">
               <div>
                 <fa-icon [icon]="icon3" size="2x" style="color: #3b5ec2"></fa-icon>
-                <h4>e-Sonuç</h4>
+                <h4>Sıkça Sorulan Sorular</h4>
               </div>
             </a>
-            <a routerLink="/" class="icon-box text-center">
+            <a routerLink="/branches" class="icon-box text-center">
               <div>
                 <fa-icon [icon]="icon4" size="2x" style="color: #3b5ec2"></fa-icon>
-                <h4>Hastanelerimiz</h4>
+                <h4>Branşlarımız</h4>
               </div>
             </a>
           </div>
