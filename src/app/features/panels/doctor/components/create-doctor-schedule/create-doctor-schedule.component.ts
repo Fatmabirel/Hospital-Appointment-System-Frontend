@@ -9,6 +9,7 @@ import { TokenService } from '../../../../../core/auth/services/token.service';
 import { DoctorSidebarComponent } from '../sidebar/doctorSidebar.component';
 import { DrscheduleService } from '../../../../doctorschedule/services/drschedule.service';
 import { error } from 'node:console';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-doctor-schedule',
@@ -28,7 +29,8 @@ export class CreateDoctorScheduleComponent implements OnInit{
   constructor(
      private tokenService:TokenService,
     private drScheduleService: DrscheduleService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private router:Router
   ) {
 
   }
@@ -79,12 +81,11 @@ export class CreateDoctorScheduleComponent implements OnInit{
 
       this.drScheduleService.add(schedule).subscribe(
         response => {
-          this.toastrService.info("Takvim çizelgenize başarılı bir şekilde eklendi",'Başarılı');
+          this.toastrService.success("Takvim çizelgenize başarılı bir şekilde eklendi",'Başarılı');
+          this.router.navigate(['list-doctor-schedule']);
         },
         responseError => {
-
-          console.log(responseError);
-          this.toastrService.error(responseError.error.detail,'Hatalı İşlem');
+          this.toastrService.error(responseError.error.Detail,'Hatalı İşlem');
 
         }
       );
@@ -123,7 +124,5 @@ export class CreateDoctorScheduleComponent implements OnInit{
     }
     return true;
   }
-
-
 
 }

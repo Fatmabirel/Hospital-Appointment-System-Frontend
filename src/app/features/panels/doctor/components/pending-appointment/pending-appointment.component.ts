@@ -7,11 +7,13 @@ import { DoctorSidebarComponent } from '../sidebar/doctorSidebar.component';
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { FilterAppointmentIdentityPipe } from '../../../../pipe/filter-appointment-identity.pipe';
 
 @Component({
   selector: 'app-pending-appointment',
   standalone: true,
-  imports: [CommonModule, DoctorSidebarComponent],
+  imports: [CommonModule, DoctorSidebarComponent,FormsModule,FilterAppointmentIdentityPipe],
   templateUrl: './pending-appointment.component.html',
   styleUrl: './pending-appointment.component.scss',
 })
@@ -19,7 +21,8 @@ export class PendingAppointmentComponent {
   appointments: Appointment[] = [];
   pageIndex: number = 0;
   pageSize: number = 12;
-  todayDate: Date = new Date(); // Bugünkü tarihi al
+  todayDate: Date = new Date(); 
+  filterText: string = "";
 
   constructor(
     private doctorService: DoctorService,

@@ -8,6 +8,7 @@ import { DoctorService } from '../../../../doctors/services/doctor.service';
 import { Doctor } from '../../../../doctors/models/doctor';
 import { RouterModule } from '@angular/router';
 import { ConfirmDialogComponent } from '../../../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-doctor-list-feedback',
@@ -26,6 +27,7 @@ export class DoctorListFeedbackComponent {
   constructor(
     private feedbackService: FeedbackService,
     private doctorService: DoctorService,
+    private toastrService: ToastrService,
     private dialog: MatDialog
   ) {}
 
@@ -62,11 +64,11 @@ export class DoctorListFeedbackComponent {
   deleteFeedback(feedbackId: number) {
     this.feedbackService.deleteFeedback(feedbackId).subscribe(
       (response) => {
-        console.log('Geri bildirim başarıyla silindi:', response);
+        this.toastrService.success("Geri bildirim başarıyla silindi");
         this.getFeedbackByUserId(this.userID);
       },
       (error) => {
-        console.error('Geri bildirim silinemedi:', error);
+        this.toastrService.success("Geri bildirim silinemedi");
       }
     );
   }
