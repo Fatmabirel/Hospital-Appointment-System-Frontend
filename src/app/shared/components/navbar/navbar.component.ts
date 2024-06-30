@@ -27,12 +27,12 @@ export class NavbarComponent {
   directUsers() {
     const userRoles = this.tokenService.getUserRole();
 
-    if (userRoles == 'Admin') this.router.navigate(['admin-sidebar']);
+    if (userRoles == 'Admin') this.router.navigate(['admin-charts']);
     // Başarılı girişten sonra yönlendirme
     else if (userRoles.includes('Doctors.Update'))
-      this.router.navigate(['doctor-sidebar']);
+      this.router.navigate(['doctor-summary']);
     else if (userRoles.includes('Patients.Update'))
-      this.router.navigate(['patient-sidebar']);
+      this.router.navigate(['patient-summary']);
   }
   checkUserForAppointment() {
     if (this.isLoggedIn) {

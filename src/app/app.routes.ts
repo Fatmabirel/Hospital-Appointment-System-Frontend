@@ -343,7 +343,7 @@ export const routes: Routes = [
     component: AddAppointmentComponent,
   },
   {
-    path: 'chart',
+    path: 'admin-charts',
     component: DashboardComponent,
   },
 
