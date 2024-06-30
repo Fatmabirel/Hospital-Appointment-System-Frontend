@@ -6,6 +6,7 @@
         <thead class="thead-primary">
           <tr>
             <th scope="col" style="width: 20%;">Doktor Adı Soyadı</th>
+            <th scope="col" style="width: 20%">Bölüm</th>
             <th scope="col" style="width: 15%;">Randevu Tarihi</th>
             <th scope="col" style="width: 15%;">Randevu Saati</th>
             <th scope="col" style="width: 15%;">Durum</th>
@@ -15,6 +16,7 @@
         <tbody>
           <tr *ngFor="let appointment of appointments">
             <td>{{ appointment.doctorTitle }} {{ appointment.doctorFirstName }} {{ appointment.doctorLastName}}</td>
+            <td>{{appointment.branchName}}</td>
             <td>{{ appointment.date | date:'dd.MM.yyyy' }}</td>
             <td>{{ appointment.time }}</td>
             <td>Tamamlandı</td>
