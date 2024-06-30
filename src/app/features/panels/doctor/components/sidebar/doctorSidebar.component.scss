@@ -1,6 +1,14 @@
 body {
   font-family: Arial, sans-serif;
   display: flex;
+  flex-direction: column; /* Sayfa içeriğini sütun olarak düzenler */
+  min-height: 100vh; /* Ekranın tamamını kaplar */
+  margin: 0; /* Sayfa kenar boşlukları */
+}
+
+.d-flex {
+  display: flex;
+  flex-grow: 1; /* İçeriği genişletmek için */
 }
 
 .sidebar {
@@ -10,6 +18,8 @@ body {
   border-right: 2px solid #333; /* Sağ kenarlık */
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   background: linear-gradient(to bottom, #ffffff, #f8f9fa); /* Arka plan gradyan */
+  overflow-y: auto; /* Gerektiğinde scrollbar ekle */
+
 }
 
 .doctor-info {
@@ -50,6 +60,11 @@ body {
   background-color: #007bff;
   color: white;
 }
+.content {
+  flex-grow: 1; /* Sağ taraftaki içeriği genişletir */
+  padding: 15px;
+}
+
 
 .nav-link i,
 .nav-link svg {
@@ -106,3 +121,4 @@ h2 {
     font-size: 3.5rem;
   }
 }
+
