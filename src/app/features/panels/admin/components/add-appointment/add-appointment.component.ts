@@ -1,19 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 import { AppointmentService } from '../../../../appointments/services/appointment.service';
 import { DoctorService } from '../../../../doctors/services/doctor.service';
 import { PatientService } from '../../../../Patients/patient.service';
 import { BranchService } from '../../../../branches/services/branch.service';
-import { ToastrService } from 'ngx-toastr';
-import { CommonModule } from '@angular/common';
-import { AdminSidebarComponent } from '../../../admin/components/sidebar/adminSidebar.component';
 import { Appointment } from '../../../../appointments/models/appointmentModel';
 import { Branch } from '../../../../branches/models/branch';
 import { Doctor } from '../../../../doctors/models/doctor';
 import { Patient } from '../../../../Patients/patientModel';
-import { response } from 'express';
-import { error } from 'console';
+import { AppointmentForPatientPanel } from '../../../../appointments/models/appointmentforpatientpanel';
+import { DoctorSchedule } from '../../../../doctorschedule/models/doctorschedule';
+import { DoctorForAppointment } from '../../../../doctors/models/doctorForAppointment';
+import { DrscheduleService } from '../../../../doctorschedule/services/drschedule.service';
+import { CreateAppointment } from '../../../../appointments/models/createAppointment';
+import { TokenService } from '../../../../../core/auth/services/token.service';
+import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-add-appointment',
@@ -21,65 +25,45 @@ import { error } from 'console';
   styleUrls: ['./add-appointment.component.scss'],
   standalone: true,
   imports: [
+    FormsModule,
     AdminSidebarComponent,
-    ReactiveFormsModule,
-    CommonModule,
-    FormsModule]
+    CommonModule]
 })
 export class AddAppointmentComponent implements OnInit {
+  pageIndex: number = 0;
+  pageSize: number = 100;
   branches: Branch[] = [];
-  doctors: Doctor[] = [];
+  doctors: DoctorForAppointment[] = [];
   patients: Patient[] = [];
-  appointmentForm: FormGroup;
-  appointment: Appointment;
-  /*   pageIndex: number = 0;
-    pageSize: number = 50;
-    selectedBranchId: string = '';
-    selectedDoctorId: string = ''; */
+  schedules: DoctorSchedule[] = [];
+  appointments: AppointmentForPatientPanel[] = [];
+  availableDates: string[] = [];
+  selectedBranch: Branch | null = null;
+  selectedDoctor: DoctorForAppointment | null = null;
+  selectedPatient: Patient | null = null;
+  selectedDate: string | null = null;
+  selectedTime: string | null = null;
+  timesWithStatus: { time: string, disabled: boolean }[] = [];
 
   constructor(
-    private formBuilder: FormBuilder,
-    private appointmentService: AppointmentService,
-    private doctorService: DoctorService,
     private patientService: PatientService,
     private branchService: BranchService,
+    private doctorService: DoctorService,
+    private doctorScheduleService: DrscheduleService,
+    private appointmentService: AppointmentService,
+    private tokenService: TokenService,
     private toastrService: ToastrService,
-    private route: ActivatedRoute,
     private router: Router
-  ) {
-    this.appointmentForm = this.formBuilder.group({
-      date: ['', Validators.required],
-      time: ['', Validators.required],
-      patientId: ['', Validators.required],
-      /*       patientFirstName: ['', Validators.required],
-            patientLastName: ['', Validators.required], */
-      branchId: ['', Validators.required],
-      doctorId: ['', Validators.required],
-      command: [''],
-      status: [true, Validators.required],
-    });
-  }
+  ) { }
 
   ngOnInit(): void {
-    this.getBranches();
+    this.branchService.getBranches(this.pageIndex, this.pageSize).subscribe(response => {
+      this.branches = response.items;
+    });
     this.getPatients();
-    this.setMinDateAndTime();
-    /* this.getDoctors(); */
   }
 
-  getBranches(): void {
-    this.branchService.getBranches(0, 100).subscribe(
-      (response) => {
-        this.branches = response.items;
-
-      },
-      (error) => {
-        console.error('Error fetching branches:', error);
-      }
-    );
-  }
-
-  getPatients() {
+  getPatients(): void {
     this.patientService.getPatients(0, 100).subscribe(
       response => {
         this.patients = response.items;
@@ -90,115 +74,155 @@ export class AddAppointmentComponent implements OnInit {
     );
   }
 
-  onBranchChange(event: Event): void {
-    const selectElement = event.target as HTMLSelectElement;
-    const branchId = selectElement.value;
-    this.appointmentForm.patchValue({ branchId });
-    this.doctorService.getDoctors(0, 100).subscribe(
-      (response) => {
-        this.doctors = response.items.filter(doctor => doctor.branchID === Number(branchId));
-      },
-      (error) => {
-        console.error('Doktorlar yüklenemedi:', error);
-      }
-    );
+  onBranchChange(): void {
+    if (this.selectedBranch) {
+      this.doctorService.getListByBranchId(this.pageIndex, this.pageSize, this.selectedBranch.id).subscribe(response => {
+        this.doctors = response.items;
+        this.selectedDoctor = null;
+        this.schedules = [];
+        this.timesWithStatus = [];
+      });
+    }
   }
 
-  /*   getDoctors() {
-      this.doctorService.getDoctors(0, 100).subscribe(
-        (response) => {
-          this.doctors = response.items;
-        },
-        (error) => {
-          console.error('Doktorlar yüklenemedi:', error);
-        }
+  onDoctorChange(): void {
+    if (this.selectedDoctor) {
+      this.doctorScheduleService.getDoctorSchedule(this.pageIndex, this.pageSize, this.selectedDoctor.id).subscribe(schedules => {
+        this.schedules = schedules.items;
+        console.log(this.schedules);
+        this.availableDates = [...new Set(this.schedules.map(schedule => schedule.date))]
+          .map(date => this.formatDate(date))
+          .filter(date => this.isFutureDate(date)); // Sadece gelecekteki tarihleri filtrele
+        console.log(this.availableDates);
+        this.selectedDate = null;
+        this.timesWithStatus = [];
+      });
+    }
+  }
+
+  onDateChange(): void {
+    if (this.selectedDoctor && this.selectedDate) {
+      this.getDoctorAppointments();
+      this.generateTimes();
+      this.updateAvailableTimes();
+    }
+  }
+
+  getDoctorAppointments(): void {
+    if (this.selectedDoctor && this.selectedDate) {
+      const formattedDate = this.formatDate(this.selectedDate);
+      console.log(formattedDate);
+      this.appointmentService.getByDoctorDate(this.pageIndex, this.pageSize, this.selectedDoctor.id, formattedDate).subscribe(response => {
+        console.log(response);
+        this.appointments = response.items;
+        console.log(this.appointments);
+        this.updateAvailableTimes();
+      }, error => { console.log(error) });
+    }
+  }
+
+
+
+
+  updateAvailableTimes(): void {
+    this.timesWithStatus = this.timesWithStatus.map(timeSlot => ({
+      ...timeSlot,
+      disabled: this.isTimeSlotBooked(timeSlot.time)
+    }));
+    console.log("Updated Times with Status:", this.timesWithStatus);
+  }
+
+  isTimeSlotBooked(time: string): boolean {
+    return this.appointments.some(appointment => {
+      const appointmentTime = appointment.time.split(':').slice(0, 2); // Saat ve dakika kısmı
+      const slotTime = time.split(':').slice(0, 2); // Saat ve dakika kısmı
+      return (
+        appointmentTime[0] === slotTime[0] &&
+        appointmentTime[1] === slotTime[1]
       );
-    } */
+    });
+  }
 
-  /* addAppointment(): void {
-    if (this.appointmentForm.valid) {
-      const selectedDoctorId = this.appointmentForm.get('doctorId')?.value;
-      const appointmentData = this.appointmentForm.value;
-      appointmentData.doctorId = selectedDoctorId;
+  formatDate(date: string): string {
+    const d = new Date(date);
+    if (isNaN(d.getTime())) {
+      throw new Error('Geçersiz tarih değeri');
+    }
+    const month = (d.getMonth() + 1).toString().padStart(2, '0');
+    const day = d.getDate().toString().padStart(2, '0');
+    const year = d.getFullYear();
+    return [year, month, day].join('-');
+  }
 
-      this.appointmentService.addAppointment(this.appointmentForm.value).subscribe(
-        (response) => {
-          this.toastrService.success('Randevu başarıyla oluşturuldu');
-          this.router.navigate(['/admin-list-appointments']);
+  isFutureDate(date: string): boolean {
+    const today = new Date();
+    const d = new Date(date);
+    return d >= today;
+  }
+
+  generateTimes(): void {
+    this.timesWithStatus = [];
+    console.log("Schedules:", this.schedules);
+    if (this.schedules.length > 0) {
+      const schedule = this.schedules.find(schedule => this.formatDate(schedule.date) === this.selectedDate);
+      console.log("Selected Schedule:", schedule);
+      if (schedule) {
+        const startTime = this.convertToTime(schedule.startTime);
+        const endTime = this.convertToTime(schedule.endTime);
+        let currentTime = startTime;
+        while (currentTime <= endTime) {
+          this.timesWithStatus.push({
+            time: this.formatTime(currentTime),
+            disabled: false // initially, all time slots are not disabled
+          });
+          currentTime += 30; // increment by 30 minutes
+        }
+        console.log(this.timesWithStatus);
+
+      }
+    }
+    this.updateAvailableTimes();
+  }
+
+  convertToTime(time: string): number {
+    const [hour, minute] = time.split(':').map(Number);
+    return hour * 60 + minute;
+  }
+
+  formatTime(minutes: number): string {
+    const hour = Math.floor(minutes / 60);
+    const minute = minutes % 60;
+    return `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+  }
+
+  addAppointment(): void {
+    if (this.selectedDoctor && this.selectedDate && this.selectedTime && this.selectedPatient) {
+      console.log("selectedDate:" + this.selectedDate);
+      console.log("selectedTime:" + this.selectedTime);
+      console.log("selectedDoctor:" + this.selectedDoctor);
+      console.log("selectedPatient:" + this.selectedPatient)
+      const formattedTime = this.selectedTime + ':00'; // "HH:mm:ss" format
+      const appointment: CreateAppointment = {
+        date: this.selectedDate,
+        time: formattedTime,
+        status: true,
+        doctorID: this.selectedDoctor?.id,
+        patientID: this.selectedPatient?.id,
+      };
+      this.appointmentService.createAppointment(appointment).subscribe(
+        response => {
+          console.log('Appointment created:', response);
+          this.toastrService.success("Randevunuz oluşturuldu");
+          this.router.navigate(['upcoming-appointments']);
         },
-        (error) => {
-          console.error('Error adding appointment:', error);
+        error => {
+          console.error('Error creating appointment:', error);
           this.toastrService.error('Randevu oluşturulamadı');
         }
       );
     } else {
-      console.error('Error adding appointment:', this.appointmentForm.value);
-      this.toastrService.error('Eksik alanları doldurunuz.');
-    }
-  } */
-
-  private formatTime(time: string): string {
-    const date = new Date(`1970-01-01T${time}Z`);
-    const hours = date.getUTCHours().toString().padStart(2, '0');
-    const minutes = date.getUTCMinutes().toString().padStart(2, '0');
-    const seconds = date.getUTCSeconds().toString().padStart(2, '0');
-    return `${hours}:${minutes}:${seconds}`;
-  }
-
-  setMinDateAndTime(): void {
-    const today = new Date();
-    const minDate = today.toISOString().split('T')[0];
-    const hours = today.getHours().toString().padStart(2, '0');
-    const minutes = today.getMinutes().toString().padStart(2, '0');
-    const minTime = `${hours}:${minutes}`;
-
-    (document.getElementById('date') as HTMLInputElement).setAttribute('min', minDate);
-    (document.getElementById('time') as HTMLInputElement).setAttribute('min', minTime);
-  }
-
-
-
-  addAppointment(): void {
-    if (this.appointmentForm.valid) {
-      const appointmentData = this.appointmentForm.value;
-      const isValid = this.validateDateTime(appointmentData.date, appointmentData.time);
-
-      if (!isValid) {
-        this.toastrService.error('Geçmiş tarih veya saate randevu oluşturulamaz.');
-        return;
-      }
-
-      appointmentData.time = this.formatTime(appointmentData.time);
-      this.appointmentService.addAppointment(appointmentData).subscribe(
-        (response) => {
-          this.toastrService.success('Randevu başarıyla oluşturuldu');
-          this.router.navigate(['/upcoming-appointments']);
-        },
-        (error) => {
-          console.error('Error adding appointment:', error);
-          if (error.status === 400) {
-            const validationErrors = error.error.errors;
-            for (const field in validationErrors) {
-              if (validationErrors.hasOwnProperty(field)) {
-                this.toastrService.error(`${field}: ${validationErrors[field]}`);
-              }
-            }
-          } else {
-            this.toastrService.error('Randevu oluşturulamadı');
-          }
-        }
-      );
-    } else {
-      console.error('Error adding appointment:', this.appointmentForm.value);
-      this.toastrService.error('Eksik alanları doldurunuz.');
+      this.toastrService.error('Lütfen gerekli alanları doldurun.');
     }
   }
-
-  validateDateTime(date: string, time: string): boolean {
-    const selectedDate = new Date(`${date}T${time}`);
-    const currentDate = new Date();
-    return selectedDate >= currentDate;
-  }
-
 
 }

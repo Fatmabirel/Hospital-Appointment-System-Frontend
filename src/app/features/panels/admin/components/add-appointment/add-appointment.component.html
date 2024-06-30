@@ -1,75 +1,46 @@
-<!-- <div class="d-flex">
-    <app-admin-sidebar></app-admin-sidebar>
-    <div class="flex-grow-1 p-3">
-      <h2 class="h2">Randevu Ekle</h2>
-      <form [formGroup]="appointmentForm" (ngSubmit)="addAppointment()">
-        <div class="mb-3">
-          <label for="date" class="form-label">Tarih</label>
-          <input id="date" type="date" formControlName="date" class="form-control">
-        </div>
-        <div class="mb-3">
-          <label for="time" class="form-label">Saat</label>
-          <input id="time" type="time" formControlName="time" class="form-control">
-        </div>
-        <div class="mb-3">
-          <label for="patientFirstName" class="form-label">Hasta Adı</label>
-          <input id="patientFirstName" type="text" formControlName="patientFirstName" class="form-control">
-        </div>
-        <div class="mb-3">
-          <label for="patientLastName" class="form-label">Hasta Soyadı</label>
-          <input id="patientLastName" type="text" formControlName="patientLastName" class="form-control">
-        </div>
-        <div class="mb-3">
-          <label for="branchId" class="form-label">Bölüm</label>
-          <select id="branchId" formControlName="branchId" class="form-select" (change)="onBranchChange($event)">
-            <option *ngFor="let branch of branches" [value]="branch.id">{{ branch.name }}</option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <label for="doctorId" class="form-label">Doktor</label>
-          <select id="doctorId" formControlName="doctorId" class="form-select">
-            <option *ngFor="let doctor of doctors" [value]="doctor.id">{{ doctor.firstName }} {{ doctor.lastName }}</option>
-          </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Randevu Ekle</button>
-      </form>
-    </div>
-  </div> -->
+<div class="d-flex">
+  <app-admin-sidebar></app-admin-sidebar>
+  <div class="flex-grow-1 p-3">
+    <h2 class="text-center" style="color: #1565c0;">RANDEVU AL</h2>
 
-  <div class="d-flex">
-    <app-admin-sidebar></app-admin-sidebar>
-    <div class="flex-grow-1 p-3">
-      <h2 class="h2">Randevu Ekle</h2>
-      <form [formGroup]="appointmentForm" (ngSubmit)="addAppointment()">
-        <div class="mb-3">
-          <label for="date" class="form-label">Tarih</label>
-          <input id="date" type="date" formControlName="date" class="form-control">
-        </div>
-        <div class="mb-3">
-          <label for="time" class="form-label">Saat</label>
-          <input id="time" type="time" formControlName="time" class="form-control">
-        </div>
-        <div class="mb-3">
-          <label for="patientId" class="form-label">Hasta</label>
-          <select id="patientId" formControlName="patientId" class="form-select">
-            <option *ngFor="let patient of patients" [value]="patient.id">{{ patient.firstName }} {{ patient.lastName }}</option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <label for="branchId" class="form-label">Bölüm</label>
-          <select id="branchId" formControlName="branchId" class="form-select" (change)="onBranchChange($event)">
-            <option *ngFor="let branch of branches" [value]="branch.id">{{ branch.name }}</option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <label for="doctorId" class="form-label">Doktor</label>
-          <select id="doctorId" formControlName="doctorId" class="form-select">
-            <option *ngFor="let doctor of doctors" [value]="doctor.id">{{ doctor.firstName }} {{ doctor.lastName }}</option>
-          </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Randevu Ekle</button>
-      </form>
+    <div class="form-group mb-3">
+      <label for="patient">Hasta</label>
+      <select id="patient" class="form-control" [(ngModel)]="selectedPatient">
+        <option *ngFor="let patient of patients" [ngValue]="patient">{{ patient.firstName + " " + patient.lastName }}
+        </option>
+      </select>
     </div>
+
+    <div class="form-group mb-3">
+      <label for="branch">Branş</label>
+      <select id="branch" class="form-control" [(ngModel)]="selectedBranch" (change)="onBranchChange()">
+        <option *ngFor="let branch of branches" [ngValue]="branch">{{ branch.name }}</option>
+      </select>
+    </div>
+
+    <div *ngIf="selectedBranch" class="form-group mb-3">
+      <label for="doctor">Doktor</label>
+      <select id="doctor" class="form-control" [(ngModel)]="selectedDoctor" (change)="onDoctorChange()">
+        <option *ngFor="let doctor of doctors" [ngValue]="doctor">{{ doctor.title + " " + doctor.firstName + ' ' +
+          doctor.lastName }}</option>
+      </select>
+    </div>
+
+    <div *ngIf="selectedDoctor" class="form-group mb-3">
+      <label for="date">Tarih</label>
+      <select id="date" class="form-control" [(ngModel)]="selectedDate" (change)="onDateChange()">
+        <option *ngFor="let date of availableDates" [ngValue]="date">{{ date }}</option>
+      </select>
+    </div>
+
+    <div *ngIf="selectedDate" class="form-group mb-3">
+      <label for="time">Saat</label>
+      <select id="time" class="form-control" [(ngModel)]="selectedTime">
+        <option *ngFor="let time of timesWithStatus" [ngValue]="time.time" [disabled]="time.disabled">{{ time.time }}
+        </option>
+      </select>
+    </div>
+
+    <button class="btn btn-primary mt-3" (click)="addAppointment()" [disabled]="!selectedTime">Randevu Al</button>
   </div>
-
-  
+</div>
