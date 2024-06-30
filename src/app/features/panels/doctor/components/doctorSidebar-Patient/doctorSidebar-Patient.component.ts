@@ -28,7 +28,7 @@ import { FilterPatientIdentityPipe } from '../../../../pipe/filter-patient-ident
 })
 export class DoctorSidebarPatientComponent implements OnInit {
   appointments: Appointment[] = [];
-  paitents: Patient[] = [];
+  patients: Patient[] = [];
   pageIndex: number = 0;
   pageSize: number = 12;
   filterText: string = '';
@@ -47,38 +47,40 @@ export class DoctorSidebarPatientComponent implements OnInit {
     this.doctorService.getDoctorProfile().subscribe(
       (doctor) => {
         const doctorId = doctor.id.toString();
-        //console.log('id:', doctorId);
         this.appointmentService
           .getDoctorAppointments(doctorId, this.pageIndex, this.pageSize)
           .subscribe(
             (response: ResponseModel<Appointment>) => {
-              for (let index = 0; index < response.items.length; index++) {
-                const appointment = response.items[index];
-                this.patientService
-                  .getByPatientId(appointment.patientID, 0, 1)
-                  .subscribe((patientResponse: Patient) => {
-                    let patients: Patient = {
-                      address: patientResponse.address,
-                      id: patientResponse.id,
-                      age: patientResponse.age,
-                      dateOfBirth: patientResponse.dateOfBirth,
-                      firstName: patientResponse.firstName,
-                      lastName: patientResponse.lastName,
-                      nationalIdentity: patientResponse.nationalIdentity,
-                      phone: patientResponse.phone,
-                      height: patientResponse.height,
-                      weight: patientResponse.weight,
-                      bloodGroup: patientResponse.bloodGroup,
-                      email: patientResponse.email,
-                      appointmentDate: patientResponse.appointmentDate,
-                      appointmentId: patientResponse.appointmentId,
-                      appointmentRapor: patientResponse.appointmentRapor,
-                      appointmentTime: patientResponse.appointmentTime,
-                    };
+              const patientIds = new Set<string>();
+              response.items.forEach((appointment) => {
+                if (!patientIds.has(appointment.patientID)) {
+                  patientIds.add(appointment.patientID);
+                  this.patientService
+                    .getByPatientId(appointment.patientID, 0, 1)
+                    .subscribe((patientResponse: Patient) => {
+                      const patient: Patient = {
+                        address: patientResponse.address,
+                        id: patientResponse.id,
+                        age: patientResponse.age,
+                        dateOfBirth: patientResponse.dateOfBirth,
+                        firstName: patientResponse.firstName,
+                        lastName: patientResponse.lastName,
+                        nationalIdentity: patientResponse.nationalIdentity,
+                        phone: patientResponse.phone,
+                        height: patientResponse.height,
+                        weight: patientResponse.weight,
+                        bloodGroup: patientResponse.bloodGroup,
+                        email: patientResponse.email,
+                        appointmentDate: patientResponse.appointmentDate,
+                        appointmentId: patientResponse.appointmentId,
+                        appointmentRapor: patientResponse.appointmentRapor,
+                        appointmentTime: patientResponse.appointmentTime,
+                      };
 
-                    this.paitents.push(patients);
-                  });
-              }
+                      this.patients.push(patient);
+                    });
+                }
+              });
             },
             (error) => {
               console.error('doktor bilgisi alınamadı:', error);
@@ -86,7 +88,7 @@ export class DoctorSidebarPatientComponent implements OnInit {
           );
       },
       (error) => {
-        console.error('hasta  bilgileri alınamadı:', error);
+        console.error('hasta bilgileri alınamadı:', error);
       }
     );
   }
