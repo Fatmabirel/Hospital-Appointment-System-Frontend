@@ -80,6 +80,8 @@ import { CookiePolicyComponent } from './shared/components/footer-content/cookie
 import { PatientDashboardComponent } from './features/panels/patient/components/patient-dashboard/patient-dashboard.component';
 import { DoctorAddFeedbackComponent } from './features/panels/doctor/components/doctor-add-feedback/doctor-add-feedback.component';
 import { DoctorUpdateFeedbackComponent } from './features/panels/doctor/components/doctor-update-feedback/doctor-update-feedback.component';
+import { ForgotPasswordComponent } from './features/forgot-password/forgot-password.component';
+
 
 
 export const routes: Routes = [
@@ -362,5 +364,9 @@ export const routes: Routes = [
   {
     path: 'cookie-policy',
     component: CookiePolicyComponent,
+  },
+  {
+    path: 'password',
+    component:ForgotPasswordComponent,
   },
 ];
