@@ -34,7 +34,7 @@ export class PastAppointmentsComponent implements OnInit {
   errorMessage: string;
   hasReportMap: { [key: number]: boolean } = {}; // hasReport bilgisini tutmak için nesne
   pageIndex: number = 0;
-  pageSize: number = 10;
+  pageSize: number = 100;
   totalPages: number = 0;
   hasNext: boolean = false;
   filterText: string = '';
