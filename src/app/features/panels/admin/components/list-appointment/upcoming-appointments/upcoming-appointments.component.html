@@ -1,14 +1,9 @@
 <div class="d-flex">
   <app-admin-sidebar></app-admin-sidebar>
   <div class="flex-grow-1 p-3">
-    <h2
-      style="
-        color: #1565c0;
-        font-size: 28px;
-        text-align: center;
-        margin-bottom: 19px;
-      "
-    >
+    <h2 style="
+        color: #1565c0; font-size: 28px; text-align: center; margin-bottom: 19px;
+      ">
       GELECEK RANDEVULAR
     </h2>
     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -17,13 +12,8 @@
           <span class="input-group-text">
             <i class="bi bi-search"></i>
           </span>
-          <input
-            type="text"
-            [(ngModel)]="filterText"
-            class="form-control"
-            id="filterText"
-            placeholder="Hasta kimlik numarası"
-          />
+          <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText"
+            placeholder="Hasta kimlik numarası" />
         </div>
       </div>
       <div class="d-flex justify-content-end mb-3">
@@ -42,41 +32,25 @@
           <th scope="col" style="width: 10%">Randevu Tarihi</th>
           <th scope="col" style="width: 10%">Randevu Saati</th>
           <th scope="col" style="width: 10%">Durum</th>
-          <!-- <th scope="col" style="width: 15%">Rapor</th> -->
           <th scope="col" style="width: 15%">İşlemler</th>
         </tr>
       </thead>
       <tbody>
-        <tr
-          *ngFor="
+        <tr *ngFor="
             let appointment of upcomingAppointments
               | filterAppointmentIdentity : filterText
-          "
-        >
-          <td>
-            {{ appointment.doctorFirstName }} {{ appointment.doctorLastName }}
-          </td>
-          <td>
-            {{ appointment.patientFirstName }} {{ appointment.patientLastName }}
-          </td>
+          ">
+          <td>{{ appointment.doctorFirstName }} {{ appointment.doctorLastName }}</td>
+          <td>{{ appointment.patientFirstName }} {{ appointment.patientLastName }}</td>
           <td>{{ appointment.patientNationalIdentity }}</td>
           <td>{{ appointment.date | date : "dd.MM.yyyy" }}</td>
           <td>{{ appointment.time }}</td>
           <td>Bekleniyor</td>
-<!--           <td>
-            <button class="btn btn-primary btn-sm" (click)="viewReport()">Raporu Görüntüle</button>
-          </td> -->
           <td>
-            <button
-              class="btn btn-sm btn-primary btn-space"
-              [routerLink]="['/update-appointment', appointment.id]"
-            >
+            <button class="btn btn-sm btn-primary btn-space" [routerLink]="['/update-appointment', appointment.id]">
               <i class="fa fa-pencil"></i>
             </button>
-            <button
-              class="btn btn-sm btn-danger"
-              (click)="confirmDelete(appointment.id)"
-            >
+            <button class="btn btn-sm btn-danger" (click)="confirmDelete(appointment.id)">
               <i class="fa fa-trash"></i>
             </button>
           </td>
