@@ -1,0 +1,31 @@
+/* live-support.component.css */
+.live-support {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .live-support ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .live-support li {
+    cursor: pointer;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .live-support li:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .response {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #e7f7ff;
+    border: 1px solid #bde5ff;
+    border-radius: 4px;
+  }
+  

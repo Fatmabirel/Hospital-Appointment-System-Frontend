@@ -1,0 +1,48 @@
+/* live-support-icon.component.css */
+.live-support-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 70px; /* İkon boyutunu büyütmek için genişlik ve yükseklik artırıldı */
+    height: 70px;
+    background-color: #007bff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: bounce 2s infinite;
+  }
+  
+  .live-support-icon i {
+    font-size: 2.5rem; /* İkonun boyutunu büyütmek için font-size artırıldı */
+    color: white; /* İkonun rengini beyaz olarak ayarladık */
+  }
+  
+  .live-support-window {
+    position: fixed;
+    bottom: 100px; /* İkonun boyutuna göre pencereyi biraz daha yukarı taşıdık */
+    right: 20px;
+    width: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+  }
+  
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(-5px);
+    }
+  }
+  
