@@ -5,13 +5,14 @@ import { DoctorService } from '../../../../doctors/services/doctor.service';
 import { Doctor } from '../../../../doctors/models/doctor';
 import { AuthService } from '../../../../../core/auth/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { NavbarComponent } from "../../../../../shared/components/navbar/navbar.component";
 
 @Component({
-  selector: 'app-doctor-sidebar',
-  standalone: true,
-  imports: [CommonModule, RouterModule],
-  templateUrl: './doctorSidebar.component.html',
-  styleUrl: './doctorSidebar.component.scss',
+    selector: 'app-doctor-sidebar',
+    standalone: true,
+    templateUrl: './doctorSidebar.component.html',
+    styleUrl: './doctorSidebar.component.scss',
+    imports: [CommonModule, RouterModule, NavbarComponent]
 })
 export class DoctorSidebarComponent implements OnInit {
   doctor: Doctor;
