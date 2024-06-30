@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { DoctorSidebarComponent } from '../../features/panels/doctor/components/sidebar/doctorSidebar.component';
 import { TokenService } from '../../core/auth/services/token.service';
 import { ToastrService } from 'ngx-toastr';
+import { LiveSupportIconComponent } from '../../shared/components/live-support-icon/live-support-icon.component';
 
 @Component({
   selector: 'app-home-page',
@@ -28,6 +29,7 @@ import { ToastrService } from 'ngx-toastr';
     FontAwesomeModule,
     SliderComponent,
     DoctorSidebarComponent,
+    LiveSupportIconComponent
   ],
 })
 export class HomePageComponent implements OnInit {
