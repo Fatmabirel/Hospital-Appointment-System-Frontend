@@ -78,7 +78,7 @@ import { DoctorAddFeedbackComponent } from './features/panels/doctor/components/
 import { DoctorUpdateFeedbackComponent } from './features/panels/doctor/components/doctor-update-feedback/doctor-update-feedback.component';
 
 import { TodayAppointmentComponent } from './features/panels/doctor/components/summary/today-appointment/today-appointment.component';
-=======
+
 import { ForgotPasswordComponent } from './features/forgot-password/forgot-password.component';
 
 
@@ -369,8 +369,8 @@ export const routes: Routes = [
 
     path:"today-appointment",
     component:TodayAppointmentComponent
-  }
-
+  },
+  {
     path: 'password',
     component:ForgotPasswordComponent,
   },
