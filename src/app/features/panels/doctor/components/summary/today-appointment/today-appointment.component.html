@@ -1,0 +1,25 @@
+<div class="d-flex">
+  <app-doctor-sidebar></app-doctor-sidebar>
+  <div class="flex-grow-1 p-3">
+    <h2 style="color: #1565c0; font-size: 28px; text-align: center;margin-bottom: 19px;">BUGÜN Kİ RANDEVULAR</h2>
+    <table class="table table-striped">
+      <thead class="thead-primary">
+        <tr>
+          <!-- <th scope="col" style="width: 20%;">Hasta Adı Soyadı</th> -->
+          <th scope="col" style="width: 15%;">Hasta Kimlik Nuamarası</th>
+         <th scope="col" style="width: 15%;">Randevu Tarihi</th>
+          <th scope="col" style="width: 15%;">Randevu Saati</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let appointment of appointments" >
+          <!-- <td>{{ appointment.patientFirstName }} {{ appointment.patientLastName }}</td> -->
+          <td>{{ appointment.patientNationalIdentity }}</td>
+          <td>{{ appointment.date | date:'dd.MM.yyyy' }}</td>
+          <td>{{ appointment.time }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
