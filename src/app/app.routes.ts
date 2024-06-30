@@ -13,7 +13,6 @@ import { AppointmentHistoryComponent } from './features/panels/doctor/components
 import { PendingAppointmentComponent } from './features/panels/doctor/components/pending-appointment/pending-appointment.component';
 import { DoctorProfileComponent } from './features/panels/doctor/components/doctor-profile/doctor-profile.component';
 import { CreateDoctorScheduleComponent } from './features/panels/doctor/components/create-doctor-schedule/create-doctor-schedule.component';
-import { DoctorDashboardComponent } from './features/panels/doctor/components/doctor-dashboard/doctor-dashboard.component';
 import { ListReportComponent } from './features/panels/doctor/components/list-report/list-report.component';
 import { EditReportComponent } from './features/panels/doctor/components/edit-report/edit-report.component';
 import { AddReportComponent } from './features/panels/doctor/components/add-report/add-report.component';
@@ -69,7 +68,6 @@ import { VisitorCompanionPolicyComponent } from './shared/components/footer-cont
 import { QualityPolicyComponent } from './shared/components/footer-content/quality-policy/quality-policy/quality-policy.component';
 import { KvkkComponent } from './shared/components/footer-content/kvkk/kvkk/kvkk.component';
 import { CookiePolicyComponent } from './shared/components/footer-content/cookie-policy/cookie-policy/cookie-policy.component';
-import { PatientDashboardComponent } from './features/panels/patient/components/patient-dashboard/patient-dashboard.component';
 import { DoctorAddFeedbackComponent } from './features/panels/doctor/components/doctor-add-feedback/doctor-add-feedback.component';
 import { DoctorUpdateFeedbackComponent } from './features/panels/doctor/components/doctor-update-feedback/doctor-update-feedback.component';
 
@@ -121,10 +119,6 @@ export const routes: Routes = [
   {
     path: 'doctor-sidebar',
     component: DoctorSidebarComponent,
-  },
-  {
-    path: 'doctor-dashboard',
-    component: DoctorDashboardComponent,
   },
   {
     path: 'doctor-profile',
@@ -318,10 +312,6 @@ export const routes: Routes = [
     path: 'patient-update-feedback/:feedbackId',
     component: PatientUpdateFeedbackComponent,
   },
-  {
-    path: 'patient-dashboard',
-    component: PatientDashboardComponent,
-  },
 
   {
     path: 'admin-edit-doctor-schedule/:doctorId/:scheduleId',
@@ -333,9 +323,9 @@ export const routes: Routes = [
     component: CreateAppointmentComponent,
   },
 
-  { 
+  {
     path: 'update-appointment/:id',
-    component: UpdateAppointmentComponent, 
+    component: UpdateAppointmentComponent,
   },
 
   {

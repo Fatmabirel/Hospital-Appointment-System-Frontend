@@ -1,7 +1,10 @@
 <div class="d-flex">
-    <app-doctor-sidebar></app-doctor-sidebar>
-  
-    <div class="flex-grow-1 p-3">
+  <app-doctor-sidebar></app-doctor-sidebar>
+  <div class="flex-grow-1 p-3">
+  <div class="content">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
       <h2
         style="
           color: #1565c0;
@@ -12,10 +15,12 @@
       >
         GERİ BİLDİRİMLERİM
       </h2>
+        </div>
+        <div class="card-body">
       <div class="d-flex justify-content-end mb-3">
         <button class="btn btn-success" [routerLink]="['/doctor-add-feedback']">Geri Bildirim Ekle</button>
       </div>
-  
+
       <table class="table table-striped">
         <thead class="thead-dark">
           <tr>
@@ -42,6 +47,6 @@
           </tr>
         </tbody>
       </table>
+        </div>
     </div>
   </div>
-  

@@ -1,8 +1,13 @@
 <div class="d-flex">
   <app-doctor-sidebar></app-doctor-sidebar>
 
+
   <div class="flex-grow-1 p-3">
+    <div class="card">
+      <div class="card-header">
     <h2 style="color: #1565c0; font-size: 28px; text-align: center;margin-bottom: 19px;">ÇALIŞMA TAKVİMİM</h2>
+      </div>
+      <div class="card-body">
     <div class="d-flex justify-content-end mb-3">
       <button class="btn btn-success" [routerLink]="['/doctor-schedule']">Çalışma Takvimi Ekle</button>
     </div>
@@ -31,5 +36,6 @@
         </tr>
       </tbody>
     </table>
+      </div>
   </div>
 </div>
