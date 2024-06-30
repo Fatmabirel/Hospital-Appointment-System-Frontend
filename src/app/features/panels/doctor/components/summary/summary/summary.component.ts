@@ -1,0 +1,17 @@
+import { Component } from '@angular/core';
+import { TodayAppointmentComponent } from "../today-appointment/today-appointment.component";
+import { TomorrowAppointmentComponent } from "../tomorrow-appointment/tomorrow-appointment.component";
+import { DrscheduleComponent } from "../drschedule/drschedule.component";
+import { ReportsComponent } from "../reports/reports.component";
+import { DoctorSidebarComponent } from "../../sidebar/doctorSidebar.component";
+
+@Component({
+    selector: 'app-summary',
+    standalone: true,
+    templateUrl: './summary.component.html',
+    styleUrl: './summary.component.scss',
+    imports: [TodayAppointmentComponent, TomorrowAppointmentComponent, DrscheduleComponent, ReportsComponent, DoctorSidebarComponent]
+})
+export class SummaryComponent {
+
+}

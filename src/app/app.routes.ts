@@ -62,10 +62,6 @@ import { PatientUpdateFeedbackComponent } from './features/panels/patient/compon
 import { UpdateAppointmentComponent } from './features/panels/admin/components/update-appointment/update-appointment.component';
 import { AddAppointmentComponent } from './features/panels/admin/components/add-appointment/add-appointment.component';
 
-import { AppointmentChartComponent } from './features/panels/admin/components/charts/appointment-chart/appointment-chart.component';
-import { TotalNumberCardsComponent } from './features/panels/admin/components/charts/total-number-cards/total-number-cards.component';
-import { PieChartBranchComponent } from './features/panels/admin/components/charts/pie-chart-brach/pie-chart-branch.component';
-import { PaiChartTitleComponent } from './features/panels/admin/components/charts/pai-chart-title/pai-chart-title.component';
 import { DashboardComponent } from './features/panels/admin/components/charts/dashboard/dashboard.component';
 
 
@@ -77,9 +73,11 @@ import { PatientDashboardComponent } from './features/panels/patient/components/
 import { DoctorAddFeedbackComponent } from './features/panels/doctor/components/doctor-add-feedback/doctor-add-feedback.component';
 import { DoctorUpdateFeedbackComponent } from './features/panels/doctor/components/doctor-update-feedback/doctor-update-feedback.component';
 
-import { TodayAppointmentComponent } from './features/panels/doctor/components/summary/today-appointment/today-appointment.component';
+
 
 import { ForgotPasswordComponent } from './features/forgot-password/forgot-password.component';
+import { SummaryComponent } from './features/panels/doctor/components/summary/summary/summary.component';
+import { PatientSummaryComponent } from './features/panels/patient/components/summary/patient-summary/patient-summary.component';
 
 
 
@@ -345,7 +343,7 @@ export const routes: Routes = [
     component: AddAppointmentComponent,
   },
   {
-    path: 'appointment-chart',
+    path: 'chart',
     component: DashboardComponent,
   },
 
@@ -370,9 +368,18 @@ export const routes: Routes = [
   },
   {
 
-    path:"today-appointment",
-    component:TodayAppointmentComponent
+    path:"doctor-summary",
+    component:SummaryComponent
+
   },
+  {
+
+    path:"patient-summary",
+    component:PatientSummaryComponent
+
+  },
+
+
   {
     path: 'password',
     component:ForgotPasswordComponent,
