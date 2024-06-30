@@ -4,19 +4,22 @@ import { AppointmentService } from '../../../../../appointments/services/appoint
 import { Appointment } from '../../../../../appointments/models/appointmentModel';
 import { DoctorSidebarComponent } from "../../sidebar/doctorSidebar.component";
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { FilterAppointmentIdentityPipe } from "../../../../../pipe/filter-appointment-identity.pipe";
 
 @Component({
     selector: 'app-today-appointment',
     standalone: true,
     templateUrl: './today-appointment.component.html',
     styleUrls: ['./today-appointment.component.scss'],
-    imports: [DoctorSidebarComponent, CommonModule]
+    imports: [DoctorSidebarComponent, CommonModule, FormsModule, FilterAppointmentIdentityPipe]
 })
 export class TodayAppointmentComponent implements OnInit {
     pageIndex: number = 0;
     pageSize: number = 100; // Eğer randevu sayısı çok fazla değilse yüksek bir değer kullanabilirsiniz.
     appointments: Appointment[] = [];
     todayDate: Date = new Date();
+    filterText: string = "";
 
     constructor(private tokenService: TokenService,
                 private appointmentService: AppointmentService) {}

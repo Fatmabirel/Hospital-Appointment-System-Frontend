@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { PatientSidebarComponent } from '../sidebar/psidebar.component';
 import { RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { TokenService } from '../../../../../core/auth/services/token.service';
 
 @Component({
   selector: 'app-patient-list-feedback',
@@ -18,7 +19,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './patient-list-feedback.component.scss'
 })
 export class PatientListFeedbackComponent {
-  patient: Patient;
+
   userID: string;
   feedbacks: Feedback[];
   pageIndex: number = 0;
@@ -27,16 +28,15 @@ export class PatientListFeedbackComponent {
   constructor(
     private feedbackService: FeedbackService,
     private toastrService: ToastrService,
-    private patientService: PatientService,
+    private tokenService:TokenService,
     private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
-    this.patientService.getPatientProfile().subscribe((patient) => {
-      this.patient = patient;
-      this.userID = patient.id;
+
+      this.userID = this.tokenService.getUserId().toString();
       this.getFeedbackByUserId(this.userID);
-    });
+
   }
 
   getFeedbackByUserId(userID: string) {
@@ -52,7 +52,7 @@ export class PatientListFeedbackComponent {
       width: '400px',
       data: { title: 'ONAY', message: 'Bu geri bildirimi silmek istediğinizden emin misiniz?' },
     });
-  
+
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.deleteFeedback(feedbackId);
