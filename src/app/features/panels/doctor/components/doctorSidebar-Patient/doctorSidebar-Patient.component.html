@@ -39,15 +39,15 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let paitent of paitents |filterPatientIdentity:filterText">
+        <tr *ngFor="let patient of patients |filterPatientIdentity:filterText">
           <td>
-            {{ paitent.firstName | CapitalizeFirst }}
-            {{ paitent.lastName | CapitalizeFirst }}
+            {{ patient.firstName | CapitalizeFirst }}
+            {{ patient.lastName | CapitalizeFirst }}
           </td>
-          <td>{{ paitent.nationalIdentity }}</td>
-          <td>{{ paitent.dateOfBirth }}</td>
-          <td>{{ paitent.age }}</td>
-          <td>{{ paitent.phone }}</td>
+          <td>{{ patient.nationalIdentity }}</td>
+          <td>{{ patient.dateOfBirth }}</td>
+          <td>{{ patient.age }}</td>
+          <td>{{ patient.phone }}</td>
         </tr>
       </tbody>
     </table>

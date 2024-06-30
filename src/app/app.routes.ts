@@ -69,10 +69,6 @@ import { PaiChartTitleComponent } from './features/panels/admin/components/chart
 import { DashboardComponent } from './features/panels/admin/components/charts/dashboard/dashboard.component';
 
 
-
-
-
-
 import { VisitorCompanionPolicyComponent } from './shared/components/footer-content/visitor-companion-policy/visitor-companion-policy/visitor-companion-policy.component';
 import { QualityPolicyComponent } from './shared/components/footer-content/quality-policy/quality-policy/quality-policy.component';
 import { KvkkComponent } from './shared/components/footer-content/kvkk/kvkk/kvkk.component';
@@ -80,7 +76,11 @@ import { CookiePolicyComponent } from './shared/components/footer-content/cookie
 import { PatientDashboardComponent } from './features/panels/patient/components/patient-dashboard/patient-dashboard.component';
 import { DoctorAddFeedbackComponent } from './features/panels/doctor/components/doctor-add-feedback/doctor-add-feedback.component';
 import { DoctorUpdateFeedbackComponent } from './features/panels/doctor/components/doctor-update-feedback/doctor-update-feedback.component';
+
+import { TodayAppointmentComponent } from './features/panels/doctor/components/summary/today-appointment/today-appointment.component';
+
 import { ForgotPasswordComponent } from './features/forgot-password/forgot-password.component';
+
 
 
 
@@ -369,7 +369,13 @@ export const routes: Routes = [
     component: CookiePolicyComponent,
   },
   {
+
+    path:"today-appointment",
+    component:TodayAppointmentComponent
+  },
+  {
     path: 'password',
     component:ForgotPasswordComponent,
   },
+
 ];
