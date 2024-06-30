@@ -1,13 +1,11 @@
-<!-- live-support.component.html -->
 <div class="live-support">
-    <h3>Nasıl Yardımcı Olabiliriz?</h3>
-    <ul>
-      <li *ngFor="let message of messages" (click)="selectMessage(message)">
-        {{ message.text }}
-        <div *ngIf="message.response" class="response">
-          <p>{{ message.response }}</p>
-        </div>
-      </li>
-    </ul>
-  </div>
-  
+  <h3>{{ welcomeMessage }}</h3>
+  <ul>
+    <li *ngFor="let message of currentMessages" (click)="selectMessage(message)">
+      {{ message.text }}
+      <div *ngIf="selectedMessageId === message.id && message.response" class="response">
+        <p>{{ message.response }}</p>
+      </div>
+    </li>
+  </ul>
+</div>
