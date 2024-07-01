@@ -8,7 +8,7 @@ import { FilterDoctorBranchPipe } from '../../../pipe/filter-doctor-branch.pipe'
 import { FormsModule } from '@angular/forms';
 import { Branch } from '../../../branches/models/branch';
 import { BranchService } from '../../../branches/services/branch.service';
-import { ScrollService } from '../../../../shared/components/footer-content/scroll-service.service';
+
 
 @Component({
   selector: 'app-doctor-list',
@@ -26,7 +26,7 @@ export class DoctorListComponent implements OnInit {
   isLoading: boolean = true;
   selectedBranch: string = '';
 
-  constructor(private doctorService: DoctorService,private branchService:BranchService,private scrollService: ScrollService) {}
+  constructor(private doctorService: DoctorService,private branchService:BranchService,) {}
 
   ngOnInit(): void {
     this.getDoctors();
