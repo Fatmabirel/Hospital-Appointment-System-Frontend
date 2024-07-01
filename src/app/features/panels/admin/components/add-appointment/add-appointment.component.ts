@@ -18,6 +18,7 @@ import { TokenService } from '../../../../../core/auth/services/token.service';
 import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { SmsService } from '../../../../appointments/services/smsMock.service';
 
 @Component({
   selector: 'app-add-appointment',
@@ -53,7 +54,8 @@ export class AddAppointmentComponent implements OnInit {
     private appointmentService: AppointmentService,
     private tokenService: TokenService,
     private toastrService: ToastrService,
-    private router: Router
+    private router: Router,
+    private smsService: SmsService
   ) { }
 
   ngOnInit(): void {
@@ -214,6 +216,19 @@ export class AddAppointmentComponent implements OnInit {
           console.log('Appointment created:', response);
           this.toastrService.success("Randevunuz oluşturuldu");
           this.router.navigate(['upcoming-appointments']);
+          
+          const message =`Sayın ${this.selectedPatient?.firstName} ${this.selectedPatient?.lastName},
+                            ${this.selectedDoctor?.firstName} ${this.selectedDoctor?.lastName} doktorundan randevunuz başarıyla oluşturulmuştur.
+                            Branş: ${this.selectedDoctor?.branchName}
+                            Randevu Tarihi: ${this.selectedDate}
+                            Randevu Saati: ${formattedTime}
+                            Detaylı bilgi için web sitemizi ziyaret edebilirsiniz.`;
+          this.smsService.sendSms(String(this.selectedPatient?.phone), message).subscribe(smsResponse => {
+            console.log('SMS sent:', smsResponse);
+            /* this.toastrService.success('Sms tarafınıza gönderildi.'); */
+          }, smsError => {
+            console.error('SMS sending error:', smsError);
+          });
         },
         error => {
           console.error('Error creating appointment:', error);
