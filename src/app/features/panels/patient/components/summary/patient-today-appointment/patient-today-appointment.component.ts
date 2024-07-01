@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
 export class PatientTodayAppointmentComponent {
   appointments: Appointment[] = [];
   pageIndex: number = 0;
-  pageSize: number = 12;
+  pageSize: number = 100; //12
   todayDate: Date = new Date(); // Bugünkü tarihi al
 
   constructor(
