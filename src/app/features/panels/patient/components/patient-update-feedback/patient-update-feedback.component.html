@@ -1,10 +1,15 @@
 <div class="d-flex">
-    <app-patient-sidebar></app-patient-sidebar>
-  
-    <div class="flex-grow-1 p-3">
+  <app-patient-sidebar></app-patient-sidebar>
+  <div class="flex-grow-1 p-3">
+    <div class="content">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
       <h2 class="h2">
         GERİ BİLDİRİM GÜNCELLE
       </h2>
+    </div>
+    <div class="card-body">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-md-11 mx-auto">
@@ -16,7 +21,7 @@
                   <textarea class="form-control" id="inputFeedback" formControlName="text" rows="5"></textarea>
                 </div>
               </div>
-  
+
               <div class="col-12">
                 <button type="submit" class="btn btn-primary w-100" (click)="updateFeedback()">Geri Bildirimi Güncelle</button>
               </div>
@@ -26,4 +31,3 @@
       </div>
     </div>
   </div>
-  

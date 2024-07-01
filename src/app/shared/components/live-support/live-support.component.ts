@@ -49,6 +49,7 @@ export class LiveSupportComponent {
   welcomeMessage = 'Merhaba, ben dijital asistanınız Pair5. Size hangi konuda yardımcı olmamı istersiniz?';
   selectedMessageId: number | null = null;  // Seçilen mesajın ID'sini tutmak için değişken
   currentMessages: Message[] = [];  // Gösterilecek mesajlar listesi
+  history: Message[][] = [];  // Geçmiş mesaj listelerini tutmak için
 
   constructor() {
     this.currentMessages = this.initialOptions; // Başlangıçta ilk seçenekleri göster
@@ -60,6 +61,9 @@ export class LiveSupportComponent {
     } else {
       this.selectedMessageId = message.id;  // Yeni mesaja tıklandığında ID'yi güncelle
     }
+
+    // Şu anki mesajları history'ye ekleyin
+    this.history.push([...this.currentMessages]);
 
     switch (message.id) {
       case 1:
@@ -89,7 +93,7 @@ export class LiveSupportComponent {
             message.response = 'Randevu alabileceğiniz doktorları "Doktorlar" bölümünden görebilirsiniz.';
             break;
           case 201:
-            message.response = 'Üyelik için ad,soyad,telefon ve şifre girmeniz gerekmektedir.';
+            message.response = 'Üyelik için ad, soyad, telefon ve şifre girmeniz gerekmektedir.';
             break;
           case 202:
             message.response = 'Üyelik avantajları arasında hızlı randevu erişimi bulunmaktadır.';
@@ -124,6 +128,12 @@ export class LiveSupportComponent {
           default:
             message.response = 'Belirtilen konu hakkında bilgi bulunamadı.';
         }
+    }
+  }
+  goBack() {
+    if (this.history.length > 0) {
+      this.currentMessages = this.history.pop() || this.initialOptions;  // Geçmişteki mesaj listesini geri yükle
+      this.selectedMessageId = null;  // Seçili mesajı temizle
     }
   }
 }
