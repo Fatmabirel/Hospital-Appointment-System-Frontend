@@ -14,6 +14,7 @@ import { BasicLayoutComponent } from '../../../shared/components/basic-layout/ba
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { TokenService } from '../../../core/auth/services/token.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ScrollService } from '../../../shared/components/footer-content/scroll-service.service';
 
 @Component({
   selector: 'app-login',
@@ -35,7 +36,8 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private toastrService: ToastrService,
     private router: Router,
-    private tokenService:TokenService
+    private tokenService:TokenService,
+    private scrollService: ScrollService
   ) {}
 
   ngOnInit(): void {
