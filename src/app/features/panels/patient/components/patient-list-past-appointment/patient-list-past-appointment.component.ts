@@ -20,7 +20,7 @@ export class PatientListPastAppointmentComponent {
   appointments: Appointment[] = [];
   hasReportMap: { [key: number]: boolean } = {}; // hasReport bilgisini tutmak için nesne
   pageIndex: number = 0;
-  pageSize: number = 12;
+  pageSize: number = 100;
   todayDate: Date = new Date(); // Bugünkü tarihi al
 
   constructor(
@@ -34,6 +34,7 @@ export class PatientListPastAppointmentComponent {
   ngOnInit(): void {
     this.getPatientAppointments();
   }
+
 
   getPatientAppointments(): void {
     this.patientService.getPatientProfile().subscribe(

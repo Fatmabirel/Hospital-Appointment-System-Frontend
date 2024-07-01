@@ -31,12 +31,23 @@ export class ReportsComponent implements OnInit {
   ngOnInit(): void {
     this.getDoctorReports();
   }
+
+  sortReportsByDateDescending(): void {
+    this.reports.sort((a, b) => {
+      const dateA = new Date(a.appointmentDate); // a.date tarih formatında olduğunu varsayıyoruz
+      const dateB = new Date(b.appointmentDate);
+      return dateB.getTime() - dateA.getTime(); // Azalan sırayla sıralama
+    });
+  }
+  
+
   getDoctorReports() {
     let doctorId = this.tokenService.getUserId().toString();
     this.reportService
       .getDoctorReports(this.pageIndex, this.pageSize, doctorId)
       .subscribe((response) => {
         this.reports = response.items;
+        this.sortReportsByDateDescending();
       });
   }
 

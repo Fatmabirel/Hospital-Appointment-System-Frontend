@@ -43,6 +43,8 @@ export class DoctorSidebarPatientComponent implements OnInit {
     this.loadDoctorPatients();
   }
 
+  
+
   loadDoctorPatients(): void {
     this.doctorService.getDoctorProfile().subscribe(
       (doctor) => {
@@ -78,6 +80,9 @@ export class DoctorSidebarPatientComponent implements OnInit {
                       };
 
                       this.patients.push(patient);
+
+                      // Hastaları sıralama
+                      this.patients.sort((a, b) => a.firstName.localeCompare(b.firstName));
                     });
                 }
               });

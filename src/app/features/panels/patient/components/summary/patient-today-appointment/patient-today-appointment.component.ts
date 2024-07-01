@@ -28,6 +28,14 @@ export class PatientTodayAppointmentComponent {
     this.getPatientAppointments();
   }
 
+  sortAppointments(): void {
+    this.appointments.sort((a, b) => {
+      const dateA = new Date(a.date + ' ' + a.time);
+      const dateB = new Date(b.date + ' ' + b.time);
+      return dateA.getTime() - dateB.getTime(); // Artan sırayla sıralama
+    });
+  }
+  
   getPatientAppointments(): void {
     this.patientService.getPatientProfile().subscribe(
       (patient) => {
@@ -43,6 +51,7 @@ export class PatientTodayAppointmentComponent {
                 // Tarih kontrolü
                 return appointmentDateStr === todayStr;
             });
+            this.sortAppointments();
             },
             (error) => {
               console.error('Randevular alınamadı:', error);

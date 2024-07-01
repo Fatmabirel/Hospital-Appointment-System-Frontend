@@ -26,12 +26,21 @@ export class PatientListReportComponent {
   ngOnInit(): void {
     this.getPatientReports();
   }
+
+  sortReportsByDateDescending(): void {
+    this.reports.sort((a, b) => {
+      const dateA = new Date(a.reportDate);
+      const dateB = new Date(b.reportDate);
+      return dateB.getTime() - dateA.getTime(); // Sort in descending order
+    });
+  }
   
   getPatientReports()
   {
     const patientId = this.tokenService.getUserId().toString();
     this.reportService.getPatientReports(this.pageIndex,this.pageSize,patientId).subscribe(response=>{
     this.reports=response.items;
+    this.sortReportsByDateDescending();
   }
    )}
 }
