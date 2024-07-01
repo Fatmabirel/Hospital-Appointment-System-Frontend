@@ -3,6 +3,7 @@ import { Branch } from '../../models/branch';
 import { BranchService } from '../../services/branch.service';
 import { CommonModule } from '@angular/common';
 import { BasicLayoutComponent } from '../../../../shared/components/basic-layout/basic-layout.component';
+import { ScrollService } from '../../../../shared/components/footer-content/scroll-service.service';
 
 @Component({
   selector: 'app-branch-list',
@@ -18,7 +19,7 @@ export class BranchListComponent implements OnInit {
   pageSize: number = 50;
   groupedBranches: { [key: string]: Branch[] } = {};
 
-  constructor(private branchService:BranchService){}
+  constructor(private branchService:BranchService, private scrollService: ScrollService){}
 
   ngOnInit(): void {
     this.getBranches();
