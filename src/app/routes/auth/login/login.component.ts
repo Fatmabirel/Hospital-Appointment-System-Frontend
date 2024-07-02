@@ -45,8 +45,7 @@ export class LoginComponent implements OnInit {
   createLoginForm() {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      authenticatorCode: [''],
+      password: ['', [Validators.required, Validators.minLength(8)]]
     });
   }
 
@@ -69,7 +68,8 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['patient-summary'])
         },
         (responseError) => {
-          this.toastrService.error('Giriş başarısız. Lütfen bilgilerinizi kontrol edin.', 'Hata');
+          console.log(responseError);
+          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
     } else {

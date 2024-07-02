@@ -25,6 +25,12 @@ export class AuthService {
     return this.httpClient.post<TokenModel>(`${this.apiUrl}/Register/Patient`, registerModel);
   }
 
+  verifyEmail(activationKey: string){
+    const url = `${this.apiUrl}/VerifyEmailAuthenticator?ActivationKey=${encodeURIComponent(activationKey)}`;
+    return this.httpClient.get(url);
+  }
+  
+  
   isAuthenticated() {
     if (localStorage.getItem('token')) {
       return true;
