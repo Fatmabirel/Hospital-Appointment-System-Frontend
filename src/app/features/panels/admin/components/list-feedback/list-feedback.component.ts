@@ -33,11 +33,21 @@ export class ListFeedbackComponent {
     this.getFeedbacks();
   }
 
+  sortFeedbacksByDateDescending(): void {
+    this.feedbacks.sort((a, b) => {
+      const dateA = new Date(a.createdDate); // a.date tarih formatında olduğunu varsayıyoruz
+      const dateB = new Date(b.createdDate);
+      return dateB.getTime() - dateA.getTime(); // Azalan sırayla sıralama
+    });
+  }
+  
+
   getFeedbacks() {
     this.feedbackService
       .getFeedbacks(this.pageIndex, this.pageSize)
       .subscribe((response) => {
         this.feedbacks = response.items;
+        this.sortFeedbacksByDateDescending();
         this.totalPages = response.pages;
         this.hasNext = response.hasNext;
       });

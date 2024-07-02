@@ -30,6 +30,14 @@ export class TomorrowAppointmentComponent implements OnInit {
     this.loadTomorrowAppointments();
   }
 
+  sortAppointments(): void {
+    this.appointments.sort((a, b) => {
+      const dateA = new Date(a.date + ' ' + a.time);
+      const dateB = new Date(b.date + ' ' + b.time);
+      return dateA.getTime() - dateB.getTime(); // Artan sırayla sıralama
+    });
+  }  
+
   loadTomorrowAppointments(): void {
     const doctorId: string = this.tokenService.getUserId();
     const tomorrowStr = this.tomorrowDate.toISOString().split('T')[0]; // Yarınki tarihi alır ve formatlar
@@ -42,6 +50,7 @@ export class TomorrowAppointmentComponent implements OnInit {
         // Tarih kontrolü
         return appointmentDateStr === tomorrowStr;
       });
+      this.sortAppointments();
     }, responseError => {
       console.log(responseError.error.detail);
     });

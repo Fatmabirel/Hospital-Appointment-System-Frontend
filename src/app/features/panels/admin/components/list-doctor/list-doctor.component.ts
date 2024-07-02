@@ -66,6 +66,7 @@ export class ListDoctorComponent implements OnInit {
       .getDoctors(this.pageIndex, this.pageSize)
       .subscribe((response) => {
         this.doctors = response.items;
+        this.doctors.sort((a, b) => a.firstName.localeCompare(b.firstName));
         this.totalPages = response.pages;
         this.hasNext = response.hasNext;
       });

@@ -54,6 +54,7 @@ export class ListPatientComponent implements OnInit {
       .getPatients(this.pageIndex, this.pageSize)
       .subscribe((response) => {
         this.patients = response.items;
+        this.patients.sort((a, b) => a.firstName.localeCompare(b.firstName));
         this.totalPages = response.pages;
         this.hasNext = response.hasNext;
       });

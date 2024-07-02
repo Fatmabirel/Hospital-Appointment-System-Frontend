@@ -53,6 +53,7 @@ export class ListBranchComponent implements OnInit {
     this.branchService.getBranches(this.pageIndex, this.pageSize).subscribe(
       (response) => {
         this.branches = response.items;
+        this.branches.sort((a, b) => a.name.localeCompare(b.name));
         this.totalPages = response.pages;
         this.hasNext = response.hasNext;
       },

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BasicLayoutComponent } from '../../../basic-layout/basic-layout.component';
+import { ScrollService } from '../../scroll-service.service';
 
 @Component({
   selector: 'app-kvkk',
@@ -8,6 +9,11 @@ import { BasicLayoutComponent } from '../../../basic-layout/basic-layout.compone
   templateUrl: './kvkk.component.html',
   styleUrl: './kvkk.component.scss'
 })
-export class KvkkComponent {
+export class KvkkComponent implements OnInit{
 
+  constructor(private scrollService: ScrollService, ) {}
+
+  ngOnInit(): void {
+
+}
 }

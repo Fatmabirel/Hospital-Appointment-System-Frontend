@@ -35,6 +35,14 @@ export class PendingAppointmentComponent {
     this.loadDoctorAppointments();
   }
 
+  sortAppointments(): void {
+    this.appointments.sort((a, b) => {
+      const dateA = new Date(a.date + ' ' + a.time);
+      const dateB = new Date(b.date + ' ' + b.time);
+      return dateA.getTime() - dateB.getTime(); // Artan sırayla sıralama
+    });
+  }
+
   loadDoctorAppointments(): void {
     this.doctorService.getDoctorProfile().subscribe(
       (doctor) => {
@@ -54,6 +62,7 @@ export class PendingAppointmentComponent {
                       this.todayDate.toTimeString().slice(0, 5))
                 );
               });
+              this.sortAppointments();
             },
             (error) => {
               console.error('Randevular alınamadı:', error);
