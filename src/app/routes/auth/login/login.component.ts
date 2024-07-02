@@ -15,6 +15,7 @@ import { BasicLayoutComponent } from '../../../shared/components/basic-layout/ba
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { TokenService } from '../../../core/auth/services/token.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ScrollService } from '../../../shared/components/footer-content/scroll-service.service';
 
 @Component({
   selector: 'app-login',
@@ -36,7 +37,8 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private toastrService: ToastrService,
     private router: Router,
-    private tokenService:TokenService
+    private tokenService:TokenService,
+    private scrollService: ScrollService
   ) {}
 
   ngOnInit(): void {
@@ -45,9 +47,13 @@ export class LoginComponent implements OnInit {
 
   createLoginForm() {
     this.loginForm = this.formBuilder.group({
+
       email:new FormControl ('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(8),Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\\d!@#$%^&*(),.?":{}|<>]{8,15}$')]),
       authenticatorCode: [''],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]]
+
     });
   }
 
@@ -84,7 +90,8 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['patient-summary'])
         },
         (responseError) => {
-          this.toastrService.error('Giriş başarısız. Lütfen bilgilerinizi kontrol edin.', 'Hata');
+          console.log(responseError);
+          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
     } else {

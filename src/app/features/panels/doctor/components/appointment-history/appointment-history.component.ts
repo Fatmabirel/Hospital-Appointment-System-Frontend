@@ -45,6 +45,15 @@ export class AppointmentHistoryComponent implements OnInit {
     this.loadDoctorAppointments();
   }
 
+  sortAppointments(): void {
+    this.appointments.sort((a, b) => {
+      const dateA = new Date(a.date + ' ' + a.time);
+      const dateB = new Date(b.date + ' ' + b.time);
+      return dateB.getTime() - dateA.getTime(); // Artan sırayla sıralama
+    });
+  }
+  
+
   loadDoctorAppointments(): void {
     this.doctorService.getDoctorProfile().subscribe(
       (doctor) => {
@@ -87,6 +96,7 @@ export class AppointmentHistoryComponent implements OnInit {
               // Tüm observables tamamlandığında appointments listesini güncelle
               Promise.all(appointmentObservables).then(() => {
                 this.appointments = filteredAppointments;
+                this.sortAppointments();
               });
             },
             (error) => {

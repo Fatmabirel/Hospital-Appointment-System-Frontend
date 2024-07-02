@@ -27,7 +27,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class AdminListReportComponent {
   reports: ResponseReport[] = [];
   pageIndex: number = 0;
-  pageSize: number = 5;
+  pageSize: number = 100;
   totalPages: number = 0;
   hasNext: boolean = false;
   filterText:string = '';
@@ -52,7 +52,7 @@ export class AdminListReportComponent {
     this.reportService
       .getList(this.pageIndex, this.pageSize)
       .subscribe((response) => {
-        this.reports = response.items;
+        this.reports = response.items.sort((a, b) => new Date(b.reportDate).getTime() - new Date(a.reportDate).getTime());
         this.totalPages = response.pages;
         this.hasNext = response.hasNext;
       });

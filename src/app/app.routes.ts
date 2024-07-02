@@ -75,7 +75,11 @@ import { DoctorUpdateFeedbackComponent } from './features/panels/doctor/componen
 
 import { SummaryComponent } from './features/panels/doctor/components/summary/summary/summary.component';
 import { PatientSummaryComponent } from './features/panels/patient/components/summary/patient-summary/patient-summary.component';
+
 import { ForgotPasswordComponent } from './routes/auth/forgot-password/forgot-password.component';
+
+import { VerifyEmailComponent } from './routes/auth/verify-email/verify-email.component';
+
 
 
 
@@ -370,4 +374,8 @@ export const routes: Routes = [
     component:ForgotPasswordComponent,
   },
 
+  {
+    path: 'verify-email',
+    component:VerifyEmailComponent,
+  },
 ];

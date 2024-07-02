@@ -15,7 +15,7 @@ import { ResponseModel } from '../../../../../models/responseModel';
 export class FutureAppointmentComponent {
   appointments: Appointment[] = [];
   pageIndex: number = 0;
-  pageSize: number = 12;
+  pageSize: number = 100;
   todayDate: Date = new Date(); // Bugünkü tarihi al
 
   constructor(
@@ -27,6 +27,15 @@ export class FutureAppointmentComponent {
   ngOnInit(): void {
     this.getPatientAppointments();
   }
+
+  sortAppointments(): void {
+    this.appointments.sort((a, b) => {
+      const dateA = new Date(a.date + ' ' + a.time);
+      const dateB = new Date(b.date + ' ' + b.time);
+      return dateA.getTime() - dateB.getTime(); // Artan sırayla sıralama
+    });
+  }
+  
 
   getPatientAppointments(): void {
     this.patientService.getPatientProfile().subscribe(
@@ -45,6 +54,7 @@ export class FutureAppointmentComponent {
                       this.todayDate.toTimeString().slice(0, 5))
                 );
               });
+              this.sortAppointments();
             },
             (error) => {
               console.error('Randevular alınamadı:', error);

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { PatientService } from '../Patients/patient.service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FeedbackService } from '../feedbacks/services/feedback.service';
+import { ScrollService } from '../../shared/components/footer-content/scroll-service.service';
 
 @Component({
   selector: 'app-contact',
@@ -26,7 +27,8 @@ export class ContactComponent {
     private patientService: PatientService,
     private feedbackService : FeedbackService,
     private toastrService: ToastrService,
-    private router: Router
+    private router: Router,
+    private scrollService: ScrollService
   ) {
     this.feedbackForm = this.formBuilder.group({
       userID: ['', Validators.required],
@@ -59,7 +61,7 @@ export class ContactComponent {
   addFeedback(): void {
     if (this.feedbackForm.valid) {
       this.feedbackService.addFeedback(this.feedbackForm.value).subscribe(
-        
+
         (response) => {
           this.toastrService.success('Geri bildirim başarıyla eklendi');
           this.router.navigate(['/patient-feedbacks']);
@@ -72,6 +74,6 @@ export class ContactComponent {
       this.toastrService.error('Eksik alanlarını doldurunuz.');
     }
   }
-  
-  
+
+
 }

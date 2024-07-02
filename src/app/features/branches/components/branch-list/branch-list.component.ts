@@ -18,7 +18,7 @@ export class BranchListComponent implements OnInit {
   pageSize: number = 50;
   groupedBranches: { [key: string]: Branch[] } = {};
 
-  constructor(private branchService:BranchService){}
+  constructor(private branchService:BranchService,){}
 
   ngOnInit(): void {
     this.getBranches();

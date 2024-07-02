@@ -6,6 +6,7 @@ import { Doctor } from '../../../../doctors/models/doctor';
 import { AuthService } from '../../../../../core/auth/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { NavbarComponent } from "../../../../../shared/components/navbar/navbar.component";
+import { TokenService } from '../../../../../core/auth/services/token.service';
 
 @Component({
     selector: 'app-doctor-sidebar',
@@ -26,7 +27,8 @@ export class DoctorSidebarComponent implements OnInit {
     private doctorService: DoctorService,
     private authService: AuthService,
     private toastrService:ToastrService,
-    private router: Router
+    private router: Router,
+    private tokenService: TokenService
   ) {}
 
   ngOnInit(): void {
@@ -36,6 +38,30 @@ export class DoctorSidebarComponent implements OnInit {
         this.doctorTitle = doctor.title;
         this.doctorName = doctor.firstName + ' ' + doctor.lastName;
         this.doctorBranch=doctor.branchName;
+
+         // Token'ın süresini kontrol et
+              // Token'ın süresini kontrol et
+              const tokenExpirationDate = this.tokenService.getTokenExpirationDate();
+              if (tokenExpirationDate) {
+                console.log('Token Expiration Date:', tokenExpirationDate);
+                const currentTime = new Date();
+                const timeDifference =
+                  tokenExpirationDate.getTime() - currentTime.getTime();
+      
+                const minutesUntilExpiration = Math.floor(
+                  timeDifference / (1000 * 60)
+                );
+                const secondsUntilExpiration = Math.floor(
+                  (timeDifference % (1000 * 60)) / 1000
+                );
+      
+                console.log(
+                  `Token kaç dakika ve saniye sonra süresi dolacak: ${minutesUntilExpiration} dakika ${secondsUntilExpiration} saniye`
+                );
+              } else {
+                console.error('Token süresi alınamadı');
+              }
+      
       },
 
       (error) => {

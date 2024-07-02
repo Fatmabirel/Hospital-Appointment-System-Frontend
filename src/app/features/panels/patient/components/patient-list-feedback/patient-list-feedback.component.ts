@@ -39,11 +39,21 @@ export class PatientListFeedbackComponent {
 
   }
 
+  sortFeedbacksByDateDescending(): void {
+    this.feedbacks.sort((a, b) => {
+      const dateA = new Date(a.createdDate); // a.date tarih formatında olduğunu varsayıyoruz
+      const dateB = new Date(b.createdDate);
+      return dateB.getTime() - dateA.getTime(); // Azalan sırayla sıralama
+    });
+  }
+  
+
   getFeedbackByUserId(userID: string) {
     this.feedbackService
       .getFeedbackByUserId(this.pageIndex,this.pageSize,userID )
       .subscribe((response) => {
         this.feedbacks = response.items;
+        this.sortFeedbacksByDateDescending();
       });
   }
 

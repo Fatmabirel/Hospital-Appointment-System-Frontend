@@ -16,6 +16,9 @@ import { CreateAppointment } from '../../../../appointments/models/createAppoint
 import { TokenService } from '../../../../../core/auth/services/token.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { PatientService } from '../../../../Patients/patient.service';
+import { Patient } from '../../../../Patients/patientModel';
+import { SmsService } from '../../../../appointments/services/smsMock.service';
 
 @Component({
     selector: 'app-create-appointment',
@@ -39,6 +42,7 @@ export class CreateAppointmentComponent implements OnInit {
     timesWithStatus: { time: string, disabled: boolean }[] = [];
 
     selectedTime: string | null = null;
+    patient: Patient | null = null; // Patient objesini saklamak için
 
     constructor(
         private branchService: BranchService,
@@ -47,7 +51,9 @@ export class CreateAppointmentComponent implements OnInit {
         private appointmentService: AppointmentService,
         private tokenService:TokenService,
         private toastrService:ToastrService,
-        private router:Router
+        private router:Router,
+        private patientService: PatientService, // Ekledik
+        private smsService: SmsService
     ) { }
 
     ngOnInit(): void {
@@ -179,7 +185,7 @@ isFutureDate(date: string): boolean {
     }
 
 
-    addAppointment(): void {
+/*     addAppointment(): void {
       const userId = this.tokenService.getUserId();
       if (this.selectedDate && this.selectedTime && this.selectedDoctor) {
         console.log("selectedDate:"+this.selectedDate);
@@ -203,7 +209,58 @@ isFutureDate(date: string): boolean {
             this.toastrService.error(responseError.error.Detail,'Hatalı İşlem');
           });
          }
-      }
+      } */
 
+    addAppointment(): void {
+        this.patientService.getPatientProfile().subscribe(
+            (patient: Patient) => {
+                if (!patient || !patient.phone) {
+                    throw new Error('Patient bilgileri alınamadı veya telefon numarası yok');
+                }
+                if (this.selectedDate && this.selectedTime && this.selectedDoctor) {
+                    console.log("selectedDate:" + this.selectedDate);
+                    console.log("selectedTime:" + this.selectedTime);
+                    console.log("selectedDoctor:" + this.selectedDoctor);
+                    const formattedTime = this.selectedTime + ':00'; // "HH:mm:ss" format
+                    const appointment: CreateAppointment = {
+                        date: this.selectedDate,
+                        time: formattedTime,
+                        status: true,
+                        doctorID: this.selectedDoctor.id,
+                        patientID: patient.id,
+                    };
+
+                    this.appointmentService.createAppointment(appointment).subscribe(
+                        (response) => {
+                            console.log('Appointment created:', response);
+                            this.toastrService.success('Randevunuz oluşturuldu');
+                            this.router.navigate(['patient-upcoming-appointments']);
+                            const message = `Sayın ${patient.firstName} ${patient.lastName},
+                                                ${this.selectedDoctor?.firstName} ${this.selectedDoctor?.lastName} doktorundan randevunuz başarıyla oluşturulmuştur.
+                                                Branş: ${this.selectedDoctor?.branchName}
+                                                Randevu Tarihi: ${this.selectedDate}
+                                                Randevu Saati: ${formattedTime}
+                                                Detaylı bilgi için web sitemizi ziyaret edebilirsiniz.`;
+                            this.smsService.sendSms(patient.phone, message).subscribe(smsResponse => {
+                                console.log('SMS sent:', smsResponse);
+                                /* this.toastrService.success('Sms tarafınıza gönderildi.'); */
+                            }, smsError => {
+                                console.error('SMS sending error:', smsError);
+                            });
+                        },
+                        (error) => {
+                            console.log(error);
+                            this.toastrService.error(error.error.Detail, 'Hatalı İşlem');
+                        }
+                    );
+                }
+            },
+            (error) => {
+                console.log(error);
+                this.toastrService.error('Patient bilgileri alınamadı', 'Hata');
+            }
+        );
+    }
+        
 }
 
