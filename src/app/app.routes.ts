@@ -24,7 +24,6 @@ import { AdminEditReportComponent } from './features/panels/admin/components/adm
 import { PastAppointmentsComponent } from './features/panels/admin/components/list-appointment/past-appointments/past-appointments.component';
 import { UpcomingAppointmentsComponent } from './features/panels/admin/components/list-appointment/upcoming-appointments/upcoming-appointments.component';
 
-import { StatisticsComponent } from './features/statistics/statistics.component';
 import { ListFeedbackComponent } from './features/panels/admin/components/list-feedback/list-feedback.component';
 
 import { DoctorSidebarPatientComponent } from './features/panels/doctor/components/doctorSidebar-Patient/doctorSidebar-Patient.component';
@@ -73,9 +72,10 @@ import { DoctorUpdateFeedbackComponent } from './features/panels/doctor/componen
 
 
 
-import { ForgotPasswordComponent } from './features/forgot-password/forgot-password.component';
+
 import { SummaryComponent } from './features/panels/doctor/components/summary/summary/summary.component';
 import { PatientSummaryComponent } from './features/panels/patient/components/summary/patient-summary/patient-summary.component';
+import { ForgotPasswordComponent } from './routes/auth/forgot-password/forgot-password.component';
 
 
 
@@ -216,11 +216,6 @@ export const routes: Routes = [
   {
     path: 'admin-update-feedback/:feedbackId',
     component: UpdateFeedbackComponent,
-  },
-
-  {
-    path: 'statistics',
-    component: StatisticsComponent,
   },
   {
     path: 'doctor-patient',

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { ResponseTokenModel } from '../models/responseTokenModel';
 import { RegisterModel } from '../models/registerModel';
 import { TokenModel } from '../models/tokenModel';
+import { User } from '../models/user-model';
 
 
 
@@ -36,4 +37,9 @@ export class AuthService {
     localStorage.removeItem('token');
   }
 
+
+  ChangePassword(User:User): Observable<User> {
+    let newPath = 'http://localhost:60805/api/Users/ChangePassword';
+    return this.httpClient.put<User>(`${newPath}`, User);
+  }
 }

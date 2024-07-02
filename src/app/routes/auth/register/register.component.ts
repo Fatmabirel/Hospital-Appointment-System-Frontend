@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { BasicLayoutComponent } from '../../../shared/components/basic-layout/basic-layout.component';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../core/auth/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { RegisterModel } from '../../../core/auth/models/registerModel';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [BasicLayoutComponent,ReactiveFormsModule],
+  imports: [BasicLayoutComponent,ReactiveFormsModule,CommonModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
@@ -28,13 +29,28 @@ export class RegisterComponent {
 
   createRegisterForm() {
     this.registerForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      phone: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(8)]],
+      firstName: new FormControl('',[ Validators.required, Validators.minLength(2), Validators.maxLength(30), Validators.pattern('^[a-zA-ZçÇğĞıİöÖşŞüÜ]+$')]),
+      lastName: new FormControl ('', [Validators.required, Validators.minLength(2), Validators.maxLength(30),  Validators.pattern('^[a-zA-ZçÇğĞıİöÖşŞüÜ]+$')]),
+      phone: new FormControl ('',[Validators.required,Validators.pattern('^[0-9]+$')]),
+      email:new FormControl ('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8),Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\\d!@#$%^&*(),.?":{}|<>]{8,15}$')]),
+
     });
   }
+  isFieldInvalid(field: string): boolean {
+    const control = this.registerForm.get(field);
+    return control ? control.invalid && (control.dirty || control.touched) : false;
+  }
+
+  markFormGroupTouched(formGroup: FormGroup) {
+    Object.values(formGroup.controls).forEach(control => {
+      control.markAsTouched();
+      if ((control as any).controls) {
+        this.markFormGroupTouched(control as FormGroup);
+      }
+    });
+  }
+
 
   registersd() {
     if (this.registerForm.valid) {
@@ -78,5 +94,8 @@ export class RegisterComponent {
   }
 }
 
-  
+
+
+
+
 }

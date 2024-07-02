@@ -16,12 +16,20 @@
               <div class="form-group">
                 <label for="email">E-posta</label>
                 <input type="text" class="form-control" id="email" formControlName="email" required>
+                <div *ngIf="isFieldInvalid('email')" class="error-messages">
+                  <small *ngIf="loginForm.get('email')?.errors?.['required']">Eposta adresini girmelisin.</small>
+                  <small *ngIf="loginForm.get('email')?.errors?.['email']" id="error">Geçerli bir eposta girmelisin</small>
+                </div>
               </div>
               <div class="form-group">
                 <label for="password" class="form-label">Şifre</label>
                 <input type="password" id="password" class="form-control" formControlName="password" aria-describedby="passwordHelpBlock">
-                <div id="passwordHelpBlock" class="form-text">
+                <!-- <div id="passwordHelpBlock" class="form-text">
                   Şifreniz en az 8 karakter olmalıdır. 1 büyük harf, 1 küçük harf ve rakam içermelidir.
+                </div> -->
+                <div *ngIf="isFieldInvalid('password')" class="error-messages">
+                  <small *ngIf="loginForm.get('password')?.errors?.['required']" id="error">Şifreni girmelisin.</small>
+                  <small *ngIf="loginForm.get('password')?.errors?.['pattern'] ">En az 8 karakter uzunluğunda ve büyük harf, küçük harf, rakam ve özel karakter içermelidir.</small>
                 </div>
               </div>
               <div class="d-flex justify-content-end">
