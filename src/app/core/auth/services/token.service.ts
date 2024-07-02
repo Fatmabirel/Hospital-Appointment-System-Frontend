@@ -75,4 +75,19 @@ export class TokenService {
 
   return userRoles;
   }
+
+  getTokenExpirationDate(): Date | null {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('Token bulunamadı');
+    }
+
+    const decodedToken: any = this.decodeToken(token);
+    if (!decodedToken || !decodedToken.exp) {
+      throw new Error('Token decode edilemedi veya expiration bilgisi bulunamadı');
+    }
+
+    const expirationDate = new Date(decodedToken.exp * 1000);
+    return expirationDate;
+  }
 }
