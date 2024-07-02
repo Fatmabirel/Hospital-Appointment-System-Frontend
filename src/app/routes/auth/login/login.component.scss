@@ -56,3 +56,19 @@ input{
 a{
   color: #0b3457
 }
+
+
+.error-messages {
+  margin-top: 0.5em; /* Yukarıdan boşluk bırak */
+  padding: 0;
+}
+
+.error-messages small {
+  font-size: 13px;
+  color: #fb3b2e !important;
+  text-align: justify; /* İki tarafa da eşit şekilde hizala */
+  display: block;
+  margin: 0.5em 0; /* Yukarıdan ve aşağıdan boşluk bırak */
+  padding: 0;
+  width: 100%; /* Tam genişlik */
+}

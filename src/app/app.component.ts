@@ -14,7 +14,6 @@ import { DoctorSidebarPatientComponent } from './features/panels/doctor/componen
 import { PastAppointmentsComponent } from './features/panels/admin/components/list-appointment/past-appointments/past-appointments.component';
 import { UpcomingAppointmentsComponent } from './features/panels/admin/components/list-appointment/upcoming-appointments/upcoming-appointments.component';
 
-import { StatisticsComponent } from './features/statistics/statistics.component';
 
 
 
@@ -37,10 +36,6 @@ import { StatisticsComponent } from './features/statistics/statistics.component'
     DoctorSidebarPatientComponent,
     PastAppointmentsComponent,
     UpcomingAppointmentsComponent,
-    StatisticsComponent
-
-
-
 
   ]
 })

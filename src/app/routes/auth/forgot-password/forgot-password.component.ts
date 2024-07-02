@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { User } from '../users/user-model';
-import { UserService } from '../users/user.service';
-import { BasicLayoutComponent } from '../../shared/components/basic-layout/basic-layout.component';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { BasicLayoutComponent } from '../../../shared/components/basic-layout/basic-layout.component';
+import { User } from '../../../core/auth/models/user-model';
+import { AuthService } from '../../../core/auth/services/auth.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -18,22 +18,22 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   templateUrl: './forgot-password.component.html',
   styleUrl: './forgot-password.component.scss',
-  
+
 })
 export class ForgotPasswordComponent implements OnInit {
 
   passwordForm:FormGroup;
   user:User;
 
- 
+
   constructor(
     private FormBuilder:FormBuilder,
-    private UserService:UserService,
+    private authService:AuthService,
     private toastrService:ToastrService,
     private route:ActivatedRoute,
     private router:Router,
-    
-    
+
+
   ) {}
 
   ngOnInit(): void {
@@ -41,26 +41,41 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   initForm() {
-   
+
     this.passwordForm = this.FormBuilder.group({
-      // id: [''], 
-      phone: ['', Validators.required],
-      email: ['',[Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-     
+
+      phone: new FormControl ('',[Validators.required,Validators.pattern('^[0-9]+$')]),
+      email:new FormControl ('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8),Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\\d!@#$%^&*(),.?":{}|<>]{8,15}$')]),
+
+    });
+  }
+
+
+  isFieldInvalid(field: string): boolean {
+    const control = this.passwordForm.get(field);
+    return control ? control.invalid && (control.dirty || control.touched) : false;
+  }
+
+  markFormGroupTouched(formGroup: FormGroup) {
+    Object.values(formGroup.controls).forEach(control => {
+      control.markAsTouched();
+      if ((control as any).controls) {
+        this.markFormGroupTouched(control as FormGroup);
+      }
     });
   }
 
   ChangePassword() {
-    
+
     if (this.passwordForm.valid) {
       // Formun geçerli olup olmadığını kontrol ediyoruz
       const ChangePassword:User = this.passwordForm.value; // Form verilerini Doctor nesnesine atıyoruz
      // ChangePassword.email = this.user.email;
       //ChangePassword.phone=this.user.phone;
-      
+
       //console.log(updatedHasta);
-      this.UserService.ChangePassword(ChangePassword).subscribe(
+      this.authService.ChangePassword(ChangePassword).subscribe(
         (response) => {
           this.toastrService.success('Şifre başarıyla güncellendi');
           this.router.navigate(['/login']);
@@ -85,26 +100,26 @@ export class ForgotPasswordComponent implements OnInit {
 
   // ForgotPassword() {
   //   // if (this.passwordForm.valid) {
-  
+
   //     // const forgotPassword:User = this.passwordForm.value;
   //     // forgotPassword.email = this.user.email;
   //     // forgotPassword.phone = this.user.phone;
-      
-    
+
+
   //     this.UserService.ChangePassword(this.user).subscribe(
   //       (response) => {
   //         this.toastrService.success('Branş başarıyla güncellendi');
-        
+
   //       },
   //       (error) => {
   //         this.toastrService.error('Aynı branchten var');
-          
+
   //       }
   //     );
-  //   } 
-  //   // else 
+  //   }
+  //   // else
   //   // {
-     
+
   //   //   this.toastrService.error('Lütfen eksik alanları doldurun');
   //   // }
   }
