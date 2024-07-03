@@ -43,6 +43,7 @@
                 <tr *ngFor="let branch of branches | filterBranchName : filterText">
                   <td>{{ branch.name }}</td>
                   <td>
+                    <div class="btn-group" role="group">
                     <button class="btn btn-sm btn-primary btn-space" [routerLink]="['/admin-update-branch', branch.id]">
                       <i class="fa fa-pencil"></i>
                     </button>
@@ -50,6 +51,7 @@
                     <button class="btn btn-sm btn-danger" (click)="confirmDelete(branch.id)">
                       <i class="fa fa-trash"></i>
                     </button>
+                  </div>
                   </td>
                 </tr>
               </tbody>
