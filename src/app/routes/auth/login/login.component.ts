@@ -89,7 +89,7 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['patient-summary'])
         },
         (responseError) => {
-          console.log(responseError);
+          console.log(this.loginForm.value);
           this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
