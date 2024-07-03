@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { PatientSidebarComponent } from '../sidebar/psidebar.component';
 import {
   FormBuilder,
   FormGroup,
@@ -12,18 +11,19 @@ import { PatientService } from '../../../../Patients/patient.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
+import { PatientSidebarComponent } from '../sidebar/psidebar.component';
 
 @Component({
   selector: 'app-patient-profile',
   standalone: true,
   imports: [
     CommonModule,
-    PatientSidebarComponent,
     ReactiveFormsModule,
     TokenComponent,
+    PatientSidebarComponent
   ],
   templateUrl: './Patient-profile.component.html',
-  styleUrl: './Patient-profile.component.scss',
+  styleUrls: ['./Patient-profile.component.scss'],
 })
 export class PatientProfileComponent implements OnInit {
   PatientForm: FormGroup;
@@ -43,7 +43,7 @@ export class PatientProfileComponent implements OnInit {
 
   initForm() {
     this.PatientForm = this.formBuilder.group({
-      id: [''], 
+      id: [''],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
@@ -54,7 +54,7 @@ export class PatientProfileComponent implements OnInit {
       nationalIdentity: ['', Validators.required],
       phone: ['', Validators.required],
       address: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      email: [{ value: '', disabled: true }, [Validators.required, Validators.email]],
     });
   }
 
@@ -69,19 +69,19 @@ export class PatientProfileComponent implements OnInit {
       }
     );
   }
+
   updatePatient() {
     if (this.PatientForm.valid) {
-      const updatedPatient: Patient = this.PatientForm.value; 
+      const updatedPatient: Patient = this.PatientForm.getRawValue();
       updatedPatient.id = this.patient.id;
       console.log(updatedPatient);
       this.patientService.updatePatient(updatedPatient).subscribe(
         (response) => {
-          console.log('Hasta güncellendi:', response);
           this.toastrService.success('Bilgileriniz başarıyla güncellendi');
           this.router.navigate(['patient-sidebar']);
         },
-        (error) => {
-          console.error('Hasta güncellenemedi:', error);
+        (responseError) => {
+          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
     } else {
