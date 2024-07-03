@@ -11,6 +11,7 @@ import { Appointment } from '../../../../appointments/models/appointmentModel';
 import { CapitalizeFirstPipe } from '../../../../pipe/capitalize-first.pipe';
 import { FormsModule } from '@angular/forms';
 import { FilterPatientIdentityPipe } from '../../../../pipe/filter-patient-identity.pipe';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 @Component({
   selector: 'app-doctor-sidebar-patient',
@@ -21,7 +22,8 @@ import { FilterPatientIdentityPipe } from '../../../../pipe/filter-patient-ident
     DoctorSidebarComponent,
     CapitalizeFirstPipe,
     FormsModule,
-    FilterPatientIdentityPipe
+    FilterPatientIdentityPipe,
+    TokenComponent
   ],
   templateUrl: './doctorSidebar-Patient.component.html',
   styleUrl: './doctorSidebar-Patient.component.scss',
@@ -42,8 +44,6 @@ export class DoctorSidebarPatientComponent implements OnInit {
   ngOnInit(): void {
     this.loadDoctorPatients();
   }
-
-  
 
   loadDoctorPatients(): void {
     this.doctorService.getDoctorProfile().subscribe(
@@ -82,7 +82,9 @@ export class DoctorSidebarPatientComponent implements OnInit {
                       this.patients.push(patient);
 
                       // Hastaları sıralama
-                      this.patients.sort((a, b) => a.firstName.localeCompare(b.firstName));
+                      this.patients.sort((a, b) =>
+                        a.firstName.localeCompare(b.firstName)
+                      );
                     });
                 }
               });

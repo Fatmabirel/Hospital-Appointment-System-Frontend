@@ -8,13 +8,14 @@ import { TokenService } from '../../../../../core/auth/services/token.service';
 import { DoctorSidebarComponent } from '../sidebar/doctorSidebar.component';
 import { DrscheduleService } from '../../../../doctorschedule/services/drschedule.service';
 import { UpdateDoctorSchedule } from '../../../../doctorschedule/models/update-doctor-schedule';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 @Component({
   selector: 'app-update-doctor-schedule',
   standalone: true,
-  imports: [FormsModule, CommonModule, DoctorSidebarComponent],
+  imports: [FormsModule, CommonModule, DoctorSidebarComponent, TokenComponent],
   templateUrl: './update-doctor-schedule.component.html',
-  styleUrls: ['./update-doctor-schedule.component.scss']
+  styleUrls: ['./update-doctor-schedule.component.scss'],
 })
 export class UpdateDoctorScheduleComponent implements OnInit {
   selectedDate: string;
@@ -43,7 +44,7 @@ export class UpdateDoctorScheduleComponent implements OnInit {
 
     this.generateTimes();
 
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params) => {
       if (params['scheduleId']) {
         this.scheduleId = +params['scheduleId'];
         console.log('Schedule ID:', this.scheduleId); // Schedule ID'nin doğru alındığını kontrol etme
@@ -56,7 +57,7 @@ export class UpdateDoctorScheduleComponent implements OnInit {
     //this.scheduleId = this.route.snapshot.paramMap.get('scheduleId');
 
     // Fetch existing schedule details
-    this.drScheduleService.getById(this.scheduleId).subscribe(schedule => {
+    this.drScheduleService.getById(this.scheduleId).subscribe((schedule) => {
       console.log(schedule);
       this.selectedDate = schedule.date;
       this.startTime = this.formatTimeForDisplay(schedule.startTime);
@@ -68,7 +69,9 @@ export class UpdateDoctorScheduleComponent implements OnInit {
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
     const day = date.getDate();
-    return `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+    return `${year}-${month.toString().padStart(2, '0')}-${day
+      .toString()
+      .padStart(2, '0')}`;
   }
 
   private generateTimes() {
@@ -84,7 +87,9 @@ export class UpdateDoctorScheduleComponent implements OnInit {
   }
 
   private formatTime(hour: number, minute: number): string {
-    return `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+    return `${hour.toString().padStart(2, '0')}:${minute
+      .toString()
+      .padStart(2, '0')}`;
   }
 
   update() {
@@ -92,25 +97,27 @@ export class UpdateDoctorScheduleComponent implements OnInit {
       const userId: string = this.tokenService.getUserId();
 
       const schedule: UpdateDoctorSchedule = {
-        id:this.scheduleId,
+        id: this.scheduleId,
         doctorID: userId,
         date: this.formatDateForDatabase(this.selectedDate),
         startTime: this.formatTimeForDatabase(this.startTime),
-        endTime: this.formatTimeForDatabase(this.endTime)
+        endTime: this.formatTimeForDatabase(this.endTime),
       };
 
-      this.drScheduleService.updateDoctorSchedule( schedule).subscribe(
-        response => {
-          this.toastrService.success("Çalışma takviminiz başarılı bir şekilde güncellendi", 'Başarılı');
-          this.router.navigate(['list-doctor-schedule'])
+      this.drScheduleService.updateDoctorSchedule(schedule).subscribe(
+        (response) => {
+          this.toastrService.success(
+            'Çalışma takviminiz başarılı bir şekilde güncellendi',
+            'Başarılı'
+          );
+          this.router.navigate(['list-doctor-schedule']);
         },
-        responseError => {
-          this.toastrService.error(responseError.error.Detail,'Hatalı İşlem');
-
+        (responseError) => {
+          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
     } else {
-      this.toastrService.error("", "Tüm alanları doldurunuz.");
+      this.toastrService.error('', 'Tüm alanları doldurunuz.');
     }
   }
 
@@ -131,14 +138,19 @@ export class UpdateDoctorScheduleComponent implements OnInit {
       return this.times;
     }
     const startIndex = this.times.indexOf(this.startTime);
-    return this.times.slice(startIndex + 1).filter(time => this.isValidEndTime(time));
+    return this.times
+      .slice(startIndex + 1)
+      .filter((time) => this.isValidEndTime(time));
   }
 
   private isValidEndTime(time: string): boolean {
     const [startHour, startMinute] = this.startTime.split(':').map(Number);
     const [endHour, endMinute] = time.split(':').map(Number);
 
-    if (endHour < startHour || (endHour === startHour && endMinute <= startMinute)) {
+    if (
+      endHour < startHour ||
+      (endHour === startHour && endMinute <= startMinute)
+    ) {
       return false;
     }
     return true;

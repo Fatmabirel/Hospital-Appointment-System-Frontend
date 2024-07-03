@@ -4,10 +4,10 @@ import { ResponseReport } from '../../../../reports/models/responseReport';
 import { CommonModule } from '@angular/common';
 import { ReportService } from '../../../../reports/services/report.service';
 import { TokenService } from '../../../../../core/auth/services/token.service';
-import { response } from 'express';
-import { Router } from '@angular/router'; // Router modülünü ekledik
+import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { FilterReportIdentityPipe } from '../../../../pipe/filter-report-identity.pipe';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 @Component({
   selector: 'app-list-report',
@@ -19,13 +19,14 @@ import { FilterReportIdentityPipe } from '../../../../pipe/filter-report-identit
     CommonModule,
     FormsModule,
     FilterReportIdentityPipe,
+    TokenComponent,
   ],
 })
 export class ListReportComponent implements OnInit {
   reports: ResponseReport[] = [];
   pageIndex: number = 0;
   pageSize: number = 100;
-  filterText:string = "";
+  filterText: string = '';
 
   constructor(
     private reportService: ReportService,

@@ -2,23 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CreateDrScheduleRequest } from '../../../../doctorschedule/models/create-request-drschedule';
-
-
 import { ToastrService } from 'ngx-toastr';
 import { TokenService } from '../../../../../core/auth/services/token.service';
 import { DoctorSidebarComponent } from '../sidebar/doctorSidebar.component';
 import { DrscheduleService } from '../../../../doctorschedule/services/drschedule.service';
-import { error } from 'node:console';
 import { Router } from '@angular/router';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 @Component({
   selector: 'app-create-doctor-schedule',
   standalone: true,
-  imports: [FormsModule, CommonModule,DoctorSidebarComponent],
+  imports: [FormsModule, CommonModule, DoctorSidebarComponent,TokenComponent],
   templateUrl: './create-doctor-schedule.component.html',
-  styleUrls: ['./create-doctor-schedule.component.scss']
+  styleUrls: ['./create-doctor-schedule.component.scss'],
 })
-export class CreateDoctorScheduleComponent implements OnInit{
+export class CreateDoctorScheduleComponent implements OnInit {
   selectedDate: string;
   startTime: string;
   endTime: string;
@@ -27,13 +25,11 @@ export class CreateDoctorScheduleComponent implements OnInit{
   times: string[] = [];
 
   constructor(
-     private tokenService:TokenService,
+    private tokenService: TokenService,
     private drScheduleService: DrscheduleService,
     private toastrService: ToastrService,
-    private router:Router
-  ) {
-
-  }
+    private router: Router
+  ) {}
   ngOnInit(): void {
     const today = new Date();
     const twoWeeksLater = new Date();
@@ -49,7 +45,9 @@ export class CreateDoctorScheduleComponent implements OnInit{
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
     const day = date.getDate();
-    return `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+    return `${year}-${month.toString().padStart(2, '0')}-${day
+      .toString()
+      .padStart(2, '0')}`;
   }
 
   private generateTimes() {
@@ -65,7 +63,9 @@ export class CreateDoctorScheduleComponent implements OnInit{
   }
 
   private formatTime(hour: number, minute: number): string {
-    return `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+    return `${hour.toString().padStart(2, '0')}:${minute
+      .toString()
+      .padStart(2, '0')}`;
   }
 
   add() {
@@ -76,23 +76,25 @@ export class CreateDoctorScheduleComponent implements OnInit{
         doctorID: userId,
         date: this.formatDateForDatabase(this.selectedDate),
         startTime: this.formatTimeForDatabase(this.startTime),
-        endTime: this.formatTimeForDatabase(this.endTime)
+        endTime: this.formatTimeForDatabase(this.endTime),
       };
 
       this.drScheduleService.add(schedule).subscribe(
-        response => {
-          this.toastrService.success("Takvim çizelgenize başarılı bir şekilde eklendi",'Başarılı');
+        (response) => {
+          this.toastrService.success(
+            'Takvim çizelgenize başarılı bir şekilde eklendi',
+            'Başarılı'
+          );
           this.router.navigate(['list-doctor-schedule']);
         },
-        responseError => {
-          this.toastrService.error(responseError.error.Detail,'Hatalı İşlem');
-
+        (responseError) => {
+          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
 
       console.log('Saved Schedule:', schedule);
     } else {
-     this.toastrService.error("","Tüm alanları doldurunuz.");
+      this.toastrService.error('', 'Tüm alanları doldurunuz.');
     }
   }
 
@@ -112,17 +114,21 @@ export class CreateDoctorScheduleComponent implements OnInit{
       return this.times;
     }
     const startIndex = this.times.indexOf(this.startTime);
-    return this.times.slice(startIndex + 1).filter(time => this.isValidEndTime(time));
+    return this.times
+      .slice(startIndex + 1)
+      .filter((time) => this.isValidEndTime(time));
   }
 
   private isValidEndTime(time: string): boolean {
     const [startHour, startMinute] = this.startTime.split(':').map(Number);
     const [endHour, endMinute] = time.split(':').map(Number);
 
-    if (endHour < startHour || (endHour === startHour && endMinute <= startMinute)) {
+    if (
+      endHour < startHour ||
+      (endHour === startHour && endMinute <= startMinute)
+    ) {
       return false;
     }
     return true;
   }
-
 }

@@ -1,20 +1,31 @@
 import { Component } from '@angular/core';
 import { DoctorSidebarComponent } from '../sidebar/doctorSidebar.component';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Feedback } from '../../../../feedbacks/models/feedback';
 import { FeedbackService } from '../../../../feedbacks/services/feedback.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { DoctorService } from '../../../../doctors/services/doctor.service';
 import { Doctor } from '../../../../doctors/models/doctor';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 @Component({
   selector: 'app-doctor-add-feedback',
   standalone: true,
-  imports: [DoctorSidebarComponent,CommonModule,ReactiveFormsModule],
+  imports: [
+    DoctorSidebarComponent,
+    CommonModule,
+    ReactiveFormsModule,
+    TokenComponent,
+  ],
   templateUrl: './doctor-add-feedback.component.html',
-  styleUrl: './doctor-add-feedback.component.scss'
+  styleUrl: './doctor-add-feedback.component.scss',
 })
 export class DoctorAddFeedbackComponent {
   doctor: Doctor;
@@ -42,7 +53,7 @@ export class DoctorAddFeedbackComponent {
       this.doctor = doctor;
       this.userID = doctor.id;
       this.feedbackForm.patchValue({
-        userID: this.userID
+        userID: this.userID,
       });
       console.log(this.userID);
     });

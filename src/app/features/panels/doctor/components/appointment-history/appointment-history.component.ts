@@ -11,6 +11,7 @@ import { ReportService } from '../../../../reports/services/report.service';
 import { CapitalizeFirstPipe } from '../../../../pipe/capitalize-first.pipe';
 import { FormsModule } from '@angular/forms';
 import { FilterAppointmentIdentityPipe } from '../../../../pipe/filter-appointment-identity.pipe';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 @Component({
   selector: 'app-appointment-history',
@@ -21,6 +22,7 @@ import { FilterAppointmentIdentityPipe } from '../../../../pipe/filter-appointme
     CapitalizeFirstPipe,
     FormsModule,
     FilterAppointmentIdentityPipe,
+    TokenComponent
   ],
   templateUrl: './appointment-history.component.html',
   styleUrls: ['./appointment-history.component.scss'],
@@ -31,7 +33,7 @@ export class AppointmentHistoryComponent implements OnInit {
   pageIndex: number = 0;
   pageSize: number = 12;
   todayDate: Date = new Date();
-  filterText:string = "";
+  filterText: string = '';
 
   constructor(
     private doctorService: DoctorService,
@@ -52,7 +54,6 @@ export class AppointmentHistoryComponent implements OnInit {
       return dateB.getTime() - dateA.getTime(); // Artan sırayla sıralama
     });
   }
-  
 
   loadDoctorAppointments(): void {
     this.doctorService.getDoctorProfile().subscribe(

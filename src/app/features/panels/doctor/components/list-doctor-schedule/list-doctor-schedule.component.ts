@@ -5,16 +5,17 @@ import { DrscheduleService } from '../../../../doctorschedule/services/drschedul
 import { DoctorSidebarComponent } from '../sidebar/doctorSidebar.component';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-import { error } from 'console';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmDialogComponent } from '../../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
+
 @Component({
   selector: 'app-list-doctor-schedule',
   standalone: true,
   templateUrl: './list-doctor-schedule.component.html',
   styleUrl: './list-doctor-schedule.component.scss',
-  imports: [DoctorSidebarComponent, CommonModule, RouterModule],
+  imports: [DoctorSidebarComponent, CommonModule, RouterModule, TokenComponent],
 })
 export class ListDoctorScheduleComponent implements OnInit {
   schedules: DoctorSchedule[] = [];
@@ -26,7 +27,7 @@ export class ListDoctorScheduleComponent implements OnInit {
     private drScheduleService: DrscheduleService,
     private toastrService: ToastrService,
     private router: Router,
-    private dialog:MatDialog
+    private dialog: MatDialog
   ) {}
   ngOnInit(): void {
     this.getDoctorSchedule();
@@ -59,7 +60,10 @@ export class ListDoctorScheduleComponent implements OnInit {
   confirmDelete(id: number) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '400px',
-      data: { title: 'ONAY', message: 'Bu çalışma takvimini silmek istediğinizden emin misiniz?' },
+      data: {
+        title: 'ONAY',
+        message: 'Bu çalışma takvimini silmek istediğinizden emin misiniz?',
+      },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
