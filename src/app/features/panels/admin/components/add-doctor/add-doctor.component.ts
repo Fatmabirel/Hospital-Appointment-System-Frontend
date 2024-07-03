@@ -14,6 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 import { BranchService } from '../../../../branches/services/branch.service';
 import { Branch } from '../../../../branches/models/branch';
 import { ThisReceiver } from '@angular/compiler';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 @Component({
   selector: 'app-add-doctor',
@@ -23,6 +24,7 @@ import { ThisReceiver } from '@angular/compiler';
     FormsModule,
     ReactiveFormsModule,
     AdminSidebarComponent,
+    TokenComponent
   ],
   templateUrl: './add-doctor.component.html',
   styleUrl: './add-doctor.component.scss',

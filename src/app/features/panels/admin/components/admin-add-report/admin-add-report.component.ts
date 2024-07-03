@@ -11,13 +11,19 @@ import { ReportService } from '../../../../reports/services/report.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
 import { AddReport } from '../../../../reports/models/addReport';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 @Component({
   selector: 'app-admin-add-report',
   standalone: true,
   templateUrl: './admin-add-report.component.html',
   styleUrl: './admin-add-report.component.scss',
-  imports: [AdminSidebarComponent, FormsModule, ReactiveFormsModule],
+  imports: [
+    AdminSidebarComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    TokenComponent,
+  ],
 })
 export class AdminAddReportComponent implements OnInit {
   reportForm: FormGroup;
@@ -51,24 +57,18 @@ export class AdminAddReportComponent implements OnInit {
       const addReport: AddReport = {
         appointmentID: this.appointmentId,
         text: this.reportForm.value.reportText,
-        // Diğer güncelleme alanlarını ekleyin
       };
 
       this.reportService.addReport(addReport).subscribe(
         (response) => {
-          // this.toastrService.success('Bilgileriniz başarıyla eklendi');
-          // this.router.navigate(['doctor-sidebar']);
-          console.log('Rapor başarıyla eklendi', response);
           this.toastrService.success('Rapor eklendi');
-          this.router.navigate(['past-appointments']); // Güncelleme sonrası yönlendirme
+          this.router.navigate(['past-appointments']);
         },
         (responseError) => {
-          console.log(responseError);
           this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
     } else {
-      // Form geçerli değilse hata mesajı gösterilebilir
       this.toastrService.error('Lütfen eksik alanları doldurun');
     }
   }

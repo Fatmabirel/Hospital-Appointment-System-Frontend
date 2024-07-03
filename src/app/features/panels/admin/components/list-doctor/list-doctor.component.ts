@@ -14,6 +14,7 @@ import { FilterDoctorBranchPipe } from '../../../../pipe/filter-doctor-branch.pi
 import { BranchService } from '../../../../branches/services/branch.service';
 import { Branch } from '../../../../branches/models/branch';
 import { PaginationComponent } from '../../../../../core/paging/components/pagination/pagination.component';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 @Component({
   selector: 'app-list-doctor',
@@ -28,7 +29,8 @@ import { PaginationComponent } from '../../../../../core/paging/components/pagin
     CapitalizeFirstPipe,
     FilterDoctorNamePipe,
     FilterDoctorBranchPipe,
-    PaginationComponent
+    PaginationComponent,
+    TokenComponent
   ],
 
   templateUrl: './list-doctor.component.html',

@@ -1,11 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Patient } from '../../../../Patients/patientModel';
 import { PatientService } from '../../../../Patients/patient.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 @Component({
   selector: 'app-update-patient',
@@ -14,22 +21,22 @@ import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    AdminSidebarComponent,   
+    AdminSidebarComponent,
+    TokenComponent
   ],
   templateUrl: './update-patient.component.html',
   styleUrl: './update-patient.component.scss',
 })
-export class UpdatePatientComponent { 
-
-  patientForm:FormGroup; // FormGroup tanımlıyoruz
-  patient:Patient;
+export class UpdatePatientComponent {
+  patientForm: FormGroup; // FormGroup tanımlıyoruz
+  patient: Patient;
 
   constructor(
-    private FormBuilder:FormBuilder, // FormBuilder kullanacağız
-    private PatientService:PatientService,
-    private toastrService:ToastrService,
-    private router:Router,
-    private route:ActivatedRoute
+    private FormBuilder: FormBuilder, // FormBuilder kullanacağız
+    private PatientService: PatientService,
+    private toastrService: ToastrService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -52,34 +59,31 @@ export class UpdatePatientComponent {
       phone: ['', Validators.required],
       address: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-     
     });
   }
 
   getPatientProfile() {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       const patientId = params.get('patientId');
-  
-      if (patientId) { // null veya undefined değilse devam ediyoruz
-        this.PatientService.getByPatientId(patientId,0,1).subscribe(
+
+      if (patientId) {
+        // null veya undefined değilse devam ediyoruz
+        this.PatientService.getByPatientId(patientId, 0, 1).subscribe(
           (data) => {
             this.patient = data;
             this.patientForm.patchValue({
               id: data.id,
               firstName: data.firstName,
               lastName: data.lastName,
-              age:data.age,
-              height:data.height,
-              weight:data.weight,
-              bloodGroup:data.bloodGroup,
+              age: data.age,
+              height: data.height,
+              weight: data.weight,
+              bloodGroup: data.bloodGroup,
               dateOfBirth: data.dateOfBirth,
               nationalIdentity: data.nationalIdentity,
               phone: data.phone,
               address: data.address,
               email: data.email,
-             
-
-              
             });
           },
           (error) => {
@@ -95,9 +99,9 @@ export class UpdatePatientComponent {
   updatePatient() {
     if (this.patientForm.valid) {
       // Formun geçerli olup olmadığını kontrol ediyoruz
-      const updatedPatient:Patient = this.patientForm.value; // Form verilerini Doctor nesnesine atıyoruz
+      const updatedPatient: Patient = this.patientForm.value; // Form verilerini Doctor nesnesine atıyoruz
       updatedPatient.id = this.patient.id;
-      
+
       //console.log(updatedHasta);
       this.PatientService.updatePatient(updatedPatient).subscribe(
         (response) => {
@@ -113,5 +117,4 @@ export class UpdatePatientComponent {
       this.toastrService.error('Lütfen eksik alanları doldurun');
     }
   }
-
 }

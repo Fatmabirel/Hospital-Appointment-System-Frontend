@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppointmentService } from '../../../../appointments/services/appointment.service';
 import { DoctorService } from '../../../../doctors/services/doctor.service';
@@ -12,6 +18,7 @@ import { Appointment } from '../../../../appointments/models/appointmentModel';
 import { Branch } from '../../../../branches/models/branch';
 import { Doctor } from '../../../../doctors/models/doctor';
 import { Patient } from '../../../../Patients/patientModel';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 @Component({
   selector: 'app-update-appointment',
@@ -20,10 +27,11 @@ import { Patient } from '../../../../Patients/patientModel';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    AdminSidebarComponent
+    AdminSidebarComponent,
+    TokenComponent
   ],
   templateUrl: './update-appointment.component.html',
-  styleUrls: ['./update-appointment.component.scss']
+  styleUrls: ['./update-appointment.component.scss'],
 })
 export class UpdateAppointmentComponent implements OnInit {
   appointmentForm: FormGroup;
@@ -42,7 +50,7 @@ export class UpdateAppointmentComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private toastrService: ToastrService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -63,19 +71,22 @@ export class UpdateAppointmentComponent implements OnInit {
       patientFirstName: ['', Validators.required],
       patientLastName: ['', Validators.required],
       branchId: ['', Validators.required],
-      doctorId: ['', Validators.required]
+      doctorId: ['', Validators.required],
     });
   }
 
   loadAppointment(): void {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       const appointmentId = +(params.get('id') || '0');
       if (appointmentId) {
         this.appointmentService.getAppointmentById(appointmentId).subscribe(
           (appointment) => {
             this.appointment = appointment;
             if (appointment) {
-              this.loadDoctorAndPatientNames(appointment.doctorID, appointment.patientID);
+              this.loadDoctorAndPatientNames(
+                appointment.doctorID,
+                appointment.patientID
+              );
               this.appointmentForm.patchValue({
                 id: appointment.id,
                 date: appointment.date,
@@ -83,7 +94,7 @@ export class UpdateAppointmentComponent implements OnInit {
                 status: appointment.status,
                 patientId: appointment.patientID,
                 branchId: appointment.branchID,
-                doctorId: appointment.doctorID
+                doctorId: appointment.doctorID,
               });
             }
           },
@@ -137,7 +148,7 @@ export class UpdateAppointmentComponent implements OnInit {
         if (doctor) {
           this.appointmentForm.patchValue({
             doctorFirstName: doctor.firstName,
-            doctorLastName: doctor.lastName
+            doctorLastName: doctor.lastName,
           });
         }
       },
@@ -151,7 +162,7 @@ export class UpdateAppointmentComponent implements OnInit {
         if (patient) {
           this.appointmentForm.patchValue({
             patientFirstName: patient.firstName,
-            patientLastName: patient.lastName
+            patientLastName: patient.lastName,
           });
         }
       },
@@ -166,7 +177,9 @@ export class UpdateAppointmentComponent implements OnInit {
     const branchId = Number(selectElement.value);
     this.doctorService.getDoctors(0, 100).subscribe(
       (response) => {
-        this.doctors = response.items.filter(doctor => doctor.branchID === branchId);
+        this.doctors = response.items.filter(
+          (doctor) => doctor.branchID === branchId
+        );
       },
       (error) => {
         console.error('Doktorlar yüklenemedi:', error);
@@ -189,35 +202,48 @@ export class UpdateAppointmentComponent implements OnInit {
     const minutes = today.getMinutes().toString().padStart(2, '0');
     const minTime = `${hours}:${minutes}`;
 
-    (document.getElementById('date') as HTMLInputElement).setAttribute('min', minDate);
-    (document.getElementById('time') as HTMLInputElement).setAttribute('min', minTime);
+    (document.getElementById('date') as HTMLInputElement).setAttribute(
+      'min',
+      minDate
+    );
+    (document.getElementById('time') as HTMLInputElement).setAttribute(
+      'min',
+      minTime
+    );
   }
 
   updateAppointment(): void {
     if (this.appointmentForm.valid) {
       const appointmentData = this.appointmentForm.value;
-      const isValid = this.validateDateTime(appointmentData.date, appointmentData.time);
+      const isValid = this.validateDateTime(
+        appointmentData.date,
+        appointmentData.time
+      );
 
       if (!isValid) {
-        this.toastrService.error('Geçmiş tarih veya saate randevu oluşturulamaz.');
+        this.toastrService.error(
+          'Geçmiş tarih veya saate randevu oluşturulamaz.'
+        );
         return;
       }
 
       const updatedAppointment: Appointment = {
         ...appointmentData,
-        time: this.formatTime(appointmentData.time)
+        time: this.formatTime(appointmentData.time),
       };
 
-      this.appointmentService.updateAppointment(updatedAppointment.id, updatedAppointment).subscribe(
-        () => {
-          this.toastrService.success('Randevu başarıyla güncellendi');
-          this.router.navigate(['/upcoming-appointments']);
-        },
-        (error) => {
-          console.error('Randevu güncellenemedi:', error);
-          this.toastrService.error('Randevu güncellenemedi');
-        }
-      );
+      this.appointmentService
+        .updateAppointment(updatedAppointment.id, updatedAppointment)
+        .subscribe(
+          () => {
+            this.toastrService.success('Randevu başarıyla güncellendi');
+            this.router.navigate(['/upcoming-appointments']);
+          },
+          (error) => {
+            console.error('Randevu güncellenemedi:', error);
+            this.toastrService.error('Randevu güncellenemedi');
+          }
+        );
     } else {
       this.toastrService.error('Lütfen eksik alanları doldurun');
     }
@@ -228,5 +254,4 @@ export class UpdateAppointmentComponent implements OnInit {
     const currentDate = new Date();
     return selectedDate >= currentDate;
   }
-
 }

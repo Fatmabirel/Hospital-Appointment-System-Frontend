@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { FilterReportIdentityPipe } from '../../../../pipe/filter-report-identity.pipe';
 import { ConfirmDialogComponent } from '../../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 @Component({
   selector: 'app-admin-list-report',
@@ -22,6 +23,7 @@ import { MatDialog } from '@angular/material/dialog';
     PaginationComponent,
     FormsModule,
     FilterReportIdentityPipe,
+    TokenComponent
   ],
 })
 export class AdminListReportComponent {
@@ -30,12 +32,12 @@ export class AdminListReportComponent {
   pageSize: number = 100;
   totalPages: number = 0;
   hasNext: boolean = false;
-  filterText:string = '';
+  filterText: string = '';
   constructor(
     private reportService: ReportService,
     private router: Router,
     private toastrService: ToastrService,
-    private dialog: MatDialog,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -52,7 +54,10 @@ export class AdminListReportComponent {
     this.reportService
       .getList(this.pageIndex, this.pageSize)
       .subscribe((response) => {
-        this.reports = response.items.sort((a, b) => new Date(b.reportDate).getTime() - new Date(a.reportDate).getTime());
+        this.reports = response.items.sort(
+          (a, b) =>
+            new Date(b.reportDate).getTime() - new Date(a.reportDate).getTime()
+        );
         this.totalPages = response.pages;
         this.hasNext = response.hasNext;
       });
@@ -76,11 +81,14 @@ export class AdminListReportComponent {
       }
     );
   }
- 
+
   confirmDelete(reportId: number) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '400px',
-      data: { title: 'ONAY', message: 'Bu raporu silmek istediğinizden emin misiniz?' },
+      data: {
+        title: 'ONAY',
+        message: 'Bu raporu silmek istediğinizden emin misiniz?',
+      },
     });
 
     dialogRef.afterClosed().subscribe((result) => {

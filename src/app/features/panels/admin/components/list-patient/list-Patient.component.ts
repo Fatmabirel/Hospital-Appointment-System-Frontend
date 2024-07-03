@@ -10,6 +10,7 @@ import { ConfirmDialogComponent } from '../../../../../shared/components/confirm
 import { PaginationComponent } from '../../../../../core/paging/components/pagination/pagination.component';
 import { FormsModule } from '@angular/forms';
 import { FilterPatientIdentityPipe } from '../../../../pipe/filter-patient-identity.pipe';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 @Component({
   selector: 'app-list-patient',
@@ -21,7 +22,8 @@ import { FilterPatientIdentityPipe } from '../../../../pipe/filter-patient-ident
     CapitalizeFirstPipe,
     PaginationComponent,
     FormsModule,
-    FilterPatientIdentityPipe
+    FilterPatientIdentityPipe,
+    TokenComponent,
   ],
   templateUrl: './list-Patient.component.html',
   styleUrl: './list-Patient.component.scss',

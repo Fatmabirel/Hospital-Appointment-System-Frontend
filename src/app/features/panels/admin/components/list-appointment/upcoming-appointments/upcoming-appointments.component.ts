@@ -10,6 +10,7 @@ import { PaginationComponent } from '../../../../../../core/paging/components/pa
 import { FormsModule } from '@angular/forms';
 import { FilterAppointmentIdentityPipe } from '../../../../../pipe/filter-appointment-identity.pipe';
 import { ToastrService } from 'ngx-toastr';
+import { TokenComponent } from '../../../../../../shared/components/token/token.component';
 
 @Component({
   selector: 'app-upcoming-appointments',
@@ -21,6 +22,7 @@ import { ToastrService } from 'ngx-toastr';
     PaginationComponent,
     FilterAppointmentIdentityPipe,
     FormsModule,
+    TokenComponent
   ],
   templateUrl: './upcoming-appointments.component.html',
   styleUrls: ['./upcoming-appointments.component.scss'],

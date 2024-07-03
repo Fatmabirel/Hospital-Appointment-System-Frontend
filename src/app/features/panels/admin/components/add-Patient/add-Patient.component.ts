@@ -6,6 +6,7 @@ import { Patient } from '../../../../Patients/patientModel';
 import { PatientService } from '../../../../Patients/patient.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 
 @Component({
@@ -15,7 +16,8 @@ import { Router } from '@angular/router';
    CommonModule,
    FormsModule,
    ReactiveFormsModule,
-   AdminSidebarComponent
+   AdminSidebarComponent,
+   TokenComponent
 
   ],
   templateUrl: './add-Patient.component.html',
