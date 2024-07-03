@@ -1,42 +1,49 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { PatientSidebarComponent } from '../sidebar/psidebar.component';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Patient } from '../../../../Patients/patientModel';
 import { PatientService } from '../../../../Patients/patient.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 @Component({
   selector: 'app-patient-profile',
   standalone: true,
   imports: [
-    CommonModule,PatientSidebarComponent,ReactiveFormsModule
+    CommonModule,
+    PatientSidebarComponent,
+    ReactiveFormsModule,
+    TokenComponent,
   ],
   templateUrl: './Patient-profile.component.html',
   styleUrl: './Patient-profile.component.scss',
-  
 })
 export class PatientProfileComponent implements OnInit {
-
-  PatientForm:FormGroup; 
-  patient:Patient;
+  PatientForm: FormGroup;
+  patient: Patient;
 
   constructor(
-    private formBuilder: FormBuilder, 
-    private patientService:PatientService,
+    private formBuilder: FormBuilder,
+    private patientService: PatientService,
     private toastrService: ToastrService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.initForm(); 
-    this.getPatientProfile(); 
+    this.initForm();
+    this.getPatientProfile();
   }
 
   initForm() {
     this.PatientForm = this.formBuilder.group({
-      id: [''], // ID alanı formda saklı olacak, ama HTML'de görünmeyecek
+      id: [''], 
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
@@ -48,8 +55,6 @@ export class PatientProfileComponent implements OnInit {
       phone: ['', Validators.required],
       address: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      // password: ['', [Validators.required]],
-      // newPassword: ['', [Validators.required]]
     });
   }
 
@@ -57,7 +62,6 @@ export class PatientProfileComponent implements OnInit {
     this.patientService.getPatientProfile().subscribe(
       (data) => {
         this.patient = data;
-        // API'den gelen doktor bilgilerini form alanlarına set ediyoruz
         this.PatientForm.patchValue(data);
       },
       (error) => {
@@ -66,8 +70,8 @@ export class PatientProfileComponent implements OnInit {
     );
   }
   updatePatient() {
-    if (this.PatientForm.valid) { // Formun geçerli olup olmadığını kontrol ediyoruz
-      const updatedPatient:Patient = this.PatientForm.value; // Form verilerini Doctor nesnesine atıyoruz
+    if (this.PatientForm.valid) {
+      const updatedPatient: Patient = this.PatientForm.value; 
       updatedPatient.id = this.patient.id;
       console.log(updatedPatient);
       this.patientService.updatePatient(updatedPatient).subscribe(
@@ -81,9 +85,7 @@ export class PatientProfileComponent implements OnInit {
         }
       );
     } else {
-      // Form geçerli değilse hata mesajı gösterilebilir
       this.toastrService.error('Lütfen eksik alanları doldurun');
     }
   }
-
- }
+}

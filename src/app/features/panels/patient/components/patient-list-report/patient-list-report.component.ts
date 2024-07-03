@@ -5,23 +5,30 @@ import { TokenService } from '../../../../../core/auth/services/token.service';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { PatientSidebarComponent } from '../sidebar/psidebar.component';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 @Component({
   selector: 'app-patient-list-report',
   standalone: true,
-  imports: [CommonModule,PatientSidebarComponent,RouterModule],
+  imports: [
+    CommonModule,
+    PatientSidebarComponent,
+    RouterModule,
+    TokenComponent,
+  ],
   templateUrl: './patient-list-report.component.html',
-  styleUrl: './patient-list-report.component.scss'
+  styleUrl: './patient-list-report.component.scss',
 })
 export class PatientListReportComponent {
-  reports: ResponseReport[]=[]
+  reports: ResponseReport[] = [];
   pageIndex: number = 0;
   pageSize: number = 10;
 
-  constructor(private reportService:ReportService,
-    private tokenService:TokenService,
+  constructor(
+    private reportService: ReportService,
+    private tokenService: TokenService,
     private router: Router
-  ){}
+  ) {}
 
   ngOnInit(): void {
     this.getPatientReports();
@@ -34,13 +41,14 @@ export class PatientListReportComponent {
       return dateB.getTime() - dateA.getTime(); // Sort in descending order
     });
   }
-  
-  getPatientReports()
-  {
+
+  getPatientReports() {
     const patientId = this.tokenService.getUserId().toString();
-    this.reportService.getPatientReports(this.pageIndex,this.pageSize,patientId).subscribe(response=>{
-    this.reports=response.items;
-    this.sortReportsByDateDescending();
+    this.reportService
+      .getPatientReports(this.pageIndex, this.pageSize, patientId)
+      .subscribe((response) => {
+        this.reports = response.items;
+        this.sortReportsByDateDescending();
+      });
   }
-   )}
 }
