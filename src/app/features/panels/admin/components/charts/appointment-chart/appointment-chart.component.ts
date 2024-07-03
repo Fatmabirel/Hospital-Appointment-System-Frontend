@@ -27,6 +27,7 @@ export class AppointmentChartComponent implements OnInit {
   xAxisLabel = 'Aylar';
   showYAxisLabel = true;
   yAxisLabel = 'Randevu Sayısı';
+  legendTitle:string="Ay";
 
 
   colorScheme: any = {
