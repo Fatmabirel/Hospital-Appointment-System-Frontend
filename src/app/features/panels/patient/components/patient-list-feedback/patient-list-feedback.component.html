@@ -38,7 +38,7 @@
               <tr *ngFor="let feedback of feedbacks">
                 <td>{{ feedback.text }}</td>
                 <td>
-                  {{ feedback.createdDate | date : "yyyy-MM-dd HH:mm:ss" }}
+                  {{ feedback.createdDate | date : "HH:mm:ss yyyy-MM-dd" }}
                 </td>
                 <td>
                   <button

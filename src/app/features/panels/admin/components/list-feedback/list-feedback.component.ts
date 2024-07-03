@@ -39,7 +39,6 @@ export class ListFeedbackComponent {
   }
   onPageChanged(newPageIndex: number) {
     this.pageIndex = newPageIndex;
-    console.log(this.pageIndex);
     this.getFeedbacks();
   }
 
