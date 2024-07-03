@@ -8,6 +8,7 @@ import { UpdateRequestReport } from '../../../../reports/models/update-request-r
 import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { error } from 'console';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 @Component({
   selector: 'app-admin-edit-report',
@@ -19,6 +20,7 @@ import { error } from 'console';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    TokenComponent
   ],
 })
 export class AdminEditReportComponent implements OnInit {

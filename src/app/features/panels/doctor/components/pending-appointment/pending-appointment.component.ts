@@ -9,11 +9,18 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { FilterAppointmentIdentityPipe } from '../../../../pipe/filter-appointment-identity.pipe';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 @Component({
   selector: 'app-pending-appointment',
   standalone: true,
-  imports: [CommonModule, DoctorSidebarComponent,FormsModule,FilterAppointmentIdentityPipe],
+  imports: [
+    CommonModule,
+    DoctorSidebarComponent,
+    FormsModule,
+    FilterAppointmentIdentityPipe,
+    TokenComponent,
+  ],
   templateUrl: './pending-appointment.component.html',
   styleUrl: './pending-appointment.component.scss',
 })
@@ -21,14 +28,14 @@ export class PendingAppointmentComponent {
   appointments: Appointment[] = [];
   pageIndex: number = 0;
   pageSize: number = 12;
-  todayDate: Date = new Date(); 
-  filterText: string = "";
+  todayDate: Date = new Date();
+  filterText: string = '';
 
   constructor(
     private doctorService: DoctorService,
     private appointmentService: AppointmentService,
     private toastrService: ToastrService,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -75,7 +82,10 @@ export class PendingAppointmentComponent {
     );
   }
 
-  public viewReport(){
-    return this.toastrService.error("Randevu henüz gerçekleşmedi. Rapor bulunmamaktadır.", "Hata");
+  public viewReport() {
+    return this.toastrService.error(
+      'Randevu henüz gerçekleşmedi. Rapor bulunmamaktadır.',
+      'Hata'
+    );
   }
 }

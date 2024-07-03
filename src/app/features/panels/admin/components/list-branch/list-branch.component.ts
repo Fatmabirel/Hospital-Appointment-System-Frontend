@@ -10,6 +10,7 @@ import { PaginationComponent } from '../../../../../core/paging/components/pagin
 import { ToastrService } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
 import { FilterBranchNamePipe } from '../../../../pipe/filter-branch-name.pipe';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 @Component({
   selector: 'app-list-branch',
@@ -20,7 +21,8 @@ import { FilterBranchNamePipe } from '../../../../pipe/filter-branch-name.pipe';
     RouterModule,
     PaginationComponent,
     FormsModule,
-    FilterBranchNamePipe
+    FilterBranchNamePipe,
+    TokenComponent
   ],
   templateUrl: './list-branch.component.html',
   styleUrl: './list-branch.component.scss',

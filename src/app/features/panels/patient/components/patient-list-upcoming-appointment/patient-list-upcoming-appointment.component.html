@@ -5,12 +5,14 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h2 style="
-        color: #1565c0;
-        font-size: 28px;
-        text-align: center;
-        margin-bottom: 19px;
-      ">
+            <h2
+              style="
+                color: #1565c0;
+                font-size: 28px;
+                text-align: center;
+                margin-bottom: 19px;
+              "
+            >
               GELECEK RANDEVULARIM
             </h2>
           </div>
@@ -30,19 +32,23 @@
               <tbody>
                 <tr *ngFor="let appointment of appointments">
                   <td>
-                    {{ appointment.doctorTitle }} {{ appointment.doctorFirstName }}
+                    {{ appointment.doctorTitle }}
+                    {{ appointment.doctorFirstName }}
                     {{ appointment.doctorLastName }}
                   </td>
-                  <td>{{appointment.branchName}}</td>
+                  <td>{{ appointment.branchName }}</td>
                   <td>{{ appointment.date | date : "dd.MM.yyyy" }}</td>
                   <td>{{ appointment.time }}</td>
                   <td>Tamamlanmadı</td>
-<!--                   <td>
+                  <!--                   <td>
                     <button class="btn btn-primary btn-sm" (click)="viewReport()">Raporu Görüntüle</button>
                   </td> -->
                   <td>
                     <div class="btn-group" role="group">
-                      <button class="btn btn-sm btn-danger cancel-button" (click)="confirmDelete(appointment.id)">
+                      <button
+                        class="btn btn-sm btn-danger cancel-button"
+                        (click)="confirmDelete(appointment.id)"
+                      >
                         İPTAL ET
                       </button>
                     </div>
@@ -53,3 +59,6 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>

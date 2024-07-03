@@ -9,13 +9,14 @@ import { Router } from '@angular/router';
 import { ResponseModel } from '../../../../models/responseModel';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 @Component({
   selector: 'app-patient-list-upcoming-appointment',
   standalone: true,
-  imports: [CommonModule,PatientSidebarComponent],
+  imports: [CommonModule, PatientSidebarComponent, TokenComponent],
   templateUrl: './patient-list-upcoming-appointment.component.html',
-  styleUrl: './patient-list-upcoming-appointment.component.scss'
+  styleUrl: './patient-list-upcoming-appointment.component.scss',
 })
 export class PatientListUpcomingAppointmentComponent {
   appointments: Appointment[] = [];
@@ -72,9 +73,12 @@ export class PatientListUpcomingAppointmentComponent {
       }
     );
   }
-  
-  viewReport() : void{
-    this.toastrService.error("Bu randevu henüz gerçekleşmedi!", "Rapor bulunamadı")
+
+  viewReport(): void {
+    this.toastrService.error(
+      'Bu randevu henüz gerçekleşmedi!',
+      'Rapor bulunamadı'
+    );
   }
 
   confirmDelete(appointmentId: number) {
@@ -96,11 +100,11 @@ export class PatientListUpcomingAppointmentComponent {
   deleteAppointment(appointmentId: number) {
     this.appointmentService.deleteAppointment(appointmentId).subscribe(
       (response) => {
-        this.toastrService.success("Randevu başarıyla iptal edildi!")
+        this.toastrService.success('Randevu başarıyla iptal edildi!');
         this.getPatientAppointments();
       },
       (error) => {
-        this.toastrService.error("Randevu iptal edilemedi!")
+        this.toastrService.error('Randevu iptal edilemedi!');
       }
     );
   }

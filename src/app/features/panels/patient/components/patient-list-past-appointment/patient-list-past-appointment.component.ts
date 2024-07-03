@@ -8,11 +8,12 @@ import { Router } from '@angular/router';
 import { PatientService } from '../../../../Patients/patient.service';
 import { ResponseModel } from '../../../../models/responseModel';
 import { ReportService } from '../../../../reports/services/report.service';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 @Component({
   selector: 'app-patient-list-past-appointment',
   standalone: true,
-  imports: [CommonModule, PatientSidebarComponent],
+  imports: [CommonModule, PatientSidebarComponent, TokenComponent],
   templateUrl: './patient-list-past-appointment.component.html',
   styleUrl: './patient-list-past-appointment.component.scss',
 })
@@ -26,7 +27,7 @@ export class PatientListPastAppointmentComponent {
   constructor(
     private patientService: PatientService,
     private appointmentService: AppointmentService,
-    private reportService:ReportService,
+    private reportService: ReportService,
     private toastrService: ToastrService,
     private router: Router
   ) {}
@@ -34,7 +35,6 @@ export class PatientListPastAppointmentComponent {
   ngOnInit(): void {
     this.getPatientAppointments();
   }
-
 
   getPatientAppointments(): void {
     this.patientService.getPatientProfile().subscribe(
@@ -68,10 +68,12 @@ export class PatientListPastAppointmentComponent {
 
   public viewReport(appointmentId: number) {
     console.log(appointmentId);
-      this.reportService.getByAppointmentId(appointmentId).subscribe(response=>{
-        let reportId=response.id;
+    this.reportService
+      .getByAppointmentId(appointmentId)
+      .subscribe((response) => {
+        let reportId = response.id;
         console.log(reportId);
         this.router.navigate(['patient-report-detail', reportId]);
-      })
+      });
   }
 }

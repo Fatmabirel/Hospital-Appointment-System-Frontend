@@ -7,29 +7,38 @@ import { ConfirmDialogComponent } from '../../../../../shared/components/confirm
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
 import { PaginationComponent } from '../../../../../core/paging/components/pagination/pagination.component';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 @Component({
   selector: 'app-list-feedback',
   standalone: true,
-  imports: [AdminSidebarComponent, CommonModule,RouterModule,PaginationComponent],
+  imports: [
+    AdminSidebarComponent,
+    CommonModule,
+    RouterModule,
+    PaginationComponent,
+    TokenComponent
+  ],
   templateUrl: './list-feedback.component.html',
   styleUrl: './list-feedback.component.scss',
 })
 export class ListFeedbackComponent {
   feedbacks: Feedback[] = [];
   pageIndex: number = 0;
-  pageSize:number = 5;
+  pageSize: number = 5;
   totalPages: number = 0;
   hasNext: boolean = false;
 
-  constructor(private feedbackService: FeedbackService, private dialog: MatDialog) {}
+  constructor(
+    private feedbackService: FeedbackService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.getFeedbacks();
   }
   onPageChanged(newPageIndex: number) {
     this.pageIndex = newPageIndex;
-    console.log(this.pageIndex);
     this.getFeedbacks();
   }
 
@@ -40,7 +49,6 @@ export class ListFeedbackComponent {
       return dateB.getTime() - dateA.getTime(); // Azalan sırayla sıralama
     });
   }
-  
 
   getFeedbacks() {
     this.feedbackService
@@ -56,16 +64,18 @@ export class ListFeedbackComponent {
   confirmDelete(feedbackId: number) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '400px',
-      data: { title: 'ONAY', message: 'Bu geri bildirimi silmek istediğinizden emin misiniz?' },
+      data: {
+        title: 'ONAY',
+        message: 'Bu geri bildirimi silmek istediğinizden emin misiniz?',
+      },
     });
-  
+
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.deleteFeedback(feedbackId);
       }
     });
   }
-  
 
   deleteFeedback(feedbackId: number) {
     this.feedbackService.deleteFeedback(feedbackId).subscribe(

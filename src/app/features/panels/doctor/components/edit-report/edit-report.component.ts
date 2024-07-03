@@ -1,26 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {
-  FormBuilder,
-  FormGroup,
-  FormControl,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DoctorSidebarComponent } from '../sidebar/doctorSidebar.component';
-
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
-
 import { ToastrService } from 'ngx-toastr';
 import { ReportService } from '../../../../reports/services/report.service';
 import { ResponseReport } from '../../../../reports/models/responseReport';
 import { UpdateRequestReport } from '../../../../reports/models/update-request-report';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
+
 @Component({
   selector: 'app-edit-report',
   standalone: true,
   templateUrl: './edit-report.component.html',
   styleUrl: './edit-report.component.scss',
-  imports: [FormsModule, ReactiveFormsModule, DoctorSidebarComponent,RouterModule],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    DoctorSidebarComponent,
+    RouterModule,
+    TokenComponent
+  ],
 })
 export class EditReportComponent implements OnInit {
   reportForm: FormGroup;

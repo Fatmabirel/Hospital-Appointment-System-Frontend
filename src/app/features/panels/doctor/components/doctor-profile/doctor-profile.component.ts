@@ -3,37 +3,49 @@ import { DoctorSidebarComponent } from '../sidebar/doctorSidebar.component';
 import { DoctorService } from '../../../../doctors/services/doctor.service';
 import { Doctor } from '../../../../doctors/models/doctor';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 @Component({
   selector: 'app-doctor-profile',
   standalone: true,
-  imports: [CommonModule, DoctorSidebarComponent, FormsModule,ReactiveFormsModule ],
+  imports: [
+    CommonModule,
+    DoctorSidebarComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    TokenComponent
+  ],
   templateUrl: './doctor-profile.component.html',
   styleUrl: './doctor-profile.component.scss',
 })
 export class DoctorProfileComponent implements OnInit {
-  doctorForm: FormGroup; // FormGroup tanımlıyoruz
+  doctorForm: FormGroup;
   doctor: Doctor;
 
   constructor(
-    private formBuilder: FormBuilder, // FormBuilder kullanacağız
+    private formBuilder: FormBuilder,
     private doctorService: DoctorService,
     private toastrService: ToastrService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.initForm(); // Formu başlatıyoruz
-    this.getDoctorProfile(); // Doktor profili bilgilerini alıyoruz
+    this.initForm();
+    this.getDoctorProfile();
   }
 
   initForm() {
-    // Formu başlatıyoruz, form alanlarını tanımlıyoruz ve validasyonları ekliyoruz
     this.doctorForm = this.formBuilder.group({
-      id: [''], // ID alanı formda saklı olacak, ama HTML'de görünmeyecek
+      id: [''],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       branchID: ['', Validators.required],
@@ -44,7 +56,7 @@ export class DoctorProfileComponent implements OnInit {
       nationalIdentity: ['', Validators.required],
       phone: ['', Validators.required],
       address: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]]
+      email: ['', [Validators.required, Validators.email]],
     });
   }
 
@@ -52,7 +64,6 @@ export class DoctorProfileComponent implements OnInit {
     this.doctorService.getDoctorProfile().subscribe(
       (data) => {
         this.doctor = data;
-        // API'den gelen doktor bilgilerini form alanlarına set ediyoruz
         this.doctorForm.patchValue(data);
       },
       (error) => {
@@ -62,8 +73,8 @@ export class DoctorProfileComponent implements OnInit {
   }
 
   updateDoctor() {
-    if (this.doctorForm.valid) { // Formun geçerli olup olmadığını kontrol ediyoruz
-      const updatedDoctor: Doctor = this.doctorForm.value; // Form verilerini Doctor nesnesine atıyoruz
+    if (this.doctorForm.valid) {
+      const updatedDoctor: Doctor = this.doctorForm.value;
       updatedDoctor.id = this.doctor.id;
       updatedDoctor.branchID = this.doctor.branchID;
       console.log(updatedDoctor);

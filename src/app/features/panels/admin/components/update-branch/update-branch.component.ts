@@ -6,6 +6,7 @@ import { BranchService } from '../../../../branches/services/branch.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 @Component({
   selector: 'app-update-branch',
@@ -14,7 +15,9 @@ import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    AdminSidebarComponent
+    AdminSidebarComponent,
+    TokenComponent
+    
   ],
   templateUrl: './update-branch.component.html',
   styleUrl: './update-branch.component.scss',

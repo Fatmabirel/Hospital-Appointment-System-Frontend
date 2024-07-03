@@ -1,33 +1,39 @@
 import { Component } from '@angular/core';
 import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { AdminService } from '../../../../admins/services/admin.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Admin } from '../../../../admins/models/admin';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 @Component({
   selector: 'app-admin-profile',
   standalone: true,
-  imports: [AdminSidebarComponent,CommonModule,ReactiveFormsModule],
+  imports: [AdminSidebarComponent, CommonModule, ReactiveFormsModule,TokenComponent],
   templateUrl: './admin-profile.component.html',
-  styleUrl: './admin-profile.component.scss'
+  styleUrl: './admin-profile.component.scss',
 })
 export class AdminProfileComponent {
-  adminForm: FormGroup; 
+  adminForm: FormGroup;
   admin: Admin;
 
   constructor(
-    private formBuilder: FormBuilder, 
+    private formBuilder: FormBuilder,
     private adminService: AdminService,
     private toastrService: ToastrService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.initForm(); 
-    this.getAdminProfile(); 
+    this.initForm();
+    this.getAdminProfile();
   }
 
   initForm() {
@@ -41,7 +47,7 @@ export class AdminProfileComponent {
       address: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
-      newPassword: ['', [Validators.required]]
+      newPassword: ['', [Validators.required]],
     });
   }
 
@@ -57,8 +63,8 @@ export class AdminProfileComponent {
     );
   }
   updateAdmin() {
-    if (this.adminForm.valid) { 
-      const updatedAdmin: Admin = this.adminForm.value; 
+    if (this.adminForm.valid) {
+      const updatedAdmin: Admin = this.adminForm.value;
       this.adminService.updateAdmin(updatedAdmin).subscribe(
         (response) => {
           this.toastrService.success('Bilgileriniz başarıyla güncellendi');

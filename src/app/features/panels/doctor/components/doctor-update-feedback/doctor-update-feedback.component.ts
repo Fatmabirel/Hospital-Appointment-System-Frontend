@@ -1,20 +1,31 @@
 import { Component } from '@angular/core';
 import { DoctorSidebarComponent } from '../sidebar/doctorSidebar.component';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { FeedbackService } from '../../../../feedbacks/services/feedback.service';
 import { DoctorService } from '../../../../doctors/services/doctor.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Feedback } from '../../../../feedbacks/models/feedback';
 import { Doctor } from '../../../../doctors/models/doctor';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 @Component({
   selector: 'app-doctor-update-feedback',
   standalone: true,
-  imports: [DoctorSidebarComponent,CommonModule,ReactiveFormsModule],
+  imports: [
+    DoctorSidebarComponent,
+    CommonModule,
+    ReactiveFormsModule,
+    TokenComponent,
+  ],
   templateUrl: './doctor-update-feedback.component.html',
-  styleUrl: './doctor-update-feedback.component.scss'
+  styleUrl: './doctor-update-feedback.component.scss',
 })
 export class DoctorUpdateFeedbackComponent {
   doctor: Doctor;
@@ -40,15 +51,17 @@ export class DoctorUpdateFeedbackComponent {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      const feedbackId = params['feedbackId']; 
-      this.feedbackService.getFeedbackById(feedbackId).subscribe((feedback: Feedback) => {
-        this.feedbackForm.patchValue({
-          id: feedback.id,
-          userID: feedback.userID,
-          text: feedback.text
+    this.route.params.subscribe((params) => {
+      const feedbackId = params['feedbackId'];
+      this.feedbackService
+        .getFeedbackById(feedbackId)
+        .subscribe((feedback: Feedback) => {
+          this.feedbackForm.patchValue({
+            id: feedback.id,
+            userID: feedback.userID,
+            text: feedback.text,
+          });
         });
-      });
     });
   }
 

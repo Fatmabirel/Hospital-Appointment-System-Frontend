@@ -1,24 +1,36 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Feedback } from '../../../../feedbacks/models/feedback';
 import { FeedbackService } from '../../../../feedbacks/services/feedback.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AdminService } from '../../../../admins/services/admin.service';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 @Component({
   selector: 'app-update-feedback',
   standalone: true,
-  imports: [CommonModule,AdminSidebarComponent,ReactiveFormsModule,RouterModule],
+  imports: [
+    CommonModule,
+    AdminSidebarComponent,
+    ReactiveFormsModule,
+    RouterModule,
+    TokenComponent
+  ],
   templateUrl: './update-feedback.component.html',
-  styleUrl: './update-feedback.component.scss'
+  styleUrl: './update-feedback.component.scss',
 })
 export class UpdateFeedbackComponent {
   feedbackForm: FormGroup;
   feedback: Feedback;
-  feedbackId: number; // feedbackId tipi number olarak tanımlanacak
+  feedbackId: number;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,7 +48,7 @@ export class UpdateFeedbackComponent {
   initForm() {
     this.feedbackForm = this.formBuilder.group({
       id: [''],
-      userID : [''],
+      userID: [''],
       userFirstName: ['', Validators.required],
       userLastName: ['', Validators.required],
       text: ['', Validators.required],
@@ -44,22 +56,21 @@ export class UpdateFeedbackComponent {
   }
 
   getFeedbackDetails() {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       const id = params.get('feedbackId');
       if (id !== null) {
-        this.feedbackId = +id; 
+        this.feedbackId = +id;
         if (isNaN(this.feedbackId)) {
-          console.error('Geçersiz geri bildirim ID parametresi');
           return;
         }
         this.feedbackService.getFeedbackById(this.feedbackId).subscribe(
           (data: Feedback) => {
             this.feedbackForm.patchValue({
-              id: this.feedbackId,              
-              userId : data.userID,
+              id: this.feedbackId,
+              userId: data.userID,
               userFirstName: data.userFirstName,
               userLastName: data.userLastName,
-              text: data.text
+              text: data.text,
             });
           },
           (error) => {
@@ -73,9 +84,10 @@ export class UpdateFeedbackComponent {
   }
 
   updateFeedback() {
-    if (this.feedbackForm.valid && this.feedbackId !== undefined) { // feedbackId'nin undefined olup olmadığını kontrol ediyoruz
+    if (this.feedbackForm.valid && this.feedbackId !== undefined) {
+      // feedbackId'nin undefined olup olmadığını kontrol ediyoruz
       const updatedFeedback: Feedback = this.feedbackForm.value;
-      updatedFeedback.id = this.feedbackId; 
+      updatedFeedback.id = this.feedbackId;
       console.log(updatedFeedback);
       this.feedbackService.updateFeedback(updatedFeedback).subscribe(
         (response) => {

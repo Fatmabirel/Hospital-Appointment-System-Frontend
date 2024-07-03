@@ -8,14 +8,15 @@ import { TokenService } from '../../../../../core/auth/services/token.service';
 
 import { DrscheduleService } from '../../../../doctorschedule/services/drschedule.service';
 import { UpdateDoctorSchedule } from '../../../../doctorschedule/models/update-doctor-schedule';
-import { AdminSidebarComponent } from "../sidebar/adminSidebar.component";
+import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 @Component({
-    selector: 'app-admin-update-drschedule',
-    standalone: true,
-    templateUrl: './admin-update-drschedule.component.html',
-    styleUrl: './admin-update-drschedule.component.scss',
-    imports: [FormsModule, CommonModule,AdminSidebarComponent]
+  selector: 'app-admin-update-drschedule',
+  standalone: true,
+  templateUrl: './admin-update-drschedule.component.html',
+  styleUrl: './admin-update-drschedule.component.scss',
+  imports: [FormsModule, CommonModule, AdminSidebarComponent,TokenComponent],
 })
 export class AdminUpdateDrscheduleComponent implements OnInit {
   selectedDate: string;
@@ -25,14 +26,14 @@ export class AdminUpdateDrscheduleComponent implements OnInit {
   maxDate: string;
   times: string[] = [];
   scheduleId: number;
-  doctorId:string;
+  doctorId: string;
 
   constructor(
     private route: ActivatedRoute,
     private tokenService: TokenService,
     private drScheduleService: DrscheduleService,
     private toastrService: ToastrService,
-    private router:Router
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -45,16 +46,15 @@ export class AdminUpdateDrscheduleComponent implements OnInit {
 
     this.generateTimes();
 
-    this.route.params.subscribe(params => {
-      if (params['doctorId'] && params['scheduleId']  ) {
+    this.route.params.subscribe((params) => {
+      if (params['doctorId'] && params['scheduleId']) {
         this.scheduleId = params['scheduleId'];
-        this.doctorId=params['doctorId'];
+        this.doctorId = params['doctorId'];
         console.log('Doctor ID:', this.doctorId); // Doctor ID'nin doğru alındığını kontrol etme
         console.log('Schedule ID:', this.scheduleId); // Schedule ID'nin doğru alındığını kontrol etme
-
       } else {
         this.scheduleId = 0;
-        this.doctorId='0';
+        this.doctorId = '0';
       }
     });
 
@@ -62,7 +62,7 @@ export class AdminUpdateDrscheduleComponent implements OnInit {
     //this.scheduleId = this.route.snapshot.paramMap.get('scheduleId');
 
     // Fetch existing schedule details
-    this.drScheduleService.getById(this.scheduleId).subscribe(schedule => {
+    this.drScheduleService.getById(this.scheduleId).subscribe((schedule) => {
       console.log(schedule);
       this.selectedDate = schedule.date;
       this.startTime = this.formatTimeForDisplay(schedule.startTime);
@@ -74,7 +74,9 @@ export class AdminUpdateDrscheduleComponent implements OnInit {
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
     const day = date.getDate();
-    return `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+    return `${year}-${month.toString().padStart(2, '0')}-${day
+      .toString()
+      .padStart(2, '0')}`;
   }
 
   private generateTimes() {
@@ -90,7 +92,9 @@ export class AdminUpdateDrscheduleComponent implements OnInit {
   }
 
   private formatTime(hour: number, minute: number): string {
-    return `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+    return `${hour.toString().padStart(2, '0')}:${minute
+      .toString()
+      .padStart(2, '0')}`;
   }
 
   update() {
@@ -98,34 +102,34 @@ export class AdminUpdateDrscheduleComponent implements OnInit {
       const userId: string = this.doctorId;
 
       const schedule: UpdateDoctorSchedule = {
-        id:this.scheduleId,
+        id: this.scheduleId,
         doctorID: userId,
         date: this.formatDateForDatabase(this.selectedDate),
         startTime: this.formatTimeForDatabase(this.startTime),
-        endTime: this.formatTimeForDatabase(this.endTime)
+        endTime: this.formatTimeForDatabase(this.endTime),
       };
 
-      this.drScheduleService.updateDoctorSchedule( schedule).subscribe(
-        response => {
-          this.toastrService.success("Doktorun takvim çizelgesi başarılı bir şekilde güncellendi", 'Başarılı');
+      this.drScheduleService.updateDoctorSchedule(schedule).subscribe(
+        (response) => {
+          this.toastrService.success(
+            'Doktorun takvim çizelgesi başarılı bir şekilde güncellendi',
+            'Başarılı'
+          );
           this.router.navigate(['admin-doctor-schedule', this.doctorId]);
-
         },
         // error => {
         //   this.toastrService.error("Bu tarih için doktorun takvim çizelgesi zaten mevcut", 'Hatalı İşlem');
         //   console.error('Error updating schedule:', error);
         // }
-        responseError => {
-
+        (responseError) => {
           console.log(responseError);
-          this.toastrService.error(responseError.error.Detail,'Hatalı İşlem');
-
+          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
 
       console.log('Updated Schedule:', schedule);
     } else {
-      this.toastrService.error("", "Tüm alanları doldurunuz.");
+      this.toastrService.error('', 'Tüm alanları doldurunuz.');
     }
   }
 
@@ -146,14 +150,19 @@ export class AdminUpdateDrscheduleComponent implements OnInit {
       return this.times;
     }
     const startIndex = this.times.indexOf(this.startTime);
-    return this.times.slice(startIndex + 1).filter(time => this.isValidEndTime(time));
+    return this.times
+      .slice(startIndex + 1)
+      .filter((time) => this.isValidEndTime(time));
   }
 
   private isValidEndTime(time: string): boolean {
     const [startHour, startMinute] = this.startTime.split(':').map(Number);
     const [endHour, endMinute] = time.split(':').map(Number);
 
-    if (endHour < startHour || (endHour === startHour && endMinute <= startMinute)) {
+    if (
+      endHour < startHour ||
+      (endHour === startHour && endMinute <= startMinute)
+    ) {
       return false;
     }
     return true;

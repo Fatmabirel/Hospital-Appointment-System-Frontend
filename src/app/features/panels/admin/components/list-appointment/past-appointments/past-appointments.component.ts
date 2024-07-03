@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 import { PaginationComponent } from '../../../../../../core/paging/components/pagination/pagination.component';
 import { FormsModule } from '@angular/forms';
 import { FilterAppointmentIdentityPipe } from '../../../../../pipe/filter-appointment-identity.pipe';
+import { TokenComponent } from '../../../../../../shared/components/token/token.component';
 
 @Component({
   selector: 'app-past-appointments',
@@ -22,7 +23,8 @@ import { FilterAppointmentIdentityPipe } from '../../../../../pipe/filter-appoin
     RouterModule,
     PaginationComponent,
     FilterAppointmentIdentityPipe,
-    FormsModule
+    FormsModule,
+    TokenComponent
   ],
   templateUrl: './past-appointments.component.html',
   styleUrls: ['./past-appointments.component.scss'],

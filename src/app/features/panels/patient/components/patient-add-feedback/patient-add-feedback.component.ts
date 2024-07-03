@@ -1,20 +1,31 @@
 import { Component } from '@angular/core';
 import { Patient } from '../../../../Patients/patientModel';
 import { Feedback } from '../../../../feedbacks/models/feedback';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { FeedbackService } from '../../../../feedbacks/services/feedback.service';
 import { PatientService } from '../../../../Patients/patient.service';
 import { ToastrService } from 'ngx-toastr';
-import { Router, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { PatientSidebarComponent } from '../sidebar/psidebar.component';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 @Component({
   selector: 'app-patient-add-feedback',
   standalone: true,
-  imports: [CommonModule,PatientSidebarComponent,ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    PatientSidebarComponent,
+    ReactiveFormsModule,
+    TokenComponent,
+  ],
   templateUrl: './patient-add-feedback.component.html',
-  styleUrl: './patient-add-feedback.component.scss'
+  styleUrl: './patient-add-feedback.component.scss',
 })
 export class PatientAddFeedbackComponent {
   patient: Patient;
@@ -42,7 +53,7 @@ export class PatientAddFeedbackComponent {
       this.patient = patient;
       this.userID = patient.id;
       this.feedbackForm.patchValue({
-        userID: this.userID
+        userID: this.userID,
       });
     });
   }

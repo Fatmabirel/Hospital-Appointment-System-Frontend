@@ -6,6 +6,7 @@ import { Patient } from '../../../../Patients/patientModel';
 import { PatientService } from '../../../../Patients/patient.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 
 @Component({
@@ -15,7 +16,8 @@ import { Router } from '@angular/router';
    CommonModule,
    FormsModule,
    ReactiveFormsModule,
-   AdminSidebarComponent
+   AdminSidebarComponent,
+   TokenComponent
 
   ],
   templateUrl: './add-Patient.component.html',
@@ -39,14 +41,14 @@ export class AddPatientComponent {
     this.PatientForm = this.formbuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      dateOfBirth: ['', Validators.required],
-      age: ['', Validators.required],
-      height: ['', Validators.required],
-      weight: ['', Validators.required],
-      bloodGroup: ['', Validators.required],
-      nationalIdentity: ['', Validators.required],
+      dateOfBirth: [''],
+      age: [''],
+      height: [''],
+      weight: [''],
+      bloodGroup: [''],
+      nationalIdentity: [''],
       phone: ['', Validators.required],
-      address: ['', Validators.required],
+      address: [''],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });

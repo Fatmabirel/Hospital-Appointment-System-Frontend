@@ -9,11 +9,12 @@ import { Doctor } from '../../../../doctors/models/doctor';
 import { RouterModule } from '@angular/router';
 import { ConfirmDialogComponent } from '../../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { ToastrService } from 'ngx-toastr';
+import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 @Component({
   selector: 'app-doctor-list-feedback',
   standalone: true,
-  imports: [DoctorSidebarComponent, CommonModule,RouterModule],
+  imports: [DoctorSidebarComponent, CommonModule, RouterModule,TokenComponent],
   templateUrl: './doctor-list-feedback.component.html',
   styleUrl: './doctor-list-feedback.component.scss',
 })
@@ -41,7 +42,7 @@ export class DoctorListFeedbackComponent {
 
   getFeedbackByUserId(userID: string) {
     this.feedbackService
-      .getFeedbackByUserId(this.pageIndex,this.pageSize,userID )
+      .getFeedbackByUserId(this.pageIndex, this.pageSize, userID)
       .subscribe((response) => {
         this.feedbacks = response.items;
       });
@@ -50,25 +51,27 @@ export class DoctorListFeedbackComponent {
   confirmDelete(feedbackId: number) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '400px',
-      data: { title: 'ONAY', message: 'Bu geri bildirimi silmek istediğinizden emin misiniz?' },
+      data: {
+        title: 'ONAY',
+        message: 'Bu geri bildirimi silmek istediğinizden emin misiniz?',
+      },
     });
-  
+
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.deleteFeedback(feedbackId);
       }
     });
   }
-  
 
   deleteFeedback(feedbackId: number) {
     this.feedbackService.deleteFeedback(feedbackId).subscribe(
       (response) => {
-        this.toastrService.success("Geri bildirim başarıyla silindi");
+        this.toastrService.success('Geri bildirim başarıyla silindi');
         this.getFeedbackByUserId(this.userID);
       },
       (error) => {
-        this.toastrService.success("Geri bildirim silinemedi");
+        this.toastrService.success('Geri bildirim silinemedi');
       }
     );
   }
