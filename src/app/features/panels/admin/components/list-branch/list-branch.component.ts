@@ -69,13 +69,12 @@ export class ListBranchComponent implements OnInit {
     this.branchService.deleteBranch(branchId,this.pageIndex,100).subscribe(
       (response) => {
         console.log('Branş başarıyla silindi:', response);
-        this.toastrService.success('Branş başarıyla silindi:');
+        this.toastrService.success('Branş başarıyla silindi');
 
         this.getBranches();
       },
       (error) => {
-        console.error('Branş silinemedi:', error);
-        this.toastrService.error('Branş silinemedi:');
+        this.toastrService.error('Bu branşa ait doktor bulunmaktadır. Branş silinemez.');
       }
     );
   }
