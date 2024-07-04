@@ -74,8 +74,10 @@ export class ListBranchComponent implements OnInit {
         this.getBranches();
       },
       (error) => {
-        console.log('Branş silinemedi:', error);
-        this.toastrService.error('Branş silinemedi');
+
+
+        this.toastrService.error('Bu branşa ait doktor bulunmaktadır. Branş silinemez.');
+
       }
     );
   }
