@@ -15,6 +15,7 @@ import { BranchService } from '../../../../branches/services/branch.service';
 import { Branch } from '../../../../branches/models/branch';
 import { PaginationComponent } from '../../../../../core/paging/components/pagination/pagination.component';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-list-doctor',
@@ -50,6 +51,7 @@ export class ListDoctorComponent implements OnInit {
     private doctorService: DoctorService,
     private branchService:BranchService,
     private dialog: MatDialog,
+    private toastrService:ToastrService,
     private router:Router
   ) {}
 
@@ -101,6 +103,7 @@ export class ListDoctorComponent implements OnInit {
     this.doctorService.deleteDoctor(doctorId).subscribe(
       (response) => {
         console.log('Doktor başarıyla silindi:', response);
+        this.toastrService.success("Doktor başarıyla silindi.");
         this.getDoctors(); // Doktorları yeniden yükleyerek güncellemeyi sağlıyoruz
       },
       (error) => {

@@ -123,7 +123,7 @@ export class AdminUpdateDrscheduleComponent implements OnInit {
         // }
         (responseError) => {
           console.log(responseError);
-          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
+          this.toastrService.error(responseError.error.detail, 'Hatalı İşlem');
         }
       );
 
