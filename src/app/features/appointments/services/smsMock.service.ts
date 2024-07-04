@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   })
   export class SmsService {
     
-    private apiUrl = 'http://localhost:60805/Sms'; // Gerçek SMS servisinin URL'si
+    private apiUrl = 'http://localhost:60805/api/Sms'; // Gerçek SMS servisinin URL'si
   
     constructor(private http: HttpClient) { }
   
