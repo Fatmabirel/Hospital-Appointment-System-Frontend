@@ -81,7 +81,7 @@ export class EditReportComponent implements OnInit {
           this.router.navigate(['doctor-reports']);
         },
         (responseError) => {
-          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
+          this.toastrService.error(responseError.error.detail, 'Hatalı İşlem');
         }
       );
     } else {

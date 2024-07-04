@@ -26,7 +26,7 @@ import { TokenComponent } from '../../../../../shared/components/token/token.com
   ],
   templateUrl: './list-branch.component.html',
   styleUrl: './list-branch.component.scss',
-  
+
 })
 export class ListBranchComponent implements OnInit {
   branches: Branch[] = [];
@@ -74,7 +74,10 @@ export class ListBranchComponent implements OnInit {
         this.getBranches();
       },
       (error) => {
+
+
         this.toastrService.error('Bu branşa ait doktor bulunmaktadır. Branş silinemez.');
+
       }
     );
   }

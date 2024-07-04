@@ -90,7 +90,7 @@ export class LoginComponent implements OnInit {
         },
         (responseError) => {
           console.log(this.loginForm.value);
-          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
+          this.toastrService.error(responseError.error.detail, 'Hatalı İşlem');
         }
       );
     } else {

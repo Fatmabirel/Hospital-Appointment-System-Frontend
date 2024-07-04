@@ -63,7 +63,7 @@ export class RegisterComponent {
         this.router.navigate(['/']);
       },
       (responseError) => {
-        this.toastrService.error(responseError.error.Detail, 'Hata');
+        this.toastrService.error(responseError.error.detail, 'Hata');
       }
     );
   }else {

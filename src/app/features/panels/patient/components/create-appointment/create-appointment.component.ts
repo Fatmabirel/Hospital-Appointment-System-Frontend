@@ -110,7 +110,7 @@ export class CreateAppointmentComponent implements OnInit {
             this.selectedDate = null;
             this.timesWithStatus = [];
             this.toastrService.warning(
-              'Bu doktor için gelecekteki randevu bulunmamaktadır.'
+              'Doktorun ilerleyen tarihlerde herhangi bir randevusu bulunmamaktadır.'
             );
           } else {
             this.selectedDate = null;
@@ -270,7 +270,7 @@ export class CreateAppointmentComponent implements OnInit {
             },
             (error) => {
               console.log(error);
-              this.toastrService.error(error.error.Detail, 'Hatalı İşlem');
+              this.toastrService.error(error.error.detail, 'Hatalı İşlem');
             }
           );
         }

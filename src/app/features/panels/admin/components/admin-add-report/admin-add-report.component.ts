@@ -65,7 +65,7 @@ export class AdminAddReportComponent implements OnInit {
           this.router.navigate(['past-appointments']);
         },
         (responseError) => {
-          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
+          this.toastrService.error(responseError.error.detail, 'Hatalı İşlem');
         }
       );
     } else {
