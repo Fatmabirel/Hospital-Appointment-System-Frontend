@@ -76,6 +76,7 @@ export class LoginComponent implements OnInit {
       this.authService.login(loginModel).subscribe(
         (response) => {
           const token = response.accessToken.token; // accessToken içinden token özelliğini al
+          console.log(token);
           localStorage.setItem('token', token);
           this.toastrService.success('Giriş başarılı!', 'Başarılı');
 
@@ -90,7 +91,7 @@ export class LoginComponent implements OnInit {
         },
         (responseError) => {
           console.log(this.loginForm.value);
-          this.toastrService.error(responseError.error.detail, 'Hatalı İşlem');
+          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
     } else {
