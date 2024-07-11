@@ -6,4 +6,5 @@ export interface Feedback{
     text:string;
     createdDate:Date;
     deletedDate:Date;
+    isApproved:boolean;
 }

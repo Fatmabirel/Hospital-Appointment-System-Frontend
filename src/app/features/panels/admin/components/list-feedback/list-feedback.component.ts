@@ -8,6 +8,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
 import { PaginationComponent } from '../../../../../core/paging/components/pagination/pagination.component';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-list-feedback',
@@ -17,7 +18,7 @@ import { TokenComponent } from '../../../../../shared/components/token/token.com
     CommonModule,
     RouterModule,
     PaginationComponent,
-    TokenComponent
+    TokenComponent,
   ],
   templateUrl: './list-feedback.component.html',
   styleUrl: './list-feedback.component.scss',
@@ -31,6 +32,7 @@ export class ListFeedbackComponent {
 
   constructor(
     private feedbackService: FeedbackService,
+    private toastrService: ToastrService,
     private dialog: MatDialog
   ) {}
 
@@ -80,12 +82,28 @@ export class ListFeedbackComponent {
   deleteFeedback(feedbackId: number) {
     this.feedbackService.deleteFeedback(feedbackId).subscribe(
       (response) => {
-        console.log('Geri bildirim başarıyla silindi:', response);
+        this.toastrService.success('Geri bildirim başarıyla silindi');
         this.getFeedbacks();
       },
       (error) => {
-        console.error('Geri bildirim silinemedi:', error);
+        this.toastrService.error('Geri bildirim silinemedi');
       }
     );
+  }
+
+  approveFeedback(feedbackId: number) {
+    const feedback = this.feedbacks.find((f) => f.id === feedbackId);
+    if (feedback) {
+      const updatedFeedback = { ...feedback, isApproved: true };
+      this.feedbackService.updateFeedback(updatedFeedback).subscribe(
+        (response) => {
+          feedback.isApproved = true;
+          this.toastrService.success('Geri bildirim başarıyla onaylandı');
+        },
+        (error) => {
+          this.toastrService.error('Geri bildirim onaylanamadı');
+        }
+      );
+    }
   }
 }

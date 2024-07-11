@@ -21,9 +21,10 @@
             <thead class="thead-dark">
               <tr>
                 <th scope="col" style="width: 20%">Kullanıcının Adı Soyadı</th>
-                <th scope="col" style="width: 40%">Mesaj</th>
-                <th scope="col" style="width: 25%">Tarih</th>
-                <th scope="col" style="width: 15%">Sil</th>
+                <th scope="col" style="width: 30%">Mesaj</th>
+                <th scope="col" style="width: 15%">Tarih</th>
+                <th scope="col" style="width: 15%">Onay Durumu</th>
+                <th scope="col" style="width: 20%">İşlemler</th>
               </tr>
             </thead>
             <tbody>
@@ -37,10 +38,31 @@
                 </td>
                 <td>
                   <button
+                    *ngIf="!feedback.isApproved"
+                    class="btn btn-sm btn-warning"
+                  >
+                    Onay Bekliyor
+                  </button>
+                  <button
+                    *ngIf="feedback.isApproved"
+                    class="btn btn-sm btn-success"
+                  >
+                    Onaylandı
+                  </button>
+                </td>
+                <td>
+                  <button
+                    class="btn btn-sm btn-success"
+                    (click)="approveFeedback(feedback.id)"
+                    [disabled]="feedback.isApproved"
+                  >
+                    Onayla
+                  </button>
+                  <button
                     class="btn btn-sm btn-danger"
                     (click)="confirmDelete(feedback.id)"
                   >
-                    <i class="fa fa-trash"></i>
+                   Sil
                   </button>
                 </td>
               </tr>
