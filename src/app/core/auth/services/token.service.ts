@@ -27,6 +27,7 @@ export class TokenService {
     }
 
     const decodedToken: any = this.decodeToken(token);
+    console.log(decodedToken);
     if (!decodedToken || !decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']) {
       throw new Error('Token decode edilemedi veya ID bulunamadı');
     }

@@ -51,12 +51,12 @@ export class CreateDoctorScheduleComponent implements OnInit {
   }
 
   private generateTimes() {
-    const startHour = 0;
-    const endHour = 23;
+    const startHour = 9;
+    const endHour = 18;
 
     for (let hour = startHour; hour <= endHour; hour++) {
       this.times.push(this.formatTime(hour, 0));
-      if (hour !== endHour || hour === 23) {
+      if (hour !== endHour ) {
         this.times.push(this.formatTime(hour, 30));
       }
     }
@@ -88,7 +88,7 @@ export class CreateDoctorScheduleComponent implements OnInit {
           this.router.navigate(['list-doctor-schedule']);
         },
         (responseError) => {
-          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
+          this.toastrService.error(responseError.error.detail, 'Hatalı İşlem');
         }
       );
 

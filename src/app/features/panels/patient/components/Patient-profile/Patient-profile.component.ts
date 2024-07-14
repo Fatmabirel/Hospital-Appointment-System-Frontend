@@ -81,7 +81,7 @@ export class PatientProfileComponent implements OnInit {
           this.router.navigate(['patient-sidebar']);
         },
         (responseError) => {
-          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
+          this.toastrService.error(responseError.error.detail, 'Hatalı İşlem');
         }
       );
     } else {

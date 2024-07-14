@@ -88,7 +88,6 @@ export class UpdateFeedbackComponent {
       // feedbackId'nin undefined olup olmadığını kontrol ediyoruz
       const updatedFeedback: Feedback = this.feedbackForm.value;
       updatedFeedback.id = this.feedbackId;
-      console.log(updatedFeedback);
       this.feedbackService.updateFeedback(updatedFeedback).subscribe(
         (response) => {
           this.toastrService.success('Geri bildirim başarıyla güncellendi');

@@ -37,8 +37,9 @@ export class VerifyEmailComponent {
          this.toastrService.success("Hesabınız başarıyla doğrulandı!")
          this.router.navigate(['/login'])
         },
-        (error) => {
-          this.toastrService.error("Hesabınız doğrulanırken bir sorun oluştu!")
+        (responseError) => {
+          this.toastrService.error(responseError.error.Detail, 'Hata');
+          this.router.navigate(['/register'])
         }
       )
   }
