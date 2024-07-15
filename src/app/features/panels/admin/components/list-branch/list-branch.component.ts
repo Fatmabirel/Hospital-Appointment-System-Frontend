@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Branch } from '../../../../branches/models/branch';
 import { BranchService } from '../../../../branches/services/branch.service';
 import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
@@ -22,23 +22,24 @@ import { TokenComponent } from '../../../../../shared/components/token/token.com
     PaginationComponent,
     FormsModule,
     FilterBranchNamePipe,
-    TokenComponent
+    TokenComponent,
   ],
   templateUrl: './list-branch.component.html',
   styleUrl: './list-branch.component.scss',
-
 })
 export class ListBranchComponent implements OnInit {
   branches: Branch[] = [];
   pageIndex: number = 0;
-  pageSize:number = 5;
+  pageSize: number = 5;
   totalPages: number = 0;
   hasNext: boolean = false;
   filterText: string = '';
 
-  constructor(private branchService: BranchService,
-     private dialog: MatDialog,
-     private toastrService:ToastrService,) {}
+  constructor(
+    private branchService: BranchService,
+    private dialog: MatDialog,
+    private toastrService: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.getBranches();
@@ -50,34 +51,25 @@ export class ListBranchComponent implements OnInit {
     this.getBranches();
   }
 
-
   getBranches() {
-    this.branchService.getBranches(this.pageIndex, this.pageSize).subscribe(
-      (response) => {
+    this.branchService
+      .getBranches(this.pageIndex, this.pageSize)
+      .subscribe((response) => {
         this.branches = response.items;
         this.branches.sort((a, b) => a.name.localeCompare(b.name));
         this.totalPages = response.pages;
         this.hasNext = response.hasNext;
-      },
-      (error) => {
-        console.error('Branşlar getirilirken hata oluştu:', error);
-      }
-    );
+      });
   }
 
   deleteBranch(branchId: number) {
-    this.branchService.deleteBranch(branchId,this.pageIndex,100).subscribe(
+    this.branchService.deleteBranch(branchId, this.pageIndex, 100).subscribe(
       (response) => {
-        console.log('Branş başarıyla silindi:', response);
         this.toastrService.success('Branş başarıyla silindi');
-
         this.getBranches();
       },
-      (error) => {
-
-
-        this.toastrService.error('Bu branşa ait doktor bulunmaktadır. Branş silinemez.');
-
+      (responseError) => {
+        this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
       }
     );
   }
@@ -85,7 +77,10 @@ export class ListBranchComponent implements OnInit {
   confirmDelete(branchId: number) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '400px',
-      data: { title: 'ONAY', message: 'Bu branşı silmek istediğinizden emin misiniz?' },
+      data: {
+        title: 'ONAY',
+        message: 'Bu branşı silmek istediğinizden emin misiniz?',
+      },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -94,4 +89,4 @@ export class ListBranchComponent implements OnInit {
       }
     });
   }
- }
+}

@@ -88,7 +88,7 @@ export class CreateDoctorScheduleComponent implements OnInit {
           this.router.navigate(['list-doctor-schedule']);
         },
         (responseError) => {
-          this.toastrService.error(responseError.error.detail, 'Hatalı İşlem');
+          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
 

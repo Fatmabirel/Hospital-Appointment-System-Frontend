@@ -86,9 +86,8 @@ export class UpdateBranchComponent {
           this.toastrService.success('Branş başarıyla güncellendi');
           this.router.navigate(['/admin-branches']);
         },
-        (error) => {
-          this.toastrService.error('Aynı branchten var');
-          
+        (responseError) => {
+          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
     } else {
