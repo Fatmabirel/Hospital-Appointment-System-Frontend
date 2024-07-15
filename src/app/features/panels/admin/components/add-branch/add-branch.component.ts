@@ -22,7 +22,7 @@ import { TokenComponent } from '../../../../../shared/components/token/token.com
     FormsModule,
     ReactiveFormsModule,
     AdminSidebarComponent,
-    TokenComponent
+    TokenComponent,
   ],
   templateUrl: './add-branch.component.html',
   styleUrl: './add-branch.component.scss',
@@ -71,9 +71,8 @@ export class AddBranchComponent {
           this.toastrService.success('Branş başarıyla eklendi');
           this.router.navigate(['/admin-branches']);
         },
-        (error) => {
-          this.toastrService.error('Aynı isimde branş bulunmaktadır.');
-          //console.error('Error adding doctor:', error);
+        (responseError) => {
+          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
     } else {
