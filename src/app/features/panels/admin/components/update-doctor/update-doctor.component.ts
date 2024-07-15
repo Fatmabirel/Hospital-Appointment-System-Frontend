@@ -107,8 +107,9 @@ export class UpdateDoctorComponent {
           this.toastrService.success('Doktor başarıyla güncellendi');
           this.router.navigate(['admin-list-doctor']);
         },
-        (error) => {
-          console.error('Doktor güncellenemedi:', error);
+        (responseError) => {
+          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
+          console.error('Doktor güncellenemedi:', responseError);
         }
       );
     } else {

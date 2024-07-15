@@ -108,8 +108,9 @@ export class UpdatePatientComponent {
           this.toastrService.success('Hasta başarıyla güncellendi');
           this.router.navigate(['/admin-patient']);
         },
-        (error) => {
-          console.error('Hasta güncellenemedi:', error);
+        (responseError) => {
+          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
+          console.error('Hasta güncellenemedi:', responseError);
         }
       );
     } else {

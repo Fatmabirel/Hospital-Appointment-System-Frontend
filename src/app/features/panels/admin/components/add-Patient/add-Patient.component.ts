@@ -80,9 +80,9 @@ export class AddPatientComponent {
           this.toastrService.success('Hasta başarıyla eklendi');
           this.router.navigate(['/admin-patient']);
         },
-        (error) => {
-          this.toastrService.error('Hasta eklenemedi');
-          //console.error('Error adding doctor:', error);
+        (responseError) => {
+          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
+          console.error('Hasta eklenemedi:', responseError);
         }
       );
     } else {

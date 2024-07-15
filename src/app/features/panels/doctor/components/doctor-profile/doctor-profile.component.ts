@@ -56,7 +56,7 @@ export class DoctorProfileComponent implements OnInit {
       nationalIdentity: ['', Validators.required],
       phone: ['', Validators.required],
       address: ['', Validators.required],
-      email: [{ value: '', disabled: true }, [Validators.required, Validators.email]],
+      email: ['',[Validators.required, Validators.email]],
     });
   }
 
@@ -85,7 +85,7 @@ export class DoctorProfileComponent implements OnInit {
           this.router.navigate(['doctor-sidebar']);
         },
         (responseError) => {
-          this.toastrService.error(responseError.error.detail, 'Hatalı İşlem');
+          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
     } else {
