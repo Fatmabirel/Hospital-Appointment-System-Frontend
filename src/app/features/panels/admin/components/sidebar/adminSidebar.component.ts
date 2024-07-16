@@ -2,10 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { TokenService } from '../../../../../core/auth/services/token.service';
-import { AdminService } from '../../../../admins/services/admin.service';
-import { Admin } from '../../../../admins/models/admin';
+
+import { Admin } from '../../models/admin';
 import { AuthService } from '../../../../../core/auth/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { AdminService } from '../../services/admin.service';
 
 
 

@@ -6,13 +6,14 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Doctor } from '../../../../doctors/models/doctor';
-import { DoctorService } from '../../../../doctors/services/doctor.service';
+import { Doctor } from '../../../doctor/models/doctor';
+
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
 import { CommonModule } from '@angular/common';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
+import { DoctorService } from '../../../doctor/services/doctor.service';
 
 @Component({
   selector: 'app-update-doctor',
@@ -95,9 +96,6 @@ export class UpdateDoctorComponent {
         (response) => {
           this.toastrService.success('Doktor başarıyla güncellendi');
           this.router.navigate(['admin-list-doctor']);
-        },
-        (responseError) => {
-          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
     } else {

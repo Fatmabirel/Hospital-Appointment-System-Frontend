@@ -8,17 +8,20 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppointmentService } from '../../../../appointments/services/appointment.service';
-import { DoctorService } from '../../../../doctors/services/doctor.service';
-import { PatientService } from '../../../../Patients/patient.service';
+
+
 import { BranchService } from '../../../../branches/services/branch.service';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { AdminSidebarComponent } from '../../../admin/components/sidebar/adminSidebar.component';
 import { Appointment } from '../../../../appointments/models/appointmentModel';
 import { Branch } from '../../../../branches/models/branch';
-import { Doctor } from '../../../../doctors/models/doctor';
-import { Patient } from '../../../../Patients/patientModel';
+
+import { Patient } from '../../../patient/models/patientModel';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
+import { PatientService } from '../../../patient/services/patient.service';
+import { DoctorService } from '../../../doctor/services/doctor.service';
+import { Doctor } from '../../../doctor/models/doctor';
 
 @Component({
   selector: 'app-update-appointment',
@@ -99,7 +102,7 @@ export class UpdateAppointmentComponent implements OnInit {
             }
           }
         );
-      } 
+      }
     });
   }
 
@@ -107,7 +110,7 @@ export class UpdateAppointmentComponent implements OnInit {
     this.branchService.getBranches(0, 100).subscribe(
       (response) => {
         this.branches = response.items;
-      }      
+      }
     );
   }
 
@@ -157,7 +160,7 @@ export class UpdateAppointmentComponent implements OnInit {
     this.doctorService.getDoctors(0, 100).subscribe(
       (response) => {
         this.doctors = response.items.filter(
-          (doctor) => doctor.branchID === branchId
+          (doctor :any) => doctor.branchID === branchId
         );
       }
     );
@@ -214,9 +217,6 @@ export class UpdateAppointmentComponent implements OnInit {
           () => {
             this.toastrService.success('Randevu başarıyla güncellendi');
             this.router.navigate(['/upcoming-appointments']);
-          },
-          (responseError) => {
-            this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
           }
         );
     } else {

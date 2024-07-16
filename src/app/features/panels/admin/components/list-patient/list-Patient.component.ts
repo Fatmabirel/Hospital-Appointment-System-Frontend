@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
-import { PatientService } from '../../../../Patients/patient.service';
-import { Patient } from '../../../../Patients/patientModel';
+
+import { Patient } from '../../../patient/models/patientModel';
 import { RouterModule } from '@angular/router';
 import { CapitalizeFirstPipe } from '../../../../pipe/capitalize-first.pipe';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { FilterPatientIdentityPipe } from '../../../../pipe/filter-patient-identity.pipe';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
 import { ToastrService } from 'ngx-toastr';
+import { PatientService } from '../../../patient/services/patient.service';
 
 @Component({
   selector: 'app-list-patient',
@@ -83,10 +84,7 @@ export class ListPatientComponent implements OnInit {
     this.patientService.deletePatient(patientId).subscribe(
       (response) => {
         this.toastrService.success('Hasta başarıyla silindi');
-        this.getPatients(); 
-      },
-      (responseError) => {
-        this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
+        this.getPatients();
       }
     );
   }

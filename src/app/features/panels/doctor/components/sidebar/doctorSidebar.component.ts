@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { DoctorService } from '../../../../doctors/services/doctor.service';
-import { Doctor } from '../../../../doctors/models/doctor';
+
+import { Doctor } from '../../models/doctor';
 import { AuthService } from '../../../../../core/auth/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { NavbarComponent } from '../../../../../shared/components/navbar/navbar.component';
 import { TokenService } from '../../../../../core/auth/services/token.service';
+import { DoctorService } from '../../services/doctor.service';
 
 @Component({
   selector: 'app-doctor-sidebar',
@@ -51,13 +52,10 @@ export class DoctorSidebarComponent implements OnInit {
             (timeDifference % (1000 * 60)) / 1000
           );
         }
-      },
-      (responseError) => {
-        this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
       }
     );
   }
-  
+
   logout(): void {
     this.authService.logout();
     this.toastrService.success(

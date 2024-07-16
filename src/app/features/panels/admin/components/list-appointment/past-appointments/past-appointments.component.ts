@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppointmentService } from '../../../../../appointments/services/appointment.service';
-import { DoctorService } from '../../../../../doctors/services/doctor.service';
+
 import { Appointment } from '../../../../../appointments/models/appointmentModel';
 import { ResponseModel } from '../../../../../models/responseModel';
 import { AdminSidebarComponent } from '../../sidebar/adminSidebar.component';
@@ -13,6 +13,7 @@ import { PaginationComponent } from '../../../../../../core/paging/components/pa
 import { FormsModule } from '@angular/forms';
 import { FilterAppointmentIdentityPipe } from '../../../../../pipe/filter-appointment-identity.pipe';
 import { TokenComponent } from '../../../../../../shared/components/token/token.component';
+import { DoctorService } from '../../../../doctor/services/doctor.service';
 
 @Component({
   selector: 'app-past-appointments',
@@ -33,7 +34,7 @@ export class PastAppointmentsComponent implements OnInit {
   pastAppointments: Appointment[] = [];
   todayDate: Date = new Date();
   errorMessage: string;
-  hasReportMap: { [key: number]: boolean } = {}; 
+  hasReportMap: { [key: number]: boolean } = {};
   pageIndex: number = 0;
   pageSize: number = 100;
   totalPages: number = 0;
@@ -88,9 +89,6 @@ export class PastAppointmentsComponent implements OnInit {
           Promise.all(appointmentObservables).then(() => {
             this.pastAppointments = this.pastAppointments;
           });
-        },
-        (responseError) => {
-          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
   }
@@ -107,9 +105,6 @@ export class PastAppointmentsComponent implements OnInit {
         this.pastAppointments = this.pastAppointments.filter(
           (appointment) => appointment.id !== appointmentId
         );
-      },
-      (error) => {
-        this.errorMessage = error.message;
       }
     );
   }

@@ -62,9 +62,6 @@ export class AddReportComponent implements OnInit {
         (response) => {
           this.toastrService.success('Rapor eklendi');
           this.router.navigate(['/doctor-reports']);
-        },
-        (responseError) => {
-          this.toastrService.error(responseError.error.detail, 'Hatalı İşlem');
         }
       );
     } else {

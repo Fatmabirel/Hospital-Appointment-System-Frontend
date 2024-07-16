@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DoctorSidebarComponent } from '../sidebar/doctorSidebar.component';
-import { DoctorService } from '../../../../doctors/services/doctor.service';
-import { Doctor } from '../../../../doctors/models/doctor';
+
+import { Doctor } from '../../models/doctor';
 import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
@@ -13,6 +13,7 @@ import {
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
+import { DoctorService } from '../../services/doctor.service';
 
 @Component({
   selector: 'app-doctor-profile',
@@ -79,9 +80,6 @@ export class DoctorProfileComponent implements OnInit {
         (response) => {
           this.toastrService.success('Bilgileriniz başarıyla güncellendi');
           this.router.navigate(['doctor-sidebar']);
-        },
-        (responseError) => {
-          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
     } else {

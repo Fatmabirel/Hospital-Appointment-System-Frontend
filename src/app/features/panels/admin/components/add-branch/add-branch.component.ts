@@ -68,9 +68,6 @@ export class AddBranchComponent {
         (response) => {
           this.toastrService.success('Branş başarıyla eklendi');
           this.router.navigate(['/admin-branches']);
-        },
-        (responseError) => {
-          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
     } else {

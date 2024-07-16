@@ -77,9 +77,6 @@ export class ForgotPasswordComponent implements OnInit {
         (response) => {
           this.toastrService.success('Şifre başarıyla güncellendi');
           this.router.navigate(['/login']);
-        },
-        (responseError) => {
-          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
     } else {

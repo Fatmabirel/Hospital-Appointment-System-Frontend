@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Patient } from '../../../../Patients/patientModel';
-import { PatientService } from '../../../../Patients/patient.service';
+import { Patient } from '../../../patient/models/patientModel';
+
 import { RouterModule } from '@angular/router';
 import { DoctorSidebarComponent } from '../sidebar/doctorSidebar.component';
-import { DoctorService } from '../../../../doctors/services/doctor.service';
+
 import { AppointmentService } from '../../../../appointments/services/appointment.service';
 import { ResponseModel } from '../../../../models/responseModel';
 import { Appointment } from '../../../../appointments/models/appointmentModel';
@@ -12,6 +12,8 @@ import { CapitalizeFirstPipe } from '../../../../pipe/capitalize-first.pipe';
 import { FormsModule } from '@angular/forms';
 import { FilterPatientIdentityPipe } from '../../../../pipe/filter-patient-identity.pipe';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
+import { PatientService } from '../../../patient/services/patient.service';
+import { DoctorService } from '../../services/doctor.service';
 
 @Component({
   selector: 'app-doctor-sidebar-patient',

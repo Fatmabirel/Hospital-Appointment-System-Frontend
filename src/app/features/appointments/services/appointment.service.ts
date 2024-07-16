@@ -3,7 +3,7 @@ import { Appointment } from '../models/appointmentModel';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ResponseModel } from '../../models/responseModel';
 import { Observable } from 'rxjs';
-import { Doctor } from '../../doctors/models/doctor';
+import { Doctor } from '../../panels/doctor/models/doctor';
 import { AppointmentForPatientPanel } from '../models/appointmentforpatientpanel';
 import { CreateAppointment } from '../models/createAppointment';
 import { CreateAppointmentResponse } from '../models/createAppointmentResponse';

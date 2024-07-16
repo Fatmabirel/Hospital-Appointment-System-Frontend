@@ -63,7 +63,7 @@ export class AdminListReportComponent {
   }
 
   goToReport(reportId: number) {
-    this.router.navigate(['admin-report-detail', reportId]); 
+    this.router.navigate(['admin-report-detail', reportId]);
   }
 
   delete(reportId: number) {
@@ -72,9 +72,6 @@ export class AdminListReportComponent {
         this.toastrService.success('Rapor silindi');
         this.getListReports();
         this.router.navigate(['admin-reports']);
-      },
-      (responseError) => {
-        this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
       }
     );
   }

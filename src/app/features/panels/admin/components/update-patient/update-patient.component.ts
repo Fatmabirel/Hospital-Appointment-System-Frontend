@@ -7,12 +7,13 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Patient } from '../../../../Patients/patientModel';
-import { PatientService } from '../../../../Patients/patient.service';
+import { Patient } from '../../../patient/models/patientModel';
+
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
+import { PatientService } from '../../../patient/services/patient.service';
 
 @Component({
   selector: 'app-update-patient',
@@ -96,9 +97,6 @@ export class UpdatePatientComponent {
         (response) => {
           this.toastrService.success('Hasta başarıyla güncellendi');
           this.router.navigate(['/admin-patient']);
-        },
-        (responseError) => {
-          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
     } else {

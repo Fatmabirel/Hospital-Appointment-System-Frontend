@@ -66,9 +66,6 @@ export class ListBranchComponent implements OnInit {
       (response) => {
         this.toastrService.success('Branş başarıyla silindi');
         this.getBranches();
-      },
-      (responseError) => {
-        this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
       }
     );
   }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Patient } from '../../../../Patients/patientModel';
+import { Patient } from '../../models/patientModel';
 import { Feedback } from '../../../../feedbacks/models/feedback';
 import {
   FormBuilder,
@@ -8,7 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { FeedbackService } from '../../../../feedbacks/services/feedback.service';
-import { PatientService } from '../../../../Patients/patient.service';
+
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { PatientSidebarComponent } from '../sidebar/psidebar.component';
@@ -70,9 +70,6 @@ export class PatientUpdateFeedbackComponent {
         (response) => {
           this.toastrService.success('Geri bildirim başarıyla güncellendi');
           this.router.navigate(['/patient-feedbacks']);
-        },
-        (responseError) => {
-          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
     } else {

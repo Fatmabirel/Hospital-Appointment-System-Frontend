@@ -11,9 +11,10 @@ import { Feedback } from '../../../../feedbacks/models/feedback';
 import { FeedbackService } from '../../../../feedbacks/services/feedback.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { DoctorService } from '../../../../doctors/services/doctor.service';
-import { Doctor } from '../../../../doctors/models/doctor';
+
+import { Doctor } from '../../models/doctor';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
+import { DoctorService } from '../../services/doctor.service';
 
 @Component({
   selector: 'app-doctor-add-feedback',
@@ -64,9 +65,6 @@ export class DoctorAddFeedbackComponent {
         (response) => {
           this.toastrService.success('Geri bildirim başarıyla eklendi');
           this.router.navigate(['/doctor-feedbacks']);
-        },
-        (responseError) => {
-          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
     } else {

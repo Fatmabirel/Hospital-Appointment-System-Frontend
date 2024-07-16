@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
 import { CommonModule } from '@angular/common';
-import { DoctorService } from '../../../../doctors/services/doctor.service';
-import { Doctor } from '../../../../doctors/models/doctor';
+
+import { Doctor } from '../../../doctor/models/doctor';
 import { Router, RouterModule } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,6 +16,7 @@ import { Branch } from '../../../../branches/models/branch';
 import { PaginationComponent } from '../../../../../core/paging/components/pagination/pagination.component';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
 import { ToastrService } from 'ngx-toastr';
+import { DoctorService } from '../../../doctor/services/doctor.service';
 
 @Component({
   selector: 'app-list-doctor',
@@ -104,9 +105,6 @@ export class ListDoctorComponent implements OnInit {
       (response) => {
         this.toastrService.success('Doktor başarıyla silindi.');
         this.getDoctors();
-      },
-      (responseError) => {
-        this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
       }
     );
   }

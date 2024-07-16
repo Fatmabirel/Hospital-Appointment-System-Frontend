@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { DoctorService } from '../../../../../doctors/services/doctor.service';
+
 import { LegendPosition, NgxChartsModule, ColorHelper } from '@swimlane/ngx-charts';
 import { AdminSidebarComponent } from "../../sidebar/adminSidebar.component";
+import { DoctorService } from '../../../../doctor/services/doctor.service';
+
 
 @Component({
   selector: 'app-pai-chart-title',
@@ -12,7 +14,7 @@ import { AdminSidebarComponent } from "../../sidebar/adminSidebar.component";
 })
 export class PaiChartTitleComponent implements OnInit {
 
-  single: any[] = []; 
+  single: any[] = [];
   view: [number, number] = [600, 300];
   gradient: boolean = true;
   showLegend: boolean = true;
@@ -67,7 +69,7 @@ export class PaiChartTitleComponent implements OnInit {
     this.doctorService.getDoctors(0, 1000).subscribe(response => {
 
       const grouped: any = {};
-      response.items.forEach(doctor => {
+      response.items.forEach((doctor:any) => {
         const title = doctor.title;
         if (!grouped[title]) {
           grouped[title] = [];

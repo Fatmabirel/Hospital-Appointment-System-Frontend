@@ -8,13 +8,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
-import { DoctorService } from '../../../../doctors/services/doctor.service';
+
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BranchService } from '../../../../branches/services/branch.service';
 import { Branch } from '../../../../branches/models/branch';
 import { ThisReceiver } from '@angular/compiler';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
+import { DoctorService } from '../../../doctor/services/doctor.service';
 
 @Component({
   selector: 'app-add-doctor',
@@ -83,9 +84,6 @@ export class AddDoctorComponent {
         (response) => {
           this.toastrService.success('Doktor başarıyla eklendi');
           this.router.navigate(['/admin-list-doctor']);
-        },
-        (responseError) => {
-          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
     } else {

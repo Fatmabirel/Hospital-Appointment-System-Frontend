@@ -7,11 +7,12 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { AdminService } from '../../../../admins/services/admin.service';
+
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { Admin } from '../../../../admins/models/admin';
+import { Admin } from '../../models/admin';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
+import { AdminService } from '../../services/admin.service';
 
 @Component({
   selector: 'app-admin-profile',
@@ -66,9 +67,6 @@ export class AdminProfileComponent {
         (response) => {
           this.toastrService.success('Bilgileriniz başarıyla güncellendi');
           this.router.navigate(['/admin-sidebar']);
-        },
-        (responseError) => {
-          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
     } else {

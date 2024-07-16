@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { DoctorService } from '../../services/doctor.service';
-import { Doctor } from '../../models/doctor';
+
+import { Doctor } from '../../../panels/doctor/models/doctor';
 import { BasicLayoutComponent } from '../../../../shared/components/basic-layout/basic-layout.component';
 import { FilterDoctorBranchPipe } from '../../../pipe/filter-doctor-branch.pipe';
 import { FormsModule } from '@angular/forms';
 import { Branch } from '../../../branches/models/branch';
 import { BranchService } from '../../../branches/services/branch.service';
+import { DoctorService } from '../../../panels/doctor/services/doctor.service';
 
 
 @Component({
