@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Appointment } from '../../../../../appointments/models/appointmentModel';
 import { ResponseModel } from '../../../../../models/responseModel';
-import { PatientService } from '../../../../../Patients/patient.service';
 import { AppointmentService } from '../../../../../appointments/services/appointment.service';
 import { CommonModule } from '@angular/common';
+import { PatientService } from '../../../services/patient.service';
 
 @Component({
   selector: 'app-patient-today-appointment',
@@ -15,8 +15,8 @@ import { CommonModule } from '@angular/common';
 export class PatientTodayAppointmentComponent {
   appointments: Appointment[] = [];
   pageIndex: number = 0;
-  pageSize: number = 100; 
-  todayDate: Date = new Date(); 
+  pageSize: number = 100;
+  todayDate: Date = new Date();
 
   constructor(
     private patientService: PatientService,
@@ -32,10 +32,10 @@ export class PatientTodayAppointmentComponent {
     this.appointments.sort((a, b) => {
       const dateA = new Date(a.date + ' ' + a.time);
       const dateB = new Date(b.date + ' ' + b.time);
-      return dateA.getTime() - dateB.getTime(); 
+      return dateA.getTime() - dateB.getTime();
     });
   }
-  
+
   getPatientAppointments(): void {
     this.patientService.getPatientProfile().subscribe(
       (patient) => {
@@ -56,10 +56,6 @@ export class PatientTodayAppointmentComponent {
       }
     );
   }
-
-
-
-
 
 }
 

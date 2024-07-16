@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { PatientSidebarComponent } from '../sidebar/psidebar.component';
 import { Appointment } from '../../../../appointments/models/appointmentModel';
-import { PatientService } from '../../../../Patients/patient.service';
+
 import { AppointmentService } from '../../../../appointments/services/appointment.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -10,6 +10,7 @@ import { ResponseModel } from '../../../../models/responseModel';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
+import { PatientService } from '../../services/patient.service';
 
 @Component({
   selector: 'app-patient-list-upcoming-appointment',
@@ -22,7 +23,7 @@ export class PatientListUpcomingAppointmentComponent {
   appointments: Appointment[] = [];
   pageIndex: number = 0;
   pageSize: number = 12;
-  todayDate: Date = new Date(); 
+  todayDate: Date = new Date();
 
   constructor(
     private patientService: PatientService,
@@ -96,9 +97,6 @@ export class PatientListUpcomingAppointmentComponent {
       (response) => {
         this.toastrService.success('Randevu başarıyla iptal edildi!');
         this.getPatientAppointments();
-      },
-      (responseError) => {
-        this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
       }
     );
   }

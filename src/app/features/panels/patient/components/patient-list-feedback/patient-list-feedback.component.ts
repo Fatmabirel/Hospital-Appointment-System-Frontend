@@ -42,9 +42,9 @@ export class PatientListFeedbackComponent {
 
   sortFeedbacksByDateDescending(): void {
     this.feedbacks.sort((a, b) => {
-      const dateA = new Date(a.createdDate); 
+      const dateA = new Date(a.createdDate);
       const dateB = new Date(b.createdDate);
-      return dateB.getTime() - dateA.getTime(); 
+      return dateB.getTime() - dateA.getTime();
     });
   }
 
@@ -78,9 +78,6 @@ export class PatientListFeedbackComponent {
       (response) => {
         this.toastrService.success('Geri bildirim başarıyla silindi');
         this.getFeedbackByUserId(this.userID);
-      },
-      (responseError) => {
-        this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
       }
     );
   }

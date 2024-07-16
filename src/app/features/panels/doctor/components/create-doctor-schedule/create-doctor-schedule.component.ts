@@ -87,9 +87,6 @@ export class CreateDoctorScheduleComponent implements OnInit {
           );
           this.router.navigate(['list-doctor-schedule']);
         },
-        (responseError) => {
-          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
-        }
       );
     } else {
       this.toastrService.error('', 'Tüm alanları doldurunuz.');

@@ -11,7 +11,7 @@ import { Feedback } from '../../../../feedbacks/models/feedback';
 import { FeedbackService } from '../../../../feedbacks/services/feedback.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { AdminService } from '../../../../admins/services/admin.service';
+
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 @Component({
@@ -86,9 +86,6 @@ export class UpdateFeedbackComponent {
         (response) => {
           this.toastrService.success('Geri bildirim başarıyla güncellendi');
           this.router.navigate(['admin-list-feedback']);
-        },
-        (responseError) => {
-          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
     } else {

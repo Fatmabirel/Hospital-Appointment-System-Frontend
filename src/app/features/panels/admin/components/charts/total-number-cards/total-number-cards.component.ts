@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { DoctorService } from '../../../../../doctors/services/doctor.service';
-import { PatientService } from '../../../../../Patients/patient.service';
+
+
 import { AppointmentService } from '../../../../../appointments/services/appointment.service';
 import { BranchService } from '../../../../../branches/services/branch.service';
 import { ReportService } from '../../../../../reports/services/report.service';
@@ -9,6 +9,8 @@ import { FeedbackService } from '../../../../../feedbacks/services/feedback.serv
 import { AdminSidebarComponent } from '../../sidebar/adminSidebar.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { PatientService } from '../../../../patient/services/patient.service';
+import { DoctorService } from '../../../../doctor/services/doctor.service';
 
 @Component({
   selector: 'app-total-number-cards',

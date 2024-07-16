@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Appointment } from '../../../../appointments/models/appointmentModel';
-import { DoctorService } from '../../../../doctors/services/doctor.service';
+
 import { ResponseModel } from '../../../../models/responseModel';
 import { AppointmentService } from '../../../../appointments/services/appointment.service';
 import { DoctorSidebarComponent } from '../sidebar/doctorSidebar.component';
@@ -12,6 +12,7 @@ import { CapitalizeFirstPipe } from '../../../../pipe/capitalize-first.pipe';
 import { FormsModule } from '@angular/forms';
 import { FilterAppointmentIdentityPipe } from '../../../../pipe/filter-appointment-identity.pipe';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
+import { DoctorService } from '../../services/doctor.service';
 
 @Component({
   selector: 'app-appointment-history',
@@ -29,7 +30,7 @@ import { TokenComponent } from '../../../../../shared/components/token/token.com
 })
 export class AppointmentHistoryComponent implements OnInit {
   appointments: Appointment[] = [];
-  hasReportMap: { [key: number]: boolean } = {}; 
+  hasReportMap: { [key: number]: boolean } = {};
   pageIndex: number = 0;
   pageSize: number = 12;
   todayDate: Date = new Date();
@@ -51,7 +52,7 @@ export class AppointmentHistoryComponent implements OnInit {
     this.appointments.sort((a, b) => {
       const dateA = new Date(a.date + ' ' + a.time);
       const dateB = new Date(b.date + ' ' + b.time);
-      return dateB.getTime() - dateA.getTime(); 
+      return dateB.getTime() - dateA.getTime();
     });
   }
 

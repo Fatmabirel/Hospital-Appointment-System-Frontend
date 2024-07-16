@@ -102,9 +102,6 @@ export class UpdateDoctorScheduleComponent implements OnInit {
             'Başarılı'
           );
           this.router.navigate(['list-doctor-schedule']);
-        },
-        (responseError) => {
-          this.toastrService.error(responseError.error.detail, 'Hatalı İşlem');
         }
       );
     } else {

@@ -3,8 +3,8 @@ import { BranchService } from '../../../../branches/services/branch.service';
 import { Branch } from '../../../../branches/models/branch';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DoctorService } from '../../../../doctors/services/doctor.service';
-import { DoctorForAppointment } from '../../../../doctors/models/doctorForAppointment';
+
+import { DoctorForAppointment } from '../../../doctor/models/doctorForAppointment';
 import { DoctorSchedule } from '../../../../doctorschedule/models/doctorschedule';
 import { DrscheduleService } from '../../../../doctorschedule/services/drschedule.service';
 import { PatientSidebarComponent } from '../sidebar/psidebar.component';
@@ -14,10 +14,12 @@ import { CreateAppointment } from '../../../../appointments/models/createAppoint
 import { TokenService } from '../../../../../core/auth/services/token.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { PatientService } from '../../../../Patients/patient.service';
-import { Patient } from '../../../../Patients/patientModel';
+
+import { Patient } from '../../models/patientModel';
 import { SmsService } from '../../../../appointments/services/smsMock.service';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
+import { PatientService } from '../../services/patient.service';
+import { DoctorService } from '../../../doctor/services/doctor.service';
 
 @Component({
   selector: 'app-create-appointment',

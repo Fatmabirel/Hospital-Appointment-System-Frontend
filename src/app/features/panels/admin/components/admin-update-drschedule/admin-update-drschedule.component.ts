@@ -109,9 +109,6 @@ export class AdminUpdateDrscheduleComponent implements OnInit {
             'Başarılı'
           );
           this.router.navigate(['admin-doctor-schedule', this.doctorId]);
-        },
-        (responseError) => {
-          this.toastrService.error(responseError.error.detail, 'Hatalı İşlem');
         }
       );
     } else {

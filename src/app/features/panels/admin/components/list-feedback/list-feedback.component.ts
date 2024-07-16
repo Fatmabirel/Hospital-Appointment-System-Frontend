@@ -85,9 +85,6 @@ export class ListFeedbackComponent {
         this.toastrService.success('Geri bildirim başarıyla silindi');
         this.getFeedbacks();
       },
-      (responseError) => {
-        this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
-      }
     );
   }
 

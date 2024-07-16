@@ -1,10 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
-import { Admin } from '../models/admin';
+
 import { Observable } from 'rxjs';
-import { TokenService } from '../../../core/auth/services/token.service';
-import { ResponseModel } from '../../models/responseModel';
+import { TokenService } from '../../../../core/auth/services/token.service';
+import { Admin } from '../models/admin';
+import { ResponseModel } from '../../../models/responseModel';
+
 
 @Injectable({
   providedIn: 'root'

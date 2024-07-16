@@ -2,31 +2,35 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { AppointmentService } from '../../../../appointments/services/appointment.service';
-import { DoctorService } from '../../../../doctors/services/doctor.service';
-import { PatientService } from '../../../../Patients/patient.service';
+
+
 import { BranchService } from '../../../../branches/services/branch.service';
 import { Appointment } from '../../../../appointments/models/appointmentModel';
 import { Branch } from '../../../../branches/models/branch';
-import { Doctor } from '../../../../doctors/models/doctor';
-import { Patient } from '../../../../Patients/patientModel';
+import { Doctor } from '../../../doctor/models/doctor';
+import { Patient } from '../../../patient/models/patientModel';
 import { AppointmentForPatientPanel } from '../../../../appointments/models/appointmentforpatientpanel';
 import { DoctorSchedule } from '../../../../doctorschedule/models/doctorschedule';
-import { DoctorForAppointment } from '../../../../doctors/models/doctorForAppointment';
+import { DoctorForAppointment } from '../../../doctor/models/doctorForAppointment';
 import { DrscheduleService } from '../../../../doctorschedule/services/drschedule.service';
 import { CreateAppointment } from '../../../../appointments/models/createAppointment';
 import { TokenService } from '../../../../../core/auth/services/token.service';
-import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
+
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SmsService } from '../../../../appointments/services/smsMock.service';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
+import { PatientService } from '../../../patient/services/patient.service';
+import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
+import { DoctorService } from '../../../doctor/services/doctor.service';
+
 
 @Component({
   selector: 'app-add-appointment',
   templateUrl: './add-appointment.component.html',
   styleUrls: ['./add-appointment.component.scss'],
   standalone: true,
-  imports: [FormsModule, AdminSidebarComponent, CommonModule, TokenComponent],
+  imports: [FormsModule, AdminSidebarComponent,CommonModule, TokenComponent],
 })
 export class AddAppointmentComponent implements OnInit {
   pageIndex: number = 0;
@@ -147,8 +151,8 @@ export class AddAppointmentComponent implements OnInit {
 
   isTimeSlotBooked(time: string): boolean {
     return this.appointments.some((appointment) => {
-      const appointmentTime = appointment.time.split(':').slice(0, 2); 
-      const slotTime = time.split(':').slice(0, 2); 
+      const appointmentTime = appointment.time.split(':').slice(0, 2);
+      const slotTime = time.split(':').slice(0, 2);
       return (
         appointmentTime[0] === slotTime[0] && appointmentTime[1] === slotTime[1]
       );
@@ -238,12 +242,9 @@ export class AddAppointmentComponent implements OnInit {
             .sendSms(String(this.selectedPatient?.phone), message)
             .subscribe(
               (smsResponse) => {
-                this.toastrService.success('Sms tarafınıza gönderildi.'); 
+                this.toastrService.success('Sms tarafınıza gönderildi.');
               }
             );
-        },
-        (responseError) => {
-          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
     } else {

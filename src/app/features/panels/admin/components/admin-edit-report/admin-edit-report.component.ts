@@ -75,10 +75,7 @@ export class AdminEditReportComponent implements OnInit {
       this.reportService.updateReport(updatedReport).subscribe(
         (response) => {
           this.toastrService.success('Rapor başarıyla güncellendi');
-          this.router.navigate(['admin-reports']); 
-        },
-        (responseError) => {
-          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
+          this.router.navigate(['admin-reports']);
         }
       );
     } else {

@@ -28,11 +28,11 @@ import { TokenComponent } from '../../../../../shared/components/token/token.com
   styleUrl: './update-branch.component.scss',
 })
 export class UpdateBranchComponent {
-  branchForm: FormGroup; 
+  branchForm: FormGroup;
   branch: Branch;
 
   constructor(
-    private FormBuilder: FormBuilder, 
+    private FormBuilder: FormBuilder,
     private branchService: BranchService,
     private toastrService: ToastrService,
     private router: Router,
@@ -75,9 +75,6 @@ export class UpdateBranchComponent {
         (response) => {
           this.toastrService.success('Branş başarıyla güncellendi');
           this.router.navigate(['/admin-branches']);
-        },
-        (responseError) => {
-          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
     } else {

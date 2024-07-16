@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Appointment } from '../../../../appointments/models/appointmentModel';
-import { DoctorService } from '../../../../doctors/services/doctor.service';
+
 import { AppointmentService } from '../../../../appointments/services/appointment.service';
 import { ResponseModel } from '../../../../models/responseModel';
 import { DoctorSidebarComponent } from '../sidebar/doctorSidebar.component';
@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { FilterAppointmentIdentityPipe } from '../../../../pipe/filter-appointment-identity.pipe';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
+import { DoctorService } from '../../services/doctor.service';
 
 @Component({
   selector: 'app-pending-appointment',

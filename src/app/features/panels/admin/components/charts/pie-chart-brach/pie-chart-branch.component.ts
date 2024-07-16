@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { DoctorService } from '../../../../../doctors/services/doctor.service';
+
 import {
   LegendPosition,
   NgxChartsModule,
   ColorHelper,
 } from '@swimlane/ngx-charts';
 import { AdminSidebarComponent } from '../../sidebar/adminSidebar.component';
+import { DoctorService } from '../../../../doctor/services/doctor.service';
 
 @Component({
   selector: 'app-pie-chart-branch',
@@ -66,7 +67,7 @@ export class PieChartBranchComponent implements OnInit {
   loadData(): void {
     this.doctorService.getDoctors(0, 1000).subscribe((response) => {
       const grouped: any = {};
-      response.items.forEach((doctor) => {
+      response.items.forEach((doctor:any) => {
         const branchName = doctor.branchName;
         if (!grouped[branchName]) {
           grouped[branchName] = [];

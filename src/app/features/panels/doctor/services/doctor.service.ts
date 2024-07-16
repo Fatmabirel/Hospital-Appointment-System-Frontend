@@ -1,11 +1,11 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Doctor } from '../models/doctor';
-import { ResponseModel } from '../../models/responseModel';
 import { jwtDecode } from 'jwt-decode';
-import { Appointment } from '../../appointments/models/appointmentModel';
+import { Doctor } from '../models/doctor';
+import { ResponseModel } from '../../../models/responseModel';
 import { DoctorForAppointment } from '../models/doctorForAppointment';
+
 
 
 

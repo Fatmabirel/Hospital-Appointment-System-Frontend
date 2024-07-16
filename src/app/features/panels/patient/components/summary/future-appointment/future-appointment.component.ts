@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { PatientService } from '../../../../../Patients/patient.service';
+
 import { AppointmentService } from '../../../../../appointments/services/appointment.service';
 import { Appointment } from '../../../../../appointments/models/appointmentModel';
 import { ResponseModel } from '../../../../../models/responseModel';
+import { PatientService } from '../../../services/patient.service';
 
 @Component({
   selector: 'app-future-appointment',
