@@ -56,7 +56,7 @@ export class DoctorProfileComponent implements OnInit {
       nationalIdentity: ['', Validators.required],
       phone: ['', Validators.required],
       address: ['', Validators.required],
-      email: ['',[Validators.required, Validators.email]],
+      email: [{ value: '', disabled: true }, [Validators.required, Validators.email]],
     });
   }
 

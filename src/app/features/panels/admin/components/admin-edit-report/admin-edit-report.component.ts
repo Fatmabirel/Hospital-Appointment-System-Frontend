@@ -59,7 +59,6 @@ export class AdminEditReportComponent implements OnInit {
   getReport(id: number) {
     this.reportService.getReportDetails(id).subscribe((response) => {
       this.responseReport = response;
-      console.log(response);
       this.reportForm.patchValue({
         name: response.patientFirstName + ' ' + response.patientLastName,
         tcNo: response.patientIdentity,
@@ -73,22 +72,18 @@ export class AdminEditReportComponent implements OnInit {
       const updatedReport: UpdateRequestReport = {
         id: this.reportId,
         text: this.reportForm.value.reportText,
-        // Diğer güncelleme alanlarını ekleyin
       };
 
       this.reportService.updateReport(updatedReport).subscribe(
         (response) => {
           this.toastrService.success('Rapor başarıyla güncellendi');
-          this.router.navigate(['admin-sidebar']);
-          console.log('Rapor başarıyla güncellendi', response);
-          this.router.navigate(['admin-reports']); // Güncelleme sonrası yönlendirme
+          this.router.navigate(['admin-reports']); 
         },
-        (error) => {
-          console.error('Güncelleme sırasında hata oluştu:', error);
+        (responseError) => {
+          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
     } else {
-      // Form geçerli değilse hata mesajı gösterilebilir
       this.toastrService.error('Lütfen eksik alanları doldurun.');
     }
   }
