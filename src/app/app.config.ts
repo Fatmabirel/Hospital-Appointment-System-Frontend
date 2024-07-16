@@ -9,12 +9,13 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { authInterceptor } from './core/auth/interceptors/auth.interceptor';
+import { errorInterceptor } from './core/exception/error.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideClientHydration(),
-    provideHttpClient(withInterceptors([authInterceptor])), //auth interceptoru eklendi
+    provideHttpClient(withInterceptors([authInterceptor,errorInterceptor])), //auth interceptoru eklendi
     provideAnimationsAsync(),
     provideToastr({
       positionClass: 'toast-bottom-right'
