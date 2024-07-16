@@ -76,21 +76,19 @@ export class AddDoctorComponent {
   addDoctor(): void {
     if (this.doctorForm.valid) {
       const selectedBranchId = this.doctorForm.get('branchId')?.value;
-      // Form verilerini alarak doktor ekleme servisini çağırıyoruz
       const doctorData = this.doctorForm.value;
-      doctorData.branchId = selectedBranchId; // Seçilen branchId'yi doktor verilerine ekliyoruz
+      doctorData.branchId = selectedBranchId;
 
       this.doctorService.addDoctor(this.doctorForm.value).subscribe(
         (response) => {
           this.toastrService.success('Doktor başarıyla eklendi');
           this.router.navigate(['/admin-list-doctor']);
         },
-        (error) => {
-          this.toastrService.error('Doktor eklenemedi');
+        (responseError) => {
+          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
     } else {
-      console.error('Error adding doctor:', this.doctorForm.value);
       this.toastrService.error('Eksik alanlarını doldurunuz.');
     }
   }

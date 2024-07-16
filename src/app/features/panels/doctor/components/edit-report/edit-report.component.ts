@@ -20,7 +20,7 @@ import { TokenComponent } from '../../../../../shared/components/token/token.com
     ReactiveFormsModule,
     DoctorSidebarComponent,
     RouterModule,
-    TokenComponent
+    TokenComponent,
   ],
 })
 export class EditReportComponent implements OnInit {
@@ -58,7 +58,6 @@ export class EditReportComponent implements OnInit {
   getReport(id: number) {
     this.reportService.getReportDetails(id).subscribe((response) => {
       this.responseReport = response;
-      console.log(response);
       this.reportForm.patchValue({
         name: response.patientFirstName + ' ' + response.patientLastName,
         tcNo: response.patientIdentity,
@@ -72,7 +71,6 @@ export class EditReportComponent implements OnInit {
       const updatedReport: UpdateRequestReport = {
         id: this.reportId,
         text: this.reportForm.value.reportText,
-        // Diğer güncelleme alanlarını ekleyin
       };
 
       this.reportService.updateReport(updatedReport).subscribe(
@@ -85,7 +83,6 @@ export class EditReportComponent implements OnInit {
         }
       );
     } else {
-      // Form geçerli değilse hata mesajı gösterilebilir
       this.toastrService.error('Lütfen eksik alanları doldurun');
     }
   }

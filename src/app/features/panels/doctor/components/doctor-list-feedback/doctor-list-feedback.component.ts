@@ -70,8 +70,8 @@ export class DoctorListFeedbackComponent {
         this.toastrService.success('Geri bildirim başarıyla silindi');
         this.getFeedbackByUserId(this.userID);
       },
-      (error) => {
-        this.toastrService.success('Geri bildirim silinemedi');
+      (responseError) => {
+        this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
       }
     );
   }

@@ -10,18 +10,17 @@ import { ResponseModel } from '../../../../../models/responseModel';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './future-appointment.component.html',
-  styleUrl: './future-appointment.component.scss'
+  styleUrl: './future-appointment.component.scss',
 })
 export class FutureAppointmentComponent {
   appointments: Appointment[] = [];
   pageIndex: number = 0;
   pageSize: number = 100;
-  todayDate: Date = new Date(); // Bugünkü tarihi al
+  todayDate: Date = new Date();
 
   constructor(
     private patientService: PatientService,
-    private appointmentService: AppointmentService,
-
+    private appointmentService: AppointmentService
   ) {}
 
   ngOnInit(): void {
@@ -35,7 +34,6 @@ export class FutureAppointmentComponent {
       return dateA.getTime() - dateB.getTime(); // Artan sırayla sıralama
     });
   }
-  
 
   getPatientAppointments(): void {
     this.patientService.getPatientProfile().subscribe(
@@ -55,20 +53,9 @@ export class FutureAppointmentComponent {
                 );
               });
               this.sortAppointments();
-            },
-            (error) => {
-              console.error('Randevular alınamadı:', error);
             }
           );
-      },
-      (error) => {
-        console.error('Hasta bilgileri alınamadı:', error);
       }
     );
   }
-
-
-
-
-
 }

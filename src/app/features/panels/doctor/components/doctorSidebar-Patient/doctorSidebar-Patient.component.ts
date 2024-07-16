@@ -23,7 +23,7 @@ import { TokenComponent } from '../../../../../shared/components/token/token.com
     CapitalizeFirstPipe,
     FormsModule,
     FilterPatientIdentityPipe,
-    TokenComponent
+    TokenComponent,
   ],
   templateUrl: './doctorSidebar-Patient.component.html',
   styleUrl: './doctorSidebar-Patient.component.scss',
@@ -46,57 +46,45 @@ export class DoctorSidebarPatientComponent implements OnInit {
   }
 
   loadDoctorPatients(): void {
-    this.doctorService.getDoctorProfile().subscribe(
-      (doctor) => {
-        const doctorId = doctor.id.toString();
-        this.appointmentService
-          .getDoctorAppointments(doctorId, this.pageIndex, this.pageSize)
-          .subscribe(
-            (response: ResponseModel<Appointment>) => {
-              const patientIds = new Set<string>();
-              response.items.forEach((appointment) => {
-                if (!patientIds.has(appointment.patientID)) {
-                  patientIds.add(appointment.patientID);
-                  this.patientService
-                    .getByPatientId(appointment.patientID, 0, 1)
-                    .subscribe((patientResponse: Patient) => {
-                      const patient: Patient = {
-                        address: patientResponse.address,
-                        id: patientResponse.id,
-                        age: patientResponse.age,
-                        dateOfBirth: patientResponse.dateOfBirth,
-                        firstName: patientResponse.firstName,
-                        lastName: patientResponse.lastName,
-                        nationalIdentity: patientResponse.nationalIdentity,
-                        phone: patientResponse.phone,
-                        height: patientResponse.height,
-                        weight: patientResponse.weight,
-                        bloodGroup: patientResponse.bloodGroup,
-                        email: patientResponse.email,
-                        appointmentDate: patientResponse.appointmentDate,
-                        appointmentId: patientResponse.appointmentId,
-                        appointmentRapor: patientResponse.appointmentRapor,
-                        appointmentTime: patientResponse.appointmentTime,
-                      };
+    this.doctorService.getDoctorProfile().subscribe((doctor) => {
+      const doctorId = doctor.id.toString();
+      this.appointmentService
+        .getDoctorAppointments(doctorId, this.pageIndex, this.pageSize)
+        .subscribe((response: ResponseModel<Appointment>) => {
+          const patientIds = new Set<string>();
+          response.items.forEach((appointment) => {
+            if (!patientIds.has(appointment.patientID)) {
+              patientIds.add(appointment.patientID);
+              this.patientService
+                .getByPatientId(appointment.patientID, 0, 1)
+                .subscribe((patientResponse: Patient) => {
+                  const patient: Patient = {
+                    address: patientResponse.address,
+                    id: patientResponse.id,
+                    age: patientResponse.age,
+                    dateOfBirth: patientResponse.dateOfBirth,
+                    firstName: patientResponse.firstName,
+                    lastName: patientResponse.lastName,
+                    nationalIdentity: patientResponse.nationalIdentity,
+                    phone: patientResponse.phone,
+                    height: patientResponse.height,
+                    weight: patientResponse.weight,
+                    bloodGroup: patientResponse.bloodGroup,
+                    email: patientResponse.email,
+                    appointmentDate: patientResponse.appointmentDate,
+                    appointmentId: patientResponse.appointmentId,
+                    appointmentRapor: patientResponse.appointmentRapor,
+                    appointmentTime: patientResponse.appointmentTime,
+                  };
 
-                      this.patients.push(patient);
-
-                      // Hastaları sıralama
-                      this.patients.sort((a, b) =>
-                        a.firstName.localeCompare(b.firstName)
-                      );
-                    });
-                }
-              });
-            },
-            (error) => {
-              console.error('doktor bilgisi alınamadı:', error);
+                  this.patients.push(patient);
+                  this.patients.sort((a, b) =>
+                    a.firstName.localeCompare(b.firstName)
+                  );
+                });
             }
-          );
-      },
-      (error) => {
-        console.error('hasta bilgileri alınamadı:', error);
-      }
-    );
+          });
+        });
+    });
   }
 }

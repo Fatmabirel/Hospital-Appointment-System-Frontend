@@ -22,7 +22,7 @@ import { TokenComponent } from '../../../../../shared/components/token/token.com
     AdminSidebarComponent,
     ReactiveFormsModule,
     RouterModule,
-    TokenComponent
+    TokenComponent,
   ],
   templateUrl: './update-feedback.component.html',
   styleUrl: './update-feedback.component.scss',
@@ -63,8 +63,9 @@ export class UpdateFeedbackComponent {
         if (isNaN(this.feedbackId)) {
           return;
         }
-        this.feedbackService.getFeedbackById(this.feedbackId).subscribe(
-          (data: Feedback) => {
+        this.feedbackService
+          .getFeedbackById(this.feedbackId)
+          .subscribe((data: Feedback) => {
             this.feedbackForm.patchValue({
               id: this.feedbackId,
               userId: data.userID,
@@ -72,20 +73,13 @@ export class UpdateFeedbackComponent {
               userLastName: data.userLastName,
               text: data.text,
             });
-          },
-          (error) => {
-            console.error('Geri bildirim detayları alınamadı:', error);
-          }
-        );
-      } else {
-        console.error('Geçersiz geri bildirim ID parametresi');
+          });
       }
     });
   }
 
   updateFeedback() {
     if (this.feedbackForm.valid && this.feedbackId !== undefined) {
-      // feedbackId'nin undefined olup olmadığını kontrol ediyoruz
       const updatedFeedback: Feedback = this.feedbackForm.value;
       updatedFeedback.id = this.feedbackId;
       this.feedbackService.updateFeedback(updatedFeedback).subscribe(
@@ -93,9 +87,8 @@ export class UpdateFeedbackComponent {
           this.toastrService.success('Geri bildirim başarıyla güncellendi');
           this.router.navigate(['admin-list-feedback']);
         },
-        (error) => {
-          console.error('Geri bildirim güncellenemedi:', error);
-          this.toastrService.error('Geri bildirim güncellenemedi');
+        (responseError) => {
+          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
     } else {

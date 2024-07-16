@@ -72,8 +72,8 @@ export class DoctorUpdateFeedbackComponent {
           this.toastrService.success('Geri bildirim başarıyla güncellendi');
           this.router.navigate(['/doctor-feedbacks']);
         },
-        (error) => {
-          this.toastrService.error('Geri bildirim eklenemedi');
+        (responseError) => {
+          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
     } else {

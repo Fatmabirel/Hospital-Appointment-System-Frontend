@@ -19,10 +19,10 @@ import { TokenComponent } from '../../../../../shared/components/token/token.com
 })
 export class PatientListPastAppointmentComponent {
   appointments: Appointment[] = [];
-  hasReportMap: { [key: number]: boolean } = {}; // hasReport bilgisini tutmak için nesne
+  hasReportMap: { [key: number]: boolean } = {}; 
   pageIndex: number = 0;
   pageSize: number = 100;
-  todayDate: Date = new Date(); // Bugünkü tarihi al
+  todayDate: Date = new Date(); 
 
   constructor(
     private patientService: PatientService,
@@ -40,7 +40,6 @@ export class PatientListPastAppointmentComponent {
     this.patientService.getPatientProfile().subscribe(
       (patient) => {
         const patientId = patient.id.toString();
-        console.log(patientId);
         this.appointmentService
           .getPatientAppointments(patientId, this.pageIndex, this.pageSize)
           .subscribe(
@@ -54,25 +53,17 @@ export class PatientListPastAppointmentComponent {
                       this.todayDate.toTimeString().slice(0, 5))
                 );
               });
-            },
-            (error) => {
-              console.error('Randevular alınamadı:', error);
             }
           );
-      },
-      (error) => {
-        console.error('Doktor bilgileri alınamadı:', error);
       }
     );
   }
 
   public viewReport(appointmentId: number) {
-    console.log(appointmentId);
     this.reportService
       .getByAppointmentId(appointmentId)
       .subscribe((response) => {
         let reportId = response.id;
-        console.log(reportId);
         this.router.navigate(['patient-report-detail', reportId]);
       });
   }

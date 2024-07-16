@@ -22,7 +22,7 @@ import { TokenComponent } from '../../../../../shared/components/token/token.com
     DoctorSidebarComponent,
     FormsModule,
     ReactiveFormsModule,
-    TokenComponent
+    TokenComponent,
   ],
   templateUrl: './doctor-profile.component.html',
   styleUrl: './doctor-profile.component.scss',
@@ -56,20 +56,18 @@ export class DoctorProfileComponent implements OnInit {
       nationalIdentity: ['', Validators.required],
       phone: ['', Validators.required],
       address: ['', Validators.required],
-      email: [{ value: '', disabled: true }, [Validators.required, Validators.email]],
+      email: [
+        { value: '', disabled: true },
+        [Validators.required, Validators.email],
+      ],
     });
   }
 
   getDoctorProfile() {
-    this.doctorService.getDoctorProfile().subscribe(
-      (data) => {
-        this.doctor = data;
-        this.doctorForm.patchValue(data);
-      },
-      (error) => {
-        console.error('Doktor profili alınamadı:', error);
-      }
-    );
+    this.doctorService.getDoctorProfile().subscribe((data) => {
+      this.doctor = data;
+      this.doctorForm.patchValue(data);
+    });
   }
 
   updateDoctor() {
@@ -77,10 +75,8 @@ export class DoctorProfileComponent implements OnInit {
       const updatedDoctor: Doctor = this.doctorForm.value;
       updatedDoctor.id = this.doctor.id;
       updatedDoctor.branchID = this.doctor.branchID;
-      console.log(updatedDoctor);
       this.doctorService.updateDoctor(updatedDoctor).subscribe(
         (response) => {
-          console.log('Doktor güncellendi:', response);
           this.toastrService.success('Bilgileriniz başarıyla güncellendi');
           this.router.navigate(['doctor-sidebar']);
         },

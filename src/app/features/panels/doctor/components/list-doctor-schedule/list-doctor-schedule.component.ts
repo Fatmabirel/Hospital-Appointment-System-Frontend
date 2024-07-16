@@ -52,7 +52,6 @@ export class ListDoctorScheduleComponent implements OnInit {
         this.getDoctorSchedule();
       },
       (responseError) => {
-        console.log(responseError);
         this.toastrService.error(responseError.error.detail, 'Hatalı İşlem');
       }
     );

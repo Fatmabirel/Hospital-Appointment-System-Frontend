@@ -2,90 +2,98 @@ import { Injectable } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TokenService {
-
-  constructor() { }
-
+  constructor() {}
 
   decodeToken(token: string): any {
     try {
       return jwtDecode(token);
     } catch (Error) {
-      console.error('Token decode edilemedi', Error);
       return null;
     }
   }
 
-  //buralarda try catch bloğuna alıp iyileştirme yapılabilir.
-
   getUserId(): string {
     const token = localStorage.getItem('token');
     if (!token) {
-      throw new Error('Token bulunamadı');
+      return '';
     }
 
     const decodedToken: any = this.decodeToken(token);
-    console.log(decodedToken);
-    if (!decodedToken || !decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']) {
-      throw new Error('Token decode edilemedi veya ID bulunamadı');
+    if (
+      !decodedToken ||
+      !decodedToken[
+        'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'
+      ]
+    ) {
+      return '';
     }
 
-    const userId = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+    const userId =
+      decodedToken[
+        'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'
+      ];
     return userId;
   }
 
-  getUserEmail():string{
+  getUserEmail(): string {
     const token = localStorage.getItem('token');
     if (!token) {
-      throw new Error('Token bulunamadı');
+      return '';
     }
 
     const decodedToken: any = this.decodeToken(token);
-    if (!decodedToken || !decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress']) {
-      throw new Error('Token decode edilemedi veya ID bulunamadı');
+    if (
+      !decodedToken ||
+      !decodedToken[
+        'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'
+      ]
+    ) {
+      return '';
     }
 
-    const userEmail = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'];
+    const userEmail =
+      decodedToken[
+        'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'
+      ];
     return userEmail;
   }
 
-  getUserRole()
-  {
+  getUserRole() {
     const token = localStorage.getItem('token');
     if (!token) {
-      throw new Error('Token bulunamadı');
+      return '';
     }
 
     const decodedToken: any = this.decodeToken(token);
-    if (!decodedToken || !decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']) {
-      throw new Error('Token decode edilemedi veya ID bulunamadı');
+    if (
+      !decodedToken ||
+      !decodedToken[
+        'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
+      ]
+    ) {
+      return '';
     }
 
-    const userRoles = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+    const userRoles =
+      decodedToken[
+        'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
+      ];
 
- //bu daha sonradan silinebilir sadece consoleda ne yazdığını görmek adına
-  // Eğer userRoles bir dizi ise, her bir rolü yazdırmak için
-  if (Array.isArray(userRoles)) {
-    //userRoles.forEach(role => console.log(role));
-  } else {
-    // Eğer userRoles tek bir string ise
-    //console.log(userRoles);
-  }
-
-  return userRoles;
+    return userRoles;
   }
 
   getTokenExpirationDate(): Date | null {
     const token = localStorage.getItem('token');
     if (!token) {
-      throw new Error('Token bulunamadı');
+      throw new Error('');
     }
 
     const decodedToken: any = this.decodeToken(token);
     if (!decodedToken || !decodedToken.exp) {
-      throw new Error('Token decode edilemedi veya expiration bilgisi bulunamadı');
+      throw new Error('');
     }
 
     const expirationDate = new Date(decodedToken.exp * 1000);

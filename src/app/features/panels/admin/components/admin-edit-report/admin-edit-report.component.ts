@@ -7,7 +7,6 @@ import { ResponseReport } from '../../../../reports/models/responseReport';
 import { UpdateRequestReport } from '../../../../reports/models/update-request-report';
 import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { error } from 'console';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 @Component({
@@ -42,7 +41,6 @@ export class AdminEditReportComponent implements OnInit {
       if (params['id']) {
         this.reportId = +params['id'];
         this.getReport(this.reportId);
-      } else {
       }
     });
     this.createReportForm();

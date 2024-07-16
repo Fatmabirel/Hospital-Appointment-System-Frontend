@@ -28,7 +28,7 @@ export class AdminService {
   getAdminByAuth(): Observable<Admin> {
     const token = localStorage.getItem('token');
     if (!token) {
-      throw new Error('Token bulunamadı');
+      throw new Error('');
     }
 
     const headers = new HttpHeaders({
@@ -41,7 +41,7 @@ export class AdminService {
   updateAdmin(admin: Admin): Observable<ResponseModel<Admin>> {
     const token = localStorage.getItem('token');
     if (!token) {
-      throw new Error('Token bulunamadı');
+      throw new Error('');
     }
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`

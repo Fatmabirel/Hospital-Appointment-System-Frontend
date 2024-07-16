@@ -97,15 +97,9 @@ export class UpdateAppointmentComponent implements OnInit {
                 doctorId: appointment.doctorID,
               });
             }
-          },
-          (error) => {
-            console.error('Randevu yüklenemedi:', error);
-            this.errorMessage = error.message;
           }
         );
-      } else {
-        console.error('Geçersiz Randevu ID parametresi');
-      }
+      } 
     });
   }
 
@@ -113,10 +107,7 @@ export class UpdateAppointmentComponent implements OnInit {
     this.branchService.getBranches(0, 100).subscribe(
       (response) => {
         this.branches = response.items;
-      },
-      (error) => {
-        console.error('Branşlar yüklenemedi:', error);
-      }
+      }      
     );
   }
 
@@ -124,9 +115,6 @@ export class UpdateAppointmentComponent implements OnInit {
     this.doctorService.getDoctors(0, 100).subscribe(
       (response) => {
         this.doctors = response.items;
-      },
-      (error) => {
-        console.error('Doktorlar yüklenemedi:', error);
       }
     );
   }
@@ -135,9 +123,6 @@ export class UpdateAppointmentComponent implements OnInit {
     this.patientService.getPatients(0, 100).subscribe(
       (response) => {
         this.patients = response.items;
-      },
-      (error) => {
-        console.error('Hastalar yüklenemedi:', error);
       }
     );
   }
@@ -151,9 +136,6 @@ export class UpdateAppointmentComponent implements OnInit {
             doctorLastName: doctor.lastName,
           });
         }
-      },
-      (error) => {
-        console.error('Doktor bilgileri yüklenemedi:', error);
       }
     );
 
@@ -165,9 +147,6 @@ export class UpdateAppointmentComponent implements OnInit {
             patientLastName: patient.lastName,
           });
         }
-      },
-      (error) => {
-        console.error('Hasta bilgileri yüklenemedi:', error);
       }
     );
   }
@@ -180,9 +159,6 @@ export class UpdateAppointmentComponent implements OnInit {
         this.doctors = response.items.filter(
           (doctor) => doctor.branchID === branchId
         );
-      },
-      (error) => {
-        console.error('Doktorlar yüklenemedi:', error);
       }
     );
   }
@@ -239,9 +215,8 @@ export class UpdateAppointmentComponent implements OnInit {
             this.toastrService.success('Randevu başarıyla güncellendi');
             this.router.navigate(['/upcoming-appointments']);
           },
-          (error) => {
-            console.error('Randevu güncellenemedi:', error);
-            this.toastrService.error('Randevu güncellenemedi');
+          (responseError) => {
+            this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
           }
         );
     } else {

@@ -22,17 +22,17 @@ import { TokenComponent } from '../../../../../shared/components/token/token.com
     FormsModule,
     ReactiveFormsModule,
     AdminSidebarComponent,
-    TokenComponent
+    TokenComponent,
   ],
   templateUrl: './update-patient.component.html',
   styleUrl: './update-patient.component.scss',
 })
 export class UpdatePatientComponent {
-  patientForm: FormGroup; // FormGroup tanımlıyoruz
+  patientForm: FormGroup;
   patient: Patient;
 
   constructor(
-    private FormBuilder: FormBuilder, // FormBuilder kullanacağız
+    private FormBuilder: FormBuilder,
     private PatientService: PatientService,
     private toastrService: ToastrService,
     private router: Router,
@@ -40,14 +40,13 @@ export class UpdatePatientComponent {
   ) {}
 
   ngOnInit(): void {
-    this.initForm(); // Formu başlatıyoruz
-    this.getPatientProfile(); // hasta profili bilgilerini alıyoruz
+    this.initForm();
+    this.getPatientProfile();
   }
 
   initForm() {
-    // Formu başlatıyoruz, form alanlarını tanımlıyoruz ve validasyonları ekliyoruz
     this.patientForm = this.FormBuilder.group({
-      id: [''], // ID alanı formda saklı olacak, ama HTML'de görünmeyecek
+      id: [''],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
@@ -65,9 +64,7 @@ export class UpdatePatientComponent {
   getPatientProfile() {
     this.route.paramMap.subscribe((params) => {
       const patientId = params.get('patientId');
-
       if (patientId) {
-        // null veya undefined değilse devam ediyoruz
         this.PatientService.getByPatientId(patientId, 0, 1).subscribe(
           (data) => {
             this.patient = data;
@@ -85,24 +82,16 @@ export class UpdatePatientComponent {
               address: data.address,
               email: data.email,
             });
-          },
-          (error) => {
-            console.error('Hasta profili alınamadı:', error);
           }
         );
-      } else {
-        console.error('Geçersiz Hasta ID parametresi');
       }
     });
   }
 
   updatePatient() {
     if (this.patientForm.valid) {
-      // Formun geçerli olup olmadığını kontrol ediyoruz
-      const updatedPatient: Patient = this.patientForm.value; // Form verilerini Doctor nesnesine atıyoruz
+      const updatedPatient: Patient = this.patientForm.value;
       updatedPatient.id = this.patient.id;
-
-      //console.log(updatedHasta);
       this.PatientService.updatePatient(updatedPatient).subscribe(
         (response) => {
           this.toastrService.success('Hasta başarıyla güncellendi');
@@ -110,11 +99,9 @@ export class UpdatePatientComponent {
         },
         (responseError) => {
           this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
-          console.error('Hasta güncellenemedi:', responseError);
         }
       );
     } else {
-      // Form geçerli değilse hata mesajı gösterilebilir
       this.toastrService.error('Lütfen eksik alanları doldurun');
     }
   }

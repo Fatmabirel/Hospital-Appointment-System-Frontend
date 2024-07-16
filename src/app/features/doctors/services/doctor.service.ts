@@ -23,7 +23,6 @@ export class DoctorService {
     try {
       return jwtDecode(token);
     } catch (Error) {
-      console.error('Token decode edilemedi', Error);
       return null;
     }
   }
@@ -62,7 +61,7 @@ export class DoctorService {
   getDoctorProfile(): Observable<Doctor> {
     const token = localStorage.getItem('token');
     if (!token) {
-      throw new Error('Token bulunamadı');
+      throw new Error('');
     }
 
     const decodedToken: any = this.decodeToken(token);

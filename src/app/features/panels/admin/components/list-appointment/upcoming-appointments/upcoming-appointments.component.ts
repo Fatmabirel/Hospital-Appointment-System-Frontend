@@ -70,9 +70,8 @@ export class UpcomingAppointmentsComponent /* implements OnInit */ {
           this.totalPages = response.pages;
           this.hasNext = response.hasNext;
         },
-        (error) => {
-          console.error('Randevular alınamadı:', error);
-          this.errorMessage = error.message;
+        (responseError) => {
+          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
   }
@@ -90,9 +89,8 @@ export class UpcomingAppointmentsComponent /* implements OnInit */ {
           (appointment) => appointment.id !== appointmentId
         );
       },
-      (error) => {
-        console.error('Randevu silinemedi:', error);
-        this.errorMessage = error.message;
+      (responseError) => {
+        this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
       }
     );
   }

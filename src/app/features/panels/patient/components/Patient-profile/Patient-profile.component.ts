@@ -63,9 +63,6 @@ export class PatientProfileComponent implements OnInit {
       (data) => {
         this.patient = data;
         this.PatientForm.patchValue(data);
-      },
-      (error) => {
-        this.toastrService.error('Hasta profili alınamadı:', error);
       }
     );
   }
@@ -74,7 +71,6 @@ export class PatientProfileComponent implements OnInit {
     if (this.PatientForm.valid) {
       const updatedPatient: Patient = this.PatientForm.getRawValue();
       updatedPatient.id = this.patient.id;
-      console.log(updatedPatient);
       this.patientService.updatePatient(updatedPatient).subscribe(
         (response) => {
           this.toastrService.success('Bilgileriniz başarıyla güncellendi');

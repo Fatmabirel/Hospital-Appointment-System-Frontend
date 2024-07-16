@@ -65,8 +65,8 @@ export class PatientAddFeedbackComponent {
           this.toastrService.success('Geri bildirim başarıyla eklendi');
           this.router.navigate(['/patient-feedbacks']);
         },
-        (error) => {
-          this.toastrService.error('Geri bildirim eklenemedi!');
+        (responseError) => {
+          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
     } else {

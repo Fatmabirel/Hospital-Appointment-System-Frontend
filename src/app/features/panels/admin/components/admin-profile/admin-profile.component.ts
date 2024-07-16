@@ -56,9 +56,6 @@ export class AdminProfileComponent {
       (data) => {
         this.admin = data;
         this.adminForm.patchValue(data);
-      },
-      (error) => {
-        console.error('Admin profili alınamadı:', error);
       }
     );
   }
@@ -70,8 +67,8 @@ export class AdminProfileComponent {
           this.toastrService.success('Bilgileriniz başarıyla güncellendi');
           this.router.navigate(['/admin-sidebar']);
         },
-        (error) => {
-          this.toastrService.error('Bilgileriniz güncellenemedi');
+        (responseError) => {
+          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
     } else {

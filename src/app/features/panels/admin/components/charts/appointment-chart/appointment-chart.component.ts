@@ -95,10 +95,8 @@ export class AppointmentChartComponent implements OnInit {
           name: item.month,
           value: item.count
         }));
-      },
-      error => {
-        console.error('Randevular alınırken hata oluştu:', error);
       }
+      
     );
   }
   formatDate(date: Date): string {
@@ -142,9 +140,7 @@ export class AppointmentChartComponent implements OnInit {
   }
 
   onSelect(event: any): void {
-    console.log(event);
+    
   }
-
-
 
 }

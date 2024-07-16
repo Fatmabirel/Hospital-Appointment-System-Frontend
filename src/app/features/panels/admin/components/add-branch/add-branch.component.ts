@@ -64,8 +64,6 @@ export class AddBranchComponent {
   addBranches(): void {
     if (this.BranchForm.valid) {
       const selectedBranchId = this.BranchForm.get('branchId')?.value;
-      // Form verilerini alarak hasta ekleme servisini çağırıyoruz
-
       this.branchService.addbranch(this.BranchForm.value).subscribe(
         (response) => {
           this.toastrService.success('Branş başarıyla eklendi');
@@ -76,7 +74,6 @@ export class AddBranchComponent {
         }
       );
     } else {
-      console.error('Error adding patient:', this.BranchForm.value);
       this.toastrService.error('Eksik alanlarını doldurunuz.');
     }
   }

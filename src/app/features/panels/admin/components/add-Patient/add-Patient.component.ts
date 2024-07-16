@@ -71,9 +71,7 @@ export class AddPatientComponent {
 
   addPatient(): void {
     if (this.PatientForm.valid) {
-      const selectedBranchId = this.PatientForm.get('patientId')?.value;
-      // Form verilerini alarak hasta ekleme servisini çağırıyoruz
-    
+      const selectedBranchId = this.PatientForm.get('patientId')?.value;  
 
       this.patientService.addPatient(this.PatientForm.value).subscribe(
         (response) => {
@@ -82,11 +80,9 @@ export class AddPatientComponent {
         },
         (responseError) => {
           this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
-          console.error('Hasta eklenemedi:', responseError);
         }
       );
     } else {
-      console.error('Error adding patient:', this.PatientForm.value);
       this.toastrService.error('Eksik alanlarını doldurunuz.');
     }
   }

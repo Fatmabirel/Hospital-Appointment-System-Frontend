@@ -1,17 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { DoctorService } from '../../../../../doctors/services/doctor.service';
-import { LegendPosition, NgxChartsModule, ColorHelper } from '@swimlane/ngx-charts';
-import { AdminSidebarComponent } from "../../sidebar/adminSidebar.component";
+import {
+  LegendPosition,
+  NgxChartsModule,
+  ColorHelper,
+} from '@swimlane/ngx-charts';
+import { AdminSidebarComponent } from '../../sidebar/adminSidebar.component';
 
 @Component({
   selector: 'app-pie-chart-branch',
   standalone: true,
   templateUrl: './pie-chart-branch.component.html',
   styleUrls: ['./pie-chart-branch.component.scss'],
-  imports: [NgxChartsModule, AdminSidebarComponent]
+  imports: [NgxChartsModule, AdminSidebarComponent],
 })
 export class PieChartBranchComponent implements OnInit {
-
   single: any[] = []; // ngx-charts için hazırlanmış veri dizisi
   view: [number, number] = [600, 300];
   gradient: boolean = true;
@@ -19,14 +22,11 @@ export class PieChartBranchComponent implements OnInit {
   showLabels: boolean = true;
   isDoughnut: boolean = false;
   legendPosition: LegendPosition = LegendPosition.Right;
-  legendTitle:string="Branş"
-  constructor(private doctorService: DoctorService) {
-
-  }
-
+  legendTitle: string = 'Branş';
+  constructor(private doctorService: DoctorService) {}
 
   colorScheme: any = {
-    domain: this.generateColors()
+    domain: this.generateColors(),
   };
 
   generateColors(): string[] {
@@ -36,7 +36,7 @@ export class PieChartBranchComponent implements OnInit {
       '#5733FF', // Electric Indigo
       '#FF5733', // Red
       '#57FF33', // Neon Green
-      '#FF33F6'  ,// Fuchsia
+      '#FF33F6', // Fuchsia
       '#3357FF', // Blue
       '#FFA500',
       '#FF4500',
@@ -56,54 +56,33 @@ export class PieChartBranchComponent implements OnInit {
       '#FFC733', // Yellow Orange
       '#FF33C7', // Magenta
       '#33FFB5', // Mint Green
-
-    ]
+    ];
   }
-
 
   ngOnInit(): void {
     this.loadData();
   }
 
   loadData(): void {
-    this.doctorService.getDoctors(0, 1000).subscribe(response => {
-      // console.log('Raw Response:', response); // Raw response log
-
-      // Group doctors by branchName
+    this.doctorService.getDoctors(0, 1000).subscribe((response) => {
       const grouped: any = {};
-      response.items.forEach(doctor => {
+      response.items.forEach((doctor) => {
         const branchName = doctor.branchName;
         if (!grouped[branchName]) {
           grouped[branchName] = [];
         }
         grouped[branchName].push(doctor);
       });
-
-      // console.log('Grouped Data:', grouped); // Grouped data log
-
-      // Prepare data for ngx-charts pie chart
-      this.single = Object.keys(grouped).map(branchName => ({
+      this.single = Object.keys(grouped).map((branchName) => ({
         name: branchName,
-        value: grouped[branchName].length
+        value: grouped[branchName].length,
       }));
-
-      // console.log('Single Data:', this.single); // Single data log
-
-      // Assign doctors for other processing if needed
-
     });
   }
 
+  onSelect(event: any): void {}
 
-  onSelect(event: any): void {
-    console.log('Item clicked', event);
-  }
+  onActivate(event: any): void {}
 
-  onActivate(event: any): void {
-    console.log('Activate', event);
-  }
-
-  onDeactivate(event: any): void {
-    console.log('Deactivate', event);
-  }
+  onDeactivate(event: any): void {}
 }

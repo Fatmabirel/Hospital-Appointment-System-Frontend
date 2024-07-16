@@ -55,7 +55,6 @@ export class DoctorAddFeedbackComponent {
       this.feedbackForm.patchValue({
         userID: this.userID,
       });
-      console.log(this.userID);
     });
   }
 
@@ -66,8 +65,8 @@ export class DoctorAddFeedbackComponent {
           this.toastrService.success('Geri bildirim başarıyla eklendi');
           this.router.navigate(['/doctor-feedbacks']);
         },
-        (error) => {
-          this.toastrService.error('Geri bildirim eklenemedi');
+        (responseError) => {
+          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
     } else {

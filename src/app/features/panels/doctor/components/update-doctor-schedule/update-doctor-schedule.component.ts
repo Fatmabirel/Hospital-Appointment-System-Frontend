@@ -38,27 +38,19 @@ export class UpdateDoctorScheduleComponent implements OnInit {
     const today = new Date();
     const twoWeeksLater = new Date();
     twoWeeksLater.setDate(today.getDate() + 14);
-
     this.minDate = this.formatDate(today);
     this.maxDate = this.formatDate(twoWeeksLater);
-
     this.generateTimes();
 
     this.route.params.subscribe((params) => {
       if (params['scheduleId']) {
         this.scheduleId = +params['scheduleId'];
-        console.log('Schedule ID:', this.scheduleId); // Schedule ID'nin doğru alındığını kontrol etme
       } else {
         this.scheduleId = 0;
       }
     });
 
-    // Get schedule ID from route parameters
-    //this.scheduleId = this.route.snapshot.paramMap.get('scheduleId');
-
-    // Fetch existing schedule details
     this.drScheduleService.getById(this.scheduleId).subscribe((schedule) => {
-      console.log(schedule);
       this.selectedDate = schedule.date;
       this.startTime = this.formatTimeForDisplay(schedule.startTime);
       this.endTime = this.formatTimeForDisplay(schedule.endTime);
@@ -95,7 +87,6 @@ export class UpdateDoctorScheduleComponent implements OnInit {
   update() {
     if (this.selectedDate && this.startTime && this.endTime) {
       const userId: string = this.tokenService.getUserId();
-
       const schedule: UpdateDoctorSchedule = {
         id: this.scheduleId,
         doctorID: userId,

@@ -22,7 +22,7 @@ export class PatientListUpcomingAppointmentComponent {
   appointments: Appointment[] = [];
   pageIndex: number = 0;
   pageSize: number = 12;
-  todayDate: Date = new Date(); // Bugünkü tarihi al
+  todayDate: Date = new Date(); 
 
   constructor(
     private patientService: PatientService,
@@ -62,14 +62,8 @@ export class PatientListUpcomingAppointmentComponent {
                 );
               });
               this.sortAppointments();
-            },
-            (error) => {
-              console.error('Randevular alınamadı:', error);
             }
           );
-      },
-      (error) => {
-        console.error('Hasta bilgileri alınamadı:', error);
       }
     );
   }
@@ -103,8 +97,8 @@ export class PatientListUpcomingAppointmentComponent {
         this.toastrService.success('Randevu başarıyla iptal edildi!');
         this.getPatientAppointments();
       },
-      (error) => {
-        this.toastrService.error('Randevu iptal edilemedi!');
+      (responseError) => {
+        this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
       }
     );
   }

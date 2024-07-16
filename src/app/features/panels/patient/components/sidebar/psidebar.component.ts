@@ -19,8 +19,6 @@ import { ToastrService } from 'ngx-toastr';
 export class PatientSidebarComponent implements OnInit{ 
   patient: Patient;
   patientName: string = '';
-
-
   errorMessage: string;
 
   constructor(
@@ -29,19 +27,18 @@ export class PatientSidebarComponent implements OnInit{
     private toastrService:ToastrService,
     private router: Router
   ) {}
+
   ngOnInit(): void {
-    //this.getPatientProfile();
     this.patientService.getPatientProfile().subscribe((aaa) => {
       this.patientName = aaa.firstName + ' ' + aaa.lastName;
     });
   }
 
-  getPatientProfile() {
-    
+  getPatientProfile() {    
   }
   logout(): void {
     this.authService.logout();
     this.toastrService.success('Başarıyla çıkış yaptınız. Giriş sayfasına yönlendiriliyorsunuz', 'Başarılı');
-    this.router.navigate(['/']); // Giriş sayfasına yönlendir
+    this.router.navigate(['/']); 
   }
 }

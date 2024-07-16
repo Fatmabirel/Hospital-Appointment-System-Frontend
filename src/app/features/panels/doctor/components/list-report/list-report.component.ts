@@ -40,7 +40,7 @@ export class ListReportComponent implements OnInit {
 
   sortReportsByDateDescending(): void {
     this.reports.sort((a, b) => {
-      const dateA = new Date(a.appointmentDate); // a.date tarih formatında olduğunu varsayıyoruz
+      const dateA = new Date(a.appointmentDate);
       const dateB = new Date(b.appointmentDate);
       return dateB.getTime() - dateA.getTime(); // Azalan sırayla sıralama
     });
@@ -57,7 +57,6 @@ export class ListReportComponent implements OnInit {
   }
 
   goToReport(reportId: number) {
-    // reportId'nin tipi number olmalı
-    this.router.navigate(['report-detail', reportId]); // yönlendirme işlemi
+    this.router.navigate(['report-detail', reportId]);
   }
 }

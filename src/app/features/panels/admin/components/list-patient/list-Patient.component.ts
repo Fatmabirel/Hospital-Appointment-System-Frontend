@@ -11,6 +11,7 @@ import { PaginationComponent } from '../../../../../core/paging/components/pagin
 import { FormsModule } from '@angular/forms';
 import { FilterPatientIdentityPipe } from '../../../../pipe/filter-patient-identity.pipe';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-list-patient',
@@ -38,6 +39,7 @@ export class ListPatientComponent implements OnInit {
 
   constructor(
     private patientService: PatientService,
+    private toastrService: ToastrService,
     private dialog: MatDialog
   ) {}
 
@@ -47,7 +49,6 @@ export class ListPatientComponent implements OnInit {
 
   onPageChanged(newPageIndex: number) {
     this.pageIndex = newPageIndex;
-    console.log(this.pageIndex);
     this.getPatients();
   }
 
@@ -81,11 +82,11 @@ export class ListPatientComponent implements OnInit {
   deletePatient(patientId: string) {
     this.patientService.deletePatient(patientId).subscribe(
       (response) => {
-        console.log('Hasta başarıyla silindi:', response);
-        this.getPatients(); // Hastaları yeniden yükleyerek güncellemeyi sağlıyoruz
+        this.toastrService.success('Hasta başarıyla silindi');
+        this.getPatients(); 
       },
-      (error) => {
-        console.error('Hasta silinemedi:', error);
+      (responseError) => {
+        this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
       }
     );
   }

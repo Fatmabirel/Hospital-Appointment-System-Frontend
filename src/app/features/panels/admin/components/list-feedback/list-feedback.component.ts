@@ -46,9 +46,9 @@ export class ListFeedbackComponent {
 
   sortFeedbacksByDateDescending(): void {
     this.feedbacks.sort((a, b) => {
-      const dateA = new Date(a.createdDate); // a.date tarih formatında olduğunu varsayıyoruz
+      const dateA = new Date(a.createdDate);
       const dateB = new Date(b.createdDate);
-      return dateB.getTime() - dateA.getTime(); // Azalan sırayla sıralama
+      return dateB.getTime() - dateA.getTime();
     });
   }
 
@@ -85,8 +85,8 @@ export class ListFeedbackComponent {
         this.toastrService.success('Geri bildirim başarıyla silindi');
         this.getFeedbacks();
       },
-      (error) => {
-        this.toastrService.error('Geri bildirim silinemedi');
+      (responseError) => {
+        this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
       }
     );
   }

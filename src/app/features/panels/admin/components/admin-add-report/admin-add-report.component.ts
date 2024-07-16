@@ -40,7 +40,6 @@ export class AdminAddReportComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       if (params['appointmentId']) {
         this.appointmentId = +params['appointmentId'];
-      } else {
       }
     });
     this.createReportForm();

@@ -5,28 +5,28 @@ import { DoctorService } from '../../../../doctors/services/doctor.service';
 import { Doctor } from '../../../../doctors/models/doctor';
 import { AuthService } from '../../../../../core/auth/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
-import { NavbarComponent } from "../../../../../shared/components/navbar/navbar.component";
+import { NavbarComponent } from '../../../../../shared/components/navbar/navbar.component';
 import { TokenService } from '../../../../../core/auth/services/token.service';
 
 @Component({
-    selector: 'app-doctor-sidebar',
-    standalone: true,
-    templateUrl: './doctorSidebar.component.html',
-    styleUrl: './doctorSidebar.component.scss',
-    imports: [CommonModule, RouterModule, NavbarComponent]
+  selector: 'app-doctor-sidebar',
+  standalone: true,
+  templateUrl: './doctorSidebar.component.html',
+  styleUrl: './doctorSidebar.component.scss',
+  imports: [CommonModule, RouterModule, NavbarComponent],
 })
 export class DoctorSidebarComponent implements OnInit {
   doctor: Doctor;
   doctorName: string = '';
   doctorTitle: string = '';
-  doctorBranch:string='';
+  doctorBranch: string = '';
 
   errorMessage: string;
 
   constructor(
     private doctorService: DoctorService,
     private authService: AuthService,
-    private toastrService:ToastrService,
+    private toastrService: ToastrService,
     private router: Router,
     private tokenService: TokenService
   ) {}
@@ -37,42 +37,33 @@ export class DoctorSidebarComponent implements OnInit {
         this.doctor = doctor;
         this.doctorTitle = doctor.title;
         this.doctorName = doctor.firstName + ' ' + doctor.lastName;
-        this.doctorBranch=doctor.branchName;
+        this.doctorBranch = doctor.branchName;
+        const tokenExpirationDate = this.tokenService.getTokenExpirationDate();
+        if (tokenExpirationDate) {
+          const currentTime = new Date();
+          const timeDifference =
+            tokenExpirationDate.getTime() - currentTime.getTime();
 
-         // Token'ın süresini kontrol et
-              // Token'ın süresini kontrol et
-              const tokenExpirationDate = this.tokenService.getTokenExpirationDate();
-              if (tokenExpirationDate) {
-                console.log('Token Expiration Date:', tokenExpirationDate);
-                const currentTime = new Date();
-                const timeDifference =
-                  tokenExpirationDate.getTime() - currentTime.getTime();
-      
-                const minutesUntilExpiration = Math.floor(
-                  timeDifference / (1000 * 60)
-                );
-                const secondsUntilExpiration = Math.floor(
-                  (timeDifference % (1000 * 60)) / 1000
-                );
-      
-                console.log(
-                  `Token kaç dakika ve saniye sonra süresi dolacak: ${minutesUntilExpiration} dakika ${secondsUntilExpiration} saniye`
-                );
-              } else {
-                console.error('Token süresi alınamadı');
-              }
-      
+          const minutesUntilExpiration = Math.floor(
+            timeDifference / (1000 * 60)
+          );
+          const secondsUntilExpiration = Math.floor(
+            (timeDifference % (1000 * 60)) / 1000
+          );
+        }
       },
-
-      (error) => {
-        this.errorMessage = error.message; // Hata mesajını al ve errorMessage değişkenine ata
-        console.error('Hata:', error); // Hata durumunda konsola yazdır
+      (responseError) => {
+        this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
       }
     );
   }
+  
   logout(): void {
     this.authService.logout();
-    this.toastrService.success('Başarıyla çıkış yaptınız. Giriş sayfasına yönlendiriliyorsunuz', 'Başarılı');
-    this.router.navigate(['/']); // Giriş sayfasına yönlendir
+    this.toastrService.success(
+      'Başarıyla çıkış yaptınız. Giriş sayfasına yönlendiriliyorsunuz',
+      'Başarılı'
+    );
+    this.router.navigate(['/']);
   }
 }

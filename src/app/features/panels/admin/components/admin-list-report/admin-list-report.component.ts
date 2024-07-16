@@ -46,7 +46,6 @@ export class AdminListReportComponent {
 
   onPageChanged(newPageIndex: number) {
     this.pageIndex = newPageIndex;
-    console.log(this.pageIndex);
     this.getListReports();
   }
 
@@ -64,8 +63,7 @@ export class AdminListReportComponent {
   }
 
   goToReport(reportId: number) {
-    // reportId'nin tipi number olmalı
-    this.router.navigate(['admin-report-detail', reportId]); // yönlendirme işlemi
+    this.router.navigate(['admin-report-detail', reportId]); 
   }
 
   delete(reportId: number) {
@@ -75,9 +73,8 @@ export class AdminListReportComponent {
         this.getListReports();
         this.router.navigate(['admin-reports']);
       },
-      (error) => {
-        this.toastrService.error('Rapor silinirkekn bir hata oluştu');
-        console.log(error);
+      (responseError) => {
+        this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
       }
     );
   }
