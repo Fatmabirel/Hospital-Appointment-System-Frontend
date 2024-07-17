@@ -77,6 +77,7 @@ export class DoctorProfileComponent implements OnInit {
       const updatedDoctor: Doctor = this.doctorForm.value;
       updatedDoctor.id = this.doctor.id;
       updatedDoctor.branchID = this.doctor.branchID;
+      updatedDoctor.email = this.doctor.email;
       console.log(updatedDoctor);
       this.doctorService.updateDoctor(updatedDoctor).subscribe(
         (response) => {

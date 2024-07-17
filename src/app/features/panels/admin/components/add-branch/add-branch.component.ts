@@ -72,8 +72,9 @@ export class AddBranchComponent {
           this.router.navigate(['/admin-branches']);
         },
         (responseError) => {
-          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
+          this.toastrService.error(responseError.error.Detail, 'Aynı İsimden Branş Var');
         }
+       
       );
     } else {
       console.error('Error adding patient:', this.BranchForm.value);
