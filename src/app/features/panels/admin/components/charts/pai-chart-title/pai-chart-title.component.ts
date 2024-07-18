@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { DoctorService } from '../../../../../doctors/services/doctor.service';
+
 import { LegendPosition, NgxChartsModule, ColorHelper } from '@swimlane/ngx-charts';
 import { AdminSidebarComponent } from "../../sidebar/adminSidebar.component";
+import { DoctorService } from '../../../../doctor/services/doctor.service';
+
 
 @Component({
   selector: 'app-pai-chart-title',
@@ -12,7 +14,7 @@ import { AdminSidebarComponent } from "../../sidebar/adminSidebar.component";
 })
 export class PaiChartTitleComponent implements OnInit {
 
-  single: any[] = []; // ngx-charts için hazırlanmış veri dizisi
+  single: any[] = [];
   view: [number, number] = [600, 300];
   gradient: boolean = true;
   showLegend: boolean = true;
@@ -25,13 +27,11 @@ export class PaiChartTitleComponent implements OnInit {
 
   }
 
-
   colorScheme: any = {
     domain: this.generateColors()
   };
 
   generateColors(): string[] {
-    // Burada renklerin dinamik olarak üretilmesi sağlanabilir
     return [
       '#1E90FF',
       '#5733FF', // Electric Indigo
@@ -57,7 +57,6 @@ export class PaiChartTitleComponent implements OnInit {
       '#FFC733', // Yellow Orange
       '#FF33C7', // Magenta
       '#33FFB5', // Mint Green
-
     ]
   }
 
@@ -68,43 +67,29 @@ export class PaiChartTitleComponent implements OnInit {
 
   loadData(): void {
     this.doctorService.getDoctors(0, 1000).subscribe(response => {
-      // console.log('Raw Response:', response); // Raw response log
 
-      // Group doctors by branchName
       const grouped: any = {};
-      response.items.forEach(doctor => {
+      response.items.forEach((doctor:any) => {
         const title = doctor.title;
         if (!grouped[title]) {
           grouped[title] = [];
         }
         grouped[title].push(doctor);
       });
-
-      // console.log('Grouped Data:', grouped); // Grouped data log
-
-      // Prepare data for ngx-charts pie chart
       this.single = Object.keys(grouped).map(titleName => ({
         name: titleName,
         value: grouped[titleName].length
       }));
-
-      // console.log('Single Data:', this.single); // Single data log
-
-      // Assign doctors for other processing if needed
-
     });
   }
 
 
   onSelect(event: any): void {
-    console.log('Item clicked', event);
   }
 
   onActivate(event: any): void {
-    console.log('Activate', event);
   }
 
   onDeactivate(event: any): void {
-    console.log('Deactivate', event);
   }
 }

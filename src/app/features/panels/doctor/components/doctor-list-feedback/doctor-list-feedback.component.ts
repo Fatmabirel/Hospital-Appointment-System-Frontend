@@ -4,12 +4,13 @@ import { CommonModule } from '@angular/common';
 import { FeedbackService } from '../../../../feedbacks/services/feedback.service';
 import { Feedback } from '../../../../feedbacks/models/feedback';
 import { MatDialog } from '@angular/material/dialog';
-import { DoctorService } from '../../../../doctors/services/doctor.service';
-import { Doctor } from '../../../../doctors/models/doctor';
+
+import { Doctor } from '../../models/doctor';
 import { RouterModule } from '@angular/router';
 import { ConfirmDialogComponent } from '../../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { ToastrService } from 'ngx-toastr';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
+import { DoctorService } from '../../services/doctor.service';
 
 @Component({
   selector: 'app-doctor-list-feedback',
@@ -69,9 +70,6 @@ export class DoctorListFeedbackComponent {
       (response) => {
         this.toastrService.success('Geri bildirim başarıyla silindi');
         this.getFeedbackByUserId(this.userID);
-      },
-      (error) => {
-        this.toastrService.success('Geri bildirim silinemedi');
       }
     );
   }

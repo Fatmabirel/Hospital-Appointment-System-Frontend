@@ -1,10 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
-import { Admin } from '../models/admin';
+
 import { Observable } from 'rxjs';
-import { TokenService } from '../../../core/auth/services/token.service';
-import { ResponseModel } from '../../models/responseModel';
+import { TokenService } from '../../../../core/auth/services/token.service';
+import { Admin } from '../models/admin';
+import { ResponseModel } from '../../../models/responseModel';
+
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +30,7 @@ export class AdminService {
   getAdminByAuth(): Observable<Admin> {
     const token = localStorage.getItem('token');
     if (!token) {
-      throw new Error('Token bulunamadı');
+      throw new Error('');
     }
 
     const headers = new HttpHeaders({
@@ -41,7 +43,7 @@ export class AdminService {
   updateAdmin(admin: Admin): Observable<ResponseModel<Admin>> {
     const token = localStorage.getItem('token');
     if (!token) {
-      throw new Error('Token bulunamadı');
+      throw new Error('');
     }
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`

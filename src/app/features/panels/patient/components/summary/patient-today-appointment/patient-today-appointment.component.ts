@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Appointment } from '../../../../../appointments/models/appointmentModel';
 import { ResponseModel } from '../../../../../models/responseModel';
-import { PatientService } from '../../../../../Patients/patient.service';
 import { AppointmentService } from '../../../../../appointments/services/appointment.service';
 import { CommonModule } from '@angular/common';
+import { PatientService } from '../../../services/patient.service';
 
 @Component({
   selector: 'app-patient-today-appointment',
@@ -15,8 +15,8 @@ import { CommonModule } from '@angular/common';
 export class PatientTodayAppointmentComponent {
   appointments: Appointment[] = [];
   pageIndex: number = 0;
-  pageSize: number = 100; //12
-  todayDate: Date = new Date(); // Bugünkü tarihi al
+  pageSize: number = 100;
+  todayDate: Date = new Date();
 
   constructor(
     private patientService: PatientService,
@@ -32,15 +32,15 @@ export class PatientTodayAppointmentComponent {
     this.appointments.sort((a, b) => {
       const dateA = new Date(a.date + ' ' + a.time);
       const dateB = new Date(b.date + ' ' + b.time);
-      return dateA.getTime() - dateB.getTime(); // Artan sırayla sıralama
+      return dateA.getTime() - dateB.getTime();
     });
   }
-  
+
   getPatientAppointments(): void {
     this.patientService.getPatientProfile().subscribe(
       (patient) => {
         const patientId = patient.id.toString();
-        const todayStr = this.todayDate.toISOString().split('T')[0]; // Bugünkü tarihi alır ve formatlar
+        const todayStr = this.todayDate.toISOString().split('T')[0];
         this.appointmentService
           .getPatientAppointments(patientId, this.pageIndex, this.pageSize)
           .subscribe(
@@ -48,25 +48,14 @@ export class PatientTodayAppointmentComponent {
               this.appointments = response.items.filter((appointment) => {
                 const appointmentDate = new Date(appointment.date);
                 const appointmentDateStr = appointmentDate.toISOString().split('T')[0];
-                // Tarih kontrolü
                 return appointmentDateStr === todayStr;
             });
             this.sortAppointments();
-            },
-            (error) => {
-              console.error('Randevular alınamadı:', error);
             }
           );
-      },
-      (error) => {
-        console.error('Hasta bilgileri alınamadı:', error);
       }
     );
   }
-
-
-
-
 
 }
 

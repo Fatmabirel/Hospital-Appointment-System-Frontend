@@ -61,9 +61,6 @@ export class RegisterComponent {
           progressBar: true
         });
         this.router.navigate(['/']);
-      },
-      (responseError) => {
-        this.toastrService.error(responseError.error.Detail, 'Hata');
       }
     );
   }else {

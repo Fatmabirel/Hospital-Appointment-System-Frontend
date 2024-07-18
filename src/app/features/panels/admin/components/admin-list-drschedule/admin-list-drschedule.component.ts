@@ -32,8 +32,6 @@ export class AdminListDrscheduleComponent implements OnInit {
     this.route.params.subscribe((params) => {
       if (params['doctorId']) {
         this.doctorId = params['doctorId'];
-      } else {
-        // this.doctorId = "0";
       }
       this.getDoctorSchedule(params['doctorId']);
     });
@@ -55,11 +53,6 @@ export class AdminListDrscheduleComponent implements OnInit {
           'Başarılı'
         );
         this.getDoctorSchedule(this.doctorId);
-      },
-
-      (responseError) => {
-        console.log(responseError);
-        this.toastrService.error(responseError.error.detail, 'Hatalı İşlem');
       }
     );
   }

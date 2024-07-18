@@ -2,31 +2,35 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { AppointmentService } from '../../../../appointments/services/appointment.service';
-import { DoctorService } from '../../../../doctors/services/doctor.service';
-import { PatientService } from '../../../../Patients/patient.service';
+
+
 import { BranchService } from '../../../../branches/services/branch.service';
 import { Appointment } from '../../../../appointments/models/appointmentModel';
 import { Branch } from '../../../../branches/models/branch';
-import { Doctor } from '../../../../doctors/models/doctor';
-import { Patient } from '../../../../Patients/patientModel';
+import { Doctor } from '../../../doctor/models/doctor';
+import { Patient } from '../../../patient/models/patientModel';
 import { AppointmentForPatientPanel } from '../../../../appointments/models/appointmentforpatientpanel';
 import { DoctorSchedule } from '../../../../doctorschedule/models/doctorschedule';
-import { DoctorForAppointment } from '../../../../doctors/models/doctorForAppointment';
+import { DoctorForAppointment } from '../../../doctor/models/doctorForAppointment';
 import { DrscheduleService } from '../../../../doctorschedule/services/drschedule.service';
 import { CreateAppointment } from '../../../../appointments/models/createAppointment';
 import { TokenService } from '../../../../../core/auth/services/token.service';
-import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
+
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SmsService } from '../../../../appointments/services/smsMock.service';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
+import { PatientService } from '../../../patient/services/patient.service';
+import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
+import { DoctorService } from '../../../doctor/services/doctor.service';
+
 
 @Component({
   selector: 'app-add-appointment',
   templateUrl: './add-appointment.component.html',
   styleUrls: ['./add-appointment.component.scss'],
   standalone: true,
-  imports: [FormsModule, AdminSidebarComponent, CommonModule, TokenComponent],
+  imports: [FormsModule, AdminSidebarComponent,CommonModule, TokenComponent],
 })
 export class AddAppointmentComponent implements OnInit {
   pageIndex: number = 0;
@@ -69,9 +73,6 @@ export class AddAppointmentComponent implements OnInit {
     this.patientService.getPatients(0, 100).subscribe(
       (response) => {
         this.patients = response.items;
-      },
-      (error) => {
-        console.error('Hastalar Alınamadı:', error);
       }
     );
   }
@@ -103,13 +104,11 @@ export class AddAppointmentComponent implements OnInit {
         )
         .subscribe((schedules) => {
           this.schedules = schedules.items;
-          console.log(this.schedules);
           this.availableDates = [
             ...new Set(this.schedules.map((schedule) => schedule.date)),
           ]
             .map((date) => this.formatDate(date))
             .filter((date) => this.isFutureDate(date)); // Sadece gelecekteki tarihleri filtrele
-          console.log(this.availableDates);
           this.selectedDate = null;
           this.timesWithStatus = [];
         });
@@ -127,7 +126,6 @@ export class AddAppointmentComponent implements OnInit {
   getDoctorAppointments(): void {
     if (this.selectedDoctor && this.selectedDate) {
       const formattedDate = this.formatDate(this.selectedDate);
-      console.log(formattedDate);
       this.appointmentService
         .getByDoctorDate(
           this.pageIndex,
@@ -137,13 +135,8 @@ export class AddAppointmentComponent implements OnInit {
         )
         .subscribe(
           (response) => {
-            console.log(response);
             this.appointments = response.items;
-            console.log(this.appointments);
             this.updateAvailableTimes();
-          },
-          (error) => {
-            console.log(error);
           }
         );
     }
@@ -154,13 +147,12 @@ export class AddAppointmentComponent implements OnInit {
       ...timeSlot,
       disabled: this.isTimeSlotBooked(timeSlot.time),
     }));
-    console.log('Updated Times with Status:', this.timesWithStatus);
   }
 
   isTimeSlotBooked(time: string): boolean {
     return this.appointments.some((appointment) => {
-      const appointmentTime = appointment.time.split(':').slice(0, 2); // Saat ve dakika kısmı
-      const slotTime = time.split(':').slice(0, 2); // Saat ve dakika kısmı
+      const appointmentTime = appointment.time.split(':').slice(0, 2);
+      const slotTime = time.split(':').slice(0, 2);
       return (
         appointmentTime[0] === slotTime[0] && appointmentTime[1] === slotTime[1]
       );
@@ -186,12 +178,10 @@ export class AddAppointmentComponent implements OnInit {
 
   generateTimes(): void {
     this.timesWithStatus = [];
-    console.log('Schedules:', this.schedules);
     if (this.schedules.length > 0) {
       const schedule = this.schedules.find(
         (schedule) => this.formatDate(schedule.date) === this.selectedDate
       );
-      console.log('Selected Schedule:', schedule);
       if (schedule) {
         const startTime = this.convertToTime(schedule.startTime);
         const endTime = this.convertToTime(schedule.endTime);
@@ -203,7 +193,6 @@ export class AddAppointmentComponent implements OnInit {
           });
           currentTime += 30; // increment by 30 minutes
         }
-        console.log(this.timesWithStatus);
       }
     }
     this.updateAvailableTimes();
@@ -229,10 +218,6 @@ export class AddAppointmentComponent implements OnInit {
       this.selectedTime &&
       this.selectedPatient
     ) {
-      console.log('selectedDate:' + this.selectedDate);
-      console.log('selectedTime:' + this.selectedTime);
-      console.log('selectedDoctor:' + this.selectedDoctor);
-      console.log('selectedPatient:' + this.selectedPatient);
       const formattedTime = this.selectedTime + ':00'; // "HH:mm:ss" format
       const appointment: CreateAppointment = {
         date: this.selectedDate,
@@ -243,10 +228,10 @@ export class AddAppointmentComponent implements OnInit {
       };
       this.appointmentService.createAppointment(appointment).subscribe(
         (response) => {
-          console.log('Appointment created:', response);
           this.toastrService.success('Randevunuz oluşturuldu');
           this.router.navigate(['upcoming-appointments']);
 
+          //SMS SIMULATION
           const message = `Sayın ${this.selectedPatient?.firstName} ${this.selectedPatient?.lastName},
                             ${this.selectedDoctor?.firstName} ${this.selectedDoctor?.lastName} doktorundan randevunuz başarıyla oluşturulmuştur.
                             Branş: ${this.selectedDoctor?.branchName}
@@ -257,17 +242,9 @@ export class AddAppointmentComponent implements OnInit {
             .sendSms(String(this.selectedPatient?.phone), message)
             .subscribe(
               (smsResponse) => {
-                console.log('SMS sent:', smsResponse);
-                /* this.toastrService.success('Sms tarafınıza gönderildi.'); */
-              },
-              (smsError) => {
-                console.error('SMS sending error:', smsError);
+                this.toastrService.success('Sms tarafınıza gönderildi.');
               }
             );
-        },
-        (error) => {
-          console.error('Error creating appointment:', error);
-          this.toastrService.error('Randevu oluşturulamadı');
         }
       );
     } else {

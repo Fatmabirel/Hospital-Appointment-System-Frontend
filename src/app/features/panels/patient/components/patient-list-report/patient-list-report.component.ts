@@ -38,7 +38,7 @@ export class PatientListReportComponent {
     this.reports.sort((a, b) => {
       const dateA = new Date(a.reportDate);
       const dateB = new Date(b.reportDate);
-      return dateB.getTime() - dateA.getTime(); // Sort in descending order
+      return dateB.getTime() - dateA.getTime();
     });
   }
 

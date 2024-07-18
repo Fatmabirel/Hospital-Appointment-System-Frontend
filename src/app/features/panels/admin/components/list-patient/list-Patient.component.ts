@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
-import { PatientService } from '../../../../Patients/patient.service';
-import { Patient } from '../../../../Patients/patientModel';
+
+import { Patient } from '../../../patient/models/patientModel';
 import { RouterModule } from '@angular/router';
 import { CapitalizeFirstPipe } from '../../../../pipe/capitalize-first.pipe';
 import { MatDialog } from '@angular/material/dialog';
@@ -11,6 +11,8 @@ import { PaginationComponent } from '../../../../../core/paging/components/pagin
 import { FormsModule } from '@angular/forms';
 import { FilterPatientIdentityPipe } from '../../../../pipe/filter-patient-identity.pipe';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
+import { ToastrService } from 'ngx-toastr';
+import { PatientService } from '../../../patient/services/patient.service';
 
 @Component({
   selector: 'app-list-patient',
@@ -38,6 +40,7 @@ export class ListPatientComponent implements OnInit {
 
   constructor(
     private patientService: PatientService,
+    private toastrService: ToastrService,
     private dialog: MatDialog
   ) {}
 
@@ -47,7 +50,6 @@ export class ListPatientComponent implements OnInit {
 
   onPageChanged(newPageIndex: number) {
     this.pageIndex = newPageIndex;
-    console.log(this.pageIndex);
     this.getPatients();
   }
 
@@ -81,11 +83,8 @@ export class ListPatientComponent implements OnInit {
   deletePatient(patientId: string) {
     this.patientService.deletePatient(patientId).subscribe(
       (response) => {
-        console.log('Hasta başarıyla silindi:', response);
-        this.getPatients(); // Hastaları yeniden yükleyerek güncellemeyi sağlıyoruz
-      },
-      (error) => {
-        console.error('Hasta silinemedi:', error);
+        this.toastrService.success('Hasta başarıyla silindi');
+        this.getPatients();
       }
     );
   }

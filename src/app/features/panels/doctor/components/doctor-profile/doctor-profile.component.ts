@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DoctorSidebarComponent } from '../sidebar/doctorSidebar.component';
-import { DoctorService } from '../../../../doctors/services/doctor.service';
-import { Doctor } from '../../../../doctors/models/doctor';
+
+import { Doctor } from '../../models/doctor';
 import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
@@ -13,6 +13,7 @@ import {
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
+import { DoctorService } from '../../services/doctor.service';
 
 @Component({
   selector: 'app-doctor-profile',
@@ -22,7 +23,7 @@ import { TokenComponent } from '../../../../../shared/components/token/token.com
     DoctorSidebarComponent,
     FormsModule,
     ReactiveFormsModule,
-    TokenComponent
+    TokenComponent,
   ],
   templateUrl: './doctor-profile.component.html',
   styleUrl: './doctor-profile.component.scss',
@@ -56,20 +57,18 @@ export class DoctorProfileComponent implements OnInit {
       nationalIdentity: ['', Validators.required],
       phone: ['', Validators.required],
       address: ['', Validators.required],
-      email: [{ value: '', disabled: true }, [Validators.required, Validators.email]],
+      email: [
+        { value: '', disabled: true },
+        [Validators.required, Validators.email],
+      ],
     });
   }
 
   getDoctorProfile() {
-    this.doctorService.getDoctorProfile().subscribe(
-      (data) => {
-        this.doctor = data;
-        this.doctorForm.patchValue(data);
-      },
-      (error) => {
-        console.error('Doktor profili alınamadı:', error);
-      }
-    );
+    this.doctorService.getDoctorProfile().subscribe((data) => {
+      this.doctor = data;
+      this.doctorForm.patchValue(data);
+    });
   }
 
   updateDoctor() {
@@ -81,12 +80,8 @@ export class DoctorProfileComponent implements OnInit {
       console.log(updatedDoctor);
       this.doctorService.updateDoctor(updatedDoctor).subscribe(
         (response) => {
-          console.log('Doktor güncellendi:', response);
           this.toastrService.success('Bilgileriniz başarıyla güncellendi');
           this.router.navigate(['doctor-sidebar']);
-        },
-        (responseError) => {
-          this.toastrService.error(responseError.error.detail, 'Hatalı İşlem');
         }
       );
     } else {

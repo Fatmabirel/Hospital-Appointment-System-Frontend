@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Appointment } from '../../../../appointments/models/appointmentModel';
-import { DoctorService } from '../../../../doctors/services/doctor.service';
+
 import { ResponseModel } from '../../../../models/responseModel';
 import { AppointmentService } from '../../../../appointments/services/appointment.service';
 import { DoctorSidebarComponent } from '../sidebar/doctorSidebar.component';
@@ -12,6 +12,7 @@ import { CapitalizeFirstPipe } from '../../../../pipe/capitalize-first.pipe';
 import { FormsModule } from '@angular/forms';
 import { FilterAppointmentIdentityPipe } from '../../../../pipe/filter-appointment-identity.pipe';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
+import { DoctorService } from '../../services/doctor.service';
 
 @Component({
   selector: 'app-appointment-history',
@@ -29,7 +30,7 @@ import { TokenComponent } from '../../../../../shared/components/token/token.com
 })
 export class AppointmentHistoryComponent implements OnInit {
   appointments: Appointment[] = [];
-  hasReportMap: { [key: number]: boolean } = {}; // hasReport bilgisini tutmak için nesne
+  hasReportMap: { [key: number]: boolean } = {};
   pageIndex: number = 0;
   pageSize: number = 12;
   todayDate: Date = new Date();
@@ -51,7 +52,7 @@ export class AppointmentHistoryComponent implements OnInit {
     this.appointments.sort((a, b) => {
       const dateA = new Date(a.date + ' ' + a.time);
       const dateB = new Date(b.date + ' ' + b.time);
-      return dateB.getTime() - dateA.getTime(); // Artan sırayla sıralama
+      return dateB.getTime() - dateA.getTime();
     });
   }
 
@@ -59,12 +60,10 @@ export class AppointmentHistoryComponent implements OnInit {
     this.doctorService.getDoctorProfile().subscribe(
       (doctor) => {
         const doctorId = doctor.id.toString();
-
         this.appointmentService
           .getDoctorAppointments(doctorId, this.pageIndex, this.pageSize)
           .subscribe(
             (response: ResponseModel<Appointment>) => {
-              console.log(response);
               const filteredAppointments = response.items.filter(
                 (appointment) => {
                   const appointmentDate = new Date(appointment.date);
@@ -76,8 +75,6 @@ export class AppointmentHistoryComponent implements OnInit {
                   );
                 }
               );
-
-              // hasReport bilgisini her randevu için kontrol et ve ata
               const appointmentObservables = filteredAppointments.map(
                 (appointment) => {
                   return this.reportService
@@ -94,19 +91,12 @@ export class AppointmentHistoryComponent implements OnInit {
                 }
               );
 
-              // Tüm observables tamamlandığında appointments listesini güncelle
               Promise.all(appointmentObservables).then(() => {
                 this.appointments = filteredAppointments;
                 this.sortAppointments();
               });
-            },
-            (error) => {
-              console.error('Randevular alınamadı:', error);
             }
           );
-      },
-      (error) => {
-        console.error('Doktor bilgileri alınamadı:', error);
       }
     );
   }

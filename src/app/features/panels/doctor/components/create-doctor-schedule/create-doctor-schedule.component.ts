@@ -12,7 +12,7 @@ import { TokenComponent } from '../../../../../shared/components/token/token.com
 @Component({
   selector: 'app-create-doctor-schedule',
   standalone: true,
-  imports: [FormsModule, CommonModule, DoctorSidebarComponent,TokenComponent],
+  imports: [FormsModule, CommonModule, DoctorSidebarComponent, TokenComponent],
   templateUrl: './create-doctor-schedule.component.html',
   styleUrls: ['./create-doctor-schedule.component.scss'],
 })
@@ -56,7 +56,7 @@ export class CreateDoctorScheduleComponent implements OnInit {
 
     for (let hour = startHour; hour <= endHour; hour++) {
       this.times.push(this.formatTime(hour, 0));
-      if (hour !== endHour ) {
+      if (hour !== endHour) {
         this.times.push(this.formatTime(hour, 30));
       }
     }
@@ -87,24 +87,17 @@ export class CreateDoctorScheduleComponent implements OnInit {
           );
           this.router.navigate(['list-doctor-schedule']);
         },
-        (responseError) => {
-          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
-        }
       );
-
-      console.log('Saved Schedule:', schedule);
     } else {
       this.toastrService.error('', 'Tüm alanları doldurunuz.');
     }
   }
 
   private formatDateForDatabase(date: string): string {
-    // Tarihi Yıl-Ay-Gün biçiminde formatlayarak döndürün
     return new Date(date).toISOString().split('T')[0];
   }
 
   private formatTimeForDatabase(time: string): string {
-    // Zamanı Saat:Dakika:Saniye biçiminde formatlayarak döndürün
     const [hour, minute] = time.split(':');
     return `${hour}:${minute}:00`;
   }

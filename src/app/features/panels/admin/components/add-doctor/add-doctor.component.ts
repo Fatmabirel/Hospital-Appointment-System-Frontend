@@ -8,13 +8,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
-import { DoctorService } from '../../../../doctors/services/doctor.service';
+
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BranchService } from '../../../../branches/services/branch.service';
 import { Branch } from '../../../../branches/models/branch';
 import { ThisReceiver } from '@angular/compiler';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
+import { DoctorService } from '../../../doctor/services/doctor.service';
 
 @Component({
   selector: 'app-add-doctor',
@@ -76,21 +77,16 @@ export class AddDoctorComponent {
   addDoctor(): void {
     if (this.doctorForm.valid) {
       const selectedBranchId = this.doctorForm.get('branchId')?.value;
-      // Form verilerini alarak doktor ekleme servisini çağırıyoruz
       const doctorData = this.doctorForm.value;
-      doctorData.branchId = selectedBranchId; // Seçilen branchId'yi doktor verilerine ekliyoruz
+      doctorData.branchId = selectedBranchId;
 
       this.doctorService.addDoctor(this.doctorForm.value).subscribe(
         (response) => {
           this.toastrService.success('Doktor başarıyla eklendi');
           this.router.navigate(['/admin-list-doctor']);
-        },
-        (error) => {
-          this.toastrService.error('Doktor eklenemedi');
         }
       );
     } else {
-      console.error('Error adding doctor:', this.doctorForm.value);
       this.toastrService.error('Eksik alanlarını doldurunuz.');
     }
   }

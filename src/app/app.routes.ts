@@ -362,10 +362,8 @@ export const routes: Routes = [
 
   },
   {
-
     path:"patient-summary",
     component:PatientSummaryComponent
-
   },
 
 

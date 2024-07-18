@@ -3,8 +3,8 @@ import { BranchService } from '../../../../branches/services/branch.service';
 import { Branch } from '../../../../branches/models/branch';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DoctorService } from '../../../../doctors/services/doctor.service';
-import { DoctorForAppointment } from '../../../../doctors/models/doctorForAppointment';
+
+import { DoctorForAppointment } from '../../../doctor/models/doctorForAppointment';
 import { DoctorSchedule } from '../../../../doctorschedule/models/doctorschedule';
 import { DrscheduleService } from '../../../../doctorschedule/services/drschedule.service';
 import { PatientSidebarComponent } from '../sidebar/psidebar.component';
@@ -14,17 +14,19 @@ import { CreateAppointment } from '../../../../appointments/models/createAppoint
 import { TokenService } from '../../../../../core/auth/services/token.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { PatientService } from '../../../../Patients/patient.service';
-import { Patient } from '../../../../Patients/patientModel';
+
+import { Patient } from '../../models/patientModel';
 import { SmsService } from '../../../../appointments/services/smsMock.service';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
+import { PatientService } from '../../services/patient.service';
+import { DoctorService } from '../../../doctor/services/doctor.service';
 
 @Component({
   selector: 'app-create-appointment',
   standalone: true,
   templateUrl: './create-appointment.component.html',
   styleUrl: './create-appointment.component.scss',
-  imports: [CommonModule, FormsModule, PatientSidebarComponent,TokenComponent],
+  imports: [CommonModule, FormsModule, PatientSidebarComponent, TokenComponent],
 })
 export class CreateAppointmentComponent implements OnInit {
   pageIndex: number = 0;
@@ -98,13 +100,11 @@ export class CreateAppointmentComponent implements OnInit {
         )
         .subscribe((schedules) => {
           this.schedules = schedules.items;
-          console.log(this.schedules);
           this.availableDates = [
             ...new Set(this.schedules.map((schedule) => schedule.date)),
           ]
             .map((date) => this.formatDate(date))
             .filter((date) => this.isFutureDate(date)); // Sadece gelecekteki tarihleri filtrele
-          console.log(this.availableDates);
 
           if (this.availableDates.length === 0) {
             this.selectedDate = null;
@@ -131,7 +131,6 @@ export class CreateAppointmentComponent implements OnInit {
   getDoctorAppointments(): void {
     if (this.selectedDoctor && this.selectedDate) {
       const formattedDate = this.formatDate(this.selectedDate);
-      console.log(formattedDate);
       this.appointmentService
         .getByDoctorDate(
           this.pageIndex,
@@ -139,17 +138,10 @@ export class CreateAppointmentComponent implements OnInit {
           this.selectedDoctor.id,
           formattedDate
         )
-        .subscribe(
-          (response) => {
-            console.log(response);
-            this.appointments = response.items;
-            console.log(this.appointments);
-            this.updateAvailableTimes();
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
+        .subscribe((response) => {
+          this.appointments = response.items;
+          this.updateAvailableTimes();
+        });
     }
   }
 
@@ -158,7 +150,6 @@ export class CreateAppointmentComponent implements OnInit {
       ...timeSlot,
       disabled: this.isTimeSlotBooked(timeSlot.time),
     }));
-    console.log('Updated Times with Status:', this.timesWithStatus);
   }
 
   isTimeSlotBooked(time: string): boolean {
@@ -190,12 +181,10 @@ export class CreateAppointmentComponent implements OnInit {
 
   generateTimes(): void {
     this.timesWithStatus = [];
-    console.log('Schedules:', this.schedules);
     if (this.schedules.length > 0) {
       const schedule = this.schedules.find(
         (schedule) => this.formatDate(schedule.date) === this.selectedDate
       );
-      console.log('Selected Schedule:', schedule);
       if (schedule) {
         const startTime = this.convertToTime(schedule.startTime);
         const endTime = this.convertToTime(schedule.endTime);
@@ -203,11 +192,10 @@ export class CreateAppointmentComponent implements OnInit {
         while (currentTime <= endTime) {
           this.timesWithStatus.push({
             time: this.formatTime(currentTime),
-            disabled: false, // initially, all time slots are not disabled
+            disabled: false,
           });
-          currentTime += 30; // increment by 30 minutes
+          currentTime += 30;
         }
-        console.log(this.timesWithStatus);
       }
     }
     this.updateAvailableTimes();
@@ -227,58 +215,46 @@ export class CreateAppointmentComponent implements OnInit {
   }
 
   addAppointment(): void {
-    this.patientService.getPatientProfile().subscribe(
-      (patient: Patient) => {
-        if (!patient || !patient.phone) {
-          throw new Error(
-            'Patient bilgileri alınamadı veya telefon numarası yok'
-          );
-        }
-        if (this.selectedDate && this.selectedTime && this.selectedDoctor) {
-          console.log('selectedDate:' + this.selectedDate);
-          console.log('selectedTime:' + this.selectedTime);
-          console.log('selectedDoctor:' + this.selectedDoctor);
-          const formattedTime = this.selectedTime + ':00'; // "HH:mm:ss" format
-          const appointment: CreateAppointment = {
-            date: this.selectedDate,
-            time: formattedTime,
-            status: true,
-            doctorID: this.selectedDoctor.id,
-            patientID: patient.id,
-          };
+    this.patientService.getPatientProfile().subscribe((patient: Patient) => {
+      if (!patient || !patient.phone) {
+        throw new Error(
+          'Patient bilgileri alınamadı veya telefon numarası yok'
+        );
+      }
+      if (this.selectedDate && this.selectedTime && this.selectedDoctor) {
+        const formattedTime = this.selectedTime + ':00'; // "HH:mm:ss" format
+        const appointment: CreateAppointment = {
+          date: this.selectedDate,
+          time: formattedTime,
+          status: true,
+          doctorID: this.selectedDoctor.id,
+          patientID: patient.id,
+        };
 
-          this.appointmentService.createAppointment(appointment).subscribe(
-            (response) => {
-              console.log('Appointment created:', response);
-              this.toastrService.success('Randevunuz oluşturuldu');
-              this.router.navigate(['patient-upcoming-appointments']);
-              const message = `Sayın ${patient.firstName} ${patient.lastName},
+        this.appointmentService.createAppointment(appointment).subscribe(
+          (response) => {
+            this.toastrService.success('Randevunuz oluşturuldu');
+            this.router.navigate(['patient-upcoming-appointments']);
+            const message = `Sayın ${patient.firstName} ${patient.lastName},
                                                 ${this.selectedDoctor?.firstName} ${this.selectedDoctor?.lastName} doktorundan randevunuz başarıyla oluşturulmuştur.
                                                 Branş: ${this.selectedDoctor?.branchName}
                                                 Randevu Tarihi: ${this.selectedDate}
                                                 Randevu Saati: ${formattedTime}
                                                 Detaylı bilgi için web sitemizi ziyaret edebilirsiniz.`;
-              this.smsService.sendSms(patient.phone, message).subscribe(
-                (smsResponse) => {
-                  console.log('SMS sent:', smsResponse);
-                  /* this.toastrService.success('Sms tarafınıza gönderildi.'); */
-                },
-                (smsError) => {
-                  console.error('SMS sending error:', smsError);
-                }
-              );
-            },
-            (error) => {
-              console.log(error);
-              this.toastrService.error(error.error.detail, 'Hatalı İşlem');
-            }
-          );
-        }
-      },
-      (error) => {
-        console.log(error);
-        this.toastrService.error('Patient bilgileri alınamadı', 'Hata');
+            this.smsService
+              .sendSms(patient.phone, message)
+              .subscribe((smsResponse) => {
+                this.toastrService.success('Sms tarafınıza gönderildi.');
+              });
+          },
+          (responseError) => {
+            this.toastrService.error(
+              responseError.error.Detail,
+              'Hatalı İşlem'
+            );
+          }
+        );
       }
-    );
+    });
   }
 }

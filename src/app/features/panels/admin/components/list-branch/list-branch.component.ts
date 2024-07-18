@@ -47,7 +47,6 @@ export class ListBranchComponent implements OnInit {
 
   onPageChanged(newPageIndex: number) {
     this.pageIndex = newPageIndex;
-    console.log(this.pageIndex);
     this.getBranches();
   }
 
@@ -67,9 +66,6 @@ export class ListBranchComponent implements OnInit {
       (response) => {
         this.toastrService.success('Branş başarıyla silindi');
         this.getBranches();
-      },
-      (responseError) => {
-        this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
       }
     );
   }

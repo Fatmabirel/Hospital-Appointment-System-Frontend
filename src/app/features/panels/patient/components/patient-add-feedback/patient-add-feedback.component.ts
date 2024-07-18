@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Patient } from '../../../../Patients/patientModel';
+import { Patient } from '../../models/patientModel';
 import { Feedback } from '../../../../feedbacks/models/feedback';
 import {
   FormBuilder,
@@ -8,12 +8,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { FeedbackService } from '../../../../feedbacks/services/feedback.service';
-import { PatientService } from '../../../../Patients/patient.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { PatientSidebarComponent } from '../sidebar/psidebar.component';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
+import { PatientService } from '../../services/patient.service';
 
 @Component({
   selector: 'app-patient-add-feedback',
@@ -64,9 +64,6 @@ export class PatientAddFeedbackComponent {
         (response) => {
           this.toastrService.success('Geri bildirim başarıyla eklendi');
           this.router.navigate(['/patient-feedbacks']);
-        },
-        (error) => {
-          this.toastrService.error('Geri bildirim eklenemedi!');
         }
       );
     } else {

@@ -50,20 +50,13 @@ export class AdminUpdateDrscheduleComponent implements OnInit {
       if (params['doctorId'] && params['scheduleId']) {
         this.scheduleId = params['scheduleId'];
         this.doctorId = params['doctorId'];
-        console.log('Doctor ID:', this.doctorId); // Doctor ID'nin doğru alındığını kontrol etme
-        console.log('Schedule ID:', this.scheduleId); // Schedule ID'nin doğru alındığını kontrol etme
       } else {
         this.scheduleId = 0;
         this.doctorId = '0';
       }
     });
 
-    // Get schedule ID from route parameters
-    //this.scheduleId = this.route.snapshot.paramMap.get('scheduleId');
-
-    // Fetch existing schedule details
     this.drScheduleService.getById(this.scheduleId).subscribe((schedule) => {
-      console.log(schedule);
       this.selectedDate = schedule.date;
       this.startTime = this.formatTimeForDisplay(schedule.startTime);
       this.endTime = this.formatTimeForDisplay(schedule.endTime);
@@ -116,18 +109,8 @@ export class AdminUpdateDrscheduleComponent implements OnInit {
             'Başarılı'
           );
           this.router.navigate(['admin-doctor-schedule', this.doctorId]);
-        },
-        // error => {
-        //   this.toastrService.error("Bu tarih için doktorun takvim çizelgesi zaten mevcut", 'Hatalı İşlem');
-        //   console.error('Error updating schedule:', error);
-        // }
-        (responseError) => {
-          console.log(responseError);
-          this.toastrService.error(responseError.error.detail, 'Hatalı İşlem');
         }
       );
-
-      console.log('Updated Schedule:', schedule);
     } else {
       this.toastrService.error('', 'Tüm alanları doldurunuz.');
     }

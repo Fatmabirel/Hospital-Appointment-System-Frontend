@@ -1,11 +1,11 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Doctor } from '../models/doctor';
-import { ResponseModel } from '../../models/responseModel';
 import { jwtDecode } from 'jwt-decode';
-import { Appointment } from '../../appointments/models/appointmentModel';
+import { Doctor } from '../models/doctor';
+import { ResponseModel } from '../../../models/responseModel';
 import { DoctorForAppointment } from '../models/doctorForAppointment';
+
 
 
 
@@ -23,7 +23,6 @@ export class DoctorService {
     try {
       return jwtDecode(token);
     } catch (Error) {
-      console.error('Token decode edilemedi', Error);
       return null;
     }
   }
@@ -62,7 +61,7 @@ export class DoctorService {
   getDoctorProfile(): Observable<Doctor> {
     const token = localStorage.getItem('token');
     if (!token) {
-      throw new Error('Token bulunamadı');
+      throw new Error('');
     }
 
     const decodedToken: any = this.decodeToken(token);
