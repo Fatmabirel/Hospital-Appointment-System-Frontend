@@ -1,10 +1,12 @@
 # Hastane Randevu Sistemi📝
-Bu proje Tobeto ile gerçekleştirilen .NET & Angular Full Stack eğitiminin bitirme projesidir. 
+Bu proje Tobeto ile gerçekleştirilen .NET & Angular Full Stack eğitiminin bitirme projesinin frontend tarafıdır. 
 
 #### GEREKSİNİMLER 🛠
-- [x] Web projesi : Asp.NET Web API & Angular 
-- [x] Veri tabanı : MsSQL Server 
-- [x] Dökümantasyon için: Postman,Swagger vs.
+- [x] Web projesi: 
+  ![Asp.NET Web API](https://img.shields.io/badge/asp.net%20web%20api-%231BA3E8.svg?style=for-the-badge&logo=dotnet&logoColor=white)
+  ![Angular](https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white)
+- [x] Veri tabanı: 
+  ![MsSQL Server](https://img.shields.io/badge/mssql%20server-%23CC2927.svg?style=for-the-badge&logo=microsoftsqlserver&logoColor=white)
 
 
 #### PROJEDE KULLANILAN PROGRAMLAMA DİLLERİ VE TEKNOLOJİLER 🎯
@@ -20,7 +22,7 @@ Bu proje Tobeto ile gerçekleştirilen .NET & Angular Full Stack eğitiminin bit
   <img alt="GitHub" src="https://img.shields.io/badge/GitHub-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" />
 </p>
 
-#### 📫 NASIL BİR PROJE OLUŞTURDUK?
+#### 🎯 NASIL BİR PROJE OLUŞTURDUK?
 <p>Bu proje, hastaların randevu almasını, geçmiş ve gelecek randevularını takip etmelerini ve doktorlar ile kolayca iletişim kurmalarını sağlayan, kullanıcı dostu bir hastane randevu sistemidir.</p>
 
 <p> Üç tip kullanıcı bulunmaktadır: </p>
@@ -57,8 +59,6 @@ Bu proje Tobeto ile gerçekleştirilen .NET & Angular Full Stack eğitiminin bit
 
 ## PROJE DETAYLARI📝
 
-Projemiz, .Net ve Angular teknolojilerini içeren modern bir web uygulamasıdır. Projemizde MsSQL kullanılmış olup, dökümantasyon için Swagger entegrasyonu sağlanmıştır.
-
 Projede Angular, modern ve kullanıcı dostu bir kullanıcı arayüzü sağlamak için kullanılmaktadır. Angular, güçlü bir framework olarak, SPA (Single Page Application) yapısını destekleyerek kullanıcı deneyimini optimize etmeye olanak tanır.
 
 Angular kullanırken projede şu özellikler ve kütüphaneler önemli rol oynamaktadır:
@@ -75,16 +75,25 @@ Angular kullanırken projede şu özellikler ve kütüphaneler önemli rol oynam
 
 Bu bileşenler ve kütüphaneler sayesinde Angular, projenizin frontend tarafında güçlü bir performans ve kullanılabilirlik sunmuştur.
 
-🔒 Projemizin katmanları aşağıda gösterilmiştir:
 
-</br>
-<img width="400" alt="image" src="https://github.com/user-attachments/assets/0976a4fa-4fea-4f31-8ba7-da3a2739d7a0">
-</br>
+<p>>📃Kullanıcılar siteye girdiklerinde onları karşılayan bir anasayfamız bulunmaktadır. Bu sayfada hastanemizle ilgili bilgilendirme yazılarının yanı sıra, oluşturduğumuz Footer ve Header yapıları sayesinde
+kullanıcıların ihtiyaç duydukları bilgilere kolayca ulaşmaları sağlanmaktadır. Bunların yanı sıra kullanıcılar anasayfadan ulaşabilecekleri tıbbi birimler, doktorlarımız, hakkımızda, bize ulaşın gibi diğer sayfalara da yönlendirilirler.</br></p>
+
+
+<img src="https://github.com/user-attachments/assets/8c11a948-5dd7-4572-9bd0-c83c019b429a" alt="image" width="700">
+<img src="https://github.com/user-attachments/assets/a5bfd29b-8dbf-42e8-8636-f31a2e6a2b60" alt="image" width="700">
+
+<p></br>➡️Ek olarak Sıkça Sorulan Sorular ve  Canlı Destek sayesinde kullanıcıların sorularına çok daha kolay ve hızlı cevap alabilmeleri sağlanır. </br></p>
+
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/2e9df765-4144-4013-a443-c906d0144851">
+
+<p></br>✎ Hastane randevu sisteminde, hastaların randevu alabilmesi için sisteme giriş yapmaları zorunlu kılınmıştır. Bu süreç, hem güvenlik hem de kişisel sağlık bilgilerinin korunması açısından kritik öneme sahiptir. Yeni hastaların sisteme üye olabilmesi için kullanıcı dostu bir Üye Ol sayfası oluşturulmuştur. Bu sayfa, hastaların gerekli bilgilerini kolayca girebilecekleri bir form içerir. Üyelik sürecinde hastalardan ad, soyad, e-posta adresi ve telefon numarası gibi temel bilgilerin yanı sıra, güvenli bir şifre oluşturmaları istenmektedir. Üye olduktan sonra hastanın sisteme giriş yapabilmesi için mail adresini doğrulama şartı eklenmiştir. Bu sayede hastanın üye olurken girmiş olduğu mail adresine bir doğrulama linki yollanır. Hasta bu link aracılığıyla e-posta adresini doğrularsa sisteme giriş yapabilmektedir, aksi taktirde sisteme giriş yapabilmesi mümkün olmayacaktır. Şifresini unutan hastalar ise e-posta veya telefon numaraları aracılığıyla yeni bir şifre talep edebilir ve şifrelerini güncelleyebilirler. Bu sayede, hastalarımızın sisteme erişimlerinin kesintisiz ve güvenli bir şekilde sağlanması hedeflenmektedir.</br></p>
+<img width="944" alt="image" src="https://github.com/user-attachments/assets/8ca318c7-01d8-4455-8a45-5cebb628f35f">
+
+<p>📌Kullanıcılar sistme giriş yaptıktan sonra yetkinliklerine göre ilgili panellere yönlendirilirler. Bu panellerden kendilerine sunulan özelliklerden istediklerine erişip kullanabilirler. Projeyi daha detaylı incelemek ve diğer sayfaları görmek isterseniz indirebilirisiniz ya da <a href="https://www.canva.com/design/DAGJ_tDryyw/pvyKpd8p9P1Oypok3TDjVQ/edit?utm_content=DAGJ_tDryyw&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton">Canva</a> 'da bulunan sunumdan diğer ekranları görebilirsiniz.</p>
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/facc8a43-3810-4f3d-9ca3-96094c6fb5df">
 
 -----------------------------------------------------------------------
-
-## 🌱PROJEYE EKLENEN EK ÖZELLİKLER:
-
 
 Görüşürüz 🎉
 
