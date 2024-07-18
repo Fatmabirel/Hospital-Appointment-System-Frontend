@@ -93,7 +93,8 @@ kullanıcıların ihtiyaç duydukları bilgilere kolayca ulaşmaları sağlanmak
 <p>📌Kullanıcılar sistme giriş yaptıktan sonra yetkinliklerine göre ilgili panellere yönlendirilirler. Bu panellerden kendilerine sunulan özelliklerden istediklerine erişip kullanabilirler. Projeyi daha detaylı incelemek ve diğer sayfaları görmek isterseniz indirebilirisiniz ya da <a href="https://www.canva.com/design/DAGJ_tDryyw/pvyKpd8p9P1Oypok3TDjVQ/edit?utm_content=DAGJ_tDryyw&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton">Canva</a> 'da bulunan sunumdan diğer ekranları görebilirsiniz.</p>
 <img width="700" alt="image" src="https://github.com/user-attachments/assets/facc8a43-3810-4f3d-9ca3-96094c6fb5df">
 
-Projenin backend tarafına <a href=https://github.com/mervekaratass/Hospital>buradan</a>  ulaşabilirsiniz.
+Projenin backend kısmına <a href=https://github.com/mervekaratass/Hospital>buradan</a>  ulaşabilirsiniz.
+
 -----------------------------------------------------------------------
 
 Görüşürüz 🎉
