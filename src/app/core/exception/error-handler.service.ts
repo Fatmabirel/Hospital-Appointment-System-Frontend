@@ -27,7 +27,7 @@ export class ErrorHandlerService {
             }
           }
         } else {
-          this.showErrorMessage(error.error.detail, 'Hatalı İşlem');
+          this.showErrorMessage(error.error.detail, 'Hatalı İşlem:'+error.error.Detail);
         }
       } else {
         this.showErrorMessage('Bilinmeyen bir hata oluştu', 'Hata');
