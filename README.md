@@ -1,6 +1,8 @@
 # Hastane Randevu Sistemi📝
 Bu proje Tobeto ile gerçekleştirilen .NET & Angular Full Stack eğitiminin bitirme projesinin frontend tarafıdır. 
 
+<p>📌Projenin backend kısmına <a href=https://github.com/mervekaratass/Hospital>buradan</a>  ulaşabilirsiniz.</p>
+
 #### GEREKSİNİMLER 🛠
 - [x] Web projesi: 
   ![Asp.NET Web API](https://img.shields.io/badge/asp.net%20web%20api-%231BA3E8.svg?style=for-the-badge&logo=dotnet&logoColor=white)
@@ -98,7 +100,7 @@ kullanıcıların ihtiyaç duydukları bilgilere kolayca ulaşmaları sağlanmak
 
 <img width="700" alt="image" src="https://github.com/user-attachments/assets/d7cc74e3-bfee-4829-9314-054d0d315b16">
 
-Projenin backend kısmına <a href=https://github.com/mervekaratass/Hospital>buradan</a>  ulaşabilirsiniz.
+
 
 -----------------------------------------------------------------------
 
