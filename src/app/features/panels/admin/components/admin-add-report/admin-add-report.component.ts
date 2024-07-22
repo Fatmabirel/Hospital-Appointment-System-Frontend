@@ -40,7 +40,6 @@ export class AdminAddReportComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       if (params['appointmentId']) {
         this.appointmentId = +params['appointmentId'];
-      } else {
       }
     });
     this.createReportForm();
@@ -63,9 +62,6 @@ export class AdminAddReportComponent implements OnInit {
         (response) => {
           this.toastrService.success('Rapor eklendi');
           this.router.navigate(['past-appointments']);
-        },
-        (responseError) => {
-          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
     } else {

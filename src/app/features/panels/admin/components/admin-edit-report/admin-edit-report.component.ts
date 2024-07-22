@@ -7,7 +7,6 @@ import { ResponseReport } from '../../../../reports/models/responseReport';
 import { UpdateRequestReport } from '../../../../reports/models/update-request-report';
 import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { error } from 'console';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
 
 @Component({
@@ -42,7 +41,6 @@ export class AdminEditReportComponent implements OnInit {
       if (params['id']) {
         this.reportId = +params['id'];
         this.getReport(this.reportId);
-      } else {
       }
     });
     this.createReportForm();
@@ -59,7 +57,6 @@ export class AdminEditReportComponent implements OnInit {
   getReport(id: number) {
     this.reportService.getReportDetails(id).subscribe((response) => {
       this.responseReport = response;
-      console.log(response);
       this.reportForm.patchValue({
         name: response.patientFirstName + ' ' + response.patientLastName,
         tcNo: response.patientIdentity,
@@ -73,22 +70,15 @@ export class AdminEditReportComponent implements OnInit {
       const updatedReport: UpdateRequestReport = {
         id: this.reportId,
         text: this.reportForm.value.reportText,
-        // Diğer güncelleme alanlarını ekleyin
       };
 
       this.reportService.updateReport(updatedReport).subscribe(
         (response) => {
           this.toastrService.success('Rapor başarıyla güncellendi');
-          this.router.navigate(['admin-sidebar']);
-          console.log('Rapor başarıyla güncellendi', response);
-          this.router.navigate(['admin-reports']); // Güncelleme sonrası yönlendirme
-        },
-        (error) => {
-          console.error('Güncelleme sırasında hata oluştu:', error);
+          this.router.navigate(['admin-reports']);
         }
       );
     } else {
-      // Form geçerli değilse hata mesajı gösterilebilir
       this.toastrService.error('Lütfen eksik alanları doldurun.');
     }
   }

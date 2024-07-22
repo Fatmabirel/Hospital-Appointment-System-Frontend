@@ -44,7 +44,6 @@ export class PatientReportDetailComponent {
       if (params['id']) {
         this.reportId = +params['id'];
         this.getReport(this.reportId);
-      } else {
       }
     });
     this.createReportForm();

@@ -18,7 +18,12 @@ import { TokenComponent } from '../../../../../shared/components/token/token.com
   standalone: true,
   templateUrl: './add-report.component.html',
   styleUrl: './add-report.component.scss',
-  imports: [DoctorSidebarComponent, FormsModule, ReactiveFormsModule,TokenComponent],
+  imports: [
+    DoctorSidebarComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    TokenComponent,
+  ],
 })
 export class AddReportComponent implements OnInit {
   reportForm: FormGroup;
@@ -35,7 +40,6 @@ export class AddReportComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       if (params['appointmentId']) {
         this.appointmentId = +params['appointmentId'];
-      } else {
       }
     });
     this.createReportForm();
@@ -52,24 +56,15 @@ export class AddReportComponent implements OnInit {
       const addReport: AddReport = {
         appointmentID: this.appointmentId,
         text: this.reportForm.value.reportText,
-        // Diğer güncelleme alanlarını ekleyin
       };
 
       this.reportService.addReport(addReport).subscribe(
         (response) => {
-          // this.toastrService.success('Bilgileriniz başarıyla eklendi');
-          // this.router.navigate(['doctor-sidebar']);
-          console.log('Rapor başarıyla eklendi', response);
           this.toastrService.success('Rapor eklendi');
-          this.router.navigate(['/doctor-reports']); // Güncelleme sonrası yönlendirme
-        },
-        (responseError) => {
-          console.log(responseError);
-          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
+          this.router.navigate(['/doctor-reports']);
         }
       );
     } else {
-      // Form geçerli değilse hata mesajı gösterilebilir
       this.toastrService.error('Lütfen eksik alanları doldurun');
     }
   }

@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { BasicLayoutComponent } from '../../shared/components/basic-layout/basic-layout.component';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { PatientService } from '../Patients/patient.service';
+
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FeedbackService } from '../feedbacks/services/feedback.service';
 import { ScrollService } from '../../shared/components/footer-content/scroll-service.service';
+import { PatientService } from '../panels/patient/services/patient.service';
 
 @Component({
   selector: 'app-contact',

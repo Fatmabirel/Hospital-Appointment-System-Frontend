@@ -75,22 +75,18 @@ export class LoginComponent implements OnInit {
       const loginModel: LoginModel = Object.assign({}, this.loginForm.value);
       this.authService.login(loginModel).subscribe(
         (response) => {
-          const token = response.accessToken.token; // accessToken içinden token özelliğini al
+          const token = response.accessToken.token;
           localStorage.setItem('token', token);
           this.toastrService.success('Giriş başarılı!', 'Başarılı');
 
           const userRoles=this.tokenService.getUserRole();
 
           if(userRoles=="Admin")
-          this.router.navigate(['admin-charts']);  // Başarılı girişten sonra yönlendirme
+          this.router.navigate(['admin-charts']);
            else if(userRoles.includes("Doctors.Update"))
           this.router.navigate(['doctor-summary'])
           else if(userRoles.includes("Patients.Update"))
             this.router.navigate(['patient-summary'])
-        },
-        (responseError) => {
-          console.log(this.loginForm.value);
-          this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
         }
       );
     } else {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppointmentService } from '../../../../../appointments/services/appointment.service';
-import { DoctorService } from '../../../../../doctors/services/doctor.service';
+
 import { Appointment } from '../../../../../appointments/models/appointmentModel';
 import { ResponseModel } from '../../../../../models/responseModel';
 import { AdminSidebarComponent } from '../../sidebar/adminSidebar.component';
@@ -13,6 +13,7 @@ import { PaginationComponent } from '../../../../../../core/paging/components/pa
 import { FormsModule } from '@angular/forms';
 import { FilterAppointmentIdentityPipe } from '../../../../../pipe/filter-appointment-identity.pipe';
 import { TokenComponent } from '../../../../../../shared/components/token/token.component';
+import { DoctorService } from '../../../../doctor/services/doctor.service';
 
 @Component({
   selector: 'app-past-appointments',
@@ -31,10 +32,9 @@ import { TokenComponent } from '../../../../../../shared/components/token/token.
 })
 export class PastAppointmentsComponent implements OnInit {
   pastAppointments: Appointment[] = [];
-  /* doctors: { [key: string]: Doctor } = {}; */
   todayDate: Date = new Date();
   errorMessage: string;
-  hasReportMap: { [key: number]: boolean } = {}; // hasReport bilgisini tutmak için nesne
+  hasReportMap: { [key: number]: boolean } = {};
   pageIndex: number = 0;
   pageSize: number = 100;
   totalPages: number = 0;
@@ -71,8 +71,6 @@ export class PastAppointmentsComponent implements OnInit {
                 appointment.time < this.todayDate.toTimeString().slice(0, 5))
             );
           });
-          console.log('Past Appointments:', this.pastAppointments);
-          // hasReport bilgisini her randevu için kontrol et ve ata
           const appointmentObservables = this.pastAppointments.map(
             (appointment) => {
               return this.reportService
@@ -88,15 +86,9 @@ export class PastAppointmentsComponent implements OnInit {
                 );
             }
           );
-
-          // Tüm observables tamamlandığında appointments listesini güncelle
           Promise.all(appointmentObservables).then(() => {
             this.pastAppointments = this.pastAppointments;
           });
-        },
-        (error) => {
-          console.error('Randevular alınamadı:', error);
-          this.errorMessage = error.message;
         }
       );
   }
@@ -113,26 +105,9 @@ export class PastAppointmentsComponent implements OnInit {
         this.pastAppointments = this.pastAppointments.filter(
           (appointment) => appointment.id !== appointmentId
         );
-      },
-      (error) => {
-        console.error('Randevu silinemedi:', error);
-        this.errorMessage = error.message;
       }
     );
   }
-
-  //randevuya ait raporu görüntüle
-  // public viewReport(appointmentId: number) {
-
-  //     this.reportService.getByAppointmentId(appointmentId).subscribe(response=>{
-  //       let reportId=response.id;
-
-  //     },responseError=>{
-  //       this.toastrService.error("Randevuya ait bir rapor bulunmamaktadır");
-  //       console.log(responseError.error)
-  //     });
-
-  //   }
 
   public viewReport(appointmentId: number) {
     if (this.hasReportMap[appointmentId]) {

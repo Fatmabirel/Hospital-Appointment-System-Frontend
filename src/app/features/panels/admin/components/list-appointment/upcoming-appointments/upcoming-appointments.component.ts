@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AppointmentService } from '../../../../../appointments/services/appointment.service';
-import { DoctorService } from '../../../../../doctors/services/doctor.service';
+
 import { Appointment } from '../../../../../appointments/models/appointmentModel';
 import { ResponseModel } from '../../../../../models/responseModel';
 import { AdminSidebarComponent } from '../../sidebar/adminSidebar.component';
@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { FilterAppointmentIdentityPipe } from '../../../../../pipe/filter-appointment-identity.pipe';
 import { ToastrService } from 'ngx-toastr';
 import { TokenComponent } from '../../../../../../shared/components/token/token.component';
+import { DoctorService } from '../../../../doctor/services/doctor.service';
 
 @Component({
   selector: 'app-upcoming-appointments',
@@ -70,10 +71,6 @@ export class UpcomingAppointmentsComponent /* implements OnInit */ {
           this.totalPages = response.pages;
           this.hasNext = response.hasNext;
         },
-        (error) => {
-          console.error('Randevular alınamadı:', error);
-          this.errorMessage = error.message;
-        }
       );
   }
 
@@ -89,10 +86,6 @@ export class UpcomingAppointmentsComponent /* implements OnInit */ {
         this.upcomingAppointments = this.upcomingAppointments.filter(
           (appointment) => appointment.id !== appointmentId
         );
-      },
-      (error) => {
-        console.error('Randevu silinemedi:', error);
-        this.errorMessage = error.message;
       }
     );
   }

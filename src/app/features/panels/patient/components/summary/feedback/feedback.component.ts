@@ -10,9 +10,9 @@ import { Feedback } from '../../../../../feedbacks/models/feedback';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './feedback.component.html',
-  styleUrl: './feedback.component.scss'
+  styleUrl: './feedback.component.scss',
 })
-export class FeedbackComponent{
+export class FeedbackComponent {
   patientID: string;
   feedbacks: Feedback[];
   pageIndex: number = 0;
@@ -20,34 +20,28 @@ export class FeedbackComponent{
 
   constructor(
     private feedbackService: FeedbackService,
-    private tokenService: TokenService,
-
+    private tokenService: TokenService
   ) {}
 
   ngOnInit(): void {
-
-      this.patientID = this.tokenService.getUserId().toString();
-      this.getFeedbackByUserId(this.patientID);
-
+    this.patientID = this.tokenService.getUserId().toString();
+    this.getFeedbackByUserId(this.patientID);
   }
 
   sortFeedbacksByDateDescending(): void {
     this.feedbacks.sort((a, b) => {
-      const dateA = new Date(a.createdDate); // a.date tarih formatında olduğunu varsayıyoruz
+      const dateA = new Date(a.createdDate);
       const dateB = new Date(b.createdDate);
-      return dateB.getTime() - dateA.getTime(); // Azalan sırayla sıralama
+      return dateB.getTime() - dateA.getTime();
     });
   }
 
-
   getFeedbackByUserId(userID: string) {
     this.feedbackService
-      .getFeedbackByUserId(this.pageIndex,this.pageSize,userID )
+      .getFeedbackByUserId(this.pageIndex, this.pageSize, userID)
       .subscribe((response) => {
         this.feedbacks = response.items;
         this.sortFeedbacksByDateDescending();
       });
   }
-
-
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Appointment } from '../../../../appointments/models/appointmentModel';
-import { DoctorService } from '../../../../doctors/services/doctor.service';
+
 import { AppointmentService } from '../../../../appointments/services/appointment.service';
 import { ResponseModel } from '../../../../models/responseModel';
 import { DoctorSidebarComponent } from '../sidebar/doctorSidebar.component';
@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { FilterAppointmentIdentityPipe } from '../../../../pipe/filter-appointment-identity.pipe';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
+import { DoctorService } from '../../services/doctor.service';
 
 @Component({
   selector: 'app-pending-appointment',
@@ -51,35 +52,22 @@ export class PendingAppointmentComponent {
   }
 
   loadDoctorAppointments(): void {
-    this.doctorService.getDoctorProfile().subscribe(
-      (doctor) => {
-        const doctorId = doctor.id.toString();
-        this.appointmentService
-          .getDoctorAppointments(doctorId, this.pageIndex, this.pageSize)
-          .subscribe(
-            (response: ResponseModel<Appointment>) => {
-              // Filtreleme işlemi
-              this.appointments = response.items.filter((appointment) => {
-                const appointmentDate = new Date(appointment.date);
-                // Tarih ve saat kontrolü
-                return (
-                  appointmentDate > this.todayDate ||
-                  (appointmentDate.getTime() === this.todayDate.getTime() &&
-                    appointment.time >
-                      this.todayDate.toTimeString().slice(0, 5))
-                );
-              });
-              this.sortAppointments();
-            },
-            (error) => {
-              console.error('Randevular alınamadı:', error);
-            }
-          );
-      },
-      (error) => {
-        console.error('Doktor bilgileri alınamadı:', error);
-      }
-    );
+    this.doctorService.getDoctorProfile().subscribe((doctor) => {
+      const doctorId = doctor.id.toString();
+      this.appointmentService
+        .getDoctorAppointments(doctorId, this.pageIndex, this.pageSize)
+        .subscribe((response: ResponseModel<Appointment>) => {
+          this.appointments = response.items.filter((appointment) => {
+            const appointmentDate = new Date(appointment.date);
+            return (
+              appointmentDate > this.todayDate ||
+              (appointmentDate.getTime() === this.todayDate.getTime() &&
+                appointment.time > this.todayDate.toTimeString().slice(0, 5))
+            );
+          });
+          this.sortAppointments();
+        });
+    });
   }
 
   public viewReport() {

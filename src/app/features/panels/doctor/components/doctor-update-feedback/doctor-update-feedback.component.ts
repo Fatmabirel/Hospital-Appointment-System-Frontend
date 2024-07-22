@@ -8,12 +8,13 @@ import {
   Validators,
 } from '@angular/forms';
 import { FeedbackService } from '../../../../feedbacks/services/feedback.service';
-import { DoctorService } from '../../../../doctors/services/doctor.service';
+
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Feedback } from '../../../../feedbacks/models/feedback';
-import { Doctor } from '../../../../doctors/models/doctor';
+import { Doctor } from '../../models/doctor';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
+import { DoctorService } from '../../services/doctor.service';
 
 @Component({
   selector: 'app-doctor-update-feedback',
@@ -71,9 +72,6 @@ export class DoctorUpdateFeedbackComponent {
         (response) => {
           this.toastrService.success('Geri bildirim başarıyla güncellendi');
           this.router.navigate(['/doctor-feedbacks']);
-        },
-        (error) => {
-          this.toastrService.error('Geri bildirim eklenemedi');
         }
       );
     } else {

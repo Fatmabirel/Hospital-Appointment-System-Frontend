@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient ,HttpParams} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
-import { Patient } from './patientModel';
-import { ResponseModel } from '../models/responseModel';
-import { TokenService } from '../../core/auth/services/token.service';
+import { TokenService } from '../../../../core/auth/services/token.service';
+import { Patient } from '../models/patientModel';
+import { ResponseModel } from '../../../models/responseModel';
 
 @Injectable({
   providedIn: 'root'
@@ -45,7 +45,7 @@ export class PatientService {
   updatePatient(patient: Patient): Observable<ResponseModel<Patient>> {
     return this.httpClient.put<ResponseModel<Patient>>(this.apiUrl, patient);
   }
-  
+
   deletePatient(id:string): Observable<ResponseModel<any>> {
     return this.httpClient.delete<ResponseModel<any>>(`${this.apiUrl}/${id}`);
   }

@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
 import { FormBuilder, FormGroup, FormsModule,ReactiveFormsModule, Validators } from '@angular/forms';
-import { Patient } from '../../../../Patients/patientModel';
-import { PatientService } from '../../../../Patients/patient.service';
+import { Patient } from '../../../patient/models/patientModel';
+
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
+import { PatientService } from '../../../patient/services/patient.service';
 
 
 @Component({
@@ -22,9 +23,9 @@ import { TokenComponent } from '../../../../../shared/components/token/token.com
   ],
   templateUrl: './add-Patient.component.html',
   styleUrl: './add-Patient.component.scss',
-  
+
 })
-export class AddPatientComponent { 
+export class AddPatientComponent {
   patient: Patient[] = [];
   patientId: string;
   pageIndex: number = 0;
@@ -34,7 +35,7 @@ export class AddPatientComponent {
   constructor(
     private formbuilder: FormBuilder,
     private patientService: PatientService,
-    
+
     private toastrService:ToastrService,
     private router: Router
   ) {
@@ -72,21 +73,14 @@ export class AddPatientComponent {
   addPatient(): void {
     if (this.PatientForm.valid) {
       const selectedBranchId = this.PatientForm.get('patientId')?.value;
-      // Form verilerini alarak hasta ekleme servisini çağırıyoruz
-    
 
       this.patientService.addPatient(this.PatientForm.value).subscribe(
         (response) => {
           this.toastrService.success('Hasta başarıyla eklendi');
           this.router.navigate(['/admin-patient']);
-        },
-        (error) => {
-          this.toastrService.error('Hasta eklenemedi');
-          //console.error('Error adding doctor:', error);
         }
       );
     } else {
-      console.error('Error adding patient:', this.PatientForm.value);
       this.toastrService.error('Eksik alanlarını doldurunuz.');
     }
   }

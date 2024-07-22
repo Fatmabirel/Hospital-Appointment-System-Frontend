@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminSidebarComponent } from '../sidebar/adminSidebar.component';
 import { CommonModule } from '@angular/common';
-import { DoctorService } from '../../../../doctors/services/doctor.service';
-import { Doctor } from '../../../../doctors/models/doctor';
+
+import { Doctor } from '../../../doctor/models/doctor';
 import { Router, RouterModule } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,6 +15,8 @@ import { BranchService } from '../../../../branches/services/branch.service';
 import { Branch } from '../../../../branches/models/branch';
 import { PaginationComponent } from '../../../../../core/paging/components/pagination/pagination.component';
 import { TokenComponent } from '../../../../../shared/components/token/token.component';
+import { ToastrService } from 'ngx-toastr';
+import { DoctorService } from '../../../doctor/services/doctor.service';
 
 @Component({
   selector: 'app-list-doctor',
@@ -30,7 +32,7 @@ import { TokenComponent } from '../../../../../shared/components/token/token.com
     FilterDoctorNamePipe,
     FilterDoctorBranchPipe,
     PaginationComponent,
-    TokenComponent
+    TokenComponent,
   ],
 
   templateUrl: './list-doctor.component.html',
@@ -40,7 +42,7 @@ export class ListDoctorComponent implements OnInit {
   doctors: Doctor[] = [];
   branches: Branch[] = [];
   pageIndex: number = 0;
-  pageSize:number = 5;
+  pageSize: number = 5;
   totalPages: number = 0;
   hasNext: boolean = false;
   filterText: string = '';
@@ -48,9 +50,10 @@ export class ListDoctorComponent implements OnInit {
 
   constructor(
     private doctorService: DoctorService,
-    private branchService:BranchService,
+    private branchService: BranchService,
     private dialog: MatDialog,
-    private router:Router
+    private toastrService: ToastrService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -100,11 +103,8 @@ export class ListDoctorComponent implements OnInit {
   deleteDoctor(doctorId: string) {
     this.doctorService.deleteDoctor(doctorId).subscribe(
       (response) => {
-        console.log('Doktor başarıyla silindi:', response);
-        this.getDoctors(); // Doktorları yeniden yükleyerek güncellemeyi sağlıyoruz
-      },
-      (error) => {
-        console.error('Doktor silinemedi:', error);
+        this.toastrService.success('Doktor başarıyla silindi.');
+        this.getDoctors();
       }
     );
   }
@@ -112,9 +112,7 @@ export class ListDoctorComponent implements OnInit {
     const selectedBranch = event.target.value;
   }
 
-  goToRoute(doctorId:string)
-  {
+  goToRoute(doctorId: string) {
     this.router.navigate(['admin-doctor-schedule', doctorId]);
   }
-
 }

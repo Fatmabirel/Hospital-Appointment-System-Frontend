@@ -50,10 +50,6 @@ export class ListDoctorScheduleComponent implements OnInit {
           'Başarılı'
         );
         this.getDoctorSchedule();
-      },
-      (responseError) => {
-        console.log(responseError);
-        this.toastrService.error(responseError.error.Detail, 'Hatalı İşlem');
       }
     );
   }
@@ -76,4 +72,11 @@ export class ListDoctorScheduleComponent implements OnInit {
   goToRoute(scheduleId: number) {
     this.router.navigate(['doctorschedule', scheduleId]);
   }
+
+  isFutureDate(date: string): boolean {
+    const scheduleDate = new Date(date);
+    const today = new Date();
+    return scheduleDate > today;
+  }
+
 }

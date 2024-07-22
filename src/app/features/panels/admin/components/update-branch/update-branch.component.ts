@@ -1,6 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Branch } from '../../../../branches/models/branch';
 import { BranchService } from '../../../../branches/services/branch.service';
 import { ToastrService } from 'ngx-toastr';
@@ -16,83 +22,62 @@ import { TokenComponent } from '../../../../../shared/components/token/token.com
     FormsModule,
     ReactiveFormsModule,
     AdminSidebarComponent,
-    TokenComponent
-    
+    TokenComponent,
   ],
   templateUrl: './update-branch.component.html',
   styleUrl: './update-branch.component.scss',
-
 })
 export class UpdateBranchComponent {
-
-  branchForm:FormGroup; // FormGroup tanımlıyoruz
-  branch:Branch;
+  branchForm: FormGroup;
+  branch: Branch;
 
   constructor(
-    private FormBuilder:FormBuilder, // FormBuilder kullanacağız
-    private branchService:BranchService,
-    private toastrService:ToastrService,
-    private router:Router,
-    private route:ActivatedRoute
+    private FormBuilder: FormBuilder,
+    private branchService: BranchService,
+    private toastrService: ToastrService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.initForm(); // Formu başlatıyoruz
-    this.getBranches(); // hasta profili bilgilerini alıyoruz
+    this.initForm();
+    this.getBranches();
   }
 
   initForm() {
-    // Formu başlatıyoruz, form alanlarını tanımlıyoruz ve validasyonları ekliyoruz
     this.branchForm = this.FormBuilder.group({
-      id: [''], // ID alanı formda saklı olacak, ama HTML'de görünmeyecek
+      id: [''],
       Name: ['', Validators.required],
-
     });
   }
 
   getBranches() {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       const branchId = params.get('branchId');
-  
-      if (branchId) { // null veya undefined değilse devam ediyoruz
-        this.branchService.getByBranchId(branchId,0,1).subscribe(
-          (data) => {
-            this.branch = data;
-            this.branchForm.patchValue({
-              id: data.id,
-             Name: data.name,
-         
-            });
-          },
-          (error) => {
-            console.error('branş alınamadı:', error);
-          }
-        );
-      } else {
-        console.error('Geçersiz Branş ID parametresi');
+
+      if (branchId) {
+        this.branchService.getByBranchId(branchId, 0, 1).subscribe((data) => {
+          this.branch = data;
+          this.branchForm.patchValue({
+            id: data.id,
+            Name: data.name,
+          });
+        });
       }
     });
   }
 
   updateBransh() {
     if (this.branchForm.valid) {
-      // Formun geçerli olup olmadığını kontrol ediyoruz
-      const updatedBranch:Branch = this.branchForm.value; // Form verilerini Doctor nesnesine atıyoruz
+      const updatedBranch: Branch = this.branchForm.value;
       updatedBranch.id = this.branch.id;
-      
-      //console.log(updatedHasta);
       this.branchService.updateBranch(updatedBranch).subscribe(
         (response) => {
           this.toastrService.success('Branş başarıyla güncellendi');
           this.router.navigate(['/admin-branches']);
-        },
-        (error) => {
-          this.toastrService.error('Aynı branchten var');
-          
         }
       );
     } else {
-      // Form geçerli değilse hata mesajı gösterilebilir
       this.toastrService.error('Lütfen eksik alanları doldurun');
     }
   }
