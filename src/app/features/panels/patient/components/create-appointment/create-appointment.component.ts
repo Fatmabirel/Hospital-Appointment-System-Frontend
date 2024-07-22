@@ -261,7 +261,7 @@ export class CreateAppointmentComponent implements OnInit {
               this.smsService.sendSms(patient.phone, message).subscribe(
                 (smsResponse) => {
                   console.log('SMS sent:', smsResponse);
-                  /* this.toastrService.success('Sms tarafınıza gönderildi.'); */
+                  this.toastrService.success('Sms tarafınıza gönderildi.');
                 },
                 (smsError) => {
                   console.error('SMS sending error:', smsError);
